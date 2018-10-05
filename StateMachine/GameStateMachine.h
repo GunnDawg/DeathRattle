@@ -10,7 +10,7 @@ class GameStateMachine
 public:
 	void push(std::unique_ptr<GameState> states);
 	void pop();
-	void update();
+	void update(double dt);
 
 	std::vector<std::unique_ptr<GameState>> m_gameStates;
 };

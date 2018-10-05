@@ -14,10 +14,10 @@ void GameStateMachine::pop()
 	}
 }
 
-void GameStateMachine::update()
+void GameStateMachine::update(double dt)
 {
 	if (!m_gameStates.empty())
 	{
-		m_gameStates.back()->update();
+		m_gameStates.back()->update(dt);
 	}
 }

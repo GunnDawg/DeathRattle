@@ -10,7 +10,7 @@ void GameState::on_exit()
 
 }
 
-void GameState::update()
+void GameState::update(double dt)
 {
 
 }

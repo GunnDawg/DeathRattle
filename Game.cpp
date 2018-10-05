@@ -1,9 +1,16 @@
 #include "Game.h"
 
 Game::Game(const char* title, unsigned int w, unsigned int h) :
-m_Title(title), m_screenWidth(w), m_screenHeight(h), m_isRunning(true)
+m_Title(title), m_screenWidth(w), m_screenHeight(h), m_isRunning(false)
 {
+	
+}
 
+void Game::updateDelta()
+{
+	m_lastTime = m_currentTime;
+	m_currentTime = SDL_GetPerformanceCounter();
+	m_deltaTime = static_cast<double>((m_currentTime - m_lastTime) * 10 / static_cast<double>(SDL_GetPerformanceFrequency()));
 }
 
 bool Game::Init()
@@ -11,6 +18,13 @@ bool Game::Init()
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		printf("Error starting SDL. Error: %s\n", SDL_GetError());
+		return(0);
+	}
+
+	if ((IMG_Init(IMG_INIT_PNG != IMG_INIT_PNG)))
+	{
+		printf("IMG_Init: Failed to init required PNG support!\n");
+		printf("IMG_Init: %s\n", IMG_GetError());
 		return(0);
 	}
 
@@ -35,6 +49,10 @@ bool Game::Init()
 		return(0);
 	}
 
+
+	m_player = Player(m_Renderer);
+	m_isRunning = true;
+
 	return(1);
 }
 
@@ -47,7 +65,7 @@ void Game::processinput()
 		{
 		case SDL_QUIT:
 		{
-
+			
 		} break;
 
 		case SDL_KEYDOWN:
@@ -78,13 +96,17 @@ void Game::processinput()
 
 void Game::Update()
 {
+	updateDelta();
 
+	m_player.update(m_deltaTime);
 }
 
 void Game::Draw()
 {
 	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_Renderer);
+
+	m_player.draw(m_Renderer);
 
 	SDL_RenderPresent(m_Renderer);
 }

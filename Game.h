@@ -1,9 +1,11 @@
 #pragma once
 #include <SDL.h>
 #include <cstdio>
+#include <SDL.h>
+#include <SDL_image.h>
+
 #include "Player.h"
 #include "StateMachine/GameState.h"
-
 
 class Game
 {
@@ -16,8 +18,9 @@ public:
 	void Update();
 	void Draw();
 	void Unload();
-
 	bool isRunning() { return m_isRunning; }
+
+	void updateDelta();
 
 	GameStateMachine m_gameStateMachine;
 
@@ -28,7 +31,11 @@ private:
 	unsigned int m_screenWidth = 0;
 	unsigned int m_screenHeight = 0;
 
-	bool m_isRunning;
-	Player m_player;
+	double m_deltaTime;
+	uint64_t m_currentTime;
+	uint64_t m_lastTime;
 
+	bool m_isRunning;
+
+	Player m_player;
 };
