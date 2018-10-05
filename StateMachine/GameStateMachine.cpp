@@ -1,8 +1,9 @@
 #include "GameStateMachine.h"
 
-void GameStateMachine::push(std::unique_ptr<GameState> states)
+void GameStateMachine::push(SDL_Renderer* passedRenderer, std::unique_ptr<GameState> states)
 {
 	m_gameStates.push_back(std::move(states));
+	m_gameStates.back()->on_enter(passedRenderer);
 }
 
 void GameStateMachine::pop()

@@ -1,16 +1,18 @@
 #include "Game.h"
 
-Game::Game(const char* title, unsigned int w, unsigned int h) :
-m_Title(title), m_screenWidth(w), m_screenHeight(h), m_isRunning(false)
-{
+bool Game::m_isRunning = false;
 
+Game::Game(const char* title, unsigned int w, unsigned int h) :
+m_Title(title), m_screenWidth(w), m_screenHeight(h)
+{
+	
 }
 
 void Game::updateDelta()
 {
 	m_lastTime = m_currentTime;
 	m_currentTime = SDL_GetPerformanceCounter();
-	m_deltaTime = static_cast<double>((m_currentTime - m_lastTime) * 10 / static_cast<double>(SDL_GetPerformanceFrequency()));
+	m_deltaTime = static_cast<double>((m_currentTime - m_lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
 }
 
 bool Game::Init()
@@ -50,7 +52,7 @@ bool Game::Init()
 	}
 
 	std::unique_ptr<GameState> playerSceneState = std::make_unique<PlayerSceneState>();
-	m_gameStateMachine.push(std::move(playerSceneState));
+	m_gameStateMachine.push(m_Renderer, std::move(playerSceneState));
 
 	m_isRunning = true;
 
@@ -71,12 +73,11 @@ void Game::Update()
 
 void Game::Draw()
 {
-	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
-	SDL_RenderClear(m_Renderer);
+	beginRender();
 
 	m_gameStateMachine.draw(m_Renderer);
 
-	SDL_RenderPresent(m_Renderer);
+	endRender();
 }
 
 void Game::Unload()

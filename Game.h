@@ -5,9 +5,12 @@
 #include <SDL_image.h>
 #include <memory>
 
+#include "StateMachine/GameStateMachine.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "StateMachine/GameState.h"
 #include "StateMachine/PlayerSceneState.h"
+#include "StateMachine/EnemySceneState.h"
 
 class Game
 {
@@ -18,13 +21,15 @@ public:
 	bool Init();
 	void processinput();
 	void Update();
+	inline void beginRender() { SDL_RenderClear(m_Renderer); }
 	void Draw();
+	inline void endRender() { SDL_RenderPresent(m_Renderer); }
 	void Unload();
-	bool isRunning() { return m_isRunning; }
+	inline bool isRunning() { return m_isRunning; }
 
 	void updateDelta();
 
-	GameStateMachine m_gameStateMachine;
+	static bool m_isRunning;
 
 private:
 	SDL_Window* m_Window = nullptr;
@@ -37,5 +42,5 @@ private:
 	uint64_t m_currentTime;
 	uint64_t m_lastTime;
 
-	bool m_isRunning;
+	GameStateMachine m_gameStateMachine;
 };

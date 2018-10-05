@@ -1,4 +1,5 @@
 #include "PlayerSceneState.h"
+#include "../Game.h"
 
 void PlayerSceneState::on_enter(SDL_Renderer* passedRenderer)
 {
@@ -21,7 +22,7 @@ void PlayerSceneState::handle_events()
 		{
 		case SDL_QUIT:
 		{
-
+			Game::m_isRunning = false;
 		} break;
 
 		case SDL_KEYDOWN:
@@ -30,12 +31,12 @@ void PlayerSceneState::handle_events()
 			{
 			case SDLK_ESCAPE:
 			{
-
+				Game::m_isRunning = false;
 			} break;
 
 			case SDLK_m:
 			{
-				printf("Teste\n");
+				
 			} break;
 
 			default:

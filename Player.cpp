@@ -23,6 +23,13 @@ void Player::on_enter(SDL_Renderer* passedRenderer)
 	m_cropRect.y = 64;
 	m_cropRect.w = m_playerRect.w / 9;
 	m_cropRect.h = m_playerRect.h / 4;
+
+	m_frameWidth = m_cropRect.w;
+	m_frameHeight = m_cropRect.h;
+
+	m_textureWidth = m_cropRect.w;
+
+	m_frameCounter = 0.0f;
 }
 
 void Player::on_exit()
@@ -52,6 +59,17 @@ void Player::update(double dt)
 	{
 		m_playerRect.y -= static_cast<int>(m_moveSpeed * dt);
 		m_cropRect.y = 0;
+	}
+
+	m_frameCounter += dt;
+	if (m_frameCounter >= 0.05f)
+	{
+		m_frameCounter = 0;
+		m_cropRect.x += m_frameWidth;
+		if (m_cropRect.x >= m_textureWidth)
+		{
+			m_cropRect.x = 0;
+		}
 	}
 }
 
