@@ -37,13 +37,23 @@ void Player::update(double dt)
 	const Uint8* keyState = SDL_GetKeyboardState(NULL);
 	if (keyState[SDL_SCANCODE_D])
 	{
-		m_playerRect.x += (int)(m_moveSpeed * dt);
+		m_playerRect.x += static_cast<int>(m_moveSpeed * dt);
 		m_cropRect.y = 196;
 	}
 	else if (keyState[SDL_SCANCODE_A])
 	{
-		m_playerRect.x -= (int)(m_moveSpeed * dt);
+		m_playerRect.x -= static_cast<int>(m_moveSpeed * dt);
 		m_cropRect.y = 64;
+	}
+	else if (keyState[SDL_SCANCODE_S])
+	{
+		m_playerRect.y += static_cast<int>(m_moveSpeed * dt);
+		m_cropRect.y = 128;
+	}
+	else if (keyState[SDL_SCANCODE_W])
+	{
+		m_playerRect.y -= static_cast<int>(m_moveSpeed * dt);
+		m_cropRect.y = 0;
 	}
 }
 

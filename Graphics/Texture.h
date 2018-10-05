@@ -13,6 +13,5 @@ public:
 	SDL_Texture* getTexture() { return m_Texture; }
 
 	SDL_Rect m_TextureRect;
-	SDL_Rect m_CropRect;
 	SDL_Texture* m_Texture;
 };
