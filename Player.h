@@ -6,16 +6,15 @@
 #include "StateMachine/GameStateMachine.h"
 #include "Graphics/Texture.h"
 
-class Player : public GameState
+class Player
 {
 public:
 	Player();
 	~Player();
 
-	void on_enter(SDL_Renderer* passedRenderer) override;
-	void on_exit() override;
-	void update(double dt) override;
-	void handle_events() override;
+	void on_enter(SDL_Renderer* passedRenderer);
+	void on_exit();
+	void update(double dt);
 	void draw(SDL_Renderer* passedRenderer);
 
 private:

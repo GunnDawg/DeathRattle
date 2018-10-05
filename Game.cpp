@@ -3,7 +3,7 @@
 Game::Game(const char* title, unsigned int w, unsigned int h) :
 m_Title(title), m_screenWidth(w), m_screenHeight(h), m_isRunning(false)
 {
-	
+
 }
 
 void Game::updateDelta()
@@ -48,6 +48,9 @@ bool Game::Init()
 		printf("Error creating SDL_Renderer. Error: %s\n", SDL_GetError());
 		return(0);
 	}
+
+	std::unique_ptr<GameState> playerSceneState = std::make_unique<PlayerSceneState>();
+	m_gameStateMachine.push(std::move(playerSceneState));
 
 	m_isRunning = true;
 

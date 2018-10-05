@@ -3,9 +3,11 @@
 #include <cstdio>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <memory>
 
 #include "Player.h"
 #include "StateMachine/GameState.h"
+#include "StateMachine/PlayerSceneState.h"
 
 class Game
 {
@@ -36,6 +38,4 @@ private:
 	uint64_t m_lastTime;
 
 	bool m_isRunning;
-
-	Player m_player;
 };
