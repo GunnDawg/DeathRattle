@@ -1,11 +1,7 @@
 #include "Player.h"
 
-Player::Player(SDL_Renderer* passedRenderer)
+Player::Player()
 {
-	assert(passedRenderer != nullptr);
-
-	m_playerTexture.Load(passedRenderer, "Assets/Graphics/knight.png");
-
 	m_playerRect.x = 100;
 	m_playerRect.y = 100;
 	m_playerRect.w = m_playerTexture.m_TextureRect.w;
@@ -22,9 +18,9 @@ Player::~Player()
 
 }
 
-void Player::on_enter()
+void Player::on_enter(SDL_Renderer* passedRenderer)
 {
-	
+	m_playerTexture.Load(passedRenderer, "Assets/Graphics/knight.png");
 }
 
 void Player::on_exit()
@@ -55,6 +51,11 @@ void Player::update(double dt)
 		m_playerRect.y -= static_cast<int>(m_moveSpeed * dt);
 		m_cropRect.y = 0;
 	}
+}
+
+void Player::handle_events()
+{
+
 }
 
 void Player::draw(SDL_Renderer* passedRenderer)

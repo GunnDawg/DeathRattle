@@ -9,13 +9,13 @@
 class Player : public GameState
 {
 public:
-	Player()=default;
-	Player(SDL_Renderer* passedRenderer);
+	Player();
 	~Player();
 
-	void on_enter() override;
+	void on_enter(SDL_Renderer* passedRenderer) override;
 	void on_exit() override;
 	void update(double dt) override;
+	void handle_events() override;
 	void draw(SDL_Renderer* passedRenderer);
 
 private:

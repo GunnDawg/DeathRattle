@@ -21,3 +21,19 @@ void GameStateMachine::update(double dt)
 		m_gameStates.back()->update(dt);
 	}
 }
+
+void GameStateMachine::draw(SDL_Renderer* passedRenderer)
+{
+	if (!m_gameStates.empty())
+	{
+		m_gameStates.back()->draw(passedRenderer);
+	}
+}
+
+void GameStateMachine::handleEvents()
+{
+	if (!m_gameStates.empty())
+	{
+		m_gameStates.back()->handle_events();
+	}
+}

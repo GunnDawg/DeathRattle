@@ -49,8 +49,6 @@ bool Game::Init()
 		return(0);
 	}
 
-
-	m_player = Player(m_Renderer);
 	m_isRunning = true;
 
 	return(1);
@@ -58,47 +56,14 @@ bool Game::Init()
 
 void Game::processinput()
 {
-	SDL_Event evnt;
-	while (SDL_PollEvent(&evnt))
-	{
-		switch (evnt.type)
-		{
-		case SDL_QUIT:
-		{
-			
-		} break;
-
-		case SDL_KEYDOWN:
-		{
-			switch (evnt.key.keysym.sym)
-			{
-				case SDLK_ESCAPE:
-				{
-
-				} break;
-
-				case SDLK_m:
-				{
-
-				} break;
-
-				default:
-					break;
-			}
-
-		} break;
-
-		default:
-			break;
-		}
-	}
+	m_gameStateMachine.handleEvents();
 }
 
 void Game::Update()
 {
 	updateDelta();
 
-	m_player.update(m_deltaTime);
+	m_gameStateMachine.update(m_deltaTime);
 }
 
 void Game::Draw()
@@ -106,7 +71,7 @@ void Game::Draw()
 	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_Renderer);
 
-	m_player.draw(m_Renderer);
+	m_gameStateMachine.draw(m_Renderer);
 
 	SDL_RenderPresent(m_Renderer);
 }

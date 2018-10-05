@@ -11,6 +11,8 @@ public:
 	void push(std::unique_ptr<GameState> states);
 	void pop();
 	void update(double dt);
+	void draw(SDL_Renderer* passedRenderer);
+	void handleEvents();
 
 	std::vector<std::unique_ptr<GameState>> m_gameStates;
 };
