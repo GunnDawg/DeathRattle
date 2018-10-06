@@ -1,0 +1,35 @@
+#pragma once
+#include "StateMachine/GameState.h"
+#include "Graphics/Texture.h"
+#include <memory>
+
+class MainMenuScene : public GameState
+{
+public:
+	void on_enter() override;
+	void on_exit() override;
+	void update() override;
+	void handle_events() override;
+	void draw() override;
+
+private:
+	Texture m_title;
+	Texture m_background;
+	Texture m_devName;
+
+	Texture m_newGame;
+	Texture m_options;
+	Texture m_leaderBoard;
+	Texture m_exit;
+
+	SDL_Rect m_titleBox;
+	SDL_Rect m_menuBox;
+	SDL_Rect m_menuBoxOutline;
+	SDL_Rect m_devNameBox;
+
+	SDL_Rect m_mouseRect;
+
+	bool m_isNewGame;
+	bool m_isOptions;
+	bool m_isExit;
+};

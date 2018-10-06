@@ -5,7 +5,6 @@ void GameplayState::on_enter()
 {
 	// initialise whatever you need to here (such as instantiating the player, etc.)
 	m_Player = Player();
-	m_Player.on_enter();
 }
 
 void GameplayState::on_exit()
@@ -22,7 +21,7 @@ void GameplayState::handle_events()
 		{
 		case SDL_QUIT:
 		{
-			Game::m_isRunning = false;
+			Game::isRunning = false;
 		} break;
 
 		case SDL_KEYDOWN:
@@ -31,12 +30,7 @@ void GameplayState::handle_events()
 			{
 			case SDLK_ESCAPE:
 			{
-				Game::m_isRunning = false;
-			} break;
-
-			case SDLK_m:
-			{
-				
+				Game::isRunning = false;
 			} break;
 
 			default:

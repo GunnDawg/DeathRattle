@@ -1,31 +1,37 @@
 #include "Game.h"
-#include <vld.h>
 
-SDL_Window* Game::m_Window = nullptr;
-SDL_Renderer* Game::m_Renderer = nullptr;
-const char* Game::m_Title = "Keep it Alive!";
-unsigned int Game::m_screenWidth = 1280;
-unsigned int Game::m_screenHeight = 720;
-bool Game::m_isRunning = false;
-GameStateMachine Game::m_gameStateMachine;
-Uint64 Game::m_currentTime = 0;
-Uint64 Game::m_lastTime = 0;
-double Game::m_deltaTime = 0;
+SDL_Window* Game::Window = nullptr;
+SDL_Renderer* Game::Renderer = nullptr;
+const char* Game::Title = "Keep it Alive!";
+unsigned int Game::screenWidth = 1280;
+unsigned int Game::screenHeight = 720;
+bool Game::isRunning = false;
+GameStateMachine Game::gameStateMachine;
+Uint64 Game::currentTime = 0;
+Uint64 Game::lastTime = 0;
+double Game::deltaTime = 0;
 
 Game::~Game()
 {
-	for (std::unique_ptr<GameState>& state : m_gameStateMachine.m_gameStates) {
+	for (std::unique_ptr<GameState>& state : gameStateMachine.m_gameStates) {
 		state->on_exit();
 	}
 
-	exitGame();
+	SDL_DestroyRenderer(Renderer);
+	Renderer = nullptr;
+
+	SDL_DestroyWindow(Window);
+	Window = nullptr;
+
+	SDL_Quit();
+	IMG_Quit();
 }
 
 void Game::updateDelta()
 {
-	m_lastTime = m_currentTime;
-	m_currentTime = SDL_GetPerformanceCounter();
-	m_deltaTime = static_cast<double>((m_currentTime - m_lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
+	lastTime = currentTime;
+	currentTime = SDL_GetPerformanceCounter();
+	deltaTime = static_cast<double>((currentTime - lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
 
 	//printf("%f\n", m_deltaTime);
 }
@@ -45,64 +51,52 @@ bool Game::Init()
 		return(0);
 	}
 
-	m_Window = SDL_CreateWindow(
-		m_Title,
+	Window = SDL_CreateWindow(
+		Title,
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		m_screenWidth,
-		m_screenHeight,
+		screenWidth,
+		screenHeight,
 		SDL_WINDOW_SHOWN
 	);
-	if (m_Window == nullptr)
+	if (Window == nullptr)
 	{
 		printf("Error creating SDL_Window. Error: %s\n", SDL_GetError());
 		return(0);
 	}
 
-	m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (m_Renderer == nullptr)
+	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (Renderer == nullptr)
 	{
 		printf("Error creating SDL_Renderer. Error: %s\n", SDL_GetError());
 		return(0);
 	}
 
 	std::unique_ptr<GameState> introSceneState = std::make_unique<IntroSceneState>();
-	m_gameStateMachine.push(std::move(introSceneState));
+	gameStateMachine.push(std::move(introSceneState));
 
-	m_isRunning = true;
+	isRunning = true;
 
 	return(1);
 }
 
 void Game::processinput()
 {
-	m_gameStateMachine.handleEvents();
+	gameStateMachine.handleEvents();
 }
 
 void Game::Update()
 {
 	updateDelta();
 
-	m_gameStateMachine.update();
+	gameStateMachine.update();
 }
 
 void Game::Draw()
 {
-	beginRender();
+	SDL_RenderClear(Renderer);
 
-	m_gameStateMachine.draw();
+	gameStateMachine.draw();
 
-	endRender();
-}
-
-void Game::exitGame()
-{
-	SDL_DestroyRenderer(m_Renderer);
-	m_Renderer = nullptr;
-
-	SDL_DestroyWindow(m_Window);
-	m_Window = nullptr;
-
-	SDL_Quit();
-	IMG_Quit();
+	SDL_RenderPresent(Renderer);
 }

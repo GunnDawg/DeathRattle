@@ -1,7 +1,6 @@
 #pragma once
-#include "StateMachine/GameStateMachine.h"
 #include "StateMachine/GameState.h"
-#include "../Graphics/Texture.h"
+#include "Graphics/Texture.h"
 #include <memory>
 
 class IntroSceneState : public GameState
@@ -18,6 +17,8 @@ private:
 	Texture m_keepIt;
 	Texture m_alive;
 	Texture m_pressEnter;
+	Texture m_plug;
 
+	SDL_Rect m_plugBox;
 	SDL_Rect m_pressEnterBox;
 };

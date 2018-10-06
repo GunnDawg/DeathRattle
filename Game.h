@@ -7,7 +7,6 @@
 
 #include "StateMachine/GameStateMachine.h"
 #include "Player.h"
-#include "Enemy.h"
 #include "StateMachine/GameState.h"
 #include "Scenes/IntroScene.h"
 
@@ -28,25 +27,22 @@ public:
 	static void processinput();
 	static void Update();
 	static void Draw();
-	static void exitGame();
-
-	static inline bool isRunning() { return m_isRunning; }
-
-	static SDL_Window* m_Window;
-	static const char* m_Title;
-	static SDL_Renderer* m_Renderer;
-	static bool m_isRunning;
-	static GameStateMachine m_gameStateMachine;
-	static Uint64 m_currentTime;
-	static Uint64 m_lastTime;
-	static double m_deltaTime;
-	static unsigned int m_screenWidth;
-	static unsigned int m_screenHeight;
-
 	static void updateDelta();
-	static inline void beginRender() { SDL_RenderClear(m_Renderer); }
-	static inline void endRender() { SDL_RenderPresent(m_Renderer); }
+
+	static inline bool Running() { return isRunning; }
+
+	static SDL_Window* Window;
+	static const char* Title;
+	static SDL_Renderer* Renderer;
+	static bool isRunning;
+	static GameStateMachine gameStateMachine;
+	static Uint64 currentTime;
+	static Uint64 lastTime;
+	static double deltaTime;
+	static unsigned int screenWidth;
+	static unsigned int screenHeight;
+
 
 private:
-	Game();
+	Game() {};
 };

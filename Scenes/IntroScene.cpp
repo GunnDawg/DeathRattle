@@ -1,41 +1,48 @@
 #include "IntroScene.h"
-#include "GameplayScene.h"
+#include "MainMenuScene.h"
 #include "../Game.h"
 
 void IntroSceneState::on_enter()
 {
-	m_background.Load(Game::m_Renderer, "Assets/Graphics/main_background.png");
+	m_background.Load(Game::Renderer, "Assets/Graphics/main_background.png");
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = 1280;
 	m_background.m_TextureRect.h = 720;
 
-	m_keepIt.Load(Game::m_Renderer, "Assets/Graphics/intro_scene/keepit.png");
-	m_keepIt.m_TextureRect.x = (Game::m_screenWidth / 2) - (m_keepIt.m_TextureRect.w / 2);
+	m_plug.Load(Game::Renderer, "Assets/Graphics/intro_scene/plug.png");
+	m_plug.m_TextureRect.x = (Game::screenWidth / 2) - (m_plug.m_TextureRect.w / 2);
+	m_plug.m_TextureRect.y = 100;
+
+	m_keepIt.Load(Game::Renderer, "Assets/Graphics/intro_scene/keepit.png");
+	m_keepIt.m_TextureRect.x = (Game::screenWidth / 2) - (m_keepIt.m_TextureRect.w / 2);
 	m_keepIt.m_TextureRect.y = 0 - (m_keepIt.m_TextureRect.h);
 
-	m_alive.Load(Game::m_Renderer, "Assets/Graphics/intro_scene/alive.png");
-	m_alive.m_TextureRect.x = (Game::m_screenWidth / 2) - (m_alive.m_TextureRect.w / 2);
+	m_alive.Load(Game::Renderer, "Assets/Graphics/intro_scene/alive.png");
+	m_alive.m_TextureRect.x = (Game::screenWidth / 2) - (m_alive.m_TextureRect.w / 2);
 	m_alive.m_TextureRect.y = 720;
 
-	m_pressEnter.Load(Game::m_Renderer, "Assets/Graphics/intro_scene/pressenter.png");
-	m_pressEnter.m_TextureRect.x = (Game::m_screenWidth / 2) - (m_pressEnter.m_TextureRect.w / 2);
+	m_pressEnter.Load(Game::Renderer, "Assets/Graphics/intro_scene/pressenter.png");
+	m_pressEnter.m_TextureRect.x = (Game::screenWidth / 2) - (m_pressEnter.m_TextureRect.w / 2);
 	m_pressEnter.m_TextureRect.y = 500;
 
 	m_pressEnterBox.x = 0;
 	m_pressEnterBox.y = m_pressEnter.m_TextureRect.y;
-	m_pressEnterBox.w = Game::m_screenWidth;
+	m_pressEnterBox.w = Game::screenWidth;
 	m_pressEnterBox.h = m_pressEnter.m_TextureRect.h;
+
+	m_plugBox.x = 0;
+	m_plugBox.y = m_plug.m_TextureRect.y;
+	m_plugBox.w = Game::screenWidth;
+	m_plugBox.h = m_plug.m_TextureRect.h;
 }
 void IntroSceneState::on_exit()
 {
-	printf("LEAVING MAIN MENU\n");
+	
 }
 
 void IntroSceneState::update()
 {
-	double slideSpeed = (0.005 * Game::m_deltaTime);
-
 	if(m_keepIt.m_TextureRect.y <= 200)
 	{
 		m_keepIt.m_TextureRect.y += 7;
@@ -56,7 +63,7 @@ void IntroSceneState::handle_events()
 		{
 			case SDL_QUIT:
 			{
-				Game::m_isRunning = false;
+				Game::isRunning = false;
 			} break;
 
 			case SDL_KEYDOWN:
@@ -65,15 +72,13 @@ void IntroSceneState::handle_events()
 				{
 					case SDLK_RETURN:
 					{
-						Game::m_gameStateMachine.pop();
-
-						std::unique_ptr<GameState> playerSceneState = std::make_unique<GameplayState>();
-						Game::m_gameStateMachine.push(std::move(playerSceneState));
+						std::unique_ptr<GameState> mainMenuState = std::make_unique<MainMenuScene>();
+						Game::gameStateMachine.push(std::move(mainMenuState));
 					} break;
 
 					case SDLK_ESCAPE:
 					{
-						Game::m_isRunning = false;
+						Game::isRunning = false;
 					} break;
 
 					default:
@@ -89,16 +94,19 @@ void IntroSceneState::handle_events()
 
 void IntroSceneState::draw()
 {
-	SDL_RenderCopy(Game::m_Renderer, m_background.getTexture(), NULL, &m_background.m_TextureRect);
-	SDL_RenderCopy(Game::m_Renderer, m_keepIt.getTexture(), NULL, &m_keepIt.m_TextureRect);
-	SDL_RenderCopy(Game::m_Renderer, m_alive.getTexture(), NULL, &m_alive.m_TextureRect);
+	SDL_RenderCopy(Game::Renderer, m_background.getTexture(), NULL, &m_background.m_TextureRect);
+	SDL_RenderCopy(Game::Renderer, m_keepIt.getTexture(), NULL, &m_keepIt.m_TextureRect);
+	SDL_RenderCopy(Game::Renderer, m_alive.getTexture(), NULL, &m_alive.m_TextureRect);
 
 	if (m_alive.m_TextureRect.y <= 325)
 	{
-		SDL_SetRenderDrawBlendMode(Game::m_Renderer, SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(Game::m_Renderer, 0, 0, 0, 200);
+		SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
 
-		SDL_RenderFillRect(Game::m_Renderer, &m_pressEnterBox);
-		SDL_RenderCopy(Game::m_Renderer, m_pressEnter.getTexture(), NULL, &m_pressEnter.m_TextureRect);
+		SDL_RenderFillRect(Game::Renderer, &m_pressEnterBox);
+		SDL_RenderFillRect(Game::Renderer, &m_plugBox);
+
+		SDL_RenderCopy(Game::Renderer, m_plug.getTexture(), NULL, &m_plug.m_TextureRect);
+		SDL_RenderCopy(Game::Renderer, m_pressEnter.getTexture(), NULL, &m_pressEnter.m_TextureRect);
 	}
 }
