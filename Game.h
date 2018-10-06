@@ -9,38 +9,37 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "StateMachine/GameState.h"
-#include "StateMachine/PlayerSceneState.h"
-#include "StateMachine/EnemySceneState.h"
+#include "Scenes/IntroScene.h"
+#include "Scenes/GameplayScene.h"
 
 class Game
 {
 public:
 	Game() = default;
-	Game(const char* title, unsigned int w, unsigned int h);
+	Game(const char* title);
+	~Game();
 
 	bool Init();
 	void processinput();
 	void Update();
-	inline void beginRender() { SDL_RenderClear(m_Renderer); }
 	void Draw();
-	inline void endRender() { SDL_RenderPresent(m_Renderer); }
-	void Unload();
+	void exitGame();
+
 	inline bool isRunning() { return m_isRunning; }
 
-	void updateDelta();
-
+	static SDL_Window* m_Window;
+	static const char* m_Title;
+	static SDL_Renderer* m_Renderer;
 	static bool m_isRunning;
+	static GameStateMachine m_gameStateMachine;
+	static Uint64 m_currentTime;
+	static Uint64 m_lastTime;
+	static double m_deltaTime;
+	static unsigned int m_screenWidth;
+	static unsigned int m_screenHeight;
 
 private:
-	SDL_Window* m_Window = nullptr;
-	SDL_Renderer* m_Renderer = nullptr;
-	const char* m_Title = nullptr;
-	unsigned int m_screenWidth = 0;
-	unsigned int m_screenHeight = 0;
-
-	double m_deltaTime;
-	uint64_t m_currentTime;
-	uint64_t m_lastTime;
-
-	GameStateMachine m_gameStateMachine;
+	void updateDelta();
+	inline void beginRender() { SDL_RenderClear(m_Renderer); }
+	inline void endRender() { SDL_RenderPresent(m_Renderer); }
 };

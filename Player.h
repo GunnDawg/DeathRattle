@@ -11,10 +11,10 @@ public:
 	Player();
 	~Player();
 
-	void on_enter(SDL_Renderer* passedRenderer);
+	void on_enter();
 	void on_exit();
-	void update(double dt);
-	void draw(SDL_Renderer* passedRenderer);
+	void update();
+	void draw();
 
 private:
 	SDL_Rect m_playerRect;
@@ -23,9 +23,9 @@ private:
 	int m_textureWidth;
 	int m_textureHeight;
 
-	float m_frameCounter = 0.0f;
+	double m_frameCounter = 0.0f;
 	int m_frameWidth = 0;
 	int m_frameHeight = 0;
 
-	float m_moveSpeed = 0.25f;
+	float m_moveSpeed = 0.50f;
 };

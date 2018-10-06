@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv[])
 {
-	Game game("Test", 1280, 720);
+	Game game("Test");
 	if (game.Init())
 	{
 		while (game.isRunning())

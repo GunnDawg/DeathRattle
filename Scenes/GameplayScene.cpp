@@ -1,19 +1,19 @@
-#include "PlayerSceneState.h"
+#include "GameplayScene.h"
 #include "../Game.h"
 
-void PlayerSceneState::on_enter(SDL_Renderer* passedRenderer)
+void GameplayState::on_enter()
 {
 	// initialise whatever you need to here (such as instantiating the player, etc.)
 	m_Player = Player();
-	m_Player.on_enter(passedRenderer);
+	m_Player.on_enter();
 }
 
-void PlayerSceneState::on_exit()
+void GameplayState::on_exit()
 {
 	// Free up memeory if you need to
 }
 
-void PlayerSceneState::handle_events()
+void GameplayState::handle_events()
 {
 	SDL_Event evnt;
 	while (SDL_PollEvent(&evnt))
@@ -51,12 +51,12 @@ void PlayerSceneState::handle_events()
 	}
 }
 
-void PlayerSceneState::update(double dt)
+void GameplayState::update()
 {
-	m_Player.update(dt); // m_Player is the player object you created in on_enter()
+	m_Player.update(); // m_Player is the player object you created in on_enter()
 }
 
-void PlayerSceneState::draw(SDL_Renderer* passedRenderer)
+void GameplayState::draw()
 {
-	m_Player.draw(passedRenderer); // m_Player is the player object you created in on_enter()
+	m_Player.draw(); // m_Player is the player object you created in on_enter()
 }

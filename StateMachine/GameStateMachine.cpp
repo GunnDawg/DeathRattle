@@ -1,9 +1,9 @@
 #include "GameStateMachine.h"
 
-void GameStateMachine::push(SDL_Renderer* passedRenderer, std::unique_ptr<GameState> states)
+void GameStateMachine::push(std::unique_ptr<GameState> states)
 {
 	m_gameStates.push_back(std::move(states));
-	m_gameStates.back()->on_enter(passedRenderer);
+	m_gameStates.back()->on_enter();
 }
 
 void GameStateMachine::pop()
@@ -15,19 +15,19 @@ void GameStateMachine::pop()
 	}
 }
 
-void GameStateMachine::update(double dt)
+void GameStateMachine::update()
 {
 	if (!m_gameStates.empty())
 	{
-		m_gameStates.back()->update(dt);
+		m_gameStates.back()->update();
 	}
 }
 
-void GameStateMachine::draw(SDL_Renderer* passedRenderer)
+void GameStateMachine::draw()
 {
 	if (!m_gameStates.empty())
 	{
-		m_gameStates.back()->draw(passedRenderer);
+		m_gameStates.back()->draw();
 	}
 }
 

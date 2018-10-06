@@ -1,11 +1,24 @@
 #include "Game.h"
 
+SDL_Window* Game::m_Window = nullptr;
+const char* Game::m_Title = "Keep it Alive!";
+unsigned int Game::m_screenWidth = 1280;
+unsigned int Game::m_screenHeight = 720;
+SDL_Renderer* Game::m_Renderer = nullptr;
 bool Game::m_isRunning = false;
+GameStateMachine Game::m_gameStateMachine;
+Uint64 Game::m_currentTime = 0;
+Uint64 Game::m_lastTime = 0;
+double Game::m_deltaTime = 0;
 
-Game::Game(const char* title, unsigned int w, unsigned int h) :
-m_Title(title), m_screenWidth(w), m_screenHeight(h)
+Game::Game(const char* title)
 {
 	
+}
+
+Game::~Game()
+{
+	exitGame();
 }
 
 void Game::updateDelta()
@@ -13,6 +26,8 @@ void Game::updateDelta()
 	m_lastTime = m_currentTime;
 	m_currentTime = SDL_GetPerformanceCounter();
 	m_deltaTime = static_cast<double>((m_currentTime - m_lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
+
+	//printf("%f\n", m_deltaTime);
 }
 
 bool Game::Init()
@@ -51,8 +66,8 @@ bool Game::Init()
 		return(0);
 	}
 
-	std::unique_ptr<GameState> playerSceneState = std::make_unique<PlayerSceneState>();
-	m_gameStateMachine.push(m_Renderer, std::move(playerSceneState));
+	std::unique_ptr<GameState> introSceneState = std::make_unique<IntroSceneState>();
+	m_gameStateMachine.push(std::move(introSceneState));
 
 	m_isRunning = true;
 
@@ -68,19 +83,19 @@ void Game::Update()
 {
 	updateDelta();
 
-	m_gameStateMachine.update(m_deltaTime);
+	m_gameStateMachine.update();
 }
 
 void Game::Draw()
 {
 	beginRender();
 
-	m_gameStateMachine.draw(m_Renderer);
+	m_gameStateMachine.draw();
 
 	endRender();
 }
 
-void Game::Unload()
+void Game::exitGame()
 {
 	SDL_DestroyRenderer(m_Renderer);
 	m_Renderer = nullptr;
@@ -89,4 +104,5 @@ void Game::Unload()
 	m_Window = nullptr;
 
 	SDL_Quit();
+	IMG_Quit();
 }
