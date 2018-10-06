@@ -1,23 +1,23 @@
 #include "Game.h"
+#include <vld.h>
 
 SDL_Window* Game::m_Window = nullptr;
+SDL_Renderer* Game::m_Renderer = nullptr;
 const char* Game::m_Title = "Keep it Alive!";
 unsigned int Game::m_screenWidth = 1280;
 unsigned int Game::m_screenHeight = 720;
-SDL_Renderer* Game::m_Renderer = nullptr;
 bool Game::m_isRunning = false;
 GameStateMachine Game::m_gameStateMachine;
 Uint64 Game::m_currentTime = 0;
 Uint64 Game::m_lastTime = 0;
 double Game::m_deltaTime = 0;
 
-Game::Game(const char* title)
-{
-	
-}
-
 Game::~Game()
 {
+	for (std::unique_ptr<GameState>& state : m_gameStateMachine.m_gameStates) {
+		state->on_exit();
+	}
+
 	exitGame();
 }
 

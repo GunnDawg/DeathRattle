@@ -14,6 +14,10 @@ public:
 	void draw() override;
 
 private:
-	Texture m_gameNameTexture;
+	Texture m_background;
+	Texture m_keepIt;
+	Texture m_alive;
 	Texture m_pressEnter;
+
+	SDL_Rect m_pressEnterBox;
 };

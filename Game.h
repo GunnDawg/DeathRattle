@@ -10,22 +10,27 @@
 #include "Enemy.h"
 #include "StateMachine/GameState.h"
 #include "Scenes/IntroScene.h"
-#include "Scenes/GameplayScene.h"
 
 class Game
 {
 public:
-	Game() = default;
-	Game(const char* title);
+	static Game& getInstance()
+	{
+		static Game instance;
+		return instance;
+	}
+
+	Game(Game const&) = delete;
+	void operator=(Game const&) = delete;
 	~Game();
 
-	bool Init();
-	void processinput();
-	void Update();
-	void Draw();
-	void exitGame();
+	static bool Init();
+	static void processinput();
+	static void Update();
+	static void Draw();
+	static void exitGame();
 
-	inline bool isRunning() { return m_isRunning; }
+	static inline bool isRunning() { return m_isRunning; }
 
 	static SDL_Window* m_Window;
 	static const char* m_Title;
@@ -38,8 +43,10 @@ public:
 	static unsigned int m_screenWidth;
 	static unsigned int m_screenHeight;
 
+	static void updateDelta();
+	static inline void beginRender() { SDL_RenderClear(m_Renderer); }
+	static inline void endRender() { SDL_RenderPresent(m_Renderer); }
+
 private:
-	void updateDelta();
-	inline void beginRender() { SDL_RenderClear(m_Renderer); }
-	inline void endRender() { SDL_RenderPresent(m_Renderer); }
+	Game();
 };

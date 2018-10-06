@@ -3,14 +3,13 @@
 
 int main(int argc, char* argv[])
 {
-	Game game("Test");
-	if (game.Init())
+	if (Game::getInstance().Init())
 	{
-		while (game.isRunning())
+		while(Game::getInstance().isRunning())
 		{
-			game.processinput();
-			game.Update();
-			game.Draw();
+			Game::getInstance().processinput();
+			Game::getInstance().Update();
+			Game::getInstance().Draw();
 		}
 	}
 	else
