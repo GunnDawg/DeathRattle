@@ -1,8 +1,9 @@
 #pragma once
-#include "../StateMachine/GameState.h"
-#include "../Player.h"
+#include "StateMachine/GameState.h"
+#include "Graphics/Texture.h"
+#include <memory>
 
-class GameplayState : public GameState
+class OptionsMenuScene : public GameState
 {
 public:
 	void on_enter() override;
@@ -13,5 +14,8 @@ public:
 	void unload_All() override;
 
 private:
-	Player m_Player;
+	Texture m_background;
+	Texture m_title;
+
+	SDL_Rect m_titleBox;
 };

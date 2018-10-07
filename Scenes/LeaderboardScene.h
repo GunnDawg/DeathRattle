@@ -3,7 +3,7 @@
 #include "Graphics/Texture.h"
 #include <memory>
 
-class IntroSceneState : public GameState
+class LeaderBoardScene : public GameState
 {
 public:
 	void on_enter() override;
@@ -15,13 +15,7 @@ public:
 
 private:
 	Texture m_background;
-	Texture m_keepIt;
-	Texture m_alive;
-	Texture m_pressEnter;
-	Texture m_plug;
-	Texture m_website;
-
-	SDL_Rect m_plugBox;
-	SDL_Rect m_websiteBox;
-	SDL_Rect m_pressEnterBox;
+	Texture m_comingSoon;
+	
+	SDL_Rect m_comingSoonBox;
 };

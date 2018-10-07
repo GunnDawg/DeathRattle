@@ -8,12 +8,14 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-
+	
 }
 
 SDL_Texture* Texture::Load(SDL_Renderer* passedRenderer, const char* filePath)
 {
-	m_Texture = IMG_LoadTexture(passedRenderer, filePath);
+	m_filePath = filePath;
+
+	m_Texture = IMG_LoadTexture(passedRenderer, m_filePath);
 	if (m_Texture == nullptr)
 	{
 		printf("Error creating Texture. Error: %s\n", IMG_GetError());

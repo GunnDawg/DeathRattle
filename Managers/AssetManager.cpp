@@ -1,11 +1,15 @@
 #include "AssetManager.h"
 
-AssetManager::AssetManager()
+template<typename T>
+T AssetManager::CreateAsset(T& asset)
 {
-	
-}
+	switch (asset)
+	{
+		case Texture:
+		{
+			Texture tex = Texture();
 
-AssetManager::~AssetManager()
-{
-
+			return tex;
+		} break;
+	}
 }

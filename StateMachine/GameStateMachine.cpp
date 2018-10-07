@@ -38,3 +38,11 @@ void GameStateMachine::handleEvents()
 		m_gameStates.back()->handle_events();
 	}
 }
+
+void GameStateMachine::unloadAll()
+{
+	if (!m_gameStates.empty())
+	{
+		m_gameStates.back()->unload_All();
+	}
+}

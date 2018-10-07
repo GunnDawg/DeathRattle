@@ -25,6 +25,7 @@ Game::~Game()
 
 	SDL_Quit();
 	IMG_Quit();
+	Mix_Quit();
 }
 
 void Game::updateDelta()
@@ -49,6 +50,12 @@ bool Game::Init()
 		printf("IMG_Init: Failed to init required PNG support!\n");
 		printf("IMG_Init: %s\n", IMG_GetError());
 		return(0);
+	}
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) != 0)
+	{
+		printf("Error starting SDL_Mixer. Error: %s\n", Mix_GetError());
+		return(false);
 	}
 
 	Window = SDL_CreateWindow(

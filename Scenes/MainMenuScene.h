@@ -1,6 +1,7 @@
 #pragma once
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
+#include "../Audio/Sound.h"
 #include <memory>
 
 class MainMenuScene : public GameState
@@ -11,6 +12,7 @@ public:
 	void update() override;
 	void handle_events() override;
 	void draw() override;
+	void unload_All() override;
 
 private:
 	Texture m_title;
@@ -18,9 +20,18 @@ private:
 	Texture m_devName;
 
 	Texture m_newGame;
+	Texture m_newGameWhite;
 	Texture m_options;
+	Texture m_optionsWhite;
 	Texture m_leaderBoard;
+	Texture m_leaderBoardWhite;
+	Texture m_credits;
+	Texture m_creditsWhite;
 	Texture m_exit;
+	Texture m_exitWhite;
+	Texture m_version;
+
+	Sound m_hoverSound;
 
 	SDL_Rect m_titleBox;
 	SDL_Rect m_menuBox;
@@ -31,5 +42,7 @@ private:
 
 	bool m_isNewGame;
 	bool m_isOptions;
+	bool m_isLeaderBoard;
+	bool m_isCredits;
 	bool m_isExit;
 };

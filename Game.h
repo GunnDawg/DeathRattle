@@ -3,12 +3,12 @@
 #include <cstdio>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <memory>
 
 #include "StateMachine/GameStateMachine.h"
-#include "Player.h"
-#include "StateMachine/GameState.h"
 #include "Scenes/IntroScene.h"
+#include "Player.h"
 
 class Game
 {
@@ -41,7 +41,6 @@ public:
 	static double deltaTime;
 	static unsigned int screenWidth;
 	static unsigned int screenHeight;
-
 
 private:
 	Game() {};
