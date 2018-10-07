@@ -17,6 +17,19 @@ void OptionsMenuScene::on_enter()
 	m_titleBox.y = m_title.m_TextureRect.y;
 	m_titleBox.w = Game::screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
+
+	m_devName.Load(Game::Renderer, "Assets/Graphics/common/dev_name.png");
+	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
+	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
+
+	m_devNameBox.h = m_devName.m_TextureRect.h;
+	m_devNameBox.w = Game::screenWidth;
+	m_devNameBox.x = 0;
+	m_devNameBox.y = m_devName.m_TextureRect.y;
+
+	m_version.Load(Game::Renderer, "Assets/Graphics/common/version.png");
+	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
+	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 }
 
 void OptionsMenuScene::on_exit()
@@ -69,11 +82,9 @@ void OptionsMenuScene::draw()
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
 	SDL_RenderFillRect(Game::Renderer, &m_titleBox);
+	SDL_RenderFillRect(Game::Renderer, &m_devNameBox);
 
-	SDL_RenderCopy(Game::Renderer, m_title.getTexture(), NULL, &m_title.m_TextureRect);
-}
-
-void OptionsMenuScene::unload_All()
-{
-
+	SDL_RenderCopy(Game::Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
+	SDL_RenderCopy(Game::Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
+	SDL_RenderCopy(Game::Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
 }

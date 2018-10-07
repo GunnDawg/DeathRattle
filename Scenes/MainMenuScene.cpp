@@ -16,7 +16,7 @@ void MainMenuScene::on_enter()
 	m_titleBox.w = Game::screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
-	m_devName.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/dev_name.png");
+	m_devName.Load(Game::Renderer, "Assets/Graphics/common/dev_name.png");
 	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
 	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
 
@@ -25,7 +25,7 @@ void MainMenuScene::on_enter()
 	m_devNameBox.x = 0;
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
-	m_version.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/version.png");
+	m_version.Load(Game::Renderer, "Assets/Graphics/common/version.png");
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
@@ -90,6 +90,10 @@ void MainMenuScene::on_enter()
 
 void MainMenuScene::on_exit()
 {
+	m_background.Unload();
+
+	m_title.Unload();
+
 	m_newGame.Unload();
 	m_newGameWhite.Unload();
 
@@ -104,6 +108,9 @@ void MainMenuScene::on_exit()
 
 	m_exit.Unload();
 	m_exitWhite.Unload();
+
+	m_devName.Unload();
+	m_version.Unload();
 }
 
 void MainMenuScene::update()
@@ -178,12 +185,12 @@ void MainMenuScene::handle_events()
 				{
 					if (m_isExit)
 					{
+						Game::gameStateMachine.unloadAll();
 						Game::isRunning = false;
 					}
 
 					if (m_isNewGame)
 					{
-						Game::gameStateMachine.unloadAll();
 						std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
 						Game::gameStateMachine.push(std::move(gamePlayState));
 					}
@@ -200,6 +207,9 @@ void MainMenuScene::handle_events()
 						Game::gameStateMachine.push(std::move(optionsMenuScene));
 					}
 				} break;
+
+				default:
+					break;
 			}
 		}
 	}
@@ -272,19 +282,4 @@ void MainMenuScene::draw()
 	SDL_RenderCopy(Game::Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
-}
-
-void MainMenuScene::unload_All()
-{
-	m_newGame.Unload();
-	m_newGameWhite.Unload();
-	m_options.Unload();
-	m_optionsWhite.Unload();
-	m_leaderBoard.Unload();
-	m_leaderBoardWhite.Unload();
-	m_credits.Unload();
-	m_creditsWhite.Unload();
-	m_exit.Unload();
-	m_exitWhite.Unload();
-	m_version.Unload();
 }

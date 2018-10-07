@@ -54,8 +54,3 @@ void GameplayState::draw()
 {
 	m_Player.draw(); // m_Player is the player object you created in on_enter()
 }
-
-void GameplayState::unload_All()
-{
-
-}

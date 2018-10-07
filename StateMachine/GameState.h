@@ -10,5 +10,4 @@ public:
 	virtual void update() = 0;
 	virtual void handle_events() = 0;
 	virtual void draw() = 0;
-	virtual void unload_All() = 0;
 };

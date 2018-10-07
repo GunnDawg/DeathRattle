@@ -41,8 +41,8 @@ void GameStateMachine::handleEvents()
 
 void GameStateMachine::unloadAll()
 {
-	if (!m_gameStates.empty())
+	while (!m_gameStates.empty())
 	{
-		m_gameStates.back()->unload_All();
+		pop();
 	}
 }

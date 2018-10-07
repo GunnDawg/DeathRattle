@@ -128,8 +128,3 @@ void IntroSceneState::draw()
 		SDL_RenderCopy(Game::Renderer, m_website.m_Texture, NULL, &m_website.m_TextureRect);
 	}
 }
-
-void IntroSceneState::unload_All()
-{
-
-}

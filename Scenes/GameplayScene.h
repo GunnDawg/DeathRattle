@@ -10,7 +10,6 @@ public:
 	void update() override;
 	void handle_events() override;
 	void draw() override;
-	void unload_All() override;
 
 private:
 	Player m_Player;

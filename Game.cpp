@@ -13,9 +13,7 @@ double Game::deltaTime = 0;
 
 Game::~Game()
 {
-	for (std::unique_ptr<GameState>& state : gameStateMachine.m_gameStates) {
-		state->on_exit();
-	}
+	Game::gameStateMachine.unloadAll();
 
 	SDL_DestroyRenderer(Renderer);
 	Renderer = nullptr;

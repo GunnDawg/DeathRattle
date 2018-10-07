@@ -72,8 +72,3 @@ void LeaderBoardScene::draw()
 
 	SDL_RenderCopy(Game::Renderer, m_comingSoon.m_Texture, NULL, &m_comingSoon.m_TextureRect);
 }
-
-void LeaderBoardScene::unload_All()
-{
-
-}

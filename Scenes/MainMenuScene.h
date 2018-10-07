@@ -12,13 +12,11 @@ public:
 	void update() override;
 	void handle_events() override;
 	void draw() override;
-	void unload_All() override;
 
 private:
 	Texture m_title;
 	Texture m_background;
 	Texture m_devName;
-
 	Texture m_newGame;
 	Texture m_newGameWhite;
 	Texture m_options;

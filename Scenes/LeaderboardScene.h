@@ -11,7 +11,6 @@ public:
 	void update() override;
 	void handle_events() override;
 	void draw() override;
-	void unload_All() override;
 
 private:
 	Texture m_background;
