@@ -1,10 +1,12 @@
 #pragma once
-#include "../Audio/Sound.h"
 #include "StateMachine/GameState.h"
+#include "IntroScene.h"
 #include "Graphics/Texture.h"
+#include "Audio/Sound.h"
+#include "Time/Timer.h"
 #include <memory>
 
-class OptionsMenuScene : public GameState
+class SplashScene : public GameState
 {
 public:
 	void on_enter() override;
@@ -14,15 +16,11 @@ public:
 	void draw() override;
 
 private:
-	Texture m_background;
-	Texture m_title;
-	Texture m_devName;
-	Texture m_version;
+	Texture m_logo;
+	Texture m_production;
 
-	Texture m_cursor;
+	SDL_Rect m_comingSoonBox;
 
-	SDL_Rect m_devNameBox;
-	SDL_Rect m_titleBox;
-
+	Timer m_timer;
 	Sound m_thud;
 };

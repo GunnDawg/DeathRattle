@@ -1,15 +1,14 @@
 #include "GameplayScene.h"
-#include "../Game.h"
+#include "Game.h"
 
 void GameplayState::on_enter()
 {
-	// initialise whatever you need to here (such as instantiating the player, etc.)
 	m_Player = Player();
 }
 
 void GameplayState::on_exit()
 {
-	// Free up memeory if you need to
+	
 }
 
 void GameplayState::handle_events()
@@ -19,38 +18,39 @@ void GameplayState::handle_events()
 	{
 		switch (evnt.type)
 		{
-		case SDL_QUIT:
-		{
-			Game::isRunning = false;
-		} break;
-
-		case SDL_KEYDOWN:
-		{
-			switch (evnt.key.keysym.sym)
-			{
-			case SDLK_ESCAPE:
+			case SDL_QUIT:
 			{
 				Game::isRunning = false;
 			} break;
 
+			case SDL_KEYDOWN:
+			{
+				switch (evnt.key.keysym.sym)
+				{
+					case SDLK_ESCAPE:
+					{
+						Game::isRunning = false;
+					} break;
+
+					default:
+						break;
+				}
+
+			} break;
+
 			default:
 				break;
-			}
-
-		} break;
-
-		default:
-			break;
 		}
 	}
 }
 
 void GameplayState::update()
 {
-	m_Player.update(); // m_Player is the player object you created in on_enter()
+	m_Player.update();
 }
 
 void GameplayState::draw()
 {
-	m_Player.draw(); // m_Player is the player object you created in on_enter()
+	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
+	m_Player.draw();
 }

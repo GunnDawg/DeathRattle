@@ -1,7 +1,7 @@
 #pragma once
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
-#include "../Audio/Sound.h"
+#include "Audio/Sound.h"
 #include <memory>
 
 class MainMenuScene : public GameState
@@ -29,7 +29,7 @@ private:
 	Texture m_exitWhite;
 	Texture m_version;
 
-	Sound m_hoverSound;
+	Texture m_cursor;
 
 	SDL_Rect m_titleBox;
 	SDL_Rect m_menuBox;
@@ -37,6 +37,8 @@ private:
 	SDL_Rect m_devNameBox;
 
 	SDL_Rect m_mouseRect;
+
+	Sound m_thud;
 
 	bool m_isNewGame;
 	bool m_isOptions;

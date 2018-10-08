@@ -1,4 +1,5 @@
 #pragma once
+#include "../Audio/Sound.h"
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
 #include <memory>
@@ -15,6 +16,9 @@ public:
 private:
 	Texture m_background;
 	Texture m_comingSoon;
+	Texture m_cursor;
 	
 	SDL_Rect m_comingSoonBox;
+
+	Sound m_thud;
 };

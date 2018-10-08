@@ -1,9 +1,13 @@
 #include "IntroScene.h"
 #include "MainMenuScene.h"
-#include "../Game.h"
+#include "Game.h"
 
 void IntroSceneState::on_enter()
 {
+	m_cursor.Load(Game::Renderer, "Assets/Graphics/common/cursor2.png");
+	m_cursor.m_TextureRect.w = 48;
+	m_cursor.m_TextureRect.h = 48;
+
 	m_background.Load(Game::Renderer, "Assets/Graphics/common/main_background.png");
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
@@ -44,18 +48,30 @@ void IntroSceneState::on_enter()
 	m_websiteBox.y = m_website.m_TextureRect.y;
 	m_websiteBox.w = Game::screenWidth;
 	m_websiteBox.h = m_website.m_TextureRect.h;
+
+	m_introSound.Load("Assets/Audio/splat.wav");
+	m_introSound.Play();
 }
 void IntroSceneState::on_exit()
 {
+	m_cursor.Unload();
+
 	m_background.Unload();
 	m_keepIt.Unload();
 	m_alive.Unload();
 	m_pressEnter.Unload();
 	m_plug.Unload();
+	m_plug.Unload();
+	m_website.Unload();
+
+	m_introSound.Unload();
 }
 
 void IntroSceneState::update()
 {
+	m_cursor.m_TextureRect.x = Game::mouseX;
+	m_cursor.m_TextureRect.y = Game::mouseY;
+
 	if(m_keepIt.m_TextureRect.y <= 200)
 	{
 		m_keepIt.m_TextureRect.y += 7;
@@ -127,4 +143,6 @@ void IntroSceneState::draw()
 
 		SDL_RenderCopy(Game::Renderer, m_website.m_Texture, NULL, &m_website.m_TextureRect);
 	}
+
+	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }

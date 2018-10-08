@@ -1,6 +1,7 @@
 #pragma once
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
+#include "../Audio/Sound.h"
 #include <memory>
 
 class IntroSceneState : public GameState
@@ -20,7 +21,11 @@ private:
 	Texture m_plug;
 	Texture m_website;
 
+	Texture m_cursor;
+
 	SDL_Rect m_plugBox;
 	SDL_Rect m_websiteBox;
 	SDL_Rect m_pressEnterBox;
+
+	Sound m_introSound;
 };

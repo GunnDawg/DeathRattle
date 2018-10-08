@@ -7,13 +7,15 @@ unsigned int Game::screenWidth = 1280;
 unsigned int Game::screenHeight = 720;
 bool Game::isRunning = false;
 GameStateMachine Game::gameStateMachine;
-Uint64 Game::currentTime = 0;
-Uint64 Game::lastTime = 0;
-double Game::deltaTime = 0;
+Uint64 Game::currentTime = 0ULL;
+Uint64 Game::lastTime = 0ULL;
+double Game::deltaTime = 0.0;
+int Game::mouseX = 0;
+int Game::mouseY = 0;
 
 Game::~Game()
 {
-	Game::gameStateMachine.unloadAll();
+	gameStateMachine.unloadAll();
 
 	SDL_DestroyRenderer(Renderer);
 	Renderer = nullptr;
@@ -31,8 +33,6 @@ void Game::updateDelta()
 	lastTime = currentTime;
 	currentTime = SDL_GetPerformanceCounter();
 	deltaTime = static_cast<double>((currentTime - lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
-
-	//printf("%f\n", m_deltaTime);
 }
 
 bool Game::Init()
@@ -77,8 +77,10 @@ bool Game::Init()
 		return(0);
 	}
 
-	std::unique_ptr<GameState> introSceneState = std::make_unique<IntroSceneState>();
-	gameStateMachine.push(std::move(introSceneState));
+	std::unique_ptr<GameState> splashSceneState = std::make_unique<SplashScene>();
+	gameStateMachine.push(std::move(splashSceneState));
+
+	SDL_ShowCursor(0);
 
 	isRunning = true;
 
@@ -95,6 +97,8 @@ void Game::Update()
 	updateDelta();
 
 	gameStateMachine.update();
+
+	SDL_GetMouseState(&mouseX, &mouseY);
 }
 
 void Game::Draw()
@@ -105,3 +109,26 @@ void Game::Draw()
 
 	SDL_RenderPresent(Renderer);
 }
+
+//void Game::toggleWindowed()
+//{
+//	//Grab the mouse so that we don't end up with unexpected movement when the dimensions/position of the window changes.
+//	SDL_SetRelativeMouseMode(SDL_TRUE);
+//	windowew = !windowed;
+//	if (windowed)
+//	{
+//		int i = SDL_GetWindowDisplayIndex(Window);
+//		screenWidth = windowedWidth;
+//		screenHeight = windowedHeight;
+//		SDL_SetWindowFullscreen(Window, 0);
+//	}
+//	else
+//	{
+//		int i = SDL_GetWindowDisplayIndex(Window);
+//		SDL_Rect j;
+//		SDL_GetDisplayBounds(i, &j);
+//		screenWidth = j.w;
+//		screenHeight = j.h;
+//		SDL_SetWindowFullscreen(Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+//	}
+//}

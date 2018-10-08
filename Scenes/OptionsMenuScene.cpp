@@ -1,8 +1,12 @@
 #include "OptionsMenuScene.h"
-#include "../Game.h"
+#include "Game.h"
 
 void OptionsMenuScene::on_enter()
 {
+	m_cursor.Load(Game::Renderer, "Assets/Graphics/common/cursor2.png");
+	m_cursor.m_TextureRect.w = 48;
+	m_cursor.m_TextureRect.h = 48;
+
 	m_background.Load(Game::Renderer, "Assets/Graphics/common/main_background.png");
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
@@ -30,17 +34,27 @@ void OptionsMenuScene::on_enter()
 	m_version.Load(Game::Renderer, "Assets/Graphics/common/version.png");
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
+
+	m_thud.Load("Assets/Audio/thud.wav");
+	m_thud.Play();
 }
 
 void OptionsMenuScene::on_exit()
 {
+	m_cursor.Unload();
+
 	m_background.Unload();
 	m_title.Unload();
+	m_devName.Unload();
+	m_version.Unload();
+
+	m_thud.Unload();
 }
 
 void OptionsMenuScene::update()
 {
-
+	m_cursor.m_TextureRect.x = Game::mouseX;
+	m_cursor.m_TextureRect.y = Game::mouseY;
 }
 
 void OptionsMenuScene::handle_events()
@@ -87,4 +101,6 @@ void OptionsMenuScene::draw()
 	SDL_RenderCopy(Game::Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
+
+	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }

@@ -5,9 +5,10 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <memory>
+#include <chrono>
 
 #include "StateMachine/GameStateMachine.h"
-#include "Scenes/IntroScene.h"
+#include "Scenes/SplashScene.h"
 #include "Player.h"
 
 class Game
@@ -28,6 +29,7 @@ public:
 	static void Update();
 	static void Draw();
 	static void updateDelta();
+	//static void toggleWindowed();
 
 	static inline bool Running() { return isRunning; }
 
@@ -41,6 +43,9 @@ public:
 	static double deltaTime;
 	static unsigned int screenWidth;
 	static unsigned int screenHeight;
+
+	static int mouseX;
+	static int mouseY;
 
 private:
 	Game() {};

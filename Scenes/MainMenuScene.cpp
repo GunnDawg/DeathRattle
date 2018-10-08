@@ -2,11 +2,15 @@
 #include "GameplayScene.h"
 #include "LeaderboardScene.h"
 #include "OptionsMenuScene.h"
-#include "../Managers/AssetManager.h"
-#include "../Game.h"
+#include "CreditsScene.h"
+#include "Game.h"
 
 void MainMenuScene::on_enter()
 {
+	m_cursor.Load(Game::Renderer, "Assets/Graphics/common/cursor2.png");
+	m_cursor.m_TextureRect.w = 48;
+	m_cursor.m_TextureRect.h = 48;
+
 	m_title.Load(Game::Renderer, "Assets/Graphics/common/title.png");
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
@@ -37,7 +41,7 @@ void MainMenuScene::on_enter()
 
 	m_menuBox.w = 400;
 	m_menuBox.h = 400;
-	m_menuBox.x = (Game::screenWidth / 2) - (m_menuBox.w / 2);
+	m_menuBox.x = Game::screenWidth;
 	m_menuBox.y = (Game::screenHeight / 2) - (m_menuBox.h / 2);
 
 	m_menuBoxOutline.w = m_menuBox.w;
@@ -85,11 +89,14 @@ void MainMenuScene::on_enter()
 	m_exitWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exitWhite.m_TextureRect.w / 2);
 	m_exitWhite.m_TextureRect.y = m_credits.m_TextureRect.y + 75;
 
-	m_hoverSound.Load("Assets/Audio/menu_hover.wav");
+	m_thud.Load("Assets/Audio/thud.wav");
+	//m_thud.Play();
 }
 
 void MainMenuScene::on_exit()
 {
+	m_cursor.Unload();
+
 	m_background.Unload();
 
 	m_title.Unload();
@@ -111,10 +118,52 @@ void MainMenuScene::on_exit()
 
 	m_devName.Unload();
 	m_version.Unload();
+
+	m_thud.Unload();
 }
 
 void MainMenuScene::update()
 {
+	if (m_menuBox.x >= (Game::screenWidth / 2) - (m_menuBox.w / 2))
+	{
+		m_menuBox.x -= static_cast<int>(1.75 * Game::deltaTime);
+
+		m_newGame.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_newGame.m_TextureRect.w / 2);
+		m_newGame.m_TextureRect.y = m_menuBox.y + 25;
+
+		m_newGameWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_newGameWhite.m_TextureRect.w / 2);
+		m_newGameWhite.m_TextureRect.y = m_menuBox.y + 25;
+
+		m_options.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_options.m_TextureRect.w / 2);
+		m_options.m_TextureRect.y = m_newGame.m_TextureRect.y + 75;
+
+		m_optionsWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_optionsWhite.m_TextureRect.w / 2);
+		m_optionsWhite.m_TextureRect.y = m_newGame.m_TextureRect.y + 75;
+
+		m_leaderBoard.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_leaderBoard.m_TextureRect.w / 2);
+		m_leaderBoard.m_TextureRect.y = m_options.m_TextureRect.y + 75;
+
+		m_leaderBoardWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_leaderBoardWhite.m_TextureRect.w / 2);
+		m_leaderBoardWhite.m_TextureRect.y = m_options.m_TextureRect.y + 75;
+
+		m_credits.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_credits.m_TextureRect.w / 2);
+		m_credits.m_TextureRect.y = m_leaderBoard.m_TextureRect.y + 75;
+
+		m_creditsWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_creditsWhite.m_TextureRect.w / 2);
+		m_creditsWhite.m_TextureRect.y = m_leaderBoard.m_TextureRect.y + 75;
+
+		m_exit.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exit.m_TextureRect.w / 2);
+		m_exit.m_TextureRect.y = m_credits.m_TextureRect.y + 75;
+
+		m_exitWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exitWhite.m_TextureRect.w / 2);
+		m_exitWhite.m_TextureRect.y = m_credits.m_TextureRect.y + 75;
+
+		m_menuBoxOutline.w = m_menuBox.w;
+		m_menuBoxOutline.h = m_menuBox.h;
+		m_menuBoxOutline.x = m_menuBox.x;
+		m_menuBoxOutline.y = m_menuBox.y;
+	}
+
 	SDL_GetMouseState(&m_mouseRect.x, &m_mouseRect.y);
 	if(m_mouseRect.x >= m_newGame.m_TextureRect.x &&
 		m_mouseRect.x <= m_newGame.m_TextureRect.x + m_newGame.m_TextureRect.w &&
@@ -129,13 +178,6 @@ void MainMenuScene::update()
 		m_mouseRect.y <= m_options.m_TextureRect.y + m_options.m_TextureRect.h)
 	{
 		m_isOptions = true;
-	}
-	else if (m_mouseRect.x >= m_exit.m_TextureRect.x &&
-		m_mouseRect.x <= m_exit.m_TextureRect.x + m_exit.m_TextureRect.w &&
-		m_mouseRect.y >= m_exit.m_TextureRect.y &&
-		m_mouseRect.y <= m_exit.m_TextureRect.y + m_exit.m_TextureRect.h)
-	{
-		m_isExit = true;
 	}
 	else if (m_mouseRect.x >= m_exit.m_TextureRect.x &&
 		m_mouseRect.x <= m_exit.m_TextureRect.x + m_exit.m_TextureRect.w &&
@@ -166,6 +208,9 @@ void MainMenuScene::update()
 		m_isCredits = false;
 		m_isExit = false;
 	}
+
+	m_cursor.m_TextureRect.x = Game::mouseX;
+	m_cursor.m_TextureRect.y = Game::mouseY;
 }
 
 void MainMenuScene::handle_events()
@@ -189,22 +234,29 @@ void MainMenuScene::handle_events()
 						Game::isRunning = false;
 					}
 
-					if (m_isNewGame)
+					else if (m_isNewGame)
 					{
+						Game::gameStateMachine.unloadAll();
 						std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
 						Game::gameStateMachine.push(std::move(gamePlayState));
 					}
 
-					if (m_isLeaderBoard)
+					else if (m_isLeaderBoard)
 					{
 						std::unique_ptr<GameState> leaderBoardScene = std::make_unique<LeaderBoardScene>();
 						Game::gameStateMachine.push(std::move(leaderBoardScene));
 					}
 
-					if (m_isOptions)
+					else if (m_isOptions)
 					{
 						std::unique_ptr<GameState> optionsMenuScene = std::make_unique<OptionsMenuScene>();
 						Game::gameStateMachine.push(std::move(optionsMenuScene));
+					}
+
+					else if (m_isCredits)
+					{
+						std::unique_ptr<GameState> creditsScene = std::make_unique<CreditsScene>();
+						Game::gameStateMachine.push(std::move(creditsScene));
 					}
 				} break;
 
@@ -226,7 +278,6 @@ void MainMenuScene::draw()
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
 
 	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-	SDL_RenderDrawRect(Game::Renderer, &m_menuBoxOutline);
 
 	if (m_isNewGame)
 	{
@@ -282,4 +333,9 @@ void MainMenuScene::draw()
 	SDL_RenderCopy(Game::Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
+
+	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
+	SDL_RenderDrawRect(Game::Renderer, &m_menuBoxOutline);
+
+	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }
