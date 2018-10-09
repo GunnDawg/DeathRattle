@@ -1,5 +1,5 @@
 #pragma once
-#include "../Audio/Sound.h"
+#include "Audio/Sound.h"
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
 #include <memory>

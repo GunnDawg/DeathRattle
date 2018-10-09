@@ -61,7 +61,6 @@ void IntroSceneState::on_exit()
 	m_alive.Unload();
 	m_pressEnter.Unload();
 	m_plug.Unload();
-	m_plug.Unload();
 	m_website.Unload();
 
 	m_introSound.Unload();

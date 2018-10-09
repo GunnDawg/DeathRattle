@@ -89,8 +89,8 @@ void MainMenuScene::on_enter()
 	m_exitWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exitWhite.m_TextureRect.w / 2);
 	m_exitWhite.m_TextureRect.y = m_credits.m_TextureRect.y + 75;
 
-	m_thud.Load("Assets/Audio/thud.wav");
-	//m_thud.Play();
+	m_swoosh.Load("Assets/Audio/swoosh.wav");
+	m_swoosh.Play();
 }
 
 void MainMenuScene::on_exit()
@@ -119,7 +119,7 @@ void MainMenuScene::on_exit()
 	m_devName.Unload();
 	m_version.Unload();
 
-	m_thud.Unload();
+	m_swoosh.Unload();
 }
 
 void MainMenuScene::update()

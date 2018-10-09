@@ -16,11 +16,13 @@ public:
 	void draw() override;
 
 private:
+	Texture m_background;
 	Texture m_logo;
 	Texture m_production;
+
+	Sound m_introSound;
 
 	SDL_Rect m_comingSoonBox;
 
 	Timer m_timer;
-	Sound m_thud;
 };

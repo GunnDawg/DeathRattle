@@ -38,7 +38,7 @@ private:
 
 	SDL_Rect m_mouseRect;
 
-	Sound m_thud;
+	Sound m_swoosh;
 
 	bool m_isNewGame;
 	bool m_isOptions;

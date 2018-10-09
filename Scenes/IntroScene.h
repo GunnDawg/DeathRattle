@@ -1,7 +1,7 @@
 #pragma once
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
-#include "../Audio/Sound.h"
+#include "Audio/Sound.h"
 #include <memory>
 
 class IntroSceneState : public GameState

@@ -2,7 +2,7 @@
 
 SDL_Window* Game::Window = nullptr;
 SDL_Renderer* Game::Renderer = nullptr;
-const char* Game::Title = "Keep it Alive!";
+const char* Game::Title = "Keep it Alive! - A Pong-Like Game";
 unsigned int Game::screenWidth = 1280;
 unsigned int Game::screenHeight = 720;
 bool Game::isRunning = false;
@@ -109,26 +109,3 @@ void Game::Draw()
 
 	SDL_RenderPresent(Renderer);
 }
-
-//void Game::toggleWindowed()
-//{
-//	//Grab the mouse so that we don't end up with unexpected movement when the dimensions/position of the window changes.
-//	SDL_SetRelativeMouseMode(SDL_TRUE);
-//	windowew = !windowed;
-//	if (windowed)
-//	{
-//		int i = SDL_GetWindowDisplayIndex(Window);
-//		screenWidth = windowedWidth;
-//		screenHeight = windowedHeight;
-//		SDL_SetWindowFullscreen(Window, 0);
-//	}
-//	else
-//	{
-//		int i = SDL_GetWindowDisplayIndex(Window);
-//		SDL_Rect j;
-//		SDL_GetDisplayBounds(i, &j);
-//		screenWidth = j.w;
-//		screenHeight = j.h;
-//		SDL_SetWindowFullscreen(Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-//	}
-//}
