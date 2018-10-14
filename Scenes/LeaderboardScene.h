@@ -1,8 +1,8 @@
 #pragma once
+#include <memory>
 #include "Audio/Sound.h"
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
-#include <memory>
 
 class LeaderBoardScene : public GameState
 {

@@ -1,8 +1,9 @@
 #pragma once
+#include <memory>
+#include <array>
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
 #include "Audio/Sound.h"
-#include <memory>
 
 class MainMenuScene : public GameState
 {
@@ -16,6 +17,7 @@ public:
 private:
 	Texture m_title;
 	Texture m_background;
+	std::array<Texture, 2> m_skulls;
 	Texture m_devName;
 	Texture m_newGame;
 	Texture m_newGameWhite;
@@ -35,8 +37,6 @@ private:
 	SDL_Rect m_menuBox;
 	SDL_Rect m_menuBoxOutline;
 	SDL_Rect m_devNameBox;
-
-	SDL_Rect m_mouseRect;
 
 	Sound m_swoosh;
 

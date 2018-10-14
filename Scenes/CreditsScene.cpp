@@ -3,6 +3,17 @@
 
 void CreditsScene::on_enter()
 {
+	for (size_t i = 0; i < m_skulls.size(); ++i)
+	{
+		m_skulls[i].Load(Game::Renderer, "Assets/Graphics/common/skull3.png");
+		m_skulls[i].m_TextureRect.w = 100;
+		m_skulls[i].m_TextureRect.h = 100;
+		m_skulls[i].m_TextureRect.y = 0;
+	}
+
+	m_skulls[0].m_TextureRect.x = 125;
+	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
+
 	m_cursor.Load(Game::Renderer, "Assets/Graphics/common/cursor2.png");
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
@@ -85,12 +96,12 @@ void CreditsScene::on_enter()
 	m_pageOne.m_TextureRect.y = m_jeff.m_TextureRect.y + 75;
 
 	m_pageTwo.Load(Game::Renderer, "Assets/Graphics/common/2of3.png");
-	m_pageTwo.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_pageTwo.m_TextureRect.w / 2);
-	m_pageTwo.m_TextureRect.y = m_jeff.m_TextureRect.y + 75;
+	m_pageTwo.m_TextureRect.x = m_pageOne.m_TextureRect.x;
+	m_pageTwo.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
 	m_pageThree.Load(Game::Renderer, "Assets/Graphics/common/3of3.png");
-	m_pageThree.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_pageThree.m_TextureRect.w / 2);
-	m_pageThree.m_TextureRect.y = m_jeff.m_TextureRect.y + 75;
+	m_pageThree.m_TextureRect.x = m_pageOne.m_TextureRect.x;
+	m_pageThree.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
 	m_devName.Load(Game::Renderer, "Assets/Graphics/common/dev_name.png");
 	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
@@ -110,7 +121,7 @@ void CreditsScene::on_enter()
 	m_rightArrow.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
 	m_rightArrowWhite.Load(Game::Renderer, "Assets/Graphics/common/right_arrow_white.png");
-	m_rightArrowWhite.m_TextureRect.x = (m_pageOne.m_TextureRect.x + m_pageOne.m_TextureRect.w) + 30;
+	m_rightArrowWhite.m_TextureRect.x = m_rightArrow.m_TextureRect.x;
 	m_rightArrowWhite.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
 	m_leftArrow.Load(Game::Renderer, "Assets/Graphics/common/left_arrow.png");
@@ -118,8 +129,15 @@ void CreditsScene::on_enter()
 	m_leftArrow.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
 	m_leftArrowWhite.Load(Game::Renderer, "Assets/Graphics/common/left_arrow_white.png");
-	m_leftArrowWhite.m_TextureRect.x = (m_pageOne.m_TextureRect.x - 50) - (m_leftArrowWhite.m_TextureRect.w / 2);
+	m_leftArrowWhite.m_TextureRect.x = m_leftArrow.m_TextureRect.x;
 	m_leftArrowWhite.m_TextureRect.y = m_pageOne.m_TextureRect.y;
+
+
+	m_logo.Load(Game::Renderer, "Assets/Graphics/common/gglogo2.png");
+	m_logo.m_TextureRect.w = 300;
+	m_logo.m_TextureRect.h = 300;
+	m_logo.m_TextureRect.x = (Game::screenWidth / 2) - (m_logo.m_TextureRect.w / 2);
+	m_logo.m_TextureRect.y = m_creditsBox.y + 50;
 
 	m_thud.Load("Assets/Audio/thud.wav");
 	m_thud.Play();
@@ -131,6 +149,7 @@ void CreditsScene::on_exit()
 
 	m_background.Unload();
 	m_title.Unload();
+	m_logo.Unload();
 
 	m_leadProgramming.Unload();
 	m_calvin.Unload();
@@ -140,9 +159,17 @@ void CreditsScene::on_exit()
 	m_panda.Unload();
 	m_jeff.Unload();
 
+	m_graphicsDesign.Unload();
+	m_mj.Unload();
+
 	m_pageOne.Unload();
 	m_pageTwo.Unload();
 	m_pageThree.Unload();
+
+	m_sound.Unload();
+	m_jun.Unload();
+	m_savage.Unload();
+	m_reitanna.Unload();
 
 	m_devName.Unload();
 	m_version.Unload();
@@ -151,6 +178,11 @@ void CreditsScene::on_exit()
 	m_rightArrowWhite.Unload();
 	m_leftArrow.Unload();
 	m_leftArrowWhite.Unload();
+
+	for (size_t i = 0; i < m_skulls.size(); ++i)
+	{
+		m_skulls[i].Unload();
+	}
 
 	m_thud.Unload();
 }
@@ -205,6 +237,8 @@ void CreditsScene::handle_events()
 					{
 						m_pageNum = 0;
 					}
+
+					m_thud.Play();
 				}
 				else if (m_isLeft)
 				{
@@ -216,6 +250,8 @@ void CreditsScene::handle_events()
 					{
 						m_pageNum = 2;
 					}
+
+					m_thud.Play();
 				}
 			} break;
 
@@ -244,8 +280,10 @@ void CreditsScene::draw()
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
+	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
 	SDL_RenderFillRect(Game::Renderer, &m_titleBox);
+	SDL_RenderFillRect(Game::Renderer, &m_devNameBox);
+	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
 	SDL_RenderFillRect(Game::Renderer, &m_creditsBox);
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
 
@@ -277,14 +315,9 @@ void CreditsScene::draw()
 
 	else if (m_pageNum == 2)
 	{
+		SDL_RenderCopy(Game::Renderer, m_logo.m_Texture, NULL, &m_logo.m_TextureRect);
 		SDL_RenderCopy(Game::Renderer, m_pageThree.m_Texture, NULL, &m_pageThree.m_TextureRect);
 	}
-
-
-	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
-	SDL_RenderFillRect(Game::Renderer, &m_devNameBox);
-	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
 
 	SDL_RenderCopy(Game::Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
@@ -311,6 +344,9 @@ void CreditsScene::draw()
 	{
 		SDL_RenderCopy(Game::Renderer, m_leftArrow.m_Texture, NULL, &m_leftArrow.m_TextureRect);
 	}
+
+	SDL_RenderCopyEx(Game::Renderer, m_skulls[0].m_Texture, NULL, &m_skulls[0].m_TextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
+	SDL_RenderCopy(Game::Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
 
 	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }

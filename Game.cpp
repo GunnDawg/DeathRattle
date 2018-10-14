@@ -56,7 +56,8 @@ bool Game::Init()
 		return(false);
 	}
 
-	Window = SDL_CreateWindow(
+	Window = SDL_CreateWindow
+	(
 		Title,
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,

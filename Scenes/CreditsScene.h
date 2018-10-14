@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include "Audio/Sound.h"
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
@@ -13,8 +14,11 @@ public:
 	void draw() override;
 
 private:
+	std::array<Texture, 2> m_skulls;
+
 	Texture m_background;
 	Texture m_title;
+	Texture m_logo;
 
 	Texture m_leadProgramming;
 	Texture m_calvin;

@@ -3,15 +3,17 @@
 
 void SplashScene::on_enter()
 {
-	m_background.Load(Game::Renderer, "Assets/Graphics/splash_scene/background2.png");
+	m_background.Load(Game::Renderer, "Assets/Graphics/splash_scene/background4.png");
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
+	m_background.m_TextureRect.w = 1280;
+	m_background.m_TextureRect.h = 720;
 
-	m_logo.Load(Game::Renderer, "Assets/Graphics/splash_scene/GGlogo2.png");
+	m_logo.Load(Game::Renderer, "Assets/Graphics/common/GGlogo2.png");
 	m_logo.m_TextureRect.x = (Game::screenWidth / 2) - (m_logo.m_TextureRect.w / 2);
 	m_logo.m_TextureRect.y = -450;
 
-	m_production.Load(Game::Renderer, "Assets/Graphics/splash_scene/production2.png");
+	m_production.Load(Game::Renderer, "Assets/Graphics/splash_scene/production3.png");
 	m_production.m_TextureRect.x = (Game::screenWidth / 2) - (m_production.m_TextureRect.w / 2);
 	m_production.m_TextureRect.y = Game::screenHeight;
 
@@ -32,17 +34,17 @@ void SplashScene::on_exit()
 
 void SplashScene::update()
 {
-	if (m_logo.m_TextureRect.y <= 75)
+	if (m_logo.m_TextureRect.y <= 10)
 	{
 		m_logo.m_TextureRect.y += 10;
 	}
 
-	if (m_production.m_TextureRect.y >= (m_logo.m_TextureRect.y + m_logo.m_TextureRect.h) + 100)
+	if (m_production.m_TextureRect.y >= (m_logo.m_TextureRect.y + m_logo.m_TextureRect.h) + 25)
 	{
-		m_production.m_TextureRect.y -= 1.75;
+		m_production.m_TextureRect.y -= 4;
 	}
 
-	if (m_timer.elapsedSeconds() > 5.0)
+	if (m_timer.elapsedSeconds() > 7.0)
 	{
 		Game::gameStateMachine.pop();
 
@@ -58,17 +60,15 @@ void SplashScene::handle_events()
 	{
 		switch (evnt.type)
 		{
-			case SDL_KEYDOWN:
+			case SDL_QUIT:
 			{
-				Game::gameStateMachine.pop();
-
-				std::unique_ptr<GameState> introSceneState = std::make_unique<IntroSceneState>();
-				Game::gameStateMachine.push(std::move(introSceneState));
+				Game::isRunning = false;
 			} break;
 
 			default:
 				break;
 		}
+		
 	}
 }
 

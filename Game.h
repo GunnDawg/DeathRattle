@@ -8,6 +8,7 @@
 #include <chrono>
 
 #include "StateMachine/GameStateMachine.h"
+#include "Audio/MusicManager.h"
 #include "Scenes/SplashScene.h"
 #include "Player.h"
 
@@ -20,15 +21,11 @@ public:
 		return instance;
 	}
 
-	Game(Game const&) = delete;
-	void operator=(Game const&) = delete;
-	~Game();
-
+	static void updateDelta();
 	static bool Init();
 	static void processinput();
 	static void Update();
 	static void Draw();
-	static void updateDelta();
 
 	static inline bool Running() { return isRunning; }
 
@@ -47,5 +44,8 @@ public:
 	static int mouseY;
 
 private:
-	Game() {};
+	Game() = default;
+	~Game();
+	Game(const Game&) = delete;
+	Game& operator=(const Game&) = delete;
 };

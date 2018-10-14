@@ -1,11 +1,12 @@
 #pragma once
 #include <memory>
+#include <array>
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
 #include "Audio/Sound.h"
 #include "Time/Timer.h"
 
-class IntroSceneState : public GameState
+class PreGameplayScene : public GameState
 {
 public:
 	void on_enter() override;
@@ -21,24 +22,18 @@ private:
 
 	Timer m_timer;
 
-	Texture m_background;
-	Texture m_keepIt;
-	Texture m_alive;
-	Texture m_plug;
-	Texture m_version;
-
-	Texture m_press;
-	Texture m_enter;
-
-	Texture m_blood;
-	Texture m_skull;
-	Texture m_skullWhite;
+	std::array<Texture, 2> m_skulls;
 
 	Texture m_cursor;
+	Texture m_title;
+	Texture m_background;
+	Texture m_devName;
+	Texture m_version;
 
-	SDL_Rect m_plugBox;
-	SDL_Rect m_skullBox;
-	SDL_Rect m_skullCollider;
+	SDL_Rect m_difficultyBox;
+	SDL_Rect m_difficultyBoxOUtline;
+	SDL_Rect m_titleBox;
+	SDL_Rect m_devNameBox;
 
-	Sound m_introSound;
+	Sound m_thud;
 };
