@@ -14,6 +14,8 @@ class MusicManager
 
 		static void Load();
 		static void Play();
+		static void Pause();
+		static void Resume();
 		static void Update();
 
 		static bool isMenuMusic;

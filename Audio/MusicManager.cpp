@@ -19,13 +19,32 @@ void MusicManager::Play()
 	m_music.Play();
 }
 
+void MusicManager::Pause()
+{
+	m_music.Pause();
+}
+
+void MusicManager::Resume()
+{
+	m_music.Resume();
+}
+
 void MusicManager::Update()
 {
 	if (!isMenuMusic)
 	{
 		m_music.Pause();
 	}
-	else if (isMenuMusic)
+	else if(isMenuMusic)
+	{
+		m_music.Resume();
+	}
+
+	else if (!isGamePlayMusic)
+	{
+		m_music.Pause();
+	}
+	else if(isGamePlayMusic)
 	{
 		m_music.Resume();
 	}

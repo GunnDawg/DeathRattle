@@ -25,6 +25,7 @@ Game::~Game()
 
 	SDL_Quit();
 	IMG_Quit();
+	TTF_Quit();
 	Mix_Quit();
 }
 
@@ -48,6 +49,12 @@ bool Game::Init()
 		printf("IMG_Init: Failed to init required PNG support!\n");
 		printf("IMG_Init: %s\n", IMG_GetError());
 		return(0);
+	}
+
+	if (TTF_Init() != 0)
+	{
+		printf("Error starting SDL_TTF. Error: %s\n", TTF_GetError());
+		return(false);
 	}
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) != 0)
@@ -96,6 +103,7 @@ void Game::processinput()
 void Game::Update()
 {
 	updateDelta();
+	MusicManager::Update();
 
 	gameStateMachine.update();
 

@@ -3,13 +3,14 @@
 #include "LeaderboardScene.h"
 #include "OptionsMenuScene.h"
 #include "CreditsScene.h"
+#include "GameplayScene.h"
 #include "Game.h"
 
 void MainMenuScene::on_enter()
 {
 	for (size_t i = 0; i < m_skulls.size(); ++i)
 	{
-		m_skulls[i].Load(Game::Renderer, "Assets/Graphics/common/skull3.png");
+		m_skulls[i].Load("Assets/Graphics/common/skull3.png");
 		m_skulls[i].m_TextureRect.w = 100;
 		m_skulls[i].m_TextureRect.h = 100;
 		m_skulls[i].m_TextureRect.y = 0;
@@ -18,11 +19,11 @@ void MainMenuScene::on_enter()
 	m_skulls[0].m_TextureRect.x = 125;
 	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
-	m_cursor.Load(Game::Renderer, "Assets/Graphics/common/cursor2.png");
+	m_cursor.Load("Assets/Graphics/common/cursor2.png");
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_title.Load(Game::Renderer, "Assets/Graphics/common/title.png");
+	m_title.Load("Assets/Graphics/common/title.png");
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
 
@@ -31,7 +32,7 @@ void MainMenuScene::on_enter()
 	m_titleBox.w = Game::screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
-	m_devName.Load(Game::Renderer, "Assets/Graphics/common/dev_name.png");
+	m_devName.Load("Assets/Graphics/common/dev_name.png");
 	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
 	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
 
@@ -40,11 +41,11 @@ void MainMenuScene::on_enter()
 	m_devNameBox.x = 0;
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
-	m_version.Load(Game::Renderer, "Assets/Graphics/common/version.png");
+	m_version.Load("Assets/Graphics/common/version.png");
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
-	m_background.Load(Game::Renderer, "Assets/Graphics/common/main_background.png");
+	m_background.Load("Assets/Graphics/common/main_background.png");
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = Game::screenWidth;
@@ -60,25 +61,16 @@ void MainMenuScene::on_enter()
 	m_menuBoxOutline.x = m_menuBox.x;
 	m_menuBoxOutline.y = m_menuBox.y;
 
-	m_newGame.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/new_game.png");
-
-	m_newGameWhite.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/new_game_white.png");
-
-	m_options.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/options.png");
-
-	m_optionsWhite.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/options_white.png");
-
-	m_leaderBoard.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/leaderboard.png");
-
-	m_leaderBoardWhite.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/leaderboard_white.png");
-
-	m_credits.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/credits.png");
-
-	m_creditsWhite.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/credits_white.png");
-
-	m_exit.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/exit.png");
-
-	m_exitWhite.Load(Game::Renderer, "Assets/Graphics/main_menu_scene/exit_white.png");
+	m_newGame.Load("Assets/Graphics/main_menu_scene/new_game.png");
+	m_newGameWhite.Load("Assets/Graphics/main_menu_scene/new_game_white.png");
+	m_options.Load("Assets/Graphics/main_menu_scene/options.png");
+	m_optionsWhite.Load("Assets/Graphics/main_menu_scene/options_white.png");
+	m_leaderBoard.Load("Assets/Graphics/main_menu_scene/leaderboard.png");
+	m_leaderBoardWhite.Load("Assets/Graphics/main_menu_scene/leaderboard_white.png");
+	m_credits.Load("Assets/Graphics/main_menu_scene/credits.png");
+	m_creditsWhite.Load("Assets/Graphics/main_menu_scene/credits_white.png");
+	m_exit.Load("Assets/Graphics/main_menu_scene/exit.png");
+	m_exitWhite.Load("Assets/Graphics/main_menu_scene/exit_white.png");
 
 	m_swoosh.Load("Assets/Audio/swoosh.wav");
 	m_swoosh.Play();
@@ -237,12 +229,12 @@ void MainMenuScene::handle_events()
 
 					else if (m_isNewGame)
 					{
-						//Game::gameStateMachine.unloadAll();
-						//std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
-						//Game::gameStateMachine.push(std::move(gamePlayState));
+						Game::gameStateMachine.unloadAll();
+						std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
+						Game::gameStateMachine.push(std::move(gamePlayState));
 
-						std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
-						Game::gameStateMachine.push(std::move(preGamePlayState));
+						//std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
+						//Game::gameStateMachine.push(std::move(preGamePlayState));
 					}
 
 					else if (m_isLeaderBoard)

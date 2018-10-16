@@ -15,9 +15,9 @@ public:
 	void draw() override;
 
 private:
+	std::array<Texture, 2> m_skulls;
 	Texture m_title;
 	Texture m_background;
-	std::array<Texture, 2> m_skulls;
 	Texture m_devName;
 	Texture m_newGame;
 	Texture m_newGameWhite;

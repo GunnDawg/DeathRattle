@@ -4,29 +4,29 @@
 
 void IntroSceneState::on_enter()
 {
-	m_cursor.Load(Game::Renderer, "Assets/Graphics/common/cursor2.png");
+	m_cursor.Load("Assets/Graphics/common/cursor2.png");
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_background.Load(Game::Renderer, "Assets/Graphics/common/main_background.png");
+	m_background.Load("Assets/Graphics/common/main_background.png");
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
-	m_plug.Load(Game::Renderer, "Assets/Graphics/intro_scene/plug.png");
+	m_plug.Load("Assets/Graphics/intro_scene/plug.png");
 	m_plug.m_TextureRect.x = (Game::screenWidth / 2) - (m_plug.m_TextureRect.w / 2);
 	m_plug.m_TextureRect.y = 0;
 
-	m_keepIt.Load(Game::Renderer, "Assets/Graphics/intro_scene/keepit2.png");
+	m_keepIt.Load("Assets/Graphics/intro_scene/keepit.png");
 	m_keepIt.m_TextureRect.x = (Game::screenWidth / 2) - (m_keepIt.m_TextureRect.w / 2);
 	m_keepIt.m_TextureRect.y = 0 - (m_keepIt.m_TextureRect.h);
 
-	m_alive.Load(Game::Renderer, "Assets/Graphics/intro_scene/alive2.png");
-	m_alive.m_TextureRect.x = (Game::screenWidth / 2) - (m_alive.m_TextureRect.w / 2);
+	m_alive.Load("Assets/Graphics/intro_scene/alive.png");
+	m_alive.m_TextureRect.x = (Game::screenWidth / 2) - (m_alive.m_TextureRect.w / 2) + 25;
 	m_alive.m_TextureRect.y = 720;
 
-	m_blood.Load(Game::Renderer, "Assets/Graphics/intro_scene/blood.png");
+	m_blood.Load("Assets/Graphics/intro_scene/blood.png");
 	m_blood.m_TextureRect.x = (Game::screenWidth / 2) - (m_blood.m_TextureRect.w / 2);
 	m_blood.m_TextureRect.y = (Game::screenHeight / 2) - (m_blood.m_TextureRect.h / 2);
 
@@ -35,7 +35,7 @@ void IntroSceneState::on_enter()
 	m_skullBox.x = (Game::screenWidth / 2) - (m_skullBox.w / 2);
 	m_skullBox.y = 550;
 
-	m_skullWhite.Load(Game::Renderer, "Assets/Graphics/intro_scene/skull_white.png");
+	m_skullWhite.Load("Assets/Graphics/intro_scene/skull_white.png");
 	m_skullWhite.m_TextureRect.w = 125;
 	m_skullWhite.m_TextureRect.h = 125;
 	m_skullWhite.m_TextureRect.x = (Game::screenWidth / 2) - m_skullWhite.m_TextureRect.w / 2;
@@ -46,17 +46,17 @@ void IntroSceneState::on_enter()
 	m_skullCollider.x = m_skullWhite.m_TextureRect.x + m_skullCollider.w / 2;
 	m_skullCollider.y = m_skullWhite.m_TextureRect.y + m_skullCollider.h / 2;
 
-	m_skull.Load(Game::Renderer, "Assets/Graphics/intro_scene/skull.png");
+	m_skull.Load("Assets/Graphics/intro_scene/skull.png");
 	m_skull.m_TextureRect.w = 125;
 	m_skull.m_TextureRect.h = 125;
 	m_skull.m_TextureRect.x = m_skullWhite.m_TextureRect.x;
 	m_skull.m_TextureRect.y = m_skullWhite.m_TextureRect.y;
 
-	m_press.Load(Game::Renderer, "Assets/Graphics/intro_scene/press.png");
+	m_press.Load("Assets/Graphics/intro_scene/press.png");
 	m_press.m_TextureRect.x = (m_skullWhite.m_TextureRect.x) - (m_press.m_TextureRect.w) - 10;
 	m_press.m_TextureRect.y = (m_skullBox.y + m_press.m_TextureRect.h / 2);
 
-	m_enter.Load(Game::Renderer, "Assets/Graphics/intro_scene/enter.png");
+	m_enter.Load("Assets/Graphics/intro_scene/enter.png");
 	m_enter.m_TextureRect.x = (m_skullWhite.m_TextureRect.x) + (m_enter.m_TextureRect.w) - 10;
 	m_enter.m_TextureRect.y = (m_skullBox.y + m_enter.m_TextureRect.h / 2);
 
@@ -65,7 +65,7 @@ void IntroSceneState::on_enter()
 	m_plugBox.w = Game::screenWidth;
 	m_plugBox.h = m_plug.m_TextureRect.h;
 
-	m_version.Load(Game::Renderer, "Assets/Graphics/common/version.png");
+	m_version.Load("Assets/Graphics/common/version.png");
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
@@ -97,7 +97,7 @@ void IntroSceneState::update()
 		m_keepIt.m_TextureRect.y += 20;
 	}
 
-	if(m_alive.m_TextureRect.y >= 325)
+	if(m_alive.m_TextureRect.y >= 300)
 	{
 		m_alive.m_TextureRect.y -= 25;
 	}

@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <cstdio>
+#include <string>
 
 class Texture
 {
@@ -9,12 +10,13 @@ public:
 	Texture();
 	~Texture();
 
-	SDL_Texture* Load(SDL_Renderer* passedRenderer, const char* filePath);
-	inline void Unload() { SDL_DestroyTexture(m_Texture); printf("Texture Destroyed: %s\n", m_filePath); }
+	SDL_Texture* Load(std::string filePath);
+	void Unload();
 	SDL_Texture* getTexture() { return m_Texture; }
+	void setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 
 	SDL_Rect m_TextureRect;
 	SDL_Texture* m_Texture;
 
-	const char* m_filePath;
+	std::string m_filePath;
 };
