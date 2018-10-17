@@ -62,7 +62,7 @@ void PreGameplayScene::on_enter()
 	m_devNameBox.x = 0;
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
-	m_thud.Load("Assets/Audio/thud.wav");
+	m_thud.Load();
 	m_thud.Play();
 }
 

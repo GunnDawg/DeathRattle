@@ -14,6 +14,7 @@ public:
 	void Load();
 	void Unload();
 	void setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
+	void setRect(unsigned int x, unsigned int y);
 	SDL_Rect getRect() const { return m_TextureRect; }
 	SDL_Texture* getTexture() const { return m_Texture; }
 

@@ -97,7 +97,7 @@ void MainMenuScene::on_enter()
 	m_exitWhite = Texture("Assets/Graphics/main_menu_scene/exit_white.png");
 	m_exitWhite.Load();
 
-	m_swoosh.Load("Assets/Audio/swoosh.wav");
+	m_swoosh.Load();
 	m_swoosh.Play();
 
 	MusicManager::Load();

@@ -20,5 +20,5 @@ private:
 	
 	SDL_Rect m_comingSoonBox = {};
 
-	Sound m_thud;
+	Sound m_thud = Sound("Assets/Audio/thud.wav");
 };

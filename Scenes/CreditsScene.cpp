@@ -165,7 +165,7 @@ void CreditsScene::on_enter()
 	m_logo.m_TextureRect.x = (Game::screenWidth / 2) - (m_logo.m_TextureRect.w / 2);
 	m_logo.m_TextureRect.y = m_creditsBox.y + 50;
 
-	m_thud.Load("Assets/Audio/thud.wav");
+	m_thud.Load();
 	m_thud.Play();
 }
 

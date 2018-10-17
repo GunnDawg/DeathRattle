@@ -1,18 +1,5 @@
 #include "Game.h"
 
-SDL_Window* Game::Window = nullptr;
-SDL_Renderer* Game::Renderer = nullptr;
-const char* Game::Title = "Keep it Alive! - A Pong-Like Game";
-unsigned int Game::screenWidth = 1280;
-unsigned int Game::screenHeight = 720;
-bool Game::isRunning = false;
-GameStateMachine Game::gameStateMachine;
-Uint64 Game::currentTime = 0ULL;
-Uint64 Game::lastTime = 0ULL;
-double Game::deltaTime = 0.0;
-int Game::mouseX = 0;
-int Game::mouseY = 0;
-
 Game::~Game()
 {
 	gameStateMachine.unloadAll();
@@ -41,14 +28,14 @@ bool Game::Init()
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		printf("Error starting SDL. Error: %s\n", SDL_GetError());
-		return(0);
+		return(false);
 	}
 
 	if ((IMG_Init(IMG_INIT_PNG != IMG_INIT_PNG)))
 	{
 		printf("IMG_Init: Failed to init required PNG support!\n");
 		printf("IMG_Init: %s\n", IMG_GetError());
-		return(0);
+		return(false);
 	}
 
 	if (TTF_Init() != 0)
@@ -75,14 +62,14 @@ bool Game::Init()
 	if (Window == nullptr)
 	{
 		printf("Error creating SDL_Window. Error: %s\n", SDL_GetError());
-		return(0);
+		return(false);
 	}
 
 	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (Renderer == nullptr)
 	{
 		printf("Error creating SDL_Renderer. Error: %s\n", SDL_GetError());
-		return(0);
+		return(false);
 	}
 
 	std::unique_ptr<GameState> splashSceneState = std::make_unique<SplashScene>();
@@ -92,7 +79,7 @@ bool Game::Init()
 
 	isRunning = true;
 
-	return(1);
+	return(true);
 }
 
 void Game::processinput()
@@ -103,21 +90,13 @@ void Game::processinput()
 void Game::Update()
 {
 	updateDelta();
-	//std::chrono::high_resolution_clock timer;
-	//auto start = timer.now();
-
-	gameStateMachine.update();
 	SDL_GetMouseState(&mouseX, &mouseY);
-
-	//auto stop = timer.now();
-	//deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000.0f;
+	gameStateMachine.update();
 }
 
 void Game::Draw()
 {
 	SDL_RenderClear(Renderer);
-
 	gameStateMachine.draw();
-
 	SDL_RenderPresent(Renderer);
 }

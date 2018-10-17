@@ -53,3 +53,9 @@ void Texture::setRect(unsigned int x, unsigned int y, unsigned int w, unsigned i
 	m_TextureRect.w = w;
 	m_TextureRect.h = h;
 }
+
+void Texture::setRect(unsigned int x, unsigned int y)
+{
+	m_TextureRect.x = x;
+	m_TextureRect.y = y;
+}

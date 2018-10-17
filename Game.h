@@ -1,12 +1,11 @@
 #pragma once
 #include <SDL.h>
-#include <cstdio>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
+#include <cstdio>
 #include <memory>
-#include <chrono>
 
 #include "StateMachine/GameStateMachine.h"
 #include "Audio/MusicManager.h"
@@ -27,21 +26,21 @@ public:
 	static void Update();
 	static void Draw();
 
-	static inline bool Running() { return isRunning; }
+	static bool Running() { return isRunning; }
 
-	static SDL_Window* Window;
-	static const char* Title;
-	static SDL_Renderer* Renderer;
-	static bool isRunning;
-	static GameStateMachine gameStateMachine;
-	static Uint64 currentTime;
-	static Uint64 lastTime;
-	static double deltaTime;
-	static unsigned int screenWidth;
-	static unsigned int screenHeight;
+	inline static GameStateMachine gameStateMachine;
+	inline static SDL_Window* Window                     = nullptr;
+	inline static const char* Title                      = "Keep it Alive!!";
+	inline static SDL_Renderer* Renderer                 = nullptr;
+	inline static bool isRunning                         = false;
+	inline static Uint64 currentTime                     = 0ULL;
+	inline static Uint64 lastTime                        = 0ULL;
+	inline static double deltaTime                       = 0.0;
+	inline static unsigned int screenWidth               = 1280;
+	inline static unsigned int screenHeight              = 720;
 
-	static int mouseX;
-	static int mouseY;
+	inline static int mouseX                             = 0;
+	inline static int mouseY                             = 0;
 
 private:
 	Game() = default;

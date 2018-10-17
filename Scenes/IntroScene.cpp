@@ -82,11 +82,11 @@ void IntroSceneState::on_enter()
 
 	m_timer.start();
 
-	m_scare.Load("Assets/Audio/scare.wav");
-	m_scare.setVolume(5);
-
-	m_introSound.Load("Assets/Audio/splat.wav");
+	m_introSound.Load();
 	m_introSound.Play();
+
+	m_scare.Load();
+	m_scare.setVolume(5);
 }
 
 void IntroSceneState::on_exit()

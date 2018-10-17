@@ -10,7 +10,7 @@ public:
 	Sound(const char* filePath);
 	~Sound();
 
-	Mix_Chunk* Load(const char* filePath);
+	void Load();
 	void Unload();
 	inline void Play() const { Mix_PlayChannel(-1, m_chunk, 0); }
 	void setVolume(int v) const;

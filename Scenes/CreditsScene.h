@@ -59,5 +59,5 @@ private:
 	bool m_isLeft = false;
 	int m_pageNum = 0;
 
-	Sound m_thud;
+	Sound m_thud = Sound("Assets/Audio/thud.wav");
 };

@@ -35,5 +35,5 @@ private:
 	SDL_Rect m_titleBox;
 	SDL_Rect m_devNameBox;
 
-	Sound m_thud;
+	Sound m_thud = Sound("Assets/Audio/thud.wav");
 };

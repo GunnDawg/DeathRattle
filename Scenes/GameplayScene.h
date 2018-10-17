@@ -37,6 +37,12 @@ public:
 	bool checkforWin();
 
 private:
+	std::array<std::unique_ptr<Paddle>, NUM_PADDLES> m_paddles = {
+		std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
+		std::make_unique<Paddle>(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),
+		std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45),
+		std::make_unique<Paddle>(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2))
+	};
 
 	unsigned int m_difficulty                      = 1;
 	int m_health                                   = 550;
@@ -52,24 +58,17 @@ private:
 
 	HUD m_HUD;
 
-	std::array<std::unique_ptr<Paddle>, NUM_PADDLES> m_paddles = {
-		std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
-		std::make_unique<Paddle>(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),
-		std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45),
-		std::make_unique<Paddle>(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2))
-	};
-
 	std::unique_ptr<LevelSet> m_dungeonLevels      = std::make_unique<LevelSet>("Assets/Graphics/Levels/Dungeon/");
 
 	std::unique_ptr<Ball> m_ball                   = std::make_unique<Ball>(m_difficulty);
 
 	AABBCollision m_collider;
 
-	Sound m_hitSound                               = Sound("Assets/Sounds/hitnormal.wav");
-	Sound m_hitBadSound                            = Sound("Assets/Sounds/hitbad.wav");
-	Sound m_pauseSound                             = Sound("Assets/Sounds/pause.wav");
-	Sound m_gameOverSound                          = Sound("Assets/Sounds/gameover.wav");
-	Sound m_heal                                   = Sound("Assets/Sounds/heal.wav");
+	Sound m_hitSound                               = Sound("Assets/Audio/hitnormal.wav");
+	Sound m_hitBadSound                            = Sound("Assets/Audio/hitbad.wav");
+	Sound m_pauseSound                             = Sound("Assets/Audio/pause.wav");
+	Sound m_gameOverSound                          = Sound("Assets/Audio/gameover.wav");
+	Sound m_heal                                   = Sound("Assets/Audio/heal.wav");
 
 	std::unique_ptr<Text> m_gameTitle              = std::make_unique<Text>(48, "KEEP IT ALIVE");
 	std::unique_ptr<Text> m_gameTitleStart         = std::make_unique<Text>(12, "Press SPACE to start or ESC to exit");
@@ -80,13 +79,13 @@ private:
 	std::unique_ptr<Text> m_levelPassed            = std::make_unique<Text>(48, "LEVEL COMPLETE");
 	std::unique_ptr<Text> m_levelPassedContinue    = std::make_unique<Text>(12, "Press N to continue to the next level");
 
-	Texture m_dead                                 = Texture("Assets/Graphics/gameplay_scene/gameover.png");
+	Texture m_grimReaper                           = Texture("Assets/Graphics/gameplay_scene/grim_reaper.png");
 	Texture m_cursor                               = Texture("Assets/Graphics/common/cursor.png");
 
 	SDL_Rect m_finalScoreBox                       = { 0 };
+
 	SDL_Rect m_finalScoreBoxOutline                = { 0 };
 
-	bool m_running                                 = false;
 	bool m_paused                                  = true;
 	bool m_gameOver                                = false;
 	bool m_levelWon                                = false;

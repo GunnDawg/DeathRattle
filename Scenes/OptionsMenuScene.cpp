@@ -220,7 +220,7 @@ void OptionsMenuScene::on_enter()
 		m_gameplayMusicEnabled = false;
 	}
 
-	m_thud.Load("Assets/Audio/thud.wav");
+	m_thud.Load();
 	m_thud.Play();
 }
 

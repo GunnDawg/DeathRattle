@@ -40,6 +40,6 @@ private:
 	SDL_Rect m_skullBox = {};
 	SDL_Rect m_skullCollider = {};
 
-	Sound m_introSound;
-	Sound m_scare;
+	Sound m_introSound = Sound("Assets/Audio/splat.wav");
+	Sound m_scare = Sound("Assets/Audio/scare.wav");
 };

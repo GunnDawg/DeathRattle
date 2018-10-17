@@ -25,7 +25,7 @@ void LeaderBoardScene::on_enter()
 	m_comingSoonBox.w = Game::screenWidth;
 	m_comingSoonBox.h = m_comingSoon.m_TextureRect.h;
 
-	m_thud.Load("Assets/Audio/thud.wav");
+	m_thud.Load();
 	m_thud.Play();
 }
 

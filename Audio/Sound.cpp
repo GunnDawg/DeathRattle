@@ -12,10 +12,8 @@ Sound::~Sound()
 
 }
 
-Mix_Chunk* Sound::Load(const char* filePath)
+void Sound::Load()
 {
-	m_soundFilePath = filePath;
-
 	m_chunk = Mix_LoadWAV(m_soundFilePath);
 	if (m_chunk == nullptr)
 	{
@@ -25,8 +23,6 @@ Mix_Chunk* Sound::Load(const char* filePath)
 	{
 		printf("SOUND LOADED: \t\t---> \t%s\n", m_soundFilePath);
 	}
-
-	return(m_chunk);
 }
 
 void Sound::Unload()

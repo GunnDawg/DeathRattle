@@ -20,7 +20,7 @@ void SplashScene::on_enter()
 	m_production.m_TextureRect.x = (Game::screenWidth / 2) - (m_production.m_TextureRect.w / 2);
 	m_production.m_TextureRect.y = Game::screenHeight;
 
-	m_introSound.Load("Assets/Audio/intro.wav");
+	m_introSound.Load();
 	m_introSound.Play();
 
 	m_timer.start();

@@ -9,11 +9,13 @@ void GameplayState::on_enter()
 	m_mouse.On();
 
 	m_cursor.Load();
-	m_cursor.m_TextureRect.w = 48;
-	m_cursor.m_TextureRect.h = 48;
 
-	m_dead.Load();
-	m_dead.setRect((Game::screenWidth / 2) - (m_dead.m_TextureRect.w / 2), Game::screenHeight - m_dead.m_TextureRect.h, m_dead.m_TextureRect.w, m_dead.m_TextureRect.h);
+	m_grimReaper.Load();
+	m_grimReaper.setRect((Game::screenWidth / 2) - (m_grimReaper.m_TextureRect.w / 2),
+					Game::screenHeight - m_grimReaper.m_TextureRect.h,
+		            m_grimReaper.m_TextureRect.w,
+		            m_grimReaper.m_TextureRect.h);
+
 	m_ball->Load();
 
 	m_HUD.Load(m_health, true);
@@ -21,22 +23,19 @@ void GameplayState::on_enter()
 	m_dungeonLevels->Load();
 	m_dungeonLevels->setScores({ 10, 50, 175, 250, 300 });
 
-	//Load all audio
-	m_hitSound.Load("Assets/Audio/hitnormal.wav");
-	m_hitBadSound.Load("Assets/Audio/hitbad.wav");
-	m_pauseSound.Load("Assets/Audio/pause.wav");
-	m_gameOverSound.Load("Assets/Audio/gameover.wav");
-	m_heal.Load("Assets/Audio/heal.wav");
+	m_hitSound.Load();
+	m_hitBadSound.Load();
+	m_pauseSound.Load();
+	m_gameOverSound.Load();
+	m_heal.Load();
 	m_heal.setVolume(4);
-
-	m_running = true;
 }
 
 void GameplayState::on_exit()
 {
 	printf("<-----UNLOADING GAME--------->\n");
 
-	m_dead.Unload();
+	m_grimReaper.Unload();
 	m_cursor.Unload();
 	m_ball->Unload();
 	m_dungeonLevels->Unload(m_dungeonLevels->getLevel());
@@ -69,7 +68,6 @@ void GameplayState::handle_events()
 				Game::isRunning = false;
 			} break;
 
-		//TODO: Consider a key input manager if needed, might not be (Calvin)
 			case SDL_KEYDOWN:
 			{
 				switch (evnt.key.keysym.sym)
@@ -155,15 +153,14 @@ void GameplayState::handle_events()
 
 void GameplayState::update()
 {
-	SDL_GetMouseState(&m_mouseX, &m_mouseY);
-	m_cursor.setRect(m_mouseX, m_mouseY, 48, 48);
+	m_cursor.setRect(Game::mouseX, Game::mouseY);
+
+	m_HUD.Update(*m_dungeonLevels, *m_ball, m_lives, m_health, m_bonusProgress);
 
 	if (m_health <= 0)
 	{
 		m_health = 0;
 	}
-
-	m_HUD.Update(*m_dungeonLevels, *m_ball, m_lives, m_health, m_bonusProgress);
 
 	if (m_paused)
 	{
@@ -219,7 +216,6 @@ void GameplayState::drawBall()
 	m_ball->Draw();
 }
 
-//TODO: Really need a game state manager to avoid this kind of code
 void GameplayState::drawText()
 {
 	if (m_HUD.isShowing())
@@ -229,8 +225,8 @@ void GameplayState::drawText()
 
 	if (m_gameOver)
 	{
-		SDL_Rect rect = m_dead.m_TextureRect;
-		SDL_RenderCopy(Game::Renderer, m_dead.getTexture(), nullptr, &rect);
+		SDL_Rect rect = m_grimReaper.m_TextureRect;
+		SDL_RenderCopy(Game::Renderer, m_grimReaper.getTexture(), nullptr, &rect);
 		m_gameOverText->Draw((Game::screenWidth / 2) - (m_gameOverText->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
 		m_gameOverNewGameText->Draw((Game::screenWidth / 2) - 225, (Game::screenHeight / 2) - 90);
 	}
@@ -296,12 +292,6 @@ void GameplayState::draw()
 	{
 		drawCursor();
 	}
-
-	if (m_bonusProgress >= 550)
-	{
-		//drawItems();
-	}
-
 }
 
 Paddle* GameplayState::getPaddle()
@@ -396,14 +386,12 @@ void GameplayState::checkCollision()
 	{
 		if (paddleHit->getRect().h >= m_ball->getRect().w && paddleHit->isMarked())
 		{
-			//Default was "5"
 			paddleHit->setRectH(paddleHit->getRect().h - (paddleHit->getRect().h / 16));
 			m_health -= 75;
 			m_ball->addSpeed(0.02f);
 		}
 		else if (paddleHit->getRect().h >= m_ball->getRect().w)
 		{
-			//Default was "2"
 			paddleHit->setRectH(paddleHit->getRect().h - (paddleHit->getRect().h / 20));
 			m_health -= 10;
 			m_ball->addSpeed(0.01f);

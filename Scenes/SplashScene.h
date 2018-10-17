@@ -21,7 +21,7 @@ private:
 	Texture m_logo;
 	Texture m_production;
 
-	Sound m_introSound;
+	Sound m_introSound = Sound("Assets/Audio/intro.wav");
 
 	SDL_Rect m_comingSoonBox = {};
 
