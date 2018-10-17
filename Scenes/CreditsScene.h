@@ -14,50 +14,52 @@ public:
 	void draw() override;
 
 private:
-	std::array<Texture, 2> m_skulls;
+	std::array<Texture, 2> m_skulls = {
+		Texture("Assets/Graphics/common/skull.png"),
+		Texture("Assets/Graphics/common/skull.png")
+	};
 
-	Texture m_background;
-	Texture m_title;
-	Texture m_logo;
+	Texture m_cursor                = Texture("Assets/Graphics/common/cursor.png");
+	Texture m_title                 = Texture("Assets/Graphics/common/title.png");
+	Texture m_background            = Texture("Assets/Graphics/common/main_background.png");
+	Texture m_logo                  = Texture("Assets/Graphics/common/GGlogo.png");
 
-	Texture m_leadProgramming;
-	Texture m_calvin;
+	Texture m_leadProgramming       = Texture("Assets/Graphics/credits_scene/lead_programming.png");
+	Texture m_calvin                = Texture("Assets/Graphics/credits_scene/calvin.png");
 
-	Texture m_additionalProgramming;
-	Texture m_kelson;
-	Texture m_panda;
-	Texture m_jeff;
+	Texture m_additionalProgramming = Texture("Assets/Graphics/credits_scene/additional_programming.png");
+	Texture m_kelson                = Texture("Assets/Graphics/credits_scene/kelson.png");
+	Texture m_panda                 = Texture("Assets/Graphics/credits_scene/fancykillerpanda.png");
+	Texture m_jeff                  = Texture("Assets/Graphics/credits_scene/jeff.png");
 
-	Texture m_graphicsDesign;
-	Texture m_mj;
+	Texture m_graphicsDesign        = Texture("Assets/Graphics/credits_scene/graphics_design.png");
+	Texture m_mj                    = Texture("Assets/Graphics/credits_scene/mj.png");
 
-	Texture m_sound;
-	Texture m_jun;
-	Texture m_savage;
-	Texture m_reitanna;
+	Texture m_sound                 = Texture("Assets/Graphics/credits_scene/sound.png");
+	Texture m_jun                   = Texture("Assets/Graphics/credits_scene/jun.png");
+	Texture m_savage                = Texture("Assets/Graphics/credits_scene/savage.png");
+	Texture m_reitanna              = Texture("Assets/Graphics/credits_scene/reitanna.png");
 
-	Texture m_pageOne;
-	Texture m_pageTwo;
-	Texture m_pageThree;
+	Texture m_pageOne               = Texture("Assets/Graphics/common/1of3.png");
+	Texture m_pageTwo               = Texture("Assets/Graphics/common/2of3.png");
+	Texture m_pageThree             = Texture("Assets/Graphics/common/3of3.png");
 
-	Texture m_devName;
-	Texture m_version;
+	Texture m_devName               = Texture("Assets/Graphics/common/dev_name.png");
+	Texture m_version               = Texture("Assets/Graphics/common/version.png");
 
-	Texture m_cursor;
+	Texture m_rightArrow            = Texture("Assets/Graphics/common/right_arrow.png");
+	Texture m_rightArrowWhite       = Texture("Assets/Graphics/common/right_arrow_white.png");
+	Texture m_leftArrow             = Texture("Assets/Graphics/common/left_arrow.png");
+	Texture m_leftArrowWhite        = Texture("Assets/Graphics/common/left_arrow_white.png");
 
-	Texture m_rightArrow;
-	Texture m_rightArrowWhite;
-	Texture m_leftArrow;
-	Texture m_leftArrowWhite;
+	SDL_Rect m_devNameBox           = { 0 };
+	SDL_Rect m_creditsBox           = { 0 };
+	SDL_Rect m_creditBoxOutline     = { 0 };
+	SDL_Rect m_titleBox             = { 0 };
 
-	SDL_Rect m_devNameBox = {};
-	SDL_Rect m_creditsBox = {};
-	SDL_Rect m_creditBoxOutline = {};
-	SDL_Rect m_titleBox = {};
+	bool m_isRight                  = false;
+	bool m_isLeft                   = false;
+	int m_pageNum                   = 0;
 
-	bool m_isRight = false;
-	bool m_isLeft = false;
-	int m_pageNum = 0;
-
-	Sound m_thud = Sound("Assets/Audio/thud.wav");
+	Sound m_thud                    = Sound("Assets/Audio/thud.wav");
 };

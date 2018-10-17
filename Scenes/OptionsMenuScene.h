@@ -15,64 +15,65 @@ public:
 	void draw() override;
 
 private:
-	Texture m_options;
-	Texture m_apply;
-	Texture m_applyRed;
-	Texture m_back;
-	Texture m_backRed;
+	std::array<Texture, 2> m_skulls = {
+		Texture("Assets/Graphics/common/skull.png"),
+		Texture("Assets/Graphics/common/skull.png")
+	};
 
-	Texture m_displayCheckMark;
-	Texture m_menuMusicCheckMark;
-	Texture m_gameplayMusicCheckMark;
-	Texture m_soundEffectsCheckMark;
+	Texture m_options                  = Texture("Assets/Graphics/options_menu/options.png");
+	Texture m_apply                    = Texture("Assets/Graphics/options_menu/apply.png");
+	Texture m_applyRed                 = Texture("Assets/Graphics/options_menu/apply_red.png");
+	Texture m_back                     = Texture("Assets/Graphics/options_menu/back.png");
+	Texture m_backRed                  = Texture("Assets/Graphics/options_menu/back_red.png");
 
-	Texture m_displayMode;
-	Texture m_fullScreen;
-	Texture m_windowed;
+	Texture m_displayCheckMark         = Texture("Assets/Graphics/options_menu/checkmark.png");
+	Texture m_menuMusicCheckMark       = Texture("Assets/Graphics/options_menu/checkmark.png");
+	Texture m_gameplayMusicCheckMark   = Texture("Assets/Graphics/options_menu/checkmark.png");
+	Texture m_soundEffectsCheckMark    = Texture("Assets/Graphics/options_menu/checkmark.png");
 
-	Texture m_audioSettings;
-	Texture m_menuMusic;
-	Texture m_gameplayMusic;
-	Texture m_soundEffects;
+	Texture m_displayMode              = Texture("Assets/Graphics/options_menu/display_mode.png");
+	Texture m_fullScreen               = Texture("Assets/Graphics/options_menu/fullscreen.png");
+	Texture m_windowed                 = Texture("Assets/Graphics/options_menu/windowed.png");
 
-	SDL_Rect m_optionsBox = {};
-	SDL_Rect m_optionsBoxOutline = {};
-
-	SDL_Rect m_fullScreenBox = {};
-	SDL_Rect m_fullScreenBoxOutline = {};
-	SDL_Rect m_windowedBox = {};
-	SDL_Rect m_windowedBoxOutline = {};
-	SDL_Rect m_soundEffectsBox = {};
-	SDL_Rect m_soundEffectsBoxOutline = {};
-	SDL_Rect m_menuMusicBox = {};
-	SDL_Rect m_menuMusicBoxOutline = {};
-	SDL_Rect m_gameplayMusicBox = {};
-	SDL_Rect m_gameplayMusicBoxOutline = {};
-
-	bool m_isFullScreen = false;
-	bool m_fullScreenEnabled = false;
-	bool m_isWindowed = true;
-	bool m_windowedEnabled = true;
-	bool m_isApply = false;
-	bool m_isBack = false;
-	bool m_isSoundEffects = true;
-	bool m_isMenuMusic = true;
-	bool m_isGameplayMusic = true;
-	bool m_soundEffectsEnabled = true;
-	bool m_menuMusicEnabled = true;
-	bool m_gameplayMusicEnabled = true;
+	Texture m_audioSettings            = Texture("Assets/Graphics/options_menu/audio_settings.png");
+	Texture m_menuMusic                = Texture("Assets/Graphics/options_menu/menu_music.png");
+	Texture m_gameplayMusic            = Texture("Assets/Graphics/options_menu/gameplay_music.png");
+	Texture m_soundEffects             = Texture("Assets/Graphics/options_menu/sound_effects.png");
 
 	//Common types
-	Texture m_background;
-	Texture m_title;
-	Texture m_devName;
-	Texture m_version;
-	Texture m_cursor;
+	Texture m_background               = Texture("Assets/Graphics/common/main_background.png");
+	Texture m_title                    = Texture("Assets/Graphics/common/title.png");
+	Texture m_devName                  = Texture("Assets/Graphics/common/dev_name.png");
+	Texture m_version                  = Texture("Assets/Graphics/common/version.png");
+	Texture m_cursor                   = Texture("Assets/Graphics/common/cursor.png");
 
-	std::array<Texture, 2> m_skulls;
+	SDL_Rect m_optionsBox              = { 0 };
+	SDL_Rect m_optionsBoxOutline       = { 0 };
+	SDL_Rect m_fullScreenBox           = { 0 };
+	SDL_Rect m_fullScreenBoxOutline    = { 0 };
+	SDL_Rect m_windowedBox             = { 0 };
+	SDL_Rect m_windowedBoxOutline      = { 0 };
+	SDL_Rect m_soundEffectsBox         = { 0 };
+	SDL_Rect m_soundEffectsBoxOutline  = { 0 };
+	SDL_Rect m_menuMusicBox            = { 0 };
+	SDL_Rect m_menuMusicBoxOutline     = { 0 };
+	SDL_Rect m_gameplayMusicBox        = { 0 };
+	SDL_Rect m_gameplayMusicBoxOutline = { 0 };
+	SDL_Rect m_devNameBox              = { 0 };
+	SDL_Rect m_titleBox                = { 0 };
 
-	SDL_Rect m_devNameBox = {};
-	SDL_Rect m_titleBox = {};
+	bool m_isFullScreen                = false;
+	bool m_fullScreenEnabled           = false;
+	bool m_isWindowed                  = true;
+	bool m_windowedEnabled             = true;
+	bool m_isApply                     = false;
+	bool m_isBack                      = false;
+	bool m_isSoundEffects              = true;
+	bool m_isMenuMusic                 = true;
+	bool m_isGameplayMusic             = true;
+	bool m_soundEffectsEnabled         = true;
+	bool m_menuMusicEnabled            = true;
+	bool m_gameplayMusicEnabled        = true;
 
 	Sound m_thud = Sound("Assets/Audio/thud.wav");
 };

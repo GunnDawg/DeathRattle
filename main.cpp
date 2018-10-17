@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 
 	if (Game::getInstance().Init())
 	{
-		while(Game::getInstance().Running())
+		while(Game::getInstance().isRunning)
 		{
 			Game::getInstance().processinput();
 			Game::getInstance().Update();

@@ -58,9 +58,9 @@ private:
 
 	HUD m_HUD;
 
-	std::unique_ptr<LevelSet> m_dungeonLevels      = std::make_unique<LevelSet>("Assets/Graphics/Levels/Dungeon/");
+	LevelSet m_dungeonLevels                       = LevelSet("Assets/Graphics/Levels/Dungeon/");
 
-	std::unique_ptr<Ball> m_ball                   = std::make_unique<Ball>(m_difficulty);
+	Ball m_ball                                    = Ball(m_difficulty);
 
 	AABBCollision m_collider;
 
@@ -70,14 +70,14 @@ private:
 	Sound m_gameOverSound                          = Sound("Assets/Audio/gameover.wav");
 	Sound m_heal                                   = Sound("Assets/Audio/heal.wav");
 
-	std::unique_ptr<Text> m_gameTitle              = std::make_unique<Text>(48, "KEEP IT ALIVE");
-	std::unique_ptr<Text> m_gameTitleStart         = std::make_unique<Text>(12, "Press SPACE to start or ESC to exit");
-	std::unique_ptr<Text> m_pausedText             = std::make_unique<Text>(48, "PAUSED");
-	std::unique_ptr<Text> m_pressSpaceText         = std::make_unique<Text>(12, "Press SPACE to continue or ESC to exit");
-	std::unique_ptr<Text> m_gameOverText           = std::make_unique<Text>(48, "GAME OVER");
-	std::unique_ptr<Text> m_gameOverNewGameText    = std::make_unique<Text>(12, "Press N to start a new game or ESC to exit");
-	std::unique_ptr<Text> m_levelPassed            = std::make_unique<Text>(48, "LEVEL COMPLETE");
-	std::unique_ptr<Text> m_levelPassedContinue    = std::make_unique<Text>(12, "Press N to continue to the next level");
+	Text m_gameTitle                               = Text(48, "KEEP IT ALIVE");
+	Text m_gameTitleStart                          = Text(12, "Press SPACE to start or ESC to exit");
+	Text m_pausedText                              = Text(48, "PAUSED");
+	Text m_pressSpaceText                          = Text(12, "Press SPACE to continue or ESC to exit");
+	Text m_gameOverText                            = Text(48, "GAME OVER");
+	Text m_gameOverNewGameText                     = Text(12, "Press N to start a new game or ESC to exit");
+	Text m_levelPassed                             = Text(48, "LEVEL COMPLETE");
+	Text m_levelPassedContinue                     = Text(12, "Press N to continue to the next level");
 
 	Texture m_grimReaper                           = Texture("Assets/Graphics/gameplay_scene/grim_reaper.png");
 	Texture m_cursor                               = Texture("Assets/Graphics/common/cursor.png");

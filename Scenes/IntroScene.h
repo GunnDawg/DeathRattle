@@ -15,31 +15,32 @@ public:
 	void draw() override;
 
 private:
-	bool m_isBlood = false;
-	bool m_isSkull = false;
-	bool m_isClicked = false;
-
 	Timer m_timer;
 
-	Texture m_background;
-	Texture m_keepIt;
-	Texture m_alive;
-	Texture m_plug;
-	Texture m_version;
+	Texture m_cursor                = Texture("Assets/Graphics/common/cursor.png");
 
-	Texture m_press;
-	Texture m_enter;
+	Texture m_background            = Texture("Assets/Graphics/common/main_background.png");
+	Texture m_keepIt                = Texture("Assets/Graphics/intro_scene/keepit.png");
+	Texture m_alive                 = Texture("Assets/Graphics/intro_scene/alive.png");
+	Texture m_plug                  = Texture("Assets/Graphics/intro_scene/plug.png");
+	Texture m_version               = Texture("Assets/Graphics/common/version.png");
 
-	Texture m_blood;
-	Texture m_skull;
-	Texture m_skullWhite;
+	Texture m_press                 = Texture("Assets/Graphics/intro_scene/press.png");
+	Texture m_enter                 = Texture("Assets/Graphics/intro_scene/enter.png");
 
-	Texture m_cursor;
+	Texture m_blood                 = Texture("Assets/Graphics/intro_scene/blood.png");
+	Texture m_skull                 = Texture("Assets/Graphics/intro_scene/skull.png");
+	Texture m_skullWhite            = Texture("Assets/Graphics/intro_scene/skull_white.png");
 
-	SDL_Rect m_plugBox = {};
-	SDL_Rect m_skullBox = {};
-	SDL_Rect m_skullCollider = {};
 
-	Sound m_introSound = Sound("Assets/Audio/splat.wav");
-	Sound m_scare = Sound("Assets/Audio/scare.wav");
+	SDL_Rect m_plugBox              = { 0 };
+	SDL_Rect m_skullBox             = { 0 };
+	SDL_Rect m_skullCollider        = { 0 };
+
+	Sound m_introSound              = Sound("Assets/Audio/splat.wav");
+	Sound m_scare                   = Sound("Assets/Audio/scare.wav");
+
+	bool m_isBlood                  = false;
+	bool m_isSkull                  = false;
+	bool m_isClicked                = false;
 };

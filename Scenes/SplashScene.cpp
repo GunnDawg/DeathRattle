@@ -3,19 +3,16 @@
 
 void SplashScene::on_enter()
 {
-	m_background = Texture("Assets/Graphics/splash_scene/background.png");
 	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = 1280;
 	m_background.m_TextureRect.h = 720;
 
-	m_logo = Texture("Assets/Graphics/common/GGlogo.png");
 	m_logo.Load();
 	m_logo.m_TextureRect.x = (Game::screenWidth / 2) - (m_logo.m_TextureRect.w / 2);
 	m_logo.m_TextureRect.y = -450;
 
-	m_production = Texture("Assets/Graphics/splash_scene/production.png");
 	m_production.Load();
 	m_production.m_TextureRect.x = (Game::screenWidth / 2) - (m_production.m_TextureRect.w / 2);
 	m_production.m_TextureRect.y = Game::screenHeight;

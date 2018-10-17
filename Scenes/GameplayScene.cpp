@@ -16,12 +16,12 @@ void GameplayState::on_enter()
 		            m_grimReaper.m_TextureRect.w,
 		            m_grimReaper.m_TextureRect.h);
 
-	m_ball->Load();
+	m_ball.Load();
 
 	m_HUD.Load(m_health, true);
 
-	m_dungeonLevels->Load();
-	m_dungeonLevels->setScores({ 10, 50, 175, 250, 300 });
+	m_dungeonLevels.Load();
+	m_dungeonLevels.setScores({ 10, 50, 175, 250, 300 });
 
 	m_hitSound.Load();
 	m_hitBadSound.Load();
@@ -37,17 +37,17 @@ void GameplayState::on_exit()
 
 	m_grimReaper.Unload();
 	m_cursor.Unload();
-	m_ball->Unload();
-	m_dungeonLevels->Unload(m_dungeonLevels->getLevel());
+	m_ball.Unload();
+	m_dungeonLevels.Unload(m_dungeonLevels.getLevel());
 
-	m_gameTitle->Unload();
-	m_gameTitleStart->Unload();
-	m_pausedText->Unload();
-	m_pressSpaceText->Unload();
-	m_gameOverText->Unload();
-	m_gameOverNewGameText->Unload();
-	m_levelPassed->Unload();
-	m_levelPassedContinue->Unload();
+	m_gameTitle.Unload();
+	m_gameTitleStart.Unload();
+	m_pausedText.Unload();
+	m_pressSpaceText.Unload();
+	m_gameOverText.Unload();
+	m_gameOverNewGameText.Unload();
+	m_levelPassed.Unload();
+	m_levelPassedContinue.Unload();
 
 	m_hitSound.Unload();
 	m_hitBadSound.Unload();
@@ -155,7 +155,7 @@ void GameplayState::update()
 {
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
 
-	m_HUD.Update(*m_dungeonLevels, *m_ball, m_lives, m_health, m_bonusProgress);
+	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
 
 	if (m_health <= 0)
 	{
@@ -180,11 +180,11 @@ void GameplayState::update()
 			m_keyBoard.Update(Game::deltaTime, 75, Game::screenWidth, Game::screenHeight, *m_paddles[0], *m_paddles[1], *m_paddles[2], *m_paddles[3]);
 		}
 
-		m_HUD.Update(*m_dungeonLevels, *m_ball, m_lives, m_health, m_bonusProgress);
+		m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
 
 		if (!m_paused)
 		{
-			m_ball->Update();
+			m_ball.Update();
 		}
 
 		checkforGameOver();
@@ -200,7 +200,7 @@ void GameplayState::drawCursor()
 
 void GameplayState::drawLevel()
 {
-	m_dungeonLevels->Draw();
+	m_dungeonLevels.Draw();
 }
 
 void GameplayState::drawPaddles()
@@ -213,7 +213,7 @@ void GameplayState::drawPaddles()
 
 void GameplayState::drawBall()
 {
-	m_ball->Draw();
+	m_ball.Draw();
 }
 
 void GameplayState::drawText()
@@ -227,26 +227,26 @@ void GameplayState::drawText()
 	{
 		SDL_Rect rect = m_grimReaper.m_TextureRect;
 		SDL_RenderCopy(Game::Renderer, m_grimReaper.getTexture(), nullptr, &rect);
-		m_gameOverText->Draw((Game::screenWidth / 2) - (m_gameOverText->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
-		m_gameOverNewGameText->Draw((Game::screenWidth / 2) - 225, (Game::screenHeight / 2) - 90);
+		m_gameOverText.Draw((Game::screenWidth / 2) - (m_gameOverText.m_textRect.w / 2), (Game::screenHeight / 2) - 150);
+		m_gameOverNewGameText.Draw((Game::screenWidth / 2) - 225, (Game::screenHeight / 2) - 90);
 	}
 
 	else if (m_levelWon)
 	{
-		m_levelPassed->Draw((Game::screenWidth / 2) - (m_levelPassed->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
-		m_levelPassedContinue->Draw((Game::screenWidth / 2) - (m_levelPassedContinue->m_textRect.w / 2), (Game::screenHeight / 2) - 90);
+		m_levelPassed.Draw((Game::screenWidth / 2) - (m_levelPassed.m_textRect.w / 2), (Game::screenHeight / 2) - 150);
+		m_levelPassedContinue.Draw((Game::screenWidth / 2) - (m_levelPassedContinue.m_textRect.w / 2), (Game::screenHeight / 2) - 90);
 	}
 
 	else if (m_paused && !m_newGame)
 	{
-		m_pausedText->Draw((Game::screenWidth / 2) - (m_pausedText->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
-		m_pressSpaceText->Draw((Game::screenWidth / 2) - (m_pressSpaceText->m_textRect.w / 2), (Game::screenHeight / 2) - 90);
+		m_pausedText.Draw((Game::screenWidth / 2) - (m_pausedText.m_textRect.w / 2), (Game::screenHeight / 2) - 150);
+		m_pressSpaceText.Draw((Game::screenWidth / 2) - (m_pressSpaceText.m_textRect.w / 2), (Game::screenHeight / 2) - 90);
 	}
 
 	else if (m_paused && m_newGame)
 	{
-		m_gameTitle->Draw((Game::screenWidth / 2) - (m_gameTitle->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
-		m_gameTitleStart->Draw((Game::screenWidth / 2) - 185, (Game::screenHeight / 2) - 90);
+		m_gameTitle.Draw((Game::screenWidth / 2) - (m_gameTitle.m_textRect.w / 2), (Game::screenHeight / 2) - 150);
+		m_gameTitleStart.Draw((Game::screenWidth / 2) - 185, (Game::screenHeight / 2) - 90);
 	}
 }
 
@@ -296,22 +296,22 @@ void GameplayState::draw()
 
 Paddle* GameplayState::getPaddle()
 {
-	if (m_collider.CheckCollision(m_paddles[0]->getRect(), m_ball->getRect()))
+	if (m_collider.CheckCollision(m_paddles[0]->getRect(), m_ball.getRect()))
 	{
 		return(m_paddles[0].get());
 	}
 
-	if (m_collider.CheckCollision(m_paddles[1]->getRect(), m_ball->getRect()))
+	if (m_collider.CheckCollision(m_paddles[1]->getRect(), m_ball.getRect()))
 	{
 		return(m_paddles[1].get());
 	}
 
-	if (m_collider.CheckCollision(m_paddles[2]->getRect(), m_ball->getRect()))
+	if (m_collider.CheckCollision(m_paddles[2]->getRect(), m_ball.getRect()))
 	{
 		return(m_paddles[2].get());
 	}
 
-	if (m_collider.CheckCollision(m_paddles[3]->getRect(), m_ball->getRect()))
+	if (m_collider.CheckCollision(m_paddles[3]->getRect(), m_ball.getRect()))
 	{
 		return(m_paddles[3].get());
 	}
@@ -347,8 +347,8 @@ void GameplayState::checkCollision()
 
 	double dimension = fTopBottom ? paddleHit->getRect().w : paddleHit->getRect().h;
 
-	double dist = fTopBottom ? (m_ball->getRect().x + m_ball->getRect().w / 2) - paddleHit->getRect().x :
-		(m_ball->getRect().y + m_ball->getRect().h / 2) - paddleHit->getRect().y;
+	double dist = fTopBottom ? (m_ball.getRect().x + m_ball.getRect().w / 2) - paddleHit->getRect().x :
+		(m_ball.getRect().y + m_ball.getRect().h / 2) - paddleHit->getRect().y;
 
 	double percent = static_cast<double>(dist / dimension);
 
@@ -362,54 +362,54 @@ void GameplayState::checkCollision()
 	if (paddleHit == m_paddles[0].get())
 	{
 		angle = percent * -1 * M_PI + M_PI;
-		m_ball->m_posY = paddleHit->getRect().y + paddleHit->getRect().h + 1;
+		m_ball.m_posY = paddleHit->getRect().y + paddleHit->getRect().h + 1;
 	}
 	else if (paddleHit == m_paddles[1].get())
 	{
 		angle = percent * -1 * M_PI - M_PI / 2;
-		m_ball->m_posX = paddleHit->getRect().x - m_ball->getRect().w - 1;
+		m_ball.m_posX = paddleHit->getRect().x - m_ball.getRect().w - 1;
 	}
 	else if (paddleHit == m_paddles[2].get())
 	{
 		angle = percent * M_PI - M_PI;
-		m_ball->m_posY = paddleHit->getRect().y - m_ball->getRect().h - 1;
+		m_ball.m_posY = paddleHit->getRect().y - m_ball.getRect().h - 1;
 	}
 	else if (paddleHit == m_paddles[3].get())
 	{
 		angle = percent * M_PI - M_PI / 2;
-		m_ball->m_posX = paddleHit->getRect().x + paddleHit->getRect().w + 1;
+		m_ball.m_posX = paddleHit->getRect().x + paddleHit->getRect().w + 1;
 	}
 
-	m_ball->setAngle(angle);
+	m_ball.setAngle(angle);
 
 	if (!fTopBottom)
 	{
-		if (paddleHit->getRect().h >= m_ball->getRect().w && paddleHit->isMarked())
+		if (paddleHit->getRect().h >= m_ball.getRect().w && paddleHit->isMarked())
 		{
 			paddleHit->setRectH(paddleHit->getRect().h - (paddleHit->getRect().h / 16));
 			m_health -= 75;
-			m_ball->addSpeed(0.02f);
+			m_ball.addSpeed(0.02f);
 		}
-		else if (paddleHit->getRect().h >= m_ball->getRect().w)
+		else if (paddleHit->getRect().h >= m_ball.getRect().w)
 		{
 			paddleHit->setRectH(paddleHit->getRect().h - (paddleHit->getRect().h / 20));
 			m_health -= 10;
-			m_ball->addSpeed(0.01f);
+			m_ball.addSpeed(0.01f);
 		}
 	}
 	else
 	{
-		if (paddleHit->getRect().w >= m_ball->getRect().w && paddleHit->isMarked())
+		if (paddleHit->getRect().w >= m_ball.getRect().w && paddleHit->isMarked())
 		{
 			paddleHit->setRectW(paddleHit->getRect().w - (paddleHit->getRect().w / 16));
 			m_health -= 75;
-			m_ball->addSpeed(0.02f);
+			m_ball.addSpeed(0.02f);
 		}
-		else if (paddleHit->getRect().w >= m_ball->getRect().w)
+		else if (paddleHit->getRect().w >= m_ball.getRect().w)
 		{
 			paddleHit->setRectW(paddleHit->getRect().w - (paddleHit->getRect().w / 20));
 			m_health -= 10;
-			m_ball->addSpeed(0.01f);
+			m_ball.addSpeed(0.01f);
 		}
 	}
 
@@ -449,7 +449,7 @@ void GameplayState::checkforBonus()
 
 		m_heal.Play();
 		m_HUD.m_ScoreBoard->increaseScore(5);
-		m_ball->removeSpeed(0.03f);
+		m_ball.removeSpeed(0.03f);
 
 		for (size_t i = 0; i < m_paddles.size(); ++i)
 		{
@@ -460,13 +460,13 @@ void GameplayState::checkforBonus()
 
 void GameplayState::checkforGameOver()
 {
-	if (m_health <= 0 || m_ball->getRect().x <= 0 || m_ball->getRect().x > Game::screenWidth - m_ball->getRect().w || m_ball->getRect().y < 0 || m_ball->getRect().y > Game::screenHeight - m_ball->getRect().h)
+	if (m_health <= 0 || m_ball.getRect().x <= 0 || m_ball.getRect().x > Game::screenWidth - m_ball.getRect().w || m_ball.getRect().y < 0 || m_ball.getRect().y > Game::screenHeight - m_ball.getRect().h)
 	{
 		m_health = 0;
 		m_bonusProgress = 0;
 		m_gameOverSound.Play();
 
-		m_ball->setDead(true);
+		m_ball.setDead(true);
 		m_paused = true;
 		if (m_HUD.m_ScoreBoard->getScore() > m_HUD.m_ScoreBoard->getHighScore())
 		{
@@ -489,7 +489,7 @@ bool GameplayState::checkforWin()
 {
 	if (m_HUD.m_ScoreBoard->getScore() >= m_HUD.m_ScoreBoard->getLevelScore())
 	{
-		m_dungeonLevels->nextLevel();
+		m_dungeonLevels.nextLevel();
 
 		return(true);
 	}
@@ -501,25 +501,25 @@ void GameplayState::resetGame()
 {
 	m_health = 550;
 	m_bonusProgress = 0;
-	m_ball->resetBall(Game::screenWidth, Game::screenHeight, m_difficulty);
+	m_ball.resetBall(Game::screenWidth, Game::screenHeight, m_difficulty);
 
 	if (!checkforWin())
 	{
 		if (m_lives > 0)
 		{
-			m_dungeonLevels->setLevel(m_dungeonLevels->getLevel());
+			m_dungeonLevels.setLevel(m_dungeonLevels.getLevel());
 		}
 		else
 		{
-			if (m_dungeonLevels->getLevel() != 0)
+			if (m_dungeonLevels.getLevel() != 0)
 			{
-				m_dungeonLevels->Unload(m_dungeonLevels->getLevel());
-				m_dungeonLevels->setLevel(0);
-				m_dungeonLevels->Load();
+				m_dungeonLevels.Unload(m_dungeonLevels.getLevel());
+				m_dungeonLevels.setLevel(0);
+				m_dungeonLevels.Load();
 			}
 			else
 			{
-				m_dungeonLevels->setLevel(0);
+				m_dungeonLevels.setLevel(0);
 			}
 
 			m_lives = 3;

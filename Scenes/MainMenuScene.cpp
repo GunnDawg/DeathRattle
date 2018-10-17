@@ -10,7 +10,6 @@ void MainMenuScene::on_enter()
 {
 	for (size_t i = 0; i < m_skulls.size(); ++i)
 	{
-		m_skulls[i] = Texture("Assets/Graphics/common/skull.png");
 		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
 		m_skulls[i].m_TextureRect.h = 100;
@@ -20,12 +19,10 @@ void MainMenuScene::on_enter()
 	m_skulls[0].m_TextureRect.x = 125;
 	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
-	m_cursor = Texture("Assets/Graphics/common/cursor.png");
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_title = Texture("Assets/Graphics/common/title.png");
 	m_title.Load();
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
@@ -35,7 +32,6 @@ void MainMenuScene::on_enter()
 	m_titleBox.w = Game::screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
-	m_devName = Texture("Assets/Graphics/common/dev_name.png");
 	m_devName.Load();
 	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
 	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
@@ -45,12 +41,10 @@ void MainMenuScene::on_enter()
 	m_devNameBox.x = 0;
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
-	m_version = Texture("Assets/Graphics/common/version.png");
 	m_version.Load();
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
-	m_background = Texture("Assets/Graphics/common/main_background.png");
 	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
@@ -67,34 +61,19 @@ void MainMenuScene::on_enter()
 	m_menuBoxOutline.x = m_menuBox.x;
 	m_menuBoxOutline.y = m_menuBox.y;
 
-	m_newGame = Texture("Assets/Graphics/main_menu_scene/new_game.png");
 	m_newGame.Load();
-
-	m_newGameWhite = Texture("Assets/Graphics/main_menu_scene/new_game_white.png");
 	m_newGameWhite.Load();
 
-	m_options = Texture("Assets/Graphics/main_menu_scene/options.png");
 	m_options.Load();
-
-	m_optionsWhite = Texture("Assets/Graphics/main_menu_scene/options_white.png");
 	m_optionsWhite.Load();
 
-	m_leaderBoard = Texture("Assets/Graphics/main_menu_scene/leaderboard.png");
 	m_leaderBoard.Load();
-
-	m_leaderBoardWhite = Texture("Assets/Graphics/main_menu_scene/leaderboard_white.png");
 	m_leaderBoardWhite.Load();
 
-	m_credits = Texture("Assets/Graphics/main_menu_scene/credits.png");
 	m_credits.Load();
-
-	m_creditsWhite = Texture("Assets/Graphics/main_menu_scene/credits_white.png");
 	m_creditsWhite.Load();
 
-	m_exit = Texture("Assets/Graphics/main_menu_scene/exit.png");
 	m_exit.Load();
-
-	m_exitWhite = Texture("Assets/Graphics/main_menu_scene/exit_white.png");
 	m_exitWhite.Load();
 
 	m_swoosh.Load();

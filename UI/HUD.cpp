@@ -2,13 +2,13 @@
 #include "Game.h"
 
 HUD::HUD(unsigned int w, unsigned int h, int hp, bool showing) :
-m_convertedBallSpeed(nullptr), m_convertedLives(nullptr), m_convertedHP(nullptr),
-m_textBoxes({0}), m_blackBoxes({0}),
-m_ballSpeedLabel(nullptr), m_ballSpeedText(nullptr),
-m_LivesLabel(nullptr), m_LivesText(nullptr),
-m_levelLabel(nullptr),
-m_remainingHP(nullptr),
-m_isShowing(showing)
+	m_convertedBallSpeed(nullptr), m_convertedLives(nullptr), m_convertedHP(nullptr),
+	m_textBoxes({ 0 }), m_blackBoxes({ 0 }),
+	m_ballSpeedLabel(nullptr), m_ballSpeedText(nullptr),
+	m_LivesLabel(nullptr), m_LivesText(nullptr),
+	m_levelLabel(nullptr),
+	m_remainingHP(nullptr),
+	m_isShowing(showing)
 {
 	assert(typeid(w) == typeid(unsigned int) && w > 0 && "HUD width must be greater than 0");
 	assert(typeid(h) == typeid(unsigned int) && h > 0 && "HUD height must be greater than 0");
@@ -17,7 +17,7 @@ m_isShowing(showing)
 
 HUD::~HUD()
 {
-	
+
 }
 
 void HUD::Load(const unsigned int hp, bool showing)
@@ -54,31 +54,31 @@ void HUD::Load(const unsigned int hp, bool showing)
 	m_remaininghpString = std::to_string(NULL);
 	m_convertedHP = m_remaininghpString.c_str();
 
-	m_ballSpeedLabel	= std::make_unique<Text>(24, "SPEED LEVEL");
-	m_ballSpeedText		= std::make_unique<Text>(24, m_convertedBallSpeed);
-	m_LivesLabel		= std::make_unique<Text>(24, "LIVES");
-	m_LivesText			= std::make_unique<Text>(24, m_convertedLives);
-	m_levelLabel        = std::make_unique<Text>(24, "STAGE");
-	m_levelText         = std::make_unique<Text>(24, m_convertedLevel);
-	m_remainingHP       = std::make_unique<Text>(22, m_convertedHP);
-	m_itemDropProgress  = std::make_unique<Text>(22, "BONUS");
+	m_ballSpeedLabel = std::make_unique<Text>(24, "SPEED LEVEL");
+	m_ballSpeedText = std::make_unique<Text>(24, m_convertedBallSpeed);
+	m_LivesLabel = std::make_unique<Text>(24, "LIVES");
+	m_LivesText = std::make_unique<Text>(24, m_convertedLives);
+	m_levelLabel = std::make_unique<Text>(24, "STAGE");
+	m_levelText = std::make_unique<Text>(24, m_convertedLevel);
+	m_remainingHP = std::make_unique<Text>(22, m_convertedHP);
+	m_itemDropProgress = std::make_unique<Text>(22, "BONUS");
 
 	m_isShowing = showing;
 }
 
-void HUD::drawHealthBar() const
+void HUD::drawHealthBar()
 {
 	SDL_SetRenderDrawColor(Game::Renderer, 255, 0, 0, 255);
 	SDL_RenderFillRect(Game::Renderer, &m_textBoxes[3]);
 }
 
-void HUD::drawProgressBar() const
+void HUD::drawProgressBar()
 {
 	SDL_SetRenderDrawColor(Game::Renderer, 76, 220, 61, 255);
 	SDL_RenderFillRect(Game::Renderer, &m_textBoxes[5]);
 }
 
-void HUD::drawText() const
+void HUD::drawText()
 {
 	m_ballSpeedLabel->Draw(m_textBoxes[1].x + 12, 24);
 	m_ballSpeedText->Draw(Game::screenWidth - 64, 24);
@@ -94,7 +94,7 @@ void HUD::drawText() const
 	m_itemDropProgress->Draw(m_textBoxes[5].x + 210, m_textBoxes[5].y - 1);
 }
 
-void HUD::drawBoxes() const
+void HUD::drawBoxes()
 {
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 100);
@@ -112,7 +112,7 @@ void HUD::drawBoxes() const
 	SDL_RenderDrawRect(Game::Renderer, &m_textBoxes[4]);
 }
 
-void HUD::Draw() const
+void HUD::Draw()
 {
 	drawHealthBar();
 	drawProgressBar();

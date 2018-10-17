@@ -2,8 +2,8 @@
 #include "Game.h"
 
 LevelSet::LevelSet(const char* filePath) :
-m_levelTextures({}),
-m_levelScore({}),
+m_levelTextures({ }),
+m_levelScore({ 0 }),
 m_levelNum(0)
 {
 	assert(typeid(filePath) == typeid(const char*) && filePath > 0);

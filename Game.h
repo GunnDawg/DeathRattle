@@ -26,8 +26,6 @@ public:
 	static void Update();
 	static void Draw();
 
-	static bool Running() { return isRunning; }
-
 	inline static GameStateMachine gameStateMachine;
 	inline static SDL_Window* Window                     = nullptr;
 	inline static const char* Title                      = "Keep it Alive!!";

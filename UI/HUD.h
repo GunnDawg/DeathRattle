@@ -23,7 +23,7 @@ public:
 	bool isShowing() const { return m_isShowing; }
 
 	void Load(const unsigned int hp, bool showing);
-	void Draw() const;
+	void Draw();
 	void Update(const LevelSet& passedLevel, const Ball& passedBall, const unsigned int lives, const unsigned int hp, const unsigned int progress);
 	inline void setShowing(bool showing) { m_isShowing = showing; }
 
@@ -33,10 +33,10 @@ private:
 	//HUD(const HUD& obj)=default;
 	//HUD& operator=(const HUD&)=default;
 
-	void drawHealthBar() const;
-	void drawProgressBar() const;
-	void drawText() const;
-	void drawBoxes() const;
+	void drawHealthBar();
+	void drawProgressBar();
+	void drawText();
+	void drawBoxes();
 
 	void setRect(SDL_Rect& r, const unsigned int w, const unsigned int h, const unsigned int x, const unsigned int y);
 	

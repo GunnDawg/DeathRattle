@@ -38,6 +38,5 @@ private:
 	std::array<Texture, LEVEL_COUNT> m_levelTextures;
 	std::array<unsigned int, LEVEL_COUNT> m_levelScore;
 
-
 	unsigned int m_levelNum;
 };

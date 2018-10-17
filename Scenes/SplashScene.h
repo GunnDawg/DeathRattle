@@ -17,13 +17,13 @@ public:
 	void draw() override;
 
 private:
-	Texture m_background;
-	Texture m_logo;
-	Texture m_production;
+	Texture m_background            = Texture("Assets/Graphics/splash_scene/background.png");
+	Texture m_logo                  = Texture("Assets/Graphics/common/GGlogo.png");
+	Texture m_production            = Texture("Assets/Graphics/splash_scene/production.png");
 
-	Sound m_introSound = Sound("Assets/Audio/intro.wav");
+	Sound m_introSound              = Sound("Assets/Audio/intro.wav");
 
-	SDL_Rect m_comingSoonBox = {};
+	SDL_Rect m_comingSoonBox        = { 0 };
 
 	Timer m_timer;
 };

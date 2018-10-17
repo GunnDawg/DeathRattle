@@ -14,11 +14,11 @@ public:
 	void draw() override;
 
 private:
-	Texture m_background;
-	Texture m_comingSoon;
-	Texture m_cursor;
+	Texture m_cursor                = Texture("Assets/Graphics/common/cursor.png");
+	Texture m_background            = Texture("Assets/Graphics/common/main_background.png");
+	Texture m_comingSoon            = Texture("Assets/Graphics/leaderboard_scene/comingsoon.png");
 	
-	SDL_Rect m_comingSoonBox = {};
+	SDL_Rect m_comingSoonBox        = { 0 };
 
-	Sound m_thud = Sound("Assets/Audio/thud.wav");
+	Sound m_thud                    = Sound("Assets/Audio/thud.wav");
 };

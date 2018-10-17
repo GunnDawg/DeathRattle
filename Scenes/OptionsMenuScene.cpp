@@ -13,23 +13,19 @@ void OptionsMenuScene::on_enter()
 	m_optionsBoxOutline.x = m_optionsBox.x;
 	m_optionsBoxOutline.y = m_optionsBox.y;
 
-	m_options = Texture("Assets/Graphics/options_menu/options.png");
 	m_options.Load();
 	m_options.m_TextureRect.x = (Game::screenWidth / 2) - (m_options.m_TextureRect.w / 2);
 	m_options.m_TextureRect.y = m_optionsBox.y + 20;
 
-	m_displayCheckMark = Texture("Assets/Graphics/options_menu/checkmark.png");
 	m_displayCheckMark.Load();
 	m_displayCheckMark.m_TextureRect.w = 30;
 	m_displayCheckMark.m_TextureRect.h = 30;
 
 	//Display Mode
-	m_displayMode = Texture("Assets/Graphics/options_menu/display_mode.png");
 	m_displayMode.Load();
 	m_displayMode.m_TextureRect.x = (m_optionsBox.x + 25);
 	m_displayMode.m_TextureRect.y = (m_options.m_TextureRect.y + m_displayMode.m_TextureRect.h) + 50;
 
-	m_fullScreen = Texture("Assets/Graphics/options_menu/fullscreen.png");
 	m_fullScreen.Load();
 	m_fullScreen.m_TextureRect.x = (m_optionsBox.x + 25);
 	m_fullScreen.m_TextureRect.y = (m_displayMode.m_TextureRect.y + 75);
@@ -44,7 +40,6 @@ void OptionsMenuScene::on_enter()
 	m_fullScreenBoxOutline.w = m_fullScreenBox.w;
 	m_fullScreenBoxOutline.h = m_fullScreenBox.h;
 
-	m_windowed = Texture("Assets/Graphics/options_menu/windowed.png");
 	m_windowed.Load();
 	m_windowed.m_TextureRect.x = (m_optionsBox.x + 25);
 	m_windowed.m_TextureRect.y = (m_fullScreen.m_TextureRect.y + 75);
@@ -60,22 +55,18 @@ void OptionsMenuScene::on_enter()
 	m_windowedBoxOutline.h = m_windowedBox.h;
 
 	//Audio Settings
-	m_audioSettings = Texture("Assets/Graphics/options_menu/audio_settings.png");
 	m_audioSettings.Load();
 	m_audioSettings.m_TextureRect.x = (m_optionsBox.x + m_optionsBox.w) - (m_audioSettings.m_TextureRect.w) - 25;
 	m_audioSettings.m_TextureRect.y = (m_options.m_TextureRect.y + m_audioSettings.m_TextureRect.h) + 50;
 
-	m_soundEffects = Texture("Assets/Graphics/options_menu/sound_effects.png");
 	m_soundEffects.Load();
 	m_soundEffects.m_TextureRect.x = m_audioSettings.m_TextureRect.x;
 	m_soundEffects.m_TextureRect.y = (m_audioSettings.m_TextureRect.y + 75);
 
-	m_menuMusic = Texture("Assets/Graphics/options_menu/menu_music.png");
 	m_menuMusic.Load();
 	m_menuMusic.m_TextureRect.x = m_audioSettings.m_TextureRect.x;
 	m_menuMusic.m_TextureRect.y = (m_soundEffects.m_TextureRect.y + 75);
 
-	m_gameplayMusic = Texture("Assets/Graphics/options_menu/gameplay_music.png");
 	m_gameplayMusic.Load();
 	m_gameplayMusic.m_TextureRect.x = m_audioSettings.m_TextureRect.x;
 	m_gameplayMusic.m_TextureRect.y = (m_menuMusic.m_TextureRect.y + 75);
@@ -110,21 +101,18 @@ void OptionsMenuScene::on_enter()
 	m_menuMusicBoxOutline.w = m_menuMusicBox.w;
 	m_menuMusicBoxOutline.h = m_menuMusicBox.h;
 
-	m_menuMusicCheckMark = Texture("Assets/Graphics/options_menu/checkmark.png");
 	m_menuMusicCheckMark.Load();
 	m_menuMusicCheckMark.m_TextureRect.w = 30;
 	m_menuMusicCheckMark.m_TextureRect.h = 30;
 	m_menuMusicCheckMark.m_TextureRect.x = m_menuMusicBox.x + (m_menuMusicBox.w / 5);
 	m_menuMusicCheckMark.m_TextureRect.y = m_menuMusicBox.y - (m_menuMusicBox.h / 2);
 
-	m_gameplayMusicCheckMark = Texture("Assets/Graphics/options_menu/checkmark.png");
 	m_gameplayMusicCheckMark.Load();
 	m_gameplayMusicCheckMark.m_TextureRect.w = 30;
 	m_gameplayMusicCheckMark.m_TextureRect.h = 30;
 	m_gameplayMusicCheckMark.m_TextureRect.x = m_gameplayMusicBox.x + (m_gameplayMusicBox.w / 5);
 	m_gameplayMusicCheckMark.m_TextureRect.y = m_gameplayMusicBox.y - (m_gameplayMusicBox.h / 2);
 
-	m_soundEffectsCheckMark = Texture("Assets/Graphics/options_menu/checkmark.png");
 	m_soundEffectsCheckMark.Load();
 	m_soundEffectsCheckMark.m_TextureRect.w = 30;
 	m_soundEffectsCheckMark.m_TextureRect.h = 30;
@@ -132,22 +120,18 @@ void OptionsMenuScene::on_enter()
 	m_soundEffectsCheckMark.m_TextureRect.y = m_soundEffectsBox.y - (m_soundEffectsBox.h / 2);
 
 	// Common Items
-	m_apply = Texture("Assets/Graphics/options_menu/apply.png");
 	m_apply.Load();
 	m_apply.m_TextureRect.x = (m_optionsBox.x + m_optionsBox.w) - (m_apply.m_TextureRect.w) - 50;
 	m_apply.m_TextureRect.y = (m_optionsBox.y + m_optionsBox.h) - (m_apply.m_TextureRect.h) - 25;
 
-	m_applyRed = Texture("Assets/Graphics/options_menu/apply_red.png");
 	m_applyRed.Load();
 	m_applyRed.m_TextureRect.x = m_apply.m_TextureRect.x;
 	m_applyRed.m_TextureRect.y = m_apply.m_TextureRect.y;
 
-	m_back = Texture("Assets/Graphics/options_menu/back.png");
 	m_back.Load();
 	m_back.m_TextureRect.x = m_optionsBox.x + 50;
 	m_back.m_TextureRect.y = (m_optionsBox.y + m_optionsBox.h) - (m_back.m_TextureRect.h) - 25;
 
-	m_backRed = Texture("Assets/Graphics/options_menu/back_red.png");
 	m_backRed.Load();
 	m_backRed.m_TextureRect.x = m_back.m_TextureRect.x;
 	m_backRed.m_TextureRect.y = m_back.m_TextureRect.y;
@@ -155,7 +139,6 @@ void OptionsMenuScene::on_enter()
 	/////////////////////////////////////////////
 	for (size_t i = 0; i < m_skulls.size(); ++i)
 	{
-		m_skulls[i] = Texture("Assets/Graphics/common/skull.png");
 		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
 		m_skulls[i].m_TextureRect.h = 100;
@@ -165,19 +148,16 @@ void OptionsMenuScene::on_enter()
 	m_skulls[0].m_TextureRect.x = 125;
 	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
-	m_cursor = Texture("Assets/Graphics/common/cursor.png");
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_background = Texture("Assets/Graphics/common/main_background.png");
 	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
-	m_title = Texture("Assets/Graphics/common/title.png");
 	m_title.Load();
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
@@ -187,7 +167,6 @@ void OptionsMenuScene::on_enter()
 	m_titleBox.w = Game::screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
-	m_devName = Texture("Assets/Graphics/common/dev_name.png");
 	m_devName.Load();
 	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
 	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
@@ -197,7 +176,6 @@ void OptionsMenuScene::on_enter()
 	m_devNameBox.x = 0;
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
-	m_version = Texture("Assets/Graphics/common/version.png");
 	m_version.Load();
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
