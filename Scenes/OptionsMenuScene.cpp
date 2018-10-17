@@ -155,7 +155,7 @@ void OptionsMenuScene::on_enter()
 	/////////////////////////////////////////////
 	for (size_t i = 0; i < m_skulls.size(); ++i)
 	{
-		m_skulls[i] = Texture("Assets/Graphics/common/skull3.png");
+		m_skulls[i] = Texture("Assets/Graphics/common/skull.png");
 		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
 		m_skulls[i].m_TextureRect.h = 100;
@@ -165,7 +165,7 @@ void OptionsMenuScene::on_enter()
 	m_skulls[0].m_TextureRect.x = 125;
 	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
-	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor.png");
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;

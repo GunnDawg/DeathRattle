@@ -3,7 +3,7 @@
 
 void LeaderBoardScene::on_enter()
 {
-	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor.png");
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;

@@ -11,7 +11,7 @@ class Paddle
 public:
 	Paddle()=default;
 	Paddle(int x, int y, int w, int h);
-	~Paddle()=default;
+	~Paddle();
 
 	bool isMarked() const { return m_paddleMarked; }
 
@@ -31,6 +31,8 @@ private:
 	//Paddle& operator=(const Paddle&)=delete;
 
 	SDL_Rect m_paddleRect;
+	//Texture m_paddleTexture;
+	//Texture m_paddleTexture2;
 	double m_moveSpeed;
 	bool m_paddleMarked;
 };

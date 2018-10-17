@@ -8,7 +8,7 @@ void GameplayState::on_enter()
 
 	m_mouse.On();
 
-	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor.png");
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
@@ -62,7 +62,7 @@ void GameplayState::on_enter()
 		m_dungeonLevels->Load();
 	}
 
-	m_dungeonLevels->setScores({ 1, 1, 1, 1, 1 });
+	m_dungeonLevels->setScores({ 10, 50, 175, 250, 300 });
 
 	//Load all audio
 	m_hitSound.Load("Assets/Audio/hitnormal.wav");

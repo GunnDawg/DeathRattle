@@ -11,10 +11,11 @@ public:
 	Texture(const std::string_view filePath);
 	~Texture();
 
-	SDL_Texture* Load();
+	void Load();
 	void Unload();
-	SDL_Texture* getTexture() { return m_Texture; }
 	void setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
+	SDL_Rect getRect() const { return m_TextureRect; }
+	SDL_Texture* getTexture() const { return m_Texture; }
 
 	std::string m_filePath;
 	SDL_Texture* m_Texture;

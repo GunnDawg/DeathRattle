@@ -19,7 +19,7 @@ Texture::~Texture()
 	}
 }
 
-SDL_Texture* Texture::Load()
+void Texture::Load()
 {
 	m_Texture = IMG_LoadTexture(Game::Renderer, m_filePath.c_str());
 	if (m_Texture == nullptr)
@@ -37,8 +37,6 @@ SDL_Texture* Texture::Load()
 			printf("TEXTURE LOADED: \t---> \t%s\n", m_filePath.c_str());
 		}
 	}
-
-	return(m_Texture);
 }
 
 void Texture::Unload()

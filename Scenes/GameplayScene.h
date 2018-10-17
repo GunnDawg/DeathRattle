@@ -54,8 +54,7 @@ private:
 
 	std::unique_ptr<LevelSet> m_dungeonLevels;
 
-	std::array<std::unique_ptr<Paddle>, NUM_PADDLES> m_paddles;
-	//std::array<std::unique_ptr<Item>, NUM_ITEMS> m_items;
+	std::array<std::unique_ptr<Paddle>, NUM_PADDLES> m_paddles = { 0 };
 	unsigned int m_itemNum = 0;
 
 	std::unique_ptr<Ball> m_ball;
@@ -80,8 +79,8 @@ private:
 	Texture m_dead;
 	Texture m_cursor;
 
-	SDL_Rect m_finalScoreBox;
-	SDL_Rect m_finalScoreBoxOutline;
+	SDL_Rect m_finalScoreBox = { 0 };
+	SDL_Rect m_finalScoreBoxOutline = { 0 };
 
 	bool m_running = false;
 	bool m_paused = true;

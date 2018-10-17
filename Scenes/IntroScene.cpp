@@ -4,7 +4,7 @@
 
 void IntroSceneState::on_enter()
 {
-	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor.png");
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
@@ -91,12 +91,17 @@ void IntroSceneState::on_enter()
 
 void IntroSceneState::on_exit()
 {
+	m_cursor.Unload();
 	m_background.Unload();
+	m_plug.Unload();
 	m_keepIt.Unload();
 	m_alive.Unload();
-	m_plug.Unload();
-	m_cursor.Unload();
 	m_blood.Unload();
+	m_skullWhite.Unload();
+	m_skull.Unload();
+	m_press.Unload();
+	m_enter.Unload();
+	m_version.Unload();
 
 	m_introSound.Unload();
 	//m_scare.Unload();
