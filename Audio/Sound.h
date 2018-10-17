@@ -1,7 +1,7 @@
 #pragma once
-
 #include <SDL_mixer.h>
 #include <cstdio>
+#include <cassert>
 
 class Sound
 {
@@ -11,10 +11,9 @@ public:
 	~Sound();
 
 	Mix_Chunk* Load(const char* filePath);
-	inline void Unload() { Mix_FreeChunk(m_chunk); printf("Sound Unloaded: %s\n", m_soundFilePath);
-	};
+	void Unload();
 	inline void Play() const { Mix_PlayChannel(-1, m_chunk, 0); }
-	inline void setVolume(int v) const { Mix_VolumeChunk(m_chunk, MIX_MAX_VOLUME / v); }
+	void setVolume(int v) const;
 
 private:
 

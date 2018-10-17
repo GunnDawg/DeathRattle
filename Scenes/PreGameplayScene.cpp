@@ -15,7 +15,8 @@ void PreGameplayScene::on_enter()
 
 	for (size_t i = 0; i < m_skulls.size(); ++i)
 	{
-		m_skulls[i].Load("Assets/Graphics/common/skull3.png");
+		m_skulls[i] = Texture("Assets/Graphics/common/skull3.png");
+		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
 		m_skulls[i].m_TextureRect.h = 100;
 		m_skulls[i].m_TextureRect.y = 0;
@@ -24,11 +25,13 @@ void PreGameplayScene::on_enter()
 	m_skulls[0].m_TextureRect.x = 125;
 	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
-	m_cursor.Load("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_title.Load("Assets/Graphics/common/title.png");
+	m_title = Texture("Assets/Graphics/common/title.png");
+	m_title.Load();
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
 
@@ -37,17 +40,20 @@ void PreGameplayScene::on_enter()
 	m_titleBox.w = Game::screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
-	m_background.Load("Assets/Graphics/common/main_background.png");
+	m_background = Texture("Assets/Graphics/common/main_background.png");
+	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
-	m_devName.Load("Assets/Graphics/common/dev_name.png");
+	m_devName = Texture("Assets/Graphics/common/dev_name.png");
+	m_devName.Load();
 	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
 	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
 
-	m_version.Load("Assets/Graphics/common/version.png");
+	m_version = Texture("Assets/Graphics/common/version.png");
+	m_version.Load();
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 

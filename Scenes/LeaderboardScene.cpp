@@ -3,17 +3,20 @@
 
 void LeaderBoardScene::on_enter()
 {
-	m_cursor.Load("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_background.Load("Assets/Graphics/common/main_background.png");
+	m_background = Texture("Assets/Graphics/common/main_background.png");
+	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
-	m_comingSoon.Load("Assets/Graphics/leaderboard_scene/comingsoon.png");
+	m_comingSoon = Texture("Assets/Graphics/leaderboard_scene/comingsoon.png");
+	m_comingSoon.Load();
 	m_comingSoon.m_TextureRect.y = (Game::screenHeight / 2) - m_comingSoon.m_TextureRect.h / 2;
 	m_comingSoon.m_TextureRect.x = (Game::screenWidth / 2) - m_comingSoon.m_TextureRect.w / 2;
 

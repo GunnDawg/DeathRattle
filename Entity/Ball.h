@@ -17,6 +17,7 @@ public:
 	~Ball()=default;
 
 	void Load();
+	void Unload();
 	void Draw();
 	void Update();
 	void setAngle(double angle);

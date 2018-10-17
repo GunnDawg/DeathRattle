@@ -1,42 +1,52 @@
 #include "Texture.h"
 #include "Game.h"
 
-Texture::Texture()
+Texture::Texture(const std::string_view filePath) :
+m_filePath(filePath),
+m_Texture(nullptr),
+m_TextureRect({ 0 })
 {
-	m_TextureRect.x = 100;
-	m_TextureRect.y = 100;
+	assert(typeid(filePath) == typeid(std::string_view) && !filePath.empty() && "Texture filepath cannot be empty");
 }
+
 
 Texture::~Texture()
 {
-	
+	if (m_Texture != nullptr)
+	{
+		SDL_DestroyTexture(m_Texture);
+		printf("TEXTURE DESTROYED: \t---> \t%s\n", m_filePath.c_str());
+	}
 }
 
-SDL_Texture* Texture::Load(std::string filePath)
+SDL_Texture* Texture::Load()
 {
-	m_filePath = filePath.c_str();
-
 	m_Texture = IMG_LoadTexture(Game::Renderer, m_filePath.c_str());
 	if (m_Texture == nullptr)
 	{
-		printf("Error creating Texture. Error: %s\n", IMG_GetError());
+		printf("TEXTURE: \t---> Error loading texture file. Error: \t%s\n", IMG_GetError());
+	}
+	else
+	{
+		if (SDL_QueryTexture(m_Texture, nullptr, nullptr, &m_TextureRect.w, &m_TextureRect.h) == -1)
+		{
+			printf("TEXTURE: \t---> \t%s is invalid\n", SDL_GetError());
+		}
+		else
+		{
+			printf("TEXTURE LOADED: \t---> \t%s\n", m_filePath.c_str());
+		}
 	}
 
-	SDL_QueryTexture(m_Texture, NULL, NULL, &m_TextureRect.w, &m_TextureRect.h);
-
-	return m_Texture;
+	return(m_Texture);
 }
 
 void Texture::Unload()
 {
-	//if (m_Texture == nullptr)
-	//{
-	//	SDL_DestroyTexture(m_Texture);
-	//	printf("Texture Destroyed: %s\n", m_filePath.c_str());
-	//}
-
 	SDL_DestroyTexture(m_Texture);
-	printf("Texture Destroyed: %s\n", m_filePath.c_str());
+	m_Texture = nullptr;
+	printf("TEXTURE UNLOADED: \t---> \t%s\n", m_filePath.c_str());
+
 }
 
 void Texture::setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h)

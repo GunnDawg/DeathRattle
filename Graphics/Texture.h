@@ -7,16 +7,16 @@
 class Texture
 {
 public:
-	Texture();
+	Texture()=default;
+	Texture(const std::string_view filePath);
 	~Texture();
 
-	SDL_Texture* Load(std::string filePath);
+	SDL_Texture* Load();
 	void Unload();
 	SDL_Texture* getTexture() { return m_Texture; }
 	void setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 
-	SDL_Rect m_TextureRect;
-	SDL_Texture* m_Texture;
-
 	std::string m_filePath;
+	SDL_Texture* m_Texture;
+	SDL_Rect m_TextureRect;
 };

@@ -30,6 +30,8 @@ m_speed(0), m_isDead(false)
 		break;
 	}
 
+	m_ballTexture = Texture("Assets/Graphics/gameplay_scene/ball.png");
+
 	setAngle(randomizeAng());
 }
 
@@ -78,7 +80,12 @@ void Ball::resetBall(unsigned int w, unsigned int h, unsigned int difficulty)
 
 void Ball::Load()
 {
-	m_ballTexture.Load("Assets/Graphics/gameplay_scene/ball.png");
+	m_ballTexture.Load();
+}
+
+void Ball::Unload()
+{
+	m_ballTexture.Unload();
 }
 
 void Ball::Draw()

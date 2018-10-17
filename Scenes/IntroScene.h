@@ -41,4 +41,5 @@ private:
 	SDL_Rect m_skullCollider;
 
 	Sound m_introSound;
+	Sound m_scare;
 };

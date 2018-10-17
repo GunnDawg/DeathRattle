@@ -4,29 +4,35 @@
 
 void IntroSceneState::on_enter()
 {
-	m_cursor.Load("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_background.Load("Assets/Graphics/common/main_background.png");
+	m_background = Texture("Assets/Graphics/common/main_background.png");
+	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
-	m_plug.Load("Assets/Graphics/intro_scene/plug.png");
+	m_plug = Texture("Assets/Graphics/intro_scene/plug.png");
+	m_plug.Load();
 	m_plug.m_TextureRect.x = (Game::screenWidth / 2) - (m_plug.m_TextureRect.w / 2);
 	m_plug.m_TextureRect.y = 0;
 
-	m_keepIt.Load("Assets/Graphics/intro_scene/keepit.png");
+	m_keepIt = Texture("Assets/Graphics/intro_scene/keepit.png");
+	m_keepIt.Load();
 	m_keepIt.m_TextureRect.x = (Game::screenWidth / 2) - (m_keepIt.m_TextureRect.w / 2);
 	m_keepIt.m_TextureRect.y = 0 - (m_keepIt.m_TextureRect.h);
 
-	m_alive.Load("Assets/Graphics/intro_scene/alive.png");
+	m_alive = Texture("Assets/Graphics/intro_scene/alive.png");
+	m_alive.Load();
 	m_alive.m_TextureRect.x = (Game::screenWidth / 2) - (m_alive.m_TextureRect.w / 2) + 25;
 	m_alive.m_TextureRect.y = 720;
 
-	m_blood.Load("Assets/Graphics/intro_scene/blood.png");
+	m_blood = Texture("Assets/Graphics/intro_scene/blood.png");
+	m_blood.Load();
 	m_blood.m_TextureRect.x = (Game::screenWidth / 2) - (m_blood.m_TextureRect.w / 2);
 	m_blood.m_TextureRect.y = (Game::screenHeight / 2) - (m_blood.m_TextureRect.h / 2);
 
@@ -35,7 +41,8 @@ void IntroSceneState::on_enter()
 	m_skullBox.x = (Game::screenWidth / 2) - (m_skullBox.w / 2);
 	m_skullBox.y = 550;
 
-	m_skullWhite.Load("Assets/Graphics/intro_scene/skull_white.png");
+	m_skullWhite = Texture("Assets/Graphics/intro_scene/skull_white.png");
+	m_skullWhite.Load();
 	m_skullWhite.m_TextureRect.w = 125;
 	m_skullWhite.m_TextureRect.h = 125;
 	m_skullWhite.m_TextureRect.x = (Game::screenWidth / 2) - m_skullWhite.m_TextureRect.w / 2;
@@ -46,17 +53,20 @@ void IntroSceneState::on_enter()
 	m_skullCollider.x = m_skullWhite.m_TextureRect.x + m_skullCollider.w / 2;
 	m_skullCollider.y = m_skullWhite.m_TextureRect.y + m_skullCollider.h / 2;
 
-	m_skull.Load("Assets/Graphics/intro_scene/skull.png");
+	m_skull = Texture("Assets/Graphics/intro_scene/skull.png");
+	m_skull.Load();
 	m_skull.m_TextureRect.w = 125;
 	m_skull.m_TextureRect.h = 125;
 	m_skull.m_TextureRect.x = m_skullWhite.m_TextureRect.x;
 	m_skull.m_TextureRect.y = m_skullWhite.m_TextureRect.y;
 
-	m_press.Load("Assets/Graphics/intro_scene/press.png");
+	m_press = Texture("Assets/Graphics/intro_scene/press.png");
+	m_press.Load();
 	m_press.m_TextureRect.x = (m_skullWhite.m_TextureRect.x) - (m_press.m_TextureRect.w) - 10;
 	m_press.m_TextureRect.y = (m_skullBox.y + m_press.m_TextureRect.h / 2);
 
-	m_enter.Load("Assets/Graphics/intro_scene/enter.png");
+	m_enter = Texture("Assets/Graphics/intro_scene/enter.png");
+	m_enter.Load();
 	m_enter.m_TextureRect.x = (m_skullWhite.m_TextureRect.x) + (m_enter.m_TextureRect.w) - 10;
 	m_enter.m_TextureRect.y = (m_skullBox.y + m_enter.m_TextureRect.h / 2);
 
@@ -65,11 +75,15 @@ void IntroSceneState::on_enter()
 	m_plugBox.w = Game::screenWidth;
 	m_plugBox.h = m_plug.m_TextureRect.h;
 
-	m_version.Load("Assets/Graphics/common/version.png");
+	m_version = Texture("Assets/Graphics/common/version.png");
+	m_version.Load();
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
 	m_timer.start();
+
+	m_scare.Load("Assets/Audio/scare.wav");
+	m_scare.setVolume(5);
 
 	m_introSound.Load("Assets/Audio/splat.wav");
 	m_introSound.Play();
@@ -85,6 +99,7 @@ void IntroSceneState::on_exit()
 	m_blood.Unload();
 
 	m_introSound.Unload();
+	//m_scare.Unload();
 }
 
 void IntroSceneState::update()
@@ -123,6 +138,7 @@ void IntroSceneState::update()
 	if (m_isClicked)
 	{
 		m_isSkull = false;
+		m_scare.Play();
 
 		m_skull.m_TextureRect.w += 200;
 		m_skull.m_TextureRect.h += 200;
@@ -138,7 +154,7 @@ void IntroSceneState::update()
 		m_press.m_TextureRect.x -= 100;
 		m_enter.m_TextureRect.x += 100;
 
-		if (m_timer.elapsedMilliseconds() > 150)
+		if (m_timer.elapsedMilliseconds() > 250)
 		{
 			Game::gameStateMachine.pop();
 

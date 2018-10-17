@@ -42,21 +42,21 @@ private:
 	int m_health = 550;
 	int m_bonusProgress = 0;
 	unsigned int m_lives = 3;
-	const char* m_convertedLives;
+	const char* m_convertedLives = nullptr;
 	std::string m_LivesString;
 
 	Keyboard m_keyBoard;
 	Mouse m_mouse;
-	int m_mouseX;
-	int m_mouseY;
+	int m_mouseX = 0;
+	int m_mouseY = 0;
 
 	HUD m_HUD;
 
-	LevelSet m_dungeonLevels;
+	std::unique_ptr<LevelSet> m_dungeonLevels;
 
 	std::array<std::unique_ptr<Paddle>, NUM_PADDLES> m_paddles;
 	//std::array<std::unique_ptr<Item>, NUM_ITEMS> m_items;
-	unsigned int m_itemNum;
+	unsigned int m_itemNum = 0;
 
 	std::unique_ptr<Ball> m_ball;
 
@@ -80,14 +80,13 @@ private:
 	Texture m_dead;
 	Texture m_cursor;
 
+	SDL_Rect m_finalScoreBox;
+	SDL_Rect m_finalScoreBoxOutline;
+
 	bool m_running = false;
 	bool m_paused = true;
 	bool m_gameOver = false;
 	bool m_levelWon = false;
 	bool m_newGame = true;
 	bool m_cached = false;
-
-	Uint64 currentTime;
-	Uint64 lastTime;
-	double deltaTime;
 };

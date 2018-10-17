@@ -15,6 +15,7 @@ public:
 
 	void Draw(unsigned int x, unsigned int y);
 	void Update(const std::string_view newText);
+	void Unload();
 
 	SDL_Rect m_textRect;
 

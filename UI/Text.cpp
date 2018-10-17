@@ -12,6 +12,8 @@ m_textTexture(loadFont(m_fontPath, m_fontSize, m_fontValue, m_fontColor))
 	assert(typeid(text) == typeid(std::string_view) && !text.empty() && "Text cannot have an empty value");
 
 	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
+
+	printf("TEXT LOADED: \t\t---> \t%s\n", m_fontValue.c_str());
 }
 
 Text::~Text()
@@ -62,4 +64,10 @@ void Text::Update(const std::string_view newText)
 	m_fontValue = newText;
 	m_textTexture = loadFont(m_fontPath, m_fontSize, m_fontValue, { 255, 255, 255, 255 });
 	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
+}
+
+void Text::Unload()
+{
+	SDL_DestroyTexture(m_textTexture);
+	printf("TEXT UNLOADED: \t\t---> \t%s\n", m_fontValue.c_str());
 }

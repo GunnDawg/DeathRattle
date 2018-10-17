@@ -3,17 +3,20 @@
 
 void SplashScene::on_enter()
 {
-	m_background.Load("Assets/Graphics/splash_scene/background4.png");
+	m_background = Texture("Assets/Graphics/splash_scene/background4.png");
+	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = 1280;
 	m_background.m_TextureRect.h = 720;
 
-	m_logo.Load("Assets/Graphics/common/GGlogo2.png");
+	m_logo = Texture("Assets/Graphics/common/GGlogo2.png");
+	m_logo.Load();
 	m_logo.m_TextureRect.x = (Game::screenWidth / 2) - (m_logo.m_TextureRect.w / 2);
 	m_logo.m_TextureRect.y = -450;
 
-	m_production.Load("Assets/Graphics/splash_scene/production3.png");
+	m_production = Texture("Assets/Graphics/splash_scene/production3.png");
+	m_production.Load();
 	m_production.m_TextureRect.x = (Game::screenWidth / 2) - (m_production.m_TextureRect.w / 2);
 	m_production.m_TextureRect.y = Game::screenHeight;
 
@@ -75,6 +78,6 @@ void SplashScene::handle_events()
 void SplashScene::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_logo.m_Texture, NULL, &m_logo.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_production.m_Texture, NULL, &m_production.m_TextureRect);
+	SDL_RenderCopy(Game::Renderer, m_logo.m_Texture, NULL, &m_logo.m_TextureRect);
 }

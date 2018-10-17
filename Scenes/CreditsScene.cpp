@@ -5,7 +5,8 @@ void CreditsScene::on_enter()
 {
 	for (size_t i = 0; i < m_skulls.size(); ++i)
 	{
-		m_skulls[i].Load("Assets/Graphics/common/skull3.png");
+		m_skulls[i] = Texture("Assets/Graphics/common/skull3.png");
+		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
 		m_skulls[i].m_TextureRect.h = 100;
 		m_skulls[i].m_TextureRect.y = 0;
@@ -14,11 +15,13 @@ void CreditsScene::on_enter()
 	m_skulls[0].m_TextureRect.x = 125;
 	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
-	m_cursor.Load("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_title.Load("Assets/Graphics/common/title.png");
+	m_title = Texture("Assets/Graphics/common/title.png");
+	m_title.Load();
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
 
@@ -27,7 +30,8 @@ void CreditsScene::on_enter()
 	m_titleBox.w = Game::screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
-	m_background.Load("Assets/Graphics/common/main_background.png");
+	m_background = Texture("Assets/Graphics/common/main_background.png");
+	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
 	m_background.m_TextureRect.w = Game::screenWidth;
@@ -43,71 +47,88 @@ void CreditsScene::on_enter()
 	m_creditBoxOutline.x = m_creditsBox.x;
 	m_creditBoxOutline.y = m_creditsBox.y;
 
-	m_leadProgramming.Load("Assets/Graphics/credits_scene/lead_programming.png");
+	m_leadProgramming = Texture("Assets/Graphics/credits_scene/lead_programming.png");
+	m_leadProgramming.Load();
 	m_leadProgramming.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_leadProgramming.m_TextureRect.w / 2);
 	m_leadProgramming.m_TextureRect.y = m_creditsBox.y + 20;
 
-	m_calvin.Load("Assets/Graphics/credits_scene/calvin.png");
+	m_calvin = Texture("Assets/Graphics/credits_scene/calvin.png");
+	m_calvin.Load();
 	m_calvin.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_calvin.m_TextureRect.w / 2);
 	m_calvin.m_TextureRect.y = m_leadProgramming.m_TextureRect.y + 65;
 
-	m_additionalProgramming.Load("Assets/Graphics/credits_scene/additional_programming.png");
+	m_additionalProgramming = Texture("Assets/Graphics/credits_scene/additional_programming.png");
+	m_additionalProgramming.Load();
 	m_additionalProgramming.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_additionalProgramming.m_TextureRect.w / 2);
 	m_additionalProgramming.m_TextureRect.y = m_calvin.m_TextureRect.y + 75;
 
-	m_kelson.Load("Assets/Graphics/credits_scene/kelson.png");
+	m_kelson = Texture("Assets/Graphics/credits_scene/kelson.png");
+	m_kelson.Load();
 	m_kelson.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_kelson.m_TextureRect.w / 2);
 	m_kelson.m_TextureRect.y = m_additionalProgramming.m_TextureRect.y + 65;
 
-	m_panda.Load("Assets/Graphics/credits_scene/fancykillerpanda.png");
+	m_panda = Texture("Assets/Graphics/credits_scene/fancykillerpanda.png");
+	m_panda.Load();
 	m_panda.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_panda.m_TextureRect.w / 2);
 	m_panda.m_TextureRect.y = m_kelson.m_TextureRect.y + 50;
 
-	m_jeff.Load("Assets/Graphics/credits_scene/jeff.png");
+	m_jeff = Texture("Assets/Graphics/credits_scene/jeff.png");
+	m_jeff.Load();
 	m_jeff.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_jeff.m_TextureRect.w / 2);
 	m_jeff.m_TextureRect.y = m_panda.m_TextureRect.y + 50;
 
-	m_graphicsDesign.Load("Assets/Graphics/credits_scene/graphics_design.png");
+	m_graphicsDesign = Texture("Assets/Graphics/credits_scene/graphics_design.png");
+	m_graphicsDesign.Load();
 	m_graphicsDesign.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_graphicsDesign.m_TextureRect.w / 2);
 	m_graphicsDesign.m_TextureRect.y = m_creditsBox.y + 20;
 
-	m_mj.Load("Assets/Graphics/credits_scene/mj.png");
+	m_mj = Texture("Assets/Graphics/credits_scene/mj.png");
+	m_mj.Load();
 	m_mj.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_mj.m_TextureRect.w / 2);
 	m_mj.m_TextureRect.y = m_graphicsDesign.m_TextureRect.y + 65;
 
-	m_sound.Load("Assets/Graphics/credits_scene/sound.png");
+	m_sound = Texture("Assets/Graphics/credits_scene/sound.png");
+	m_sound.Load();
 	m_sound.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_sound.m_TextureRect.w / 2);
 	m_sound.m_TextureRect.y = m_mj.m_TextureRect.y + 75;
 
-	m_jun.Load("Assets/Graphics/credits_scene/jun.png");
+	m_jun = Texture("Assets/Graphics/credits_scene/jun.png");
+	m_jun.Load();
 	m_jun.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_jun.m_TextureRect.w / 2);
 	m_jun.m_TextureRect.y = m_sound.m_TextureRect.y + 65;
 
-	m_savage.Load("Assets/Graphics/credits_scene/savage.png");
+	m_savage = Texture("Assets/Graphics/credits_scene/savage.png");
+	m_savage.Load();
 	m_savage.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_savage.m_TextureRect.w / 2);
 	m_savage.m_TextureRect.y = m_jun.m_TextureRect.y + 50;
 
-	m_reitanna.Load("Assets/Graphics/credits_scene/reitanna.png");
+	m_reitanna = Texture("Assets/Graphics/credits_scene/reitanna.png");
+	m_reitanna.Load();
 	m_reitanna.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_reitanna.m_TextureRect.w / 2);
 	m_reitanna.m_TextureRect.y = m_savage.m_TextureRect.y + 50;
 
-	m_pageOne.Load("Assets/Graphics/common/1of3.png");
+	m_pageOne = Texture("Assets/Graphics/common/1of3.png");
+	m_pageOne.Load();
 	m_pageOne.m_TextureRect.x = m_creditsBox.x + ((m_creditsBox.w / 2) - m_pageOne.m_TextureRect.w / 2);
 	m_pageOne.m_TextureRect.y = m_jeff.m_TextureRect.y + 75;
 
-	m_pageTwo.Load("Assets/Graphics/common/2of3.png");
+	m_pageTwo = Texture("Assets/Graphics/common/2of3.png");
+	m_pageTwo.Load();
 	m_pageTwo.m_TextureRect.x = m_pageOne.m_TextureRect.x;
 	m_pageTwo.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
-	m_pageThree.Load("Assets/Graphics/common/3of3.png");
+	m_pageThree = Texture("Assets/Graphics/common/3of3.png");
+	m_pageThree.Load();
 	m_pageThree.m_TextureRect.x = m_pageOne.m_TextureRect.x;
 	m_pageThree.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
-	m_devName.Load("Assets/Graphics/common/dev_name.png");
+	m_devName = Texture("Assets/Graphics/common/dev_name.png");
+	m_devName.Load();
 	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
 	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
 
-	m_version.Load("Assets/Graphics/common/version.png");
+	m_version = Texture("Assets/Graphics/common/version.png");
+	m_version.Load();
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
@@ -116,24 +137,29 @@ void CreditsScene::on_enter()
 	m_devNameBox.x = 0;
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
-	m_rightArrow.Load("Assets/Graphics/common/right_arrow.png");
+	m_rightArrow = Texture("Assets/Graphics/common/right_arrow.png");
+	m_rightArrow.Load();
 	m_rightArrow.m_TextureRect.x = (m_pageOne.m_TextureRect.x + m_pageOne.m_TextureRect.w) + 30;
 	m_rightArrow.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
-	m_rightArrowWhite.Load("Assets/Graphics/common/right_arrow_white.png");
+	m_rightArrowWhite = Texture("Assets/Graphics/common/right_arrow_white.png");
+	m_rightArrowWhite.Load();
 	m_rightArrowWhite.m_TextureRect.x = m_rightArrow.m_TextureRect.x;
 	m_rightArrowWhite.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
-	m_leftArrow.Load("Assets/Graphics/common/left_arrow.png");
+	m_leftArrow = Texture("Assets/Graphics/common/left_arrow.png");
+	m_leftArrow.Load();
 	m_leftArrow.m_TextureRect.x = (m_pageOne.m_TextureRect.x - 50) - (m_leftArrow.m_TextureRect.w / 2);
 	m_leftArrow.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
-	m_leftArrowWhite.Load("Assets/Graphics/common/left_arrow_white.png");
+	m_leftArrowWhite = Texture("Assets/Graphics/common/left_arrow_white.png");
+	m_leftArrowWhite.Load();
 	m_leftArrowWhite.m_TextureRect.x = m_leftArrow.m_TextureRect.x;
 	m_leftArrowWhite.m_TextureRect.y = m_pageOne.m_TextureRect.y;
 
 
-	m_logo.Load("Assets/Graphics/common/gglogo2.png");
+	m_logo = Texture("Assets/Graphics/common/gglogo2.png");
+	m_logo.Load();
 	m_logo.m_TextureRect.w = 300;
 	m_logo.m_TextureRect.h = 300;
 	m_logo.m_TextureRect.x = (Game::screenWidth / 2) - (m_logo.m_TextureRect.w / 2);

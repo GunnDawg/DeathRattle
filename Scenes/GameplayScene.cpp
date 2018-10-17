@@ -1,4 +1,5 @@
 #include "GameplayScene.h"
+#include "Scenes/MainMenuScene.h"
 #include "Game.h"
 
 void GameplayState::on_enter()
@@ -7,19 +8,13 @@ void GameplayState::on_enter()
 
 	m_mouse.On();
 
-	m_cursor.Load("Assets/Graphics/common/cursor2.png");
+	m_cursor = Texture("Assets/Graphics/common/cursor2.png");
+	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	//Define Drops
-	//m_items[0] = std::make_unique<Item>(Type::DamagePaddles);
-	//m_items[1] = std::make_unique<Item>(Type::SwapPaddles);
-	//m_items[2] = std::make_unique<Item>(Type::IncreaseSpeed);
-	//m_items[3] = std::make_unique<Item>(Type::DecreaseSpeed);
-	//m_items[4] = std::make_unique<Item>(Type::Health);
-
 	//Define Level Object
-	m_dungeonLevels = LevelSet("Assets/Graphics/Levels/Dungeon/", Game::screenWidth, Game::screenHeight);
+	m_dungeonLevels = std::make_unique<LevelSet>("Assets/Graphics/Levels/Dungeon/");
 
 	//Define paddles
 	m_paddles[0] = std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30);
@@ -35,23 +30,15 @@ void GameplayState::on_enter()
 	m_gameTitle            = std::make_unique<Text>(48, "KEEP IT ALIVE");
 	m_gameTitleStart       = std::make_unique<Text>(12, "Press SPACE to start or ESC to exit");
 	m_pausedText           = std::make_unique<Text>(48, "PAUSED");
-	m_pressSpaceText       = std::make_unique<Text>(12, "Press SPACE to continue");
+	m_pressSpaceText       = std::make_unique<Text>(12, "Press SPACE to continue or ESC to exit");
 	m_gameOverText         = std::make_unique<Text>(48, "GAME OVER");
 	m_gameOverNewGameText  = std::make_unique<Text>(12, "Press N to start a new game or ESC to exit");
 	m_levelPassed          = std::make_unique<Text>(48, "LEVEL COMPLETE");
 	m_levelPassedContinue  = std::make_unique<Text>(12, "Press N to continue to the next level");
 
-	//m_gameTitle           = Text(48, "KEEP IT ALIVE");
-	//m_gameTitleStart      = Text(m_renderer, 12, "Press SPACE to start or ESC to exit");
-	//m_pausedText          = Text(m_renderer, 48, "PAUSED");
-	//m_pressSpaceText      = Text(m_renderer, 12, "Press SPACE to continue");
-	//m_gameOverText        = Text(m_renderer, 48, "GAME OVER");
-	//m_gameOverNewGameText = Text(m_renderer, 12, "Press N to start a new game or ESC to exit");
-	//m_levelPassed         = Text(m_renderer, 48, "LEVEL COMPLETE");
-	//m_levelPassedContinue = Text(m_renderer, 12, "Press N to continue to the next level");
-
 	//Define misc. graphical components
-	m_dead.Load("Assets/Graphics/gameplay_scene/gameover.png");
+	m_dead = Texture("Assets/Graphics/gameplay_scene/gameover.png");
+	m_dead.Load();
 	m_dead.setRect((Game::screenWidth / 2) - (m_dead.m_TextureRect.w / 2), Game::screenHeight - m_dead.m_TextureRect.h, m_dead.m_TextureRect.w, m_dead.m_TextureRect.h);
 	m_ball->Load();
 
@@ -65,23 +52,17 @@ void GameplayState::on_enter()
 	//Load HUD
 	m_HUD.Load(m_health, true);
 
-	//Load Items
-	//for (size_t i = 0; i < m_items.size(); ++i)
-	//{
-	//	m_items[i]->Load(Game::Renderer);
-	//}
-
 	//Load Level Sets
 	if (m_cached)
 	{
-		m_dungeonLevels.LoadAll();
+		m_dungeonLevels->LoadAll();
 	}
 	else
 	{
-		m_dungeonLevels.Load();
+		m_dungeonLevels->Load();
 	}
 
-	m_dungeonLevels.setScores({ 10, 50, 175, 250, 300 });
+	m_dungeonLevels->setScores({ 1, 1, 1, 1, 1 });
 
 	//Load all audio
 	m_hitSound.Load("Assets/Audio/hitnormal.wav");
@@ -96,7 +77,27 @@ void GameplayState::on_enter()
 
 void GameplayState::on_exit()
 {
-	
+	printf("<-----UNLOADING GAME--------->\n");
+
+	m_dead.Unload();
+	m_cursor.Unload();
+	m_ball->Unload();
+	m_dungeonLevels->UnloadAll();
+
+	m_gameTitle->Unload();
+	m_gameTitleStart->Unload();
+	m_pausedText->Unload();
+	m_pressSpaceText->Unload();
+	m_gameOverText->Unload();
+	m_gameOverNewGameText->Unload();
+	m_levelPassed->Unload();
+	m_levelPassedContinue->Unload();
+
+	m_hitSound.Unload();
+	m_hitBadSound.Unload();
+	m_pauseSound.Unload();
+	m_gameOverSound.Unload();
+	m_heal.Unload();
 }
 
 void GameplayState::handle_events()
@@ -106,84 +107,94 @@ void GameplayState::handle_events()
 	{
 		switch (evnt.type)
 		{
-		case SDL_QUIT:
-		{
-			Game::isRunning = false;
-		} break;
-
-		//TODO: Consider a key input manager if needed, might not be (Calvin)
-		case SDL_KEYDOWN:
-		{
-			switch (evnt.key.keysym.sym)
-			{
-			case SDLK_ESCAPE:
+			case SDL_QUIT:
 			{
 				Game::isRunning = false;
 			} break;
 
-			case SDLK_SPACE:
+		//TODO: Consider a key input manager if needed, might not be (Calvin)
+			case SDL_KEYDOWN:
 			{
-				if (!m_paused)
+				switch (evnt.key.keysym.sym)
 				{
-					Mix_PauseMusic();
-					m_paused = true;
-					m_pauseSound.Play();
-				}
-				else if (m_levelWon)
-				{
-					m_paused = true;
-				}
-				else if (m_paused && !m_gameOver)
-				{
-					if (!MusicManager::isGamePlayMusic)
+					case SDLK_ESCAPE:
 					{
-						Mix_PausedMusic();
+						if (m_paused || m_gameOver || m_levelWon)
+						{
+							Game::gameStateMachine.pop();
+
+							std::unique_ptr<GameState> mainMenuState = std::make_unique<MainMenuScene>();
+							Game::gameStateMachine.push(std::move(mainMenuState));
+						}
+						else
+						{
+							m_paused = true;
+						}
+					} break;
+
+					case SDLK_SPACE:
+					{
+						if (!m_paused)
+						{
+							Mix_PauseMusic();
+							m_paused = true;
+							m_pauseSound.Play();
+						}
+						else if (m_levelWon)
+						{
+							m_paused = true;
+						}
+						else if (m_paused && !m_gameOver)
+						{
+							if (!MusicManager::isGamePlayMusic)
+							{
+								Mix_PausedMusic();
+							}
+							m_paused = false;
+							m_pauseSound.Play();
+						}
+
+						if (!m_keyBoard.isEnabled() && !m_mouse.isEnabled())
+						{
+							printf("No input devices enabled. Enable either the mouse or the keyboard!\n");
+							m_paused = true;
+						}
+						else if (m_newGame)
+						{
+							m_newGame = false;
+						}
+					} break;
+
+					case SDLK_n:
+					{
+						if (m_gameOver || m_levelWon)
+						{
+							resetGame();
+							m_gameOver = false;
+							m_levelWon = false;
+							m_newGame = true;
+						}
+					} break;
+
+					case SDLK_h:
+					{
+						if (m_HUD.isShowing())
+						{
+							m_HUD.setShowing(false);
+						}
+						else
+						{
+							m_HUD.setShowing(true);
+						}
+					} break;
+
+					default:
+						break;
 					}
-					m_paused = false;
-					m_pauseSound.Play();
-				}
-
-				if (!m_keyBoard.isEnabled() && !m_mouse.isEnabled())
-				{
-					printf("No input devices enabled. Enable either the mouse or the keyboard!\n");
-					m_paused = true;
-				}
-				else if (m_newGame)
-				{
-					m_newGame = false;
-				}
-			} break;
-
-			case SDLK_n:
-			{
-				if (m_gameOver || m_levelWon)
-				{
-					resetGame();
-					m_gameOver = false;
-					m_levelWon = false;
-					m_newGame = true;
-				}
-			} break;
-
-			case SDLK_h:
-			{
-				if (m_HUD.isShowing())
-				{
-					m_HUD.setShowing(false);
-				}
-				else
-				{
-					m_HUD.setShowing(true);
-				}
-			} break;
+				} break;
 
 			default:
 				break;
-			}
-		} break;
-
-		default:
-			break;
 		}
 	}
 }
@@ -199,7 +210,7 @@ void GameplayState::update()
 		m_health = 0;
 	}
 
-	m_HUD.Update(m_dungeonLevels, *m_ball, m_lives, m_health, m_bonusProgress);
+	m_HUD.Update(*m_dungeonLevels, *m_ball, m_lives, m_health, m_bonusProgress);
 
 	if (m_paused)
 	{
@@ -219,7 +230,7 @@ void GameplayState::update()
 			m_keyBoard.Update(Game::deltaTime, 75, Game::screenWidth, Game::screenHeight, *m_paddles[0], *m_paddles[1], *m_paddles[2], *m_paddles[3]);
 		}
 
-		m_HUD.Update(m_dungeonLevels, *m_ball, m_lives, m_health, m_bonusProgress);
+		m_HUD.Update(*m_dungeonLevels, *m_ball, m_lives, m_health, m_bonusProgress);
 
 		if (!m_paused)
 		{
@@ -230,11 +241,6 @@ void GameplayState::update()
 		checkCollision();
 		checkforBonus();
 	}
-
-	//if (!MusicManager::isGamePlayMusic)
-	//{
-	//	MusicManager::
-	//}
 }
 
 void GameplayState::drawCursor()
@@ -244,7 +250,7 @@ void GameplayState::drawCursor()
 
 void GameplayState::drawLevel()
 {
-	m_dungeonLevels.Draw();
+	m_dungeonLevels->Draw();
 }
 
 void GameplayState::drawPaddles()
@@ -272,25 +278,25 @@ void GameplayState::drawText()
 	{
 		SDL_Rect rect = m_dead.m_TextureRect;
 		SDL_RenderCopy(Game::Renderer, m_dead.getTexture(), nullptr, &rect);
-		m_gameOverText->Draw((Game::screenWidth / 2) - 216, (Game::screenHeight / 2) - 150);
+		m_gameOverText->Draw((Game::screenWidth / 2) - (m_gameOverText->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
 		m_gameOverNewGameText->Draw((Game::screenWidth / 2) - 225, (Game::screenHeight / 2) - 90);
 	}
 
 	else if (m_levelWon)
 	{
-		m_levelPassed->Draw((Game::screenWidth / 2) - 336, (Game::screenHeight / 2) - 150);
-		m_levelPassedContinue->Draw((Game::screenWidth / 2) - 222, (Game::screenHeight / 2) - 90);
+		m_levelPassed->Draw((Game::screenWidth / 2) - (m_levelPassed->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
+		m_levelPassedContinue->Draw((Game::screenWidth / 2) - (m_levelPassedContinue->m_textRect.w / 2), (Game::screenHeight / 2) - 90);
 	}
 
 	else if (m_paused && !m_newGame)
 	{
-		m_pausedText->Draw((Game::screenWidth / 2) - 144, (Game::screenHeight / 2) - 150);
-		m_pressSpaceText->Draw((Game::screenWidth / 2) - 130, (Game::screenHeight / 2) - 90);
+		m_pausedText->Draw((Game::screenWidth / 2) - (m_pausedText->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
+		m_pressSpaceText->Draw((Game::screenWidth / 2) - (m_pressSpaceText->m_textRect.w / 2), (Game::screenHeight / 2) - 90);
 	}
 
 	else if (m_paused && m_newGame)
 	{
-		m_gameTitle->Draw((Game::screenWidth / 2) - 255, (Game::screenHeight / 2) - 150);
+		m_gameTitle->Draw((Game::screenWidth / 2) - (m_gameTitle->m_textRect.w / 2), (Game::screenHeight / 2) - 150);
 		m_gameTitleStart->Draw((Game::screenWidth / 2) - 185, (Game::screenHeight / 2) - 90);
 	}
 }
@@ -300,13 +306,33 @@ void GameplayState::draw()
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
 	
 	drawLevel();
-	drawText();
 
 	if (m_gameOver || m_levelWon)
 	{
+		m_finalScoreBox.w = 700;
+		m_finalScoreBox.h = 300;
+		m_finalScoreBox.x = (Game::screenWidth / 2) - (m_finalScoreBox.w / 2);
+		m_finalScoreBox.y = (Game::screenHeight / 2) - (m_finalScoreBox.h / 2) - 50;
+
+		m_finalScoreBoxOutline.x = m_finalScoreBox.x;
+		m_finalScoreBoxOutline.y = m_finalScoreBox.y;
+		m_finalScoreBoxOutline.w = m_finalScoreBox.w;
+		m_finalScoreBoxOutline.h = m_finalScoreBox.h;
+
+		SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
+		SDL_RenderFillRect(Game::Renderer, &m_finalScoreBox);
+		SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
+
+		SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
+		SDL_RenderDrawRect(Game::Renderer, &m_finalScoreBoxOutline);
+		SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
+
 		m_HUD.m_ScoreBoard->showFinal();
+		m_HUD.setShowing(false);
 	}
 
+	drawText();
 	drawBall();
 
 	if (!m_paused)
@@ -371,12 +397,10 @@ void GameplayState::checkCollision()
 		else
 		{
 			m_bonusProgress = 0;
-			//spawnItem();
 		}
 	}
 
-	bool fTopBottom = paddleHit == m_paddles[0].get() || paddleHit == m_paddles[2].get(); /*||
-					  paddleHit == m_levelPaddles[0].get() || paddleHit == m_levelPaddles[2].get();*/
+	bool fTopBottom = paddleHit == m_paddles[0].get() || paddleHit == m_paddles[2].get(); 
 
 	double dimension = fTopBottom ? paddleHit->getRect().w : paddleHit->getRect().h;
 
@@ -480,7 +504,6 @@ void GameplayState::checkforBonus()
 		else
 		{
 			m_bonusProgress = 0;
-			//spawnItem();
 		}
 
 		m_heal.Play();
@@ -498,7 +521,6 @@ void GameplayState::checkforGameOver()
 {
 	if (m_health <= 0 || m_ball->getRect().x <= 0 || m_ball->getRect().x > Game::screenWidth - m_ball->getRect().w || m_ball->getRect().y < 0 || m_ball->getRect().y > Game::screenHeight - m_ball->getRect().h)
 	{
-		//m_bgMusic.Stop();
 		m_health = 0;
 		m_bonusProgress = 0;
 		m_gameOverSound.Play();
@@ -526,7 +548,7 @@ bool GameplayState::checkforWin()
 {
 	if (m_HUD.m_ScoreBoard->getScore() >= m_HUD.m_ScoreBoard->getLevelScore())
 	{
-		m_dungeonLevels.nextLevel(m_cached);
+		m_dungeonLevels->nextLevel(m_cached);
 
 		return(true);
 	}
@@ -544,19 +566,19 @@ void GameplayState::resetGame()
 	{
 		if (m_lives > 0)
 		{
-			m_dungeonLevels.setLevel(m_dungeonLevels.getLevel());
+			m_dungeonLevels->setLevel(m_dungeonLevels->getLevel());
 		}
 		else
 		{
-			if (!m_cached && m_dungeonLevels.getLevel() != 0)
+			if (!m_cached && m_dungeonLevels->getLevel() != 0)
 			{
-				m_dungeonLevels.Unload(m_dungeonLevels.getLevel());
-				m_dungeonLevels.setLevel(0);
-				m_dungeonLevels.Load();
+				m_dungeonLevels->Unload(m_dungeonLevels->getLevel());
+				m_dungeonLevels->setLevel(0);
+				m_dungeonLevels->Load();
 			}
 			else
 			{
-				m_dungeonLevels.setLevel(0);
+				m_dungeonLevels->setLevel(0);
 			}
 
 			m_lives = 3;
@@ -569,8 +591,7 @@ void GameplayState::resetGame()
 	m_paddles[3]->resetPaddles(30, (Game::screenHeight / 2) - (175 / 2), 15, (Game::screenHeight / 4));
 
 	m_HUD.m_ScoreBoard->setScore(0);
-
-	//m_bgMusic.Play();
+	m_HUD.setShowing(true);
 
 	m_newGame = true;
 	m_paused = true;

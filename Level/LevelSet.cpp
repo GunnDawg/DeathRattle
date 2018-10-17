@@ -1,40 +1,36 @@
 #include "LevelSet.h"
 #include "Game.h"
 
-LevelSet::LevelSet(const char* filePath, unsigned int w, unsigned int h) :
-m_levelTextures({}),
-m_levelScore({0}), m_levelNum(0),
-m_cached(false)
+LevelSet::LevelSet(const char* filePath)
 {
 	assert(typeid(filePath) == typeid(const char*) && filePath > 0);
-	assert(typeid(w) == typeid(unsigned int) && w > 0);
-	assert(typeid(h) == typeid(unsigned int) && h > 0);
 
-	for (size_t i = 0; i < m_levelTextures.size(); ++i)
+	for (size_t i = 0; i < m_levelTextures.size(); i++)
 	{
 		std::ostringstream out;
 		out << filePath << "level" << i << ".png";
-		std::string filename = out.str();
-		m_levelTextures[i].Load(filename);
-		m_levelTextures[i].setRect(0, 0, w, h);
+		m_filename = out.str();
+		m_levelTextures[i] = Texture(m_filename);
 	}
 }
 
 LevelSet::~LevelSet()
 {
 	UnloadAll();
+	printf("Levelset DTOR\n");
 }
 
 void LevelSet::Load()
 {
-	//m_levelTextures[m_levelNum].Load("Assets/Graphics/Levels/Dungeon/");
+	m_levelTextures[m_levelNum].Load();
+	m_levelTextures[m_levelNum].setRect(0, 0, Game::screenWidth, Game::screenHeight);
 }
 
 void LevelSet::LoadAll()
 {
 	for (size_t i = 0; i < m_levelTextures.size(); ++i)
 	{
-		m_levelTextures[i].Load("Assets/Graphics/Levels/Dungeon/");
+		m_levelTextures[i].Load();
 	}
 }
 
@@ -47,10 +43,7 @@ void LevelSet::UnloadAll()
 {
 	for (size_t i = 0; i < m_levelTextures.size(); ++i)
 	{
-		if (m_levelTextures[i].getTexture() != nullptr)
-		{
-			m_levelTextures[i].Unload();
-		}
+		m_levelTextures[i].Unload();
 	}
 }
 
