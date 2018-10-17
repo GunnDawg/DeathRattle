@@ -40,8 +40,6 @@ void HUD::Load(const unsigned int hp, bool showing)
 	setRect(m_textBoxes[5], 0, 25, m_textBoxes[4].x + 4, m_textBoxes[4].y + 5);
 	setRect(m_blackBoxes[3], 550, 25, m_textBoxes[5].x, m_textBoxes[5].y);
 
-	m_ScoreBoard = std::make_unique<Scoreboard>(24, 24);
-
 	m_ballSpeedString = std::to_string(NULL);
 	m_convertedBallSpeed = m_ballSpeedString.c_str();
 
@@ -54,14 +52,14 @@ void HUD::Load(const unsigned int hp, bool showing)
 	m_remaininghpString = std::to_string(NULL);
 	m_convertedHP = m_remaininghpString.c_str();
 
-	m_ballSpeedLabel = std::make_unique<Text>(24, "SPEED LEVEL");
-	m_ballSpeedText = std::make_unique<Text>(24, m_convertedBallSpeed);
-	m_LivesLabel = std::make_unique<Text>(24, "LIVES");
-	m_LivesText = std::make_unique<Text>(24, m_convertedLives);
-	m_levelLabel = std::make_unique<Text>(24, "STAGE");
-	m_levelText = std::make_unique<Text>(24, m_convertedLevel);
-	m_remainingHP = std::make_unique<Text>(22, m_convertedHP);
-	m_itemDropProgress = std::make_unique<Text>(22, "BONUS");
+	m_ballSpeedLabel               = std::make_unique<Text>(24, "SPEED LEVEL");
+	m_ballSpeedText                = std::make_unique<Text>(24, m_convertedBallSpeed);
+	m_LivesLabel                   = std::make_unique<Text>(24, "LIVES");
+	m_LivesText                    = std::make_unique<Text>(24, m_convertedLives);
+	m_levelLabel                   = std::make_unique<Text>(24, "STAGE");
+	m_levelText                    = std::make_unique<Text>(24, m_convertedLevel);
+	m_remainingHP                  = std::make_unique<Text>(22, m_convertedHP);
+	m_itemDropProgress             = std::make_unique<Text>(22, "BONUS");
 
 	m_isShowing = showing;
 }
@@ -119,7 +117,7 @@ void HUD::Draw()
 	drawBoxes();
 	drawText();
 
-	m_ScoreBoard->Draw();
+	m_ScoreBoard.Draw();
 }
 
 void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsigned int lives, const unsigned int hp, const unsigned int progress)
@@ -132,7 +130,7 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 
 	m_textBoxes[5].w = progress;
 
-	m_ScoreBoard->Update(passedLevel);
+	m_ScoreBoard.Update(passedLevel);
 
 	m_ballSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));
 	m_ballSpeedText->Update(m_convertedBallSpeed);

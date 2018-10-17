@@ -116,7 +116,7 @@ void Scoreboard::Update(const LevelSet& passedLevel)
 	}
 }
 
-void Scoreboard::Draw() const
+void Scoreboard::Draw()
 {
 	m_scoreLabel->Draw(m_scoreLabel->m_textRect.x, m_scoreText->m_textRect.y);
 	m_scoreText->Draw((m_scoreLabel->m_textRect.x) + 240, m_scoreLabel->m_textRect.y);

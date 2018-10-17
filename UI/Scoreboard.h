@@ -19,7 +19,7 @@ public:
 
 	void Load();
 	void Update(const LevelSet& passedLevel);
-	void Draw() const;
+	void Draw();
 	void recordHighScore() const;
 
 	inline unsigned int getScore() const { return m_score; }

@@ -16,7 +16,7 @@ constexpr unsigned int NUM_SHADED_BOXES = 4;
 class HUD
 {
 public:
-	HUD()=default;
+	HUD() = default;
 	HUD(unsigned int w, unsigned int h, int hp, bool showing);
 	~HUD();
 
@@ -27,7 +27,7 @@ public:
 	void Update(const LevelSet& passedLevel, const Ball& passedBall, const unsigned int lives, const unsigned int hp, const unsigned int progress);
 	inline void setShowing(bool showing) { m_isShowing = showing; }
 
-	std::unique_ptr<Scoreboard> m_ScoreBoard;
+	Scoreboard m_ScoreBoard = Scoreboard(24, 24);
 
 private:
 	//HUD(const HUD& obj)=default;
@@ -39,7 +39,7 @@ private:
 	void drawBoxes();
 
 	void setRect(SDL_Rect& r, const unsigned int w, const unsigned int h, const unsigned int x, const unsigned int y);
-	
+
 	std::string m_ballSpeedString;
 	std::string m_livesString;
 	std::string m_levelString;

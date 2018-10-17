@@ -2,11 +2,11 @@
 #include "Game.h"
 
 Text::Text(unsigned int fontSize, const std::string_view text) :
-m_textRect({}), m_fontPath("Assets/Fonts/8BIT.ttf"),
-m_fontValue(text),
-m_fontSize(fontSize),
-m_fontColor({255, 255, 255, 255}),
-m_textTexture(loadFont(m_fontPath, m_fontSize, m_fontValue, m_fontColor))
+	m_textRect({}), m_fontPath("Assets/Fonts/8BIT.ttf"),
+	m_fontValue(text),
+	m_fontSize(fontSize),
+	m_fontColor({ 255, 255, 255, 255 }),
+	m_textTexture(loadFont(m_fontPath, m_fontSize, m_fontValue, m_fontColor))
 {
 	assert(typeid(fontSize) == typeid(unsigned int) && fontSize > 0 && "Text must have a font size");
 	assert(typeid(text) == typeid(std::string_view) && !text.empty() && "Text cannot have an empty value");
@@ -36,7 +36,7 @@ SDL_Texture* Text::loadFont(const std::string_view fontPath, unsigned int fontSi
 		printf("Error creating text surface: %s/nFile: %s", SDL_GetError(), fontPath.data());
 	}
 
-	m_textTexture  = SDL_CreateTextureFromSurface(Game::Renderer, textSurface);
+	m_textTexture = SDL_CreateTextureFromSurface(Game::Renderer, textSurface);
 	if (!m_textTexture)
 	{
 		printf("Error creating text texture: %s\n", SDL_GetError());

@@ -9,7 +9,7 @@
 class Text
 {
 public:
-	Text()=default;
+	Text() = default;
 	Text(unsigned int fontSize, const std::string_view text);
 	~Text();
 

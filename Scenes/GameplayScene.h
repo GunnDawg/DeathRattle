@@ -37,11 +37,11 @@ public:
 	bool checkforWin();
 
 private:
-	std::array<std::unique_ptr<Paddle>, NUM_PADDLES> m_paddles = {
-		std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
-		std::make_unique<Paddle>(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),
-		std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45),
-		std::make_unique<Paddle>(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2))
+	std::array<Paddle, NUM_PADDLES> m_paddles = {
+	Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
+	Paddle(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),
+	Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45),
+	Paddle(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2))
 	};
 
 	unsigned int m_difficulty                      = 1;
@@ -51,8 +51,8 @@ private:
 	const char* m_convertedLives                   = nullptr;
 	std::string m_LivesString;
 
-	Keyboard m_keyBoard;
-	Mouse m_mouse;
+	Keyboard m_keyBoard                            = Keyboard(false);
+	Mouse m_mouse                                  = Mouse(true);
 	int m_mouseX                                   = 0;
 	int m_mouseY                                   = 0;
 
