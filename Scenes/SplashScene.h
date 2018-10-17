@@ -23,7 +23,7 @@ private:
 
 	Sound m_introSound;
 
-	SDL_Rect m_comingSoonBox;
+	SDL_Rect m_comingSoonBox = {};
 
 	Timer m_timer;
 };

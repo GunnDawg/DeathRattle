@@ -18,7 +18,7 @@ private:
 	Texture m_comingSoon;
 	Texture m_cursor;
 	
-	SDL_Rect m_comingSoonBox;
+	SDL_Rect m_comingSoonBox = {};
 
 	Sound m_thud;
 };

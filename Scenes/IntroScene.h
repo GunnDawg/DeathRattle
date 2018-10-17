@@ -36,9 +36,9 @@ private:
 
 	Texture m_cursor;
 
-	SDL_Rect m_plugBox;
-	SDL_Rect m_skullBox;
-	SDL_Rect m_skullCollider;
+	SDL_Rect m_plugBox = {};
+	SDL_Rect m_skullBox = {};
+	SDL_Rect m_skullCollider = {};
 
 	Sound m_introSound;
 	Sound m_scare;

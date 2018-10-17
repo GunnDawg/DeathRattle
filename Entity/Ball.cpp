@@ -1,15 +1,13 @@
 #include "Ball.h"
-#include "Game.h"
 
-Ball::Ball(unsigned int x, unsigned int y, unsigned int speed) :
-m_posX((x / 2) - 40), m_posY((y/ 2) - 25), m_angle(0),
-m_ballRect({0}),
+Ball::Ball(unsigned int speed) :
+m_posX((Game::screenWidth / 2) - 40), m_posY((Game::screenHeight / 2) - 25), m_angle(0),
+m_ballRect({ 0 }),
 m_ballWidth(50), m_ballHeight(50),
 m_velocityX(0.0), m_velocityY(0.0),
 m_speed(0), m_isDead(false)
 {
-	assert(typeid(x) == typeid(unsigned int) && x > 0 && "Ball must have an X value");
-	assert(typeid(y) == typeid(unsigned int) && y > 0 && "Ball must have an Y value");
+	assert(typeid(speed) == typeid(unsigned int) && speed > 0 && "Ball must have a speed/difficulty value");
 
 	switch (speed)
 	{
@@ -17,10 +15,12 @@ m_speed(0), m_isDead(false)
 		{
 			m_speed = 0.35f;
 		} break;
+
 		case 1:
 		{
 			m_speed = 0.50f;
 		} break;
+
 		case 2:
 		{
 			m_speed = 0.70f;
@@ -31,21 +31,6 @@ m_speed(0), m_isDead(false)
 	}
 
 	m_ballTexture = Texture("Assets/Graphics/gameplay_scene/ball.png");
-
-	setAngle(randomizeAng());
-}
-
-Ball::Ball(unsigned int w, unsigned int h, unsigned int x, unsigned int y) :
-m_posX(x), m_posY(y), m_angle(0),
-m_ballRect({ 0, 0, 0, 0 }),
-m_ballWidth(w), m_ballHeight(h),
-m_velocityX(0.0), m_velocityY(0.0),
-m_speed(0), m_isDead(false)
-{
-	assert(w > 0);
-	assert(h > 0);
-	assert(x > 0);
-	assert(y > 0);
 
 	setAngle(randomizeAng());
 }
@@ -64,10 +49,12 @@ void Ball::resetBall(unsigned int w, unsigned int h, unsigned int difficulty)
 		{
 			m_speed = 0.35f;
 		} break;
+
 		case 1:
 		{
 			m_speed = 0.50f;
 		} break;
+
 		case 2:
 		{
 			m_speed = 0.70f;
@@ -111,8 +98,6 @@ void Ball::Update()
 {
 	m_posX += static_cast<int>(m_velocityX * Game::deltaTime);
 	m_posY += static_cast<int>(m_velocityY * Game::deltaTime);
-
-	//printf("Speed: %i\n", m_speed);
 }
 
 void Ball::setAngle(double angle)

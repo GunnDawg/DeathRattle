@@ -9,7 +9,6 @@ m_TextureRect({ 0 })
 	assert(typeid(filePath) == typeid(std::string_view) && !filePath.empty() && "Texture filepath cannot be empty");
 }
 
-
 Texture::~Texture()
 {
 	if (m_Texture != nullptr)

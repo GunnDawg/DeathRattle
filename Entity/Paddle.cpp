@@ -1,8 +1,7 @@
 #include "Paddle.h"
-#include "Game.h"
 
 Paddle::Paddle(int x, int y, int w, int h) :
-m_paddleRect({w, h, x, y}),
+m_paddleRect({ w, h, x, y }),
 m_moveSpeed(500),
 m_paddleMarked(false)
 {

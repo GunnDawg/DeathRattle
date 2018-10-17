@@ -7,13 +7,13 @@
 #include <random>
 
 #include "Graphics/Texture.h"
+#include "Game.h"
 
 class Ball
 {
 public:
 	Ball()=default;
-	Ball(unsigned int x, unsigned int y, unsigned int speed);
-	Ball(unsigned int w, unsigned int h, unsigned int x, unsigned int y);
+	Ball(unsigned int speed);
 	~Ball()=default;
 
 	void Load();
@@ -37,8 +37,8 @@ public:
 	void resetBall(unsigned int w, unsigned int h, unsigned int difficulty);
 	double randomizeAng();
 
-	unsigned int m_posX;
-	unsigned int m_posY;
+	unsigned int m_posX = (Game::screenWidth / 2) - 40;
+	unsigned int m_posY = (Game::screenHeight / 2) - 25;
 
 	double m_angle;
 

@@ -33,16 +33,16 @@ private:
 
 	Texture m_cursor;
 
-	SDL_Rect m_titleBox;
-	SDL_Rect m_menuBox;
-	SDL_Rect m_menuBoxOutline;
-	SDL_Rect m_devNameBox;
+	SDL_Rect m_titleBox = {};
+	SDL_Rect m_menuBox = {};
+	SDL_Rect m_menuBoxOutline = {};
+	SDL_Rect m_devNameBox = {};
 
 	Sound m_swoosh;
 
-	bool m_isNewGame;
-	bool m_isOptions;
-	bool m_isLeaderBoard;
-	bool m_isCredits;
-	bool m_isExit;
+	bool m_isNewGame = false;
+	bool m_isOptions = false;
+	bool m_isLeaderBoard = false;
+	bool m_isCredits = false;
+	bool m_isExit = false;
 };

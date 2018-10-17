@@ -103,11 +103,14 @@ void Game::processinput()
 void Game::Update()
 {
 	updateDelta();
-	MusicManager::Update();
+	//std::chrono::high_resolution_clock timer;
+	//auto start = timer.now();
 
 	gameStateMachine.update();
-
 	SDL_GetMouseState(&mouseX, &mouseY);
+
+	//auto stop = timer.now();
+	//deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000.0f;
 }
 
 void Game::Draw()

@@ -8,60 +8,17 @@ void GameplayState::on_enter()
 
 	m_mouse.On();
 
-	m_cursor = Texture("Assets/Graphics/common/cursor.png");
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	//Define Level Object
-	m_dungeonLevels = std::make_unique<LevelSet>("Assets/Graphics/Levels/Dungeon/");
-
-	//Define paddles
-	m_paddles[0] = std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30);
-	m_paddles[1] = std::make_unique<Paddle>(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2));
-	m_paddles[2] = std::make_unique<Paddle>((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45);
-	m_paddles[3] = std::make_unique<Paddle>(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2));
-
-	//Define ball
-	m_ball = std::make_unique<Ball>(Game::screenWidth, Game::screenHeight, m_difficulty);
-
-	//TODO: Rewrite the text class entirely, this is shit (Calvin)
-	//Define text components
-	m_gameTitle            = std::make_unique<Text>(48, "KEEP IT ALIVE");
-	m_gameTitleStart       = std::make_unique<Text>(12, "Press SPACE to start or ESC to exit");
-	m_pausedText           = std::make_unique<Text>(48, "PAUSED");
-	m_pressSpaceText       = std::make_unique<Text>(12, "Press SPACE to continue or ESC to exit");
-	m_gameOverText         = std::make_unique<Text>(48, "GAME OVER");
-	m_gameOverNewGameText  = std::make_unique<Text>(12, "Press N to start a new game or ESC to exit");
-	m_levelPassed          = std::make_unique<Text>(48, "LEVEL COMPLETE");
-	m_levelPassedContinue  = std::make_unique<Text>(12, "Press N to continue to the next level");
-
-	//Define misc. graphical components
-	m_dead = Texture("Assets/Graphics/gameplay_scene/gameover.png");
 	m_dead.Load();
 	m_dead.setRect((Game::screenWidth / 2) - (m_dead.m_TextureRect.w / 2), Game::screenHeight - m_dead.m_TextureRect.h, m_dead.m_TextureRect.w, m_dead.m_TextureRect.h);
 	m_ball->Load();
 
-	//Define audio components
-	m_hitSound = Sound("Assets/Sounds/hitnormal.wav");
-	m_hitBadSound = Sound("Assets/Sounds/hitbad.wav");
-	m_pauseSound = Sound("Assets/Sounds/pause.wav");
-	m_gameOverSound = Sound("Assets/Sounds/gameover.wav");
-	m_heal = Sound("Assets/Sounds/heal.wav");
-
-	//Load HUD
 	m_HUD.Load(m_health, true);
 
-	//Load Level Sets
-	if (m_cached)
-	{
-		m_dungeonLevels->LoadAll();
-	}
-	else
-	{
-		m_dungeonLevels->Load();
-	}
-
+	m_dungeonLevels->Load();
 	m_dungeonLevels->setScores({ 10, 50, 175, 250, 300 });
 
 	//Load all audio
@@ -82,7 +39,7 @@ void GameplayState::on_exit()
 	m_dead.Unload();
 	m_cursor.Unload();
 	m_ball->Unload();
-	m_dungeonLevels->UnloadAll();
+	m_dungeonLevels->Unload(m_dungeonLevels->getLevel());
 
 	m_gameTitle->Unload();
 	m_gameTitleStart->Unload();
@@ -146,10 +103,7 @@ void GameplayState::handle_events()
 						}
 						else if (m_paused && !m_gameOver)
 						{
-							if (!MusicManager::isGamePlayMusic)
-							{
-								Mix_PausedMusic();
-							}
+							Mix_ResumeMusic();
 							m_paused = false;
 							m_pauseSound.Play();
 						}
@@ -202,7 +156,6 @@ void GameplayState::handle_events()
 void GameplayState::update()
 {
 	SDL_GetMouseState(&m_mouseX, &m_mouseY);
-
 	m_cursor.setRect(m_mouseX, m_mouseY, 48, 48);
 
 	if (m_health <= 0)
@@ -304,7 +257,7 @@ void GameplayState::drawText()
 void GameplayState::draw()
 {
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
-	
+
 	drawLevel();
 
 	if (m_gameOver || m_levelWon)
@@ -548,7 +501,7 @@ bool GameplayState::checkforWin()
 {
 	if (m_HUD.m_ScoreBoard->getScore() >= m_HUD.m_ScoreBoard->getLevelScore())
 	{
-		m_dungeonLevels->nextLevel(m_cached);
+		m_dungeonLevels->nextLevel();
 
 		return(true);
 	}
@@ -570,7 +523,7 @@ void GameplayState::resetGame()
 		}
 		else
 		{
-			if (!m_cached && m_dungeonLevels->getLevel() != 0)
+			if (m_dungeonLevels->getLevel() != 0)
 			{
 				m_dungeonLevels->Unload(m_dungeonLevels->getLevel());
 				m_dungeonLevels->setLevel(0);

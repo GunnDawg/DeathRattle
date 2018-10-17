@@ -50,10 +50,10 @@ private:
 	Texture m_leftArrow;
 	Texture m_leftArrowWhite;
 
-	SDL_Rect m_devNameBox;
-	SDL_Rect m_creditsBox;
-	SDL_Rect m_creditBoxOutline;
-	SDL_Rect m_titleBox;
+	SDL_Rect m_devNameBox = {};
+	SDL_Rect m_creditsBox = {};
+	SDL_Rect m_creditBoxOutline = {};
+	SDL_Rect m_titleBox = {};
 
 	bool m_isRight = false;
 	bool m_isLeft = false;

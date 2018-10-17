@@ -18,18 +18,12 @@ public:
 	LevelSet(const char* filePath);
 	~LevelSet();
 
-	inline void isCached(bool c) { m_cached = c; }
-
 	void Load();
-	void LoadAll();
-
 	void Unload(int x);
-	void UnloadAll();
-
 	void Draw();
 
 	void setLevel(unsigned int x);
-	void nextLevel(bool v);
+	void nextLevel();
 	void prevLevel();
 	inline unsigned int getLevel() const { return m_levelNum; }
 	inline unsigned int getLevelPlusOne() const { return m_levelNum + 1; }
@@ -42,9 +36,8 @@ private:
 
 	std::string m_filename;
 	std::array<Texture, LEVEL_COUNT> m_levelTextures;
-	std::array<unsigned int, LEVEL_COUNT> m_levelScore = { 0 };
+	std::array<unsigned int, LEVEL_COUNT> m_levelScore;
 
 
-	unsigned int m_levelNum = 0;
-	bool m_cached = false;
+	unsigned int m_levelNum;
 };

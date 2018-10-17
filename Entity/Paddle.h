@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <typeinfo>
 #include "Graphics/Texture.h"
+#include "Game.h"
 
 class Paddle
 {

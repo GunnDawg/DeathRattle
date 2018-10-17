@@ -35,19 +35,19 @@ private:
 	Texture m_gameplayMusic;
 	Texture m_soundEffects;
 
-	SDL_Rect m_optionsBox;
-	SDL_Rect m_optionsBoxOutline;
+	SDL_Rect m_optionsBox = {};
+	SDL_Rect m_optionsBoxOutline = {};
 
-	SDL_Rect m_fullScreenBox;
-	SDL_Rect m_fullScreenBoxOutline;
-	SDL_Rect m_windowedBox;
-	SDL_Rect m_windowedBoxOutline;
-	SDL_Rect m_soundEffectsBox;
-	SDL_Rect m_soundEffectsBoxOutline;
-	SDL_Rect m_menuMusicBox;
-	SDL_Rect m_menuMusicBoxOutline;
-	SDL_Rect m_gameplayMusicBox;
-	SDL_Rect m_gameplayMusicBoxOutline;
+	SDL_Rect m_fullScreenBox = {};
+	SDL_Rect m_fullScreenBoxOutline = {};
+	SDL_Rect m_windowedBox = {};
+	SDL_Rect m_windowedBoxOutline = {};
+	SDL_Rect m_soundEffectsBox = {};
+	SDL_Rect m_soundEffectsBoxOutline = {};
+	SDL_Rect m_menuMusicBox = {};
+	SDL_Rect m_menuMusicBoxOutline = {};
+	SDL_Rect m_gameplayMusicBox = {};
+	SDL_Rect m_gameplayMusicBoxOutline = {};
 
 	bool m_isFullScreen = false;
 	bool m_fullScreenEnabled = false;
@@ -71,8 +71,8 @@ private:
 
 	std::array<Texture, 2> m_skulls;
 
-	SDL_Rect m_devNameBox;
-	SDL_Rect m_titleBox;
+	SDL_Rect m_devNameBox = {};
+	SDL_Rect m_titleBox = {};
 
 	Sound m_thud;
 };

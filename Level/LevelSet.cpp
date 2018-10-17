@@ -1,7 +1,10 @@
 #include "LevelSet.h"
 #include "Game.h"
 
-LevelSet::LevelSet(const char* filePath)
+LevelSet::LevelSet(const char* filePath) :
+m_levelTextures({}),
+m_levelScore({}),
+m_levelNum(0)
 {
 	assert(typeid(filePath) == typeid(const char*) && filePath > 0);
 
@@ -16,7 +19,7 @@ LevelSet::LevelSet(const char* filePath)
 
 LevelSet::~LevelSet()
 {
-	UnloadAll();
+	Unload(m_levelNum);
 	printf("Levelset DTOR\n");
 }
 
@@ -26,25 +29,9 @@ void LevelSet::Load()
 	m_levelTextures[m_levelNum].setRect(0, 0, Game::screenWidth, Game::screenHeight);
 }
 
-void LevelSet::LoadAll()
-{
-	for (size_t i = 0; i < m_levelTextures.size(); ++i)
-	{
-		m_levelTextures[i].Load();
-	}
-}
-
 void LevelSet::Unload(int x)
 {
 	m_levelTextures[x].Unload();
-}
-
-void LevelSet::UnloadAll()
-{
-	for (size_t i = 0; i < m_levelTextures.size(); ++i)
-	{
-		m_levelTextures[i].Unload();
-	}
 }
 
 void LevelSet::setScores(std::array<int, LEVEL_COUNT> s)
@@ -66,30 +53,19 @@ void LevelSet::setLevel(unsigned int x)
 	m_levelNum = x;
 }
 
-void LevelSet::nextLevel(bool v)
+void LevelSet::nextLevel()
 {
-	if (m_levelNum < (m_levelTextures.size() - 1) && !v)
+	if (m_levelNum < (m_levelTextures.size() - 1))
 	{
 		Unload(m_levelNum);
 		++m_levelNum;
 		Load();
 	}
-	else if (m_levelNum < (m_levelTextures.size() - 1))
-	{
-		++m_levelNum;
-	}
 	else
 	{
-		if (!v)
-		{
-			Unload(m_levelNum);
-			m_levelNum = 0;
-			Load();
-		}
-		else
-		{
-			m_levelNum = 0;
-		}
+		Unload(m_levelNum);
+		m_levelNum = 0;
+		Load();
 	}
 }
 
