@@ -2,9 +2,7 @@
 #include "Game.h"
 
 Texture::Texture(const std::string_view filePath) :
-m_filePath(filePath),
-m_Texture(nullptr),
-m_TextureRect({ 0 })
+m_filePath(filePath)
 {
 	assert(typeid(filePath) == typeid(std::string_view) && !filePath.empty() && "Texture filepath cannot be empty");
 }

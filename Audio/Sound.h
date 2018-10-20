@@ -16,7 +16,6 @@ public:
 	void setVolume(int v) const;
 
 private:
-
-	Mix_Chunk* m_chunk;
+	Mix_Chunk* m_chunk                = nullptr;
 	const char* m_soundFilePath;
 };

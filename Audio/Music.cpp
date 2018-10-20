@@ -1,9 +1,7 @@
 #include "Music.h"
 
 Music::Music(const std::string_view filePath) :
-m_music(nullptr),
-m_musicFilePath(filePath),
-m_isMuted(false)
+m_musicFilePath(filePath)
 {
 	assert(typeid(filePath) == typeid(std::string_view) && !filePath.empty() && "Music filepath cannot have an empty value");
 }

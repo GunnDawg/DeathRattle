@@ -13,11 +13,11 @@
 class Scoreboard
 {
 public:
-	Scoreboard()=default;
-	Scoreboard(unsigned int x, unsigned int y);
+	Scoreboard();
 	~Scoreboard()=default;
 
 	void Load();
+	void Unload();
 	void Update(const LevelSet& passedLevel);
 	void Draw();
 	void recordHighScore() const;
@@ -40,26 +40,24 @@ private:
 
 	std::unique_ptr<FileIO> m_File;
 
-	const char* m_convertedScore;
-	const char* m_convertedHighScore;
-	const char* m_convertedLevelScore;
-	const char* m_convertedFinalScore;
+	const char* m_convertedScore                       = nullptr;
+	const char* m_convertedHighScore                   = nullptr;
+	const char* m_convertedLevelScore                  = nullptr;
+	const char* m_convertedFinalScore                  = nullptr;
 
-	//std::array<const char*, 4> m_convertedText;
+	Text m_scoreLabel;
+	Text m_scoreText;
+	Text m_highScoreLabel;
+	Text m_highScoreText;
+	Text m_levelScoreLabel;
+	Text m_levelScoreText;
+	Text m_finalScoreLabel;
+	Text m_finalScoreText;
 
-	std::unique_ptr<Text> m_scoreLabel;
-	std::unique_ptr<Text> m_scoreText;
-	std::unique_ptr<Text> m_highScoreLabel;
-	std::unique_ptr<Text> m_highScoreText;
-	std::unique_ptr<Text> m_levelScoreLabel;
-	std::unique_ptr<Text> m_levelScoreText;
-	std::unique_ptr<Text> m_finalScoreLabel;
-	std::unique_ptr<Text> m_finalScoreText;
-
-	unsigned int m_score = 0;
-	unsigned int m_highScore = 0;
-	unsigned int m_levelScore = 0;
-	std::array<unsigned int, 3> m_difficultyLevel;
+	unsigned int m_score                               = 0;
+	unsigned int m_highScore                           = 0;
+	unsigned int m_levelScore                          = 0;
+	std::array<unsigned int, 3> m_difficultyLevel      = { 0, 1, 2 };
 
 	std::string m_fs;
 	std::string m_hs;

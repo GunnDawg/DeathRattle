@@ -2,16 +2,13 @@
 #include "Game.h"
 
 Text::Text(unsigned int fontSize, const std::string_view text) :
-	m_textRect({}), m_fontPath("Assets/Fonts/8BIT.ttf"),
-	m_fontValue(text),
-	m_fontSize(fontSize),
-	m_fontColor({ 255, 255, 255, 255 }),
-	m_textTexture(loadFont(m_fontPath, m_fontSize, m_fontValue, m_fontColor))
+m_fontValue(text),
+m_fontSize(fontSize)
 {
 	assert(typeid(fontSize) == typeid(unsigned int) && fontSize > 0 && "Text must have a font size");
 	assert(typeid(text) == typeid(std::string_view) && !text.empty() && "Text cannot have an empty value");
 
-	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
+	loadFont(m_fontPath, m_fontSize, m_fontValue, m_fontColor);
 
 	printf("TEXT LOADED: \t\t---> \t%s\n", m_fontValue.c_str());
 }
@@ -22,7 +19,7 @@ Text::~Text()
 	m_textTexture = nullptr;
 }
 
-SDL_Texture* Text::loadFont(const std::string_view fontPath, unsigned int fontSize, const std::string_view text, const SDL_Color color)
+void Text::loadFont(const std::string_view fontPath, unsigned int fontSize, const std::string_view text, const SDL_Color color)
 {
 	TTF_Font* font = TTF_OpenFont(fontPath.data(), fontSize);
 	if (!font)
@@ -42,11 +39,16 @@ SDL_Texture* Text::loadFont(const std::string_view fontPath, unsigned int fontSi
 		printf("Error creating text texture: %s\n", SDL_GetError());
 	}
 
+	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
+
 	SDL_FreeSurface(textSurface);
 
-	TTF_CloseFont(font);
+	//TTF_CloseFont(font);
+}
 
-	return(m_textTexture);
+void Text::Draw()
+{
+	SDL_RenderCopy(Game::Renderer, m_textTexture, nullptr, &m_textRect);
 }
 
 void Text::Draw(unsigned int x, unsigned int y)
@@ -62,7 +64,12 @@ void Text::Update(const std::string_view newText)
 	SDL_DestroyTexture(m_textTexture);
 
 	m_fontValue = newText;
-	m_textTexture = loadFont(m_fontPath, m_fontSize, m_fontValue, { 255, 255, 255, 255 });
+	loadFont(m_fontPath, m_fontSize, m_fontValue, m_fontColor);
+	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
+}
+
+void Text::Update()
+{
 	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
 }
 

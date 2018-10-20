@@ -19,6 +19,6 @@ public:
 	SDL_Texture* getTexture() const { return m_Texture; }
 
 	std::string m_filePath;
-	SDL_Texture* m_Texture;
-	SDL_Rect m_TextureRect;
+	SDL_Texture* m_Texture            = nullptr;
+	SDL_Rect m_TextureRect            = { 0 };
 };

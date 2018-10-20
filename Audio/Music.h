@@ -28,8 +28,9 @@ private:
 	//Music(const Music& obj)=delete;
 	//Music& operator=(const Music&)=delete;
 
-	Mix_Music* m_music;
 	std::string m_musicFilePath;
 
-	bool m_isMuted;
+	Mix_Music* m_music             = nullptr;
+	bool m_isMuted                 = false;
+
 };

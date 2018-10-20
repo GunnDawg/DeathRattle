@@ -1,26 +1,7 @@
 #include "HUD.h"
 #include "Game.h"
 
-HUD::HUD(unsigned int w, unsigned int h, int hp, bool showing) :
-	m_convertedBallSpeed(nullptr), m_convertedLives(nullptr), m_convertedHP(nullptr),
-	m_textBoxes({ 0 }), m_blackBoxes({ 0 }),
-	m_ballSpeedLabel(nullptr), m_ballSpeedText(nullptr),
-	m_LivesLabel(nullptr), m_LivesText(nullptr),
-	m_levelLabel(nullptr),
-	m_remainingHP(nullptr),
-	m_isShowing(showing)
-{
-	assert(typeid(w) == typeid(unsigned int) && w > 0 && "HUD width must be greater than 0");
-	assert(typeid(h) == typeid(unsigned int) && h > 0 && "HUD height must be greater than 0");
-	assert(typeid(hp) == typeid(int) && hp > 0 && "HUD needs a valid health pool");
-}
-
-HUD::~HUD()
-{
-
-}
-
-void HUD::Load(const unsigned int hp, bool showing)
+void HUD::Load()
 {
 	//Top Left Display
 	setRect(m_textBoxes[0], 336, 100, 12, 12);
@@ -32,7 +13,7 @@ void HUD::Load(const unsigned int hp, bool showing)
 
 	//Health Bar
 	setRect(m_textBoxes[2], 558, 35, (Game::screenWidth / 2) - 280, 12);// <--- Use textBoxes[2] if you need to move it around.
-	setRect(m_textBoxes[3], hp, 25, m_textBoxes[2].x + 4, m_textBoxes[2].y + 5); // <--- The red part of the bar :)
+	setRect(m_textBoxes[3], 550, 25, m_textBoxes[2].x + 4, m_textBoxes[2].y + 5); // <--- The red part of the bar :)
 	setRect(m_blackBoxes[2], 550, 25, m_textBoxes[3].x, m_textBoxes[3].y);
 
 	//Bonus Bar
@@ -52,16 +33,31 @@ void HUD::Load(const unsigned int hp, bool showing)
 	m_remaininghpString = std::to_string(NULL);
 	m_convertedHP = m_remaininghpString.c_str();
 
-	m_ballSpeedLabel               = std::make_unique<Text>(24, "SPEED LEVEL");
-	m_ballSpeedText                = std::make_unique<Text>(24, m_convertedBallSpeed);
-	m_LivesLabel                   = std::make_unique<Text>(24, "LIVES");
-	m_LivesText                    = std::make_unique<Text>(24, m_convertedLives);
-	m_levelLabel                   = std::make_unique<Text>(24, "STAGE");
-	m_levelText                    = std::make_unique<Text>(24, m_convertedLevel);
-	m_remainingHP                  = std::make_unique<Text>(22, m_convertedHP);
-	m_itemDropProgress             = std::make_unique<Text>(22, "BONUS");
+	m_ballSpeedLabel               = Text(24, "SPEED LEVEL");
+	m_ballSpeedText                = Text(24, m_convertedBallSpeed);
+	m_LivesLabel                   = Text(24, "LIVES");
+	m_LivesText                    = Text(24, m_convertedLives);
+	m_levelLabel                   = Text(24, "STAGE");
+	m_levelText                    = Text(24, m_convertedLevel);
+	m_remainingHP                  = Text(22, m_convertedHP);
+	m_itemDropProgress             = Text(22, "BONUS");
 
-	m_isShowing = showing;
+	m_ballSpeedLabel.m_textRect.x  = m_textBoxes[1].x + 12;
+	m_ballSpeedLabel.m_textRect.y  = 24;
+}
+
+void HUD::Unload()
+{
+	m_ScoreBoard.Unload();
+
+	m_ballSpeedLabel.Unload();
+	m_ballSpeedText.Unload();
+	m_LivesLabel.Unload();
+	m_LivesText.Unload();
+	m_levelLabel.Unload();
+	m_levelText.Unload();
+	m_remainingHP.Unload();
+	m_itemDropProgress.Unload();
 }
 
 void HUD::drawHealthBar()
@@ -78,18 +74,18 @@ void HUD::drawProgressBar()
 
 void HUD::drawText()
 {
-	m_ballSpeedLabel->Draw(m_textBoxes[1].x + 12, 24);
-	m_ballSpeedText->Draw(Game::screenWidth - 64, 24);
+	m_ballSpeedLabel.Draw();
+	m_ballSpeedText.Draw(Game::screenWidth - 64, 24);
 
-	m_LivesLabel->Draw(m_ballSpeedLabel->m_textRect.x, m_ballSpeedLabel->m_textRect.y + 24);
-	m_LivesText->Draw(Game::screenWidth - 64, m_LivesLabel->m_textRect.y);
+	m_LivesLabel.Draw(m_ballSpeedLabel.m_textRect.x, m_ballSpeedLabel.m_textRect.y + 24);
+	m_LivesText.Draw(Game::screenWidth - 64, m_LivesLabel.m_textRect.y);
 
-	m_levelLabel->Draw(m_ballSpeedLabel->m_textRect.x, m_ballSpeedLabel->m_textRect.y + 48);
-	m_levelText->Draw(Game::screenWidth - 64, m_levelLabel->m_textRect.y);
+	m_levelLabel.Draw(m_ballSpeedLabel.m_textRect.x, m_ballSpeedLabel.m_textRect.y + 48);
+	m_levelText.Draw(Game::screenWidth - 64, m_levelLabel.m_textRect.y);
 
-	m_remainingHP->Draw(m_textBoxes[3].x + 235, m_textBoxes[3].y - 1);
+	m_remainingHP.Draw(m_textBoxes[3].x + 235, m_textBoxes[3].y - 1);
 
-	m_itemDropProgress->Draw(m_textBoxes[5].x + 210, m_textBoxes[5].y - 1);
+	m_itemDropProgress.Draw(m_textBoxes[5].x + 210, m_textBoxes[5].y - 1);
 }
 
 void HUD::drawBoxes()
@@ -132,17 +128,20 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 
 	m_ScoreBoard.Update(passedLevel);
 
+	m_ballSpeedLabel.Update("SPEED LEVEL");
 	m_ballSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));
-	m_ballSpeedText->Update(m_convertedBallSpeed);
+	m_ballSpeedText.Update(m_convertedBallSpeed);
 
+	m_LivesLabel.Update("LIVES");
 	m_livesString = std::to_string(lives);
-	m_LivesText->Update(m_convertedLives);
+	m_LivesText.Update(m_convertedLives);
 
+	m_levelLabel.Update("STAGE");
 	m_levelString = std::to_string(passedLevel.getLevelPlusOne());
-	m_levelText->Update(m_convertedLevel);
+	m_levelText.Update(m_convertedLevel);
 
 	m_remaininghpString = std::to_string(static_cast<int>(hp / 550.0f * 100));
-	m_remainingHP->Update(m_convertedHP);
+	m_remainingHP.Update(m_convertedHP);
 }
 
 void HUD::setRect(SDL_Rect& r, const unsigned int w, const unsigned int h, const unsigned int x, const unsigned int y)

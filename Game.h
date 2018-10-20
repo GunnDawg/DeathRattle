@@ -28,8 +28,8 @@ public:
 
 	inline static GameStateMachine gameStateMachine;
 	inline static SDL_Window* Window                     = nullptr;
-	inline static const char* Title                      = "Keep it Alive!!";
 	inline static SDL_Renderer* Renderer                 = nullptr;
+	inline static const char* Title                      = "Keep it Alive!!";
 	inline static bool isRunning                         = false;
 	inline static Uint64 currentTime                     = 0ULL;
 	inline static Uint64 lastTime                        = 0ULL;

@@ -1,10 +1,5 @@
 #include "AABBCollision.h"
 
-AABBCollision::AABBCollision()
-{
-
-}
-
 bool AABBCollision::CheckCollision(SDL_Rect firstRect, SDL_Rect secondRect) const
 {
 	if (firstRect.x + firstRect.w >= secondRect.x &&

@@ -40,7 +40,7 @@ public:
 	unsigned int m_posX = (Game::screenWidth / 2) - 40;
 	unsigned int m_posY = (Game::screenHeight / 2) - 25;
 
-	double m_angle;
+	double m_angle = 0.0;
 
 private:
 	//Ball(const Ball& obj)=delete;
@@ -48,14 +48,14 @@ private:
 
 	Texture m_ballTexture;
 
-	SDL_Rect m_ballRect;
-	const unsigned int m_ballWidth;
-	const unsigned int m_ballHeight;
+	SDL_Rect m_ballRect = { 0 };
+	const unsigned int m_ballWidth = 50;
+	const unsigned int m_ballHeight = 50;
 
-	double m_velocityX;
-	double m_velocityY;
+	double m_velocityX = 0.0;
+	double m_velocityY = 0.0;
 
-	float m_speed;
+	float m_speed = 0;
 
-	bool m_isDead;
+	bool m_isDead = false;
 };

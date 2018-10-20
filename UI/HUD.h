@@ -17,17 +17,17 @@ class HUD
 {
 public:
 	HUD() = default;
-	HUD(unsigned int w, unsigned int h, int hp, bool showing);
-	~HUD();
+	~HUD() = default;
 
 	bool isShowing() const { return m_isShowing; }
 
-	void Load(const unsigned int hp, bool showing);
+	void Load();
+	void Unload();
 	void Draw();
 	void Update(const LevelSet& passedLevel, const Ball& passedBall, const unsigned int lives, const unsigned int hp, const unsigned int progress);
 	inline void setShowing(bool showing) { m_isShowing = showing; }
 
-	Scoreboard m_ScoreBoard = Scoreboard(24, 24);
+	Scoreboard m_ScoreBoard;
 
 private:
 	//HUD(const HUD& obj)=default;
@@ -37,30 +37,29 @@ private:
 	void drawProgressBar();
 	void drawText();
 	void drawBoxes();
-
 	void setRect(SDL_Rect& r, const unsigned int w, const unsigned int h, const unsigned int x, const unsigned int y);
+
+	const char* m_convertedBallSpeed                         = nullptr;
+	const char* m_convertedLives                             = nullptr;
+	const char* m_convertedHP                                = nullptr;
+	const char* m_convertedLevel                             = nullptr;
+
+	std::array<SDL_Rect, NUM_BOXES> m_textBoxes              = { 0 };
+	std::array<SDL_Rect, NUM_SHADED_BOXES> m_blackBoxes      = { 0 };
 
 	std::string m_ballSpeedString;
 	std::string m_livesString;
 	std::string m_levelString;
 	std::string m_remaininghpString;
 
-	const char* m_convertedBallSpeed;
-	const char* m_convertedLives;
-	const char* m_convertedHP;
-	const char* m_convertedLevel;
+	Text m_ballSpeedLabel;
+	Text m_ballSpeedText;
+	Text m_LivesLabel;
+	Text m_LivesText;
+	Text m_levelLabel;
+	Text m_levelText;
+	Text m_remainingHP;
+	Text m_itemDropProgress;
 
-	std::array<SDL_Rect, NUM_BOXES> m_textBoxes;
-	std::array<SDL_Rect, NUM_SHADED_BOXES> m_blackBoxes;
-
-	std::unique_ptr<Text> m_ballSpeedLabel;
-	std::unique_ptr<Text> m_ballSpeedText;
-	std::unique_ptr<Text> m_LivesLabel;
-	std::unique_ptr<Text> m_LivesText;
-	std::unique_ptr<Text> m_levelLabel;
-	std::unique_ptr<Text> m_levelText;
-	std::unique_ptr<Text> m_remainingHP;
-	std::unique_ptr<Text> m_itemDropProgress;
-
-	bool m_isShowing;
+	bool m_isShowing                                         = true;
 };

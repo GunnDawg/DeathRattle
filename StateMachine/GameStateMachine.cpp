@@ -2,7 +2,8 @@
 
 void GameStateMachine::push(std::unique_ptr<GameState> states)
 {
-	m_gameStates.push_back(std::move(states));
+	m_gameStates.emplace_back(std::move(states));
+	//m_gameStates.push_back(std::move(states));
 	m_gameStates.back()->on_enter();
 }
 

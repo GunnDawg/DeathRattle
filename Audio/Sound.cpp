@@ -1,7 +1,6 @@
 #include "Sound.h"
 
 Sound::Sound(const char* filePath) : 
-m_chunk(nullptr),
 m_soundFilePath(filePath)
 {
 	

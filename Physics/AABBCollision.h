@@ -5,11 +5,8 @@
 class AABBCollision
 {
 public:
-	AABBCollision();
+	AABBCollision()=default;
 	~AABBCollision()=default;
 
 	bool CheckCollision(SDL_Rect firstRect, SDL_Rect secondRect) const;
-private:
-	//AABBCollision(const AABBCollision& obj)=delete;
-	//AABBCollision& operator=(const AABBCollision&)=delete;
 };

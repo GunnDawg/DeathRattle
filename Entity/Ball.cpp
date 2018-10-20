@@ -1,11 +1,7 @@
 #include "Ball.h"
 
 Ball::Ball(unsigned int speed) :
-m_posX((Game::screenWidth / 2) - 40), m_posY((Game::screenHeight / 2) - 25), m_angle(0),
-m_ballRect({ 0 }),
-m_ballWidth(50), m_ballHeight(50),
-m_velocityX(0.0), m_velocityY(0.0),
-m_speed(0), m_isDead(false)
+m_speed(speed)
 {
 	assert(typeid(speed) == typeid(unsigned int) && speed > 0 && "Ball must have a speed/difficulty value");
 

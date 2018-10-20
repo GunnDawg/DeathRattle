@@ -35,8 +35,8 @@ private:
 	//LevelSet& operator=(const LevelSet&)=delete;
 
 	std::string m_filename;
-	std::array<Texture, LEVEL_COUNT> m_levelTextures;
-	std::array<unsigned int, LEVEL_COUNT> m_levelScore;
+	std::array<Texture, LEVEL_COUNT> m_levelTextures = { };
+	std::array<unsigned int, LEVEL_COUNT> m_levelScore = { 0 };
 
-	unsigned int m_levelNum;
+	unsigned int m_levelNum = 0;
 };

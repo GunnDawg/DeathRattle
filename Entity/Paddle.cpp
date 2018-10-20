@@ -1,9 +1,7 @@
 #include "Paddle.h"
 
 Paddle::Paddle(int x, int y, int w, int h) :
-m_paddleRect({ w, h, x, y }),
-m_moveSpeed(500),
-m_paddleMarked(false)
+m_paddleRect({ w, h, x, y })
 {
 	assert(typeid(w) == typeid(int) && w > 0 && "Paddle width must be greater than 0");
 	assert(typeid(h) == typeid(int) && h > 0 && "Paddle height must be greater than 0");

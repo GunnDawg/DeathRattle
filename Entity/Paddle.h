@@ -31,9 +31,7 @@ private:
 	//Paddle(const Paddle& objt)=delete;
 	//Paddle& operator=(const Paddle&)=delete;
 
-	SDL_Rect m_paddleRect;
-	//Texture m_paddleTexture;
-	//Texture m_paddleTexture2;
-	double m_moveSpeed;
-	bool m_paddleMarked;
+	SDL_Rect m_paddleRect             = { 0 };
+	double m_moveSpeed                = 0.0;
+	bool m_paddleMarked               = false;
 };

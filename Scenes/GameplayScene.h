@@ -22,6 +22,8 @@ public:
 	void update() override;
 	void handle_events() override;
 	void draw() override;
+
+private:
 	void drawCursor();
 	void drawLevel();
 	void drawPaddles();
@@ -29,24 +31,23 @@ public:
 	void drawText();
 	void resetGame();
 
-	Paddle* getPaddle();
-
 	void checkCollision();
 	void checkforBonus();
 	void checkforGameOver();
 	bool checkforWin();
 
-private:
+	Paddle* getPaddle();
+
 	std::array<Paddle, NUM_PADDLES> m_paddles = {
-	Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
-	Paddle(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),
-	Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45),
-	Paddle(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2))
+		Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
+		Paddle(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),
+		Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45),
+		Paddle(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2))
 	};
 
 	unsigned int m_difficulty                      = 1;
 	int m_health                                   = 550;
-	int m_bonusProgress                            = 0;
+	unsigned int m_bonusProgress                   = 0;
 	unsigned int m_lives                           = 3;
 	const char* m_convertedLives                   = nullptr;
 	std::string m_LivesString;
@@ -83,7 +84,6 @@ private:
 	Texture m_cursor                               = Texture("Assets/Graphics/common/cursor.png");
 
 	SDL_Rect m_finalScoreBox                       = { 0 };
-
 	SDL_Rect m_finalScoreBoxOutline                = { 0 };
 
 	bool m_paused                                  = true;
