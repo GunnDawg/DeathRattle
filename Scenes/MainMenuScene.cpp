@@ -8,7 +8,7 @@
 
 void MainMenuScene::on_enter()
 {
-	for (size_t i = 0; i < m_skulls.size(); ++i)
+	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
@@ -53,7 +53,7 @@ void MainMenuScene::on_enter()
 
 	m_menuBox.w = 400;
 	m_menuBox.h = 400;
-	m_menuBox.x = (Game::screenWidth / 2) + (m_menuBox.w / 2);
+	m_menuBox.x = (Game::screenWidth / 2) - (m_menuBox.w / 2);
 	m_menuBox.y = (Game::screenHeight / 2) - (m_menuBox.h / 2);
 
 	m_menuBoxOutline.w = m_menuBox.w;
@@ -79,8 +79,38 @@ void MainMenuScene::on_enter()
 	m_swoosh.Load();
 	m_swoosh.Play();
 
+	m_newGame.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_newGame.m_TextureRect.w / 2);
+	m_newGame.m_TextureRect.y = m_menuBox.y + 25;
+
+	m_newGameWhite.m_TextureRect.x = m_newGame.m_TextureRect.x;
+	m_newGameWhite.m_TextureRect.y = m_newGame.m_TextureRect.y;
+
+	m_options.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_options.m_TextureRect.w / 2);
+	m_options.m_TextureRect.y = m_newGame.m_TextureRect.y + 75;
+
+	m_optionsWhite.m_TextureRect.x = m_options.m_TextureRect.x;
+	m_optionsWhite.m_TextureRect.y = m_options.m_TextureRect.y;
+
+	m_leaderBoard.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_leaderBoard.m_TextureRect.w / 2);
+	m_leaderBoard.m_TextureRect.y = m_options.m_TextureRect.y + 65;
+
+	m_leaderBoardWhite.m_TextureRect.x = m_leaderBoard.m_TextureRect.x;
+	m_leaderBoardWhite.m_TextureRect.y = m_leaderBoard.m_TextureRect.y;
+
+	m_credits.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_credits.m_TextureRect.w / 2);
+	m_credits.m_TextureRect.y = m_leaderBoard.m_TextureRect.y + 65;
+
+	m_creditsWhite.m_TextureRect.x = m_credits.m_TextureRect.x;
+	m_creditsWhite.m_TextureRect.y = m_credits.m_TextureRect.y;
+
+	m_exit.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exit.m_TextureRect.w / 2);
+	m_exit.m_TextureRect.y = m_credits.m_TextureRect.y + 75;
+
+	m_exitWhite.m_TextureRect.x = m_exit.m_TextureRect.x;
+	m_exitWhite.m_TextureRect.y = m_exit.m_TextureRect.y;
+
 	MusicManager::Load();
-	if (MusicManager::isMenuMusic)
+	if (Settings::Audio::MenuMusic == 1)
 	{
 		MusicManager::Play();
 	}
@@ -112,7 +142,7 @@ void MainMenuScene::on_exit()
 	m_devName.Unload();
 	m_version.Unload();
 
-	for (size_t i = 0; i < m_skulls.size(); ++i)
+	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Unload();
 	}
@@ -122,46 +152,6 @@ void MainMenuScene::on_exit()
 
 void MainMenuScene::update()
 {
-	if (m_menuBox.x >= (Game::screenWidth / 2) - (m_menuBox.w / 2))
-	{
-		m_menuBox.x -= static_cast<int>(1.75 * Game::deltaTime);
-
-		m_newGame.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_newGame.m_TextureRect.w / 2);
-		m_newGame.m_TextureRect.y = m_menuBox.y + 25;
-
-		m_newGameWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_newGameWhite.m_TextureRect.w / 2);
-		m_newGameWhite.m_TextureRect.y = m_newGame.m_TextureRect.y;
-
-		m_options.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_options.m_TextureRect.w / 2);
-		m_options.m_TextureRect.y = m_newGame.m_TextureRect.y + 75;
-
-		m_optionsWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_optionsWhite.m_TextureRect.w / 2);
-		m_optionsWhite.m_TextureRect.y = m_options.m_TextureRect.y;
-
-		m_leaderBoard.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_leaderBoard.m_TextureRect.w / 2);
-		m_leaderBoard.m_TextureRect.y = m_options.m_TextureRect.y + 65;
-
-		m_leaderBoardWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_leaderBoardWhite.m_TextureRect.w / 2);
-		m_leaderBoardWhite.m_TextureRect.y = m_leaderBoard.m_TextureRect.y;
-
-		m_credits.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_credits.m_TextureRect.w / 2);
-		m_credits.m_TextureRect.y = m_leaderBoard.m_TextureRect.y + 65;
-
-		m_creditsWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_creditsWhite.m_TextureRect.w / 2);
-		m_creditsWhite.m_TextureRect.y = m_credits.m_TextureRect.y;
-
-		m_exit.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exit.m_TextureRect.w / 2);
-		m_exit.m_TextureRect.y = m_credits.m_TextureRect.y + 75;
-
-		m_exitWhite.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exitWhite.m_TextureRect.w / 2);
-		m_exitWhite.m_TextureRect.y = m_exit.m_TextureRect.y;
-
-		m_menuBoxOutline.w = m_menuBox.w;
-		m_menuBoxOutline.h = m_menuBox.h;
-		m_menuBoxOutline.x = m_menuBox.x;
-		m_menuBoxOutline.y = m_menuBox.y;
-	}
-
 	if(Game::mouseX >= m_newGame.m_TextureRect.x &&
 		Game::mouseX <= m_newGame.m_TextureRect.x + m_newGame.m_TextureRect.w &&
 		Game::mouseY >= m_newGame.m_TextureRect.y &&
@@ -206,8 +196,7 @@ void MainMenuScene::update()
 		m_isExit = false;
 	}
 
-	m_cursor.m_TextureRect.x = Game::mouseX;
-	m_cursor.m_TextureRect.y = Game::mouseY;
+	m_cursor.setRect(Game::mouseX, Game::mouseY);
 }
 
 void MainMenuScene::handle_events()
@@ -272,7 +261,7 @@ void MainMenuScene::handle_events()
 						default:
 							break;
 					}
-				}
+				} break;
 
 				default:
 					break;

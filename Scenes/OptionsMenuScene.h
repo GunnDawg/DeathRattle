@@ -63,14 +63,17 @@ private:
 	SDL_Rect m_titleBox                = { 0 };
 
 	bool m_isFullScreen                = false;
-	bool m_fullScreenEnabled           = false;
 	bool m_isWindowed                  = true;
+
+	bool m_fullScreenEnabled           = false;
 	bool m_windowedEnabled             = true;
+
 	bool m_isApply                     = false;
 	bool m_isBack                      = false;
 	bool m_isSoundEffects              = true;
 	bool m_isMenuMusic                 = true;
 	bool m_isGameplayMusic             = true;
+
 	bool m_soundEffectsEnabled         = true;
 	bool m_menuMusicEnabled            = true;
 	bool m_gameplayMusicEnabled        = true;

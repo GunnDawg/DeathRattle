@@ -24,6 +24,11 @@ void MusicManager::Pause()
 	m_music.Pause();
 }
 
+void MusicManager::Stop()
+{
+	m_music.Stop();
+}
+
 void MusicManager::Resume()
 {
 	m_music.Resume();

@@ -10,10 +10,10 @@ Game::~Game()
 	SDL_DestroyWindow(Window);
 	Window = nullptr;
 
-	SDL_Quit();
-	IMG_Quit();
-	TTF_Quit();
 	Mix_Quit();
+	TTF_Quit();
+	IMG_Quit();
+	SDL_Quit();
 }
 
 void Game::updateDelta()
@@ -72,11 +72,13 @@ bool Game::Init()
 		return(false);
 	}
 
-	std::unique_ptr<GameState> splashSceneState = std::make_unique<SplashScene>();
-	gameStateMachine.push(std::move(splashSceneState));
+	std::unique_ptr<GameState> loadingSceneState = std::make_unique<LoadingScene>();
+	gameStateMachine.push(std::move(loadingSceneState));
+
+	//std::unique_ptr<GameState> splashSceneState = std::make_unique<SplashScene>();
+	//gameStateMachine.push(std::move(splashSceneState));
 
 	SDL_ShowCursor(0);
-
 	isRunning = true;
 
 	return(true);

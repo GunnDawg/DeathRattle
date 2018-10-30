@@ -5,7 +5,7 @@ LevelSet::LevelSet(const char* filePath)
 {
 	assert(typeid(filePath) == typeid(const char*) && filePath > 0);
 
-	for (size_t i = 0; i < m_levelTextures.size(); i++)
+	for (std::size_t i = 0; i < m_levelTextures.size(); i++)
 	{
 		std::ostringstream out;
 		out << filePath << "level" << i << ".png";
@@ -33,7 +33,7 @@ void LevelSet::Unload(int x)
 
 void LevelSet::setScores(std::array<int, LEVEL_COUNT> s)
 {
-	for (size_t i = 0; i < s.size(); ++i)
+	for (std::size_t i = 0; i < s.size(); ++i)
 	{
 		m_levelScore[i] = s[i];
 	}

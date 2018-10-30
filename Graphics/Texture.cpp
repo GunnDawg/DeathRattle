@@ -2,9 +2,9 @@
 #include "Game.h"
 
 Texture::Texture(const std::string_view filePath) :
-m_filePath(filePath)
+m_filePath(filePath.data())
 {
-	assert(typeid(filePath) == typeid(std::string_view) && !filePath.empty() && "Texture filepath cannot be empty");
+
 }
 
 Texture::~Texture()
@@ -12,7 +12,7 @@ Texture::~Texture()
 	if (m_Texture != nullptr)
 	{
 		SDL_DestroyTexture(m_Texture);
-		printf("TEXTURE DESTROYED: \t---> \t%s\n", m_filePath.c_str());
+		printf("TEXTURE DESTROYED: \t---> \t%s\n", m_filePath);
 	}
 }
 
@@ -31,7 +31,7 @@ void Texture::Load()
 		}
 		else
 		{
-			printf("TEXTURE LOADED: \t---> \t%s\n", m_filePath.c_str());
+			printf("TEXTURE LOADED: \t---> \t%s\n", m_filePath);
 		}
 	}
 }
@@ -40,7 +40,7 @@ void Texture::Unload()
 {
 	SDL_DestroyTexture(m_Texture);
 	m_Texture = nullptr;
-	printf("TEXTURE UNLOADED: \t---> \t%s\n", m_filePath.c_str());
+	printf("TEXTURE UNLOADED: \t---> \t%s\n", m_filePath);
 
 }
 

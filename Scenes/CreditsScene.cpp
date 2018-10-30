@@ -3,7 +3,7 @@
 
 void CreditsScene::on_enter()
 {
-	for (size_t i = 0; i < m_skulls.size(); ++i)
+	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
@@ -176,7 +176,7 @@ void CreditsScene::on_exit()
 	m_leftArrow.Unload();
 	m_leftArrowWhite.Unload();
 
-	for (size_t i = 0; i < m_skulls.size(); ++i)
+	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Unload();
 	}
@@ -206,8 +206,7 @@ void CreditsScene::update()
 		m_isLeft = false;
 	}
 
-	m_cursor.m_TextureRect.x = Game::mouseX;
-	m_cursor.m_TextureRect.y = Game::mouseY;
+	m_cursor.setRect(Game::mouseX, Game::mouseY);
 }
 
 void CreditsScene::handle_events()
@@ -264,7 +263,7 @@ void CreditsScene::handle_events()
 					default:
 						break;
 				}
-			}
+			} break;
 
 			default:
 				break;

@@ -1,23 +1,20 @@
 #include "Ball.h"
 
-Ball::Ball(unsigned int speed) :
-m_speed(speed)
+Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 {
-	assert(typeid(speed) == typeid(unsigned int) && speed > 0 && "Ball must have a speed/difficulty value");
-
 	switch (speed)
 	{
-		case 0:
+		case Settings::GamePlay::GameDifficulty::EASY:
 		{
 			m_speed = 0.35f;
 		} break;
 
-		case 1:
+		case Settings::GamePlay::GameDifficulty::MEDIUM:
 		{
 			m_speed = 0.50f;
 		} break;
 
-		case 2:
+		case Settings::GamePlay::GameDifficulty::HARD:
 		{
 			m_speed = 0.70f;
 		} break;
@@ -31,33 +28,33 @@ m_speed(speed)
 	setAngle(randomizeAng());
 }
 
-void Ball::resetBall(unsigned int w, unsigned int h, unsigned int difficulty)
+void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 {
-	m_posX = (w / 2) - 40;
-	m_posY = (h / 2) - 25;
+	m_posX = (Game::screenWidth / 2) - 40;
+	m_posY = (Game::screenHeight / 2) - 25;
 
 	setAngle(randomizeAng());
 	m_isDead = false;
 
-	switch (difficulty)
+	switch (speed)
 	{
-		case 0:
+		case Settings::GamePlay::GameDifficulty::EASY:
 		{
 			m_speed = 0.35f;
 		} break;
 
-		case 1:
+		case Settings::GamePlay::GameDifficulty::MEDIUM:
 		{
 			m_speed = 0.50f;
 		} break;
 
-		case 2:
+		case Settings::GamePlay::GameDifficulty::HARD:
 		{
 			m_speed = 0.70f;
 		} break;
 
-	default:
-		break;
+		default:
+			break;
 	}
 }
 

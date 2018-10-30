@@ -31,8 +31,8 @@ public:
 	inline unsigned int getScore(unsigned int s) const { return m_levelScore[s]; }
 
 private:
-	//LevelSet(const LevelSet& obj)=delete;
-	//LevelSet& operator=(const LevelSet&)=delete;
+	LevelSet(const LevelSet& obj)=delete;
+	LevelSet& operator=(const LevelSet&)=delete;
 
 	std::string m_filename;
 	std::array<Texture, LEVEL_COUNT> m_levelTextures = { };

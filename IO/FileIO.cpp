@@ -1,7 +1,7 @@
 #include "FileIO.h"
 
 FileIO::FileIO(const std::string_view filePath) :
-m_file(filePath)
+m_file(filePath.data())
 {
 	assert(typeid(filePath) == typeid(std::string_view) && !filePath.empty() && "Filepath cannot be an empty value");
 }

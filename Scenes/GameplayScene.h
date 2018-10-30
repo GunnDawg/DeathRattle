@@ -9,6 +9,7 @@
 #include "Level/LevelSet.h"
 #include "Physics/AABBCollision.h"
 #include "Audio/Sound.h"
+#include "GameSettings.h"
 
 constexpr unsigned int NUM_PADDLES = 4;
 constexpr unsigned int NUM_ITEMS = 5;
@@ -22,8 +23,6 @@ public:
 	void update() override;
 	void handle_events() override;
 	void draw() override;
-
-private:
 	void drawCursor();
 	void drawLevel();
 	void drawPaddles();
@@ -31,13 +30,14 @@ private:
 	void drawText();
 	void resetGame();
 
+	Paddle* getPaddle();
+
 	void checkCollision();
 	void checkforBonus();
 	void checkforGameOver();
 	bool checkforWin();
 
-	Paddle* getPaddle();
-
+private:
 	std::array<Paddle, NUM_PADDLES> m_paddles = {
 		Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
 		Paddle(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),
@@ -45,49 +45,50 @@ private:
 		Paddle(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2))
 	};
 
-	unsigned int m_difficulty                      = 1;
-	int m_health                                   = 550;
-	unsigned int m_bonusProgress                   = 0;
-	unsigned int m_lives                           = 3;
-	const char* m_convertedLives                   = nullptr;
+	int m_health                        = 550;
+	int m_bonusProgress                 = 0;
+	unsigned int m_lives                = 3;
+	const char* m_convertedLives        = nullptr;
 	std::string m_LivesString;
 
-	Keyboard m_keyBoard                            = Keyboard(false);
-	Mouse m_mouse                                  = Mouse(true);
-	int m_mouseX                                   = 0;
-	int m_mouseY                                   = 0;
+	Keyboard m_keyBoard                 = Keyboard(false);
+	Mouse m_mouse                       = Mouse(true);
+	int m_mouseX                        = 0;
+	int m_mouseY                        = 0;
 
 	HUD m_HUD;
 
-	LevelSet m_dungeonLevels                       = LevelSet("Assets/Graphics/Levels/Dungeon/");
+	LevelSet m_dungeonLevels            = LevelSet("Assets/Graphics/Levels/Dungeon/");
 
-	Ball m_ball                                    = Ball(m_difficulty);
+	//Ball m_ball                         = Ball(Settings::GamePlay::Difficulty);
+	Ball m_ball                           = Ball(Settings::GamePlay::Difficulty);
 
 	AABBCollision m_collider;
 
-	Sound m_hitSound                               = Sound("Assets/Audio/hitnormal.wav");
-	Sound m_hitBadSound                            = Sound("Assets/Audio/hitbad.wav");
-	Sound m_pauseSound                             = Sound("Assets/Audio/pause.wav");
-	Sound m_gameOverSound                          = Sound("Assets/Audio/gameover.wav");
-	Sound m_heal                                   = Sound("Assets/Audio/heal.wav");
+	Sound m_hitSound                    = Sound("Assets/Audio/hitnormal.wav");
+	Sound m_hitBadSound                 = Sound("Assets/Audio/hitbad.wav");
+	Sound m_pauseSound                  = Sound("Assets/Audio/pause.wav");
+	Sound m_gameOverSound               = Sound("Assets/Audio/gameover.wav");
+	Sound m_heal                        = Sound("Assets/Audio/heal.wav");
 
-	Text m_gameTitle                               = Text(48, "KEEP IT ALIVE");
-	Text m_gameTitleStart                          = Text(12, "Press SPACE to start or ESC to exit");
-	Text m_pausedText                              = Text(48, "PAUSED");
-	Text m_pressSpaceText                          = Text(12, "Press SPACE to continue or ESC to exit");
-	Text m_gameOverText                            = Text(48, "GAME OVER");
-	Text m_gameOverNewGameText                     = Text(12, "Press N to start a new game or ESC to exit");
-	Text m_levelPassed                             = Text(48, "LEVEL COMPLETE");
-	Text m_levelPassedContinue                     = Text(12, "Press N to continue to the next level");
+	Text m_gameTitle                    = Text(48, "KEEP IT ALIVE");
+	Text m_gameTitleStart               = Text(12, "Press SPACE to start or ESC to exit");
+	Text m_pausedText                   = Text(48, "PAUSED");
+	Text m_pressSpaceText               = Text(12, "Press SPACE to continue or ESC to exit");
+	Text m_gameOverText                 = Text(48, "GAME OVER");
+	Text m_gameOverNewGameText          = Text(12, "Press N to start a new game or ESC to exit");
+	Text m_levelPassed                  = Text(48, "LEVEL COMPLETE");
+	Text m_levelPassedContinue          = Text(12, "Press N to continue to the next level");
 
-	Texture m_grimReaper                           = Texture("Assets/Graphics/gameplay_scene/grim_reaper.png");
-	Texture m_cursor                               = Texture("Assets/Graphics/common/cursor.png");
+	Texture m_grimReaper                = Texture("Assets/Graphics/gameplay_scene/grim_reaper.png");
+	Texture m_cursor                    = Texture("Assets/Graphics/common/cursor.png");
 
-	SDL_Rect m_finalScoreBox                       = { 0 };
-	SDL_Rect m_finalScoreBoxOutline                = { 0 };
+	SDL_Rect m_finalScoreBox            = { 0 };
 
-	bool m_paused                                  = true;
-	bool m_gameOver                                = false;
-	bool m_levelWon                                = false;
-	bool m_newGame                                 = true;
+	SDL_Rect m_finalScoreBoxOutline     = { 0 };
+
+	bool m_paused                       = true;
+	bool m_gameOver                     = false;
+	bool m_levelWon                     = false;
+	bool m_newGame                      = true;
 };

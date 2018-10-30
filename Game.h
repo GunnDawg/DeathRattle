@@ -9,6 +9,7 @@
 
 #include "StateMachine/GameStateMachine.h"
 #include "Audio/MusicManager.h"
+#include "Scenes/LoadingScene.h"
 #include "Scenes/SplashScene.h"
 
 class Game
@@ -20,22 +21,27 @@ public:
 		return instance;
 	}
 
+	Game(const Game&) = delete;
+	Game(Game&&) = delete;
+	Game& operator=(const Game&) = delete;
+	Game& operator=(Game&&) = delete;
+
 	static void updateDelta();
 	static bool Init();
 	static void processinput();
 	static void Update();
 	static void Draw();
 
-	inline static GameStateMachine gameStateMachine;
+	inline static GameStateMachine gameStateMachine      = GameStateMachine();
 	inline static SDL_Window* Window                     = nullptr;
 	inline static SDL_Renderer* Renderer                 = nullptr;
 	inline static const char* Title                      = "Keep it Alive!!";
+	inline static unsigned int screenWidth               = 1280;
+	inline static unsigned int screenHeight              = 720;
 	inline static bool isRunning                         = false;
 	inline static Uint64 currentTime                     = 0ULL;
 	inline static Uint64 lastTime                        = 0ULL;
 	inline static double deltaTime                       = 0.0;
-	inline static unsigned int screenWidth               = 1280;
-	inline static unsigned int screenHeight              = 720;
 
 	inline static int mouseX                             = 0;
 	inline static int mouseY                             = 0;
@@ -43,6 +49,4 @@ public:
 private:
 	Game() = default;
 	~Game();
-	Game(const Game&) = delete;
-	Game& operator=(const Game&) = delete;
 };

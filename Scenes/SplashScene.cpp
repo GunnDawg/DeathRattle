@@ -36,12 +36,14 @@ void SplashScene::update()
 {
 	if (m_logo.m_TextureRect.y <= 10)
 	{
-		m_logo.m_TextureRect.y += 10;
+		m_logo.m_TextureRect.y += 0.35 * Game::deltaTime;
+		//m_logo.m_TextureRect.y += 10;
 	}
 
-	if (m_production.m_TextureRect.y >= (m_logo.m_TextureRect.y + m_logo.m_TextureRect.h) + 25)
+	if (m_production.m_TextureRect.y >= 540)
 	{
-		m_production.m_TextureRect.y -= 4;
+		m_production.m_TextureRect.y -= 0.12 * Game::deltaTime;
+		//m_production.m_TextureRect.y -= 4;
 	}
 
 	if (m_timer.elapsedSeconds() > 7.0)

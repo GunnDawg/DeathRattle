@@ -16,6 +16,9 @@ public:
 	void setVolume(int v) const;
 
 private:
+	Sound(const Sound& obj)=delete;
+	Sound& operator=(const Sound&)=delete;
+
 	Mix_Chunk* m_chunk                = nullptr;
-	const char* m_soundFilePath;
+	const char* m_soundFilePath       = nullptr;
 };

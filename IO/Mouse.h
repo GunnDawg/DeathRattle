@@ -17,8 +17,8 @@ public:
 	inline bool isEnabled() const { return m_Enabled; }
 
 private:
-	//Mouse(const Mouse& obj)=delete;
-	//Mouse& operator=(const Mouse&)=delete;
+	Mouse(const Mouse& obj)=delete;
+	Mouse& operator=(const Mouse&)=delete;
 
 	bool m_Enabled;
 	int m_MouseX;

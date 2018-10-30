@@ -15,8 +15,8 @@ public:
 	void Write(unsigned int highScore);
 
 private:
-	//FileIO(const FileIO& obj)=delete;
-	//FileIO& operator=(const FileIO&)=delete;
+	FileIO(const FileIO& obj)=delete;
+	FileIO& operator=(const FileIO&)=delete;
 
 	std::string m_file;
 };

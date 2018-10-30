@@ -1,24 +1,27 @@
 #include <cstdio>
 #include "Game.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char* args[])
 {
 	(void*)argc;
-	(void*)argv;
+	(void*)args;
 
-	if (Game::getInstance().Init())
+	Game& game = Game::getInstance();
+
+	if (game.Init())
 	{
-		while(Game::getInstance().isRunning)
+		while (game.isRunning)
 		{
-			Game::getInstance().processinput();
-			Game::getInstance().Update();
-			Game::getInstance().Draw();
+			game.processinput();
+			game.Update();
+			game.Draw();
 		}
 	}
 	else
 	{
 		printf("Error starting Game. Please Restart!\n");
+		return(EXIT_FAILURE);
 	}
 
-	return(0);
+	return(EXIT_SUCCESS);
 }

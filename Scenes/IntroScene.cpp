@@ -98,17 +98,16 @@ void IntroSceneState::on_exit()
 
 void IntroSceneState::update()
 {
-	m_cursor.m_TextureRect.x = Game::mouseX;
-	m_cursor.m_TextureRect.y = Game::mouseY;
-
 	if(m_keepIt.m_TextureRect.y <= 200)
 	{
-		m_keepIt.m_TextureRect.y += 20;
+		m_keepIt.m_TextureRect.y += 0.85 * Game::deltaTime;
+		//m_keepIt.m_TextureRect.y += 20;
 	}
 
 	if(m_alive.m_TextureRect.y >= 300)
 	{
-		m_alive.m_TextureRect.y -= 25;
+		m_alive.m_TextureRect.y -= 1.05 * Game::deltaTime;
+		//m_alive.m_TextureRect.y -= 25;
 	}
 
 	if (m_timer.elapsedMilliseconds() > 200)
@@ -156,6 +155,8 @@ void IntroSceneState::update()
 			Game::gameStateMachine.push(std::move(mainMenuState));
 		}
 	}
+
+	m_cursor.setRect(Game::mouseX, Game::mouseY);
 }
 
 void IntroSceneState::handle_events()
@@ -198,7 +199,7 @@ void IntroSceneState::handle_events()
 					m_timer.start();
 					m_isClicked = true;
 				}
-			}
+			} break;
 
 			default:
 				break;

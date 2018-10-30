@@ -1,9 +1,9 @@
 #include "Music.h"
 
-Music::Music(const std::string_view filePath) :
+Music::Music(const char* filePath) :
 m_musicFilePath(filePath)
 {
-	assert(typeid(filePath) == typeid(std::string_view) && !filePath.empty() && "Music filepath cannot have an empty value");
+
 }
 
 Music::~Music()
@@ -16,7 +16,7 @@ Music::~Music()
 
 void Music::Load()
 {
-	m_music = Mix_LoadMUS(m_musicFilePath.c_str());
+	m_music = Mix_LoadMUS(m_musicFilePath);
 	if (m_music == nullptr)
 	{
 		printf("Error loading music file. Error: %s\n", Mix_GetError());

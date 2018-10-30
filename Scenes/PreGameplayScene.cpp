@@ -3,17 +3,17 @@
 
 void PreGameplayScene::on_enter()
 {
-	m_difficultyBox.w = 400;
-	m_difficultyBox.h = 400;
-	m_difficultyBox.x = Game::screenWidth;
-	m_difficultyBox.y = (Game::screenHeight / 2) - (m_difficultyBox.h / 2);
+	m_difficultyBox.w = 800;
+	m_difficultyBox.h = 450;
+	m_difficultyBox.x = (Game::screenWidth / 2) - (m_difficultyBox.w / 2);
+	m_difficultyBox.y = (Game::screenHeight / 2) - (m_difficultyBox.h / 2) + 25;
 
 	m_difficultyBoxOUtline.w = m_difficultyBox.w;
 	m_difficultyBoxOUtline.h = m_difficultyBox.h;
 	m_difficultyBoxOUtline.x = m_difficultyBox.x;
 	m_difficultyBoxOUtline.y = m_difficultyBox.y;
 
-	for (size_t i = 0; i < m_skulls.size(); ++i)
+	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i] = Texture("Assets/Graphics/common/skull.png");
 		m_skulls[i].Load();
@@ -68,7 +68,7 @@ void PreGameplayScene::on_enter()
 
 void PreGameplayScene::on_exit()
 {
-	for (size_t i = 0; i < m_skulls.size(); ++i)
+	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Unload();
 	}
@@ -84,8 +84,7 @@ void PreGameplayScene::on_exit()
 
 void PreGameplayScene::update()
 {
-	m_cursor.m_TextureRect.x = Game::mouseX;
-	m_cursor.m_TextureRect.y = Game::mouseY;
+	m_cursor.setRect(Game::mouseX, Game::mouseY);
 }
 
 void PreGameplayScene::handle_events()
@@ -107,9 +106,9 @@ void PreGameplayScene::handle_events()
 					case SDLK_ESCAPE:
 					{
 						Game::gameStateMachine.pop();
-					}
+					} break;
 				}
-			}
+			} break;
 
 			default:
 				break;
@@ -125,6 +124,7 @@ void PreGameplayScene::draw()
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
 	SDL_RenderFillRect(Game::Renderer, &m_titleBox);
 	SDL_RenderFillRect(Game::Renderer, &m_devNameBox);
+	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
 	SDL_RenderFillRect(Game::Renderer, &m_difficultyBox);
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
 

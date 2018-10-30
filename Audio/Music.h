@@ -11,7 +11,7 @@ class Music
 {
 public:
 	Music()=default;
-	Music(const std::string_view filePath);
+	Music(const char* filePath);
 	~Music();
 
 	void Load();
@@ -25,12 +25,12 @@ public:
 	inline bool isMuted() const { return m_isMuted; }
 
 private:
-	//Music(const Music& obj)=delete;
-	//Music& operator=(const Music&)=delete;
+	Music(const Music& obj)=delete;
+	Music& operator=(const Music&)=delete;
 
-	std::string m_musicFilePath;
 
 	Mix_Music* m_music             = nullptr;
-	bool m_isMuted                 = false;
+	const char* m_musicFilePath    = nullptr;
 
+	bool m_isMuted                 = false;
 };

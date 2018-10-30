@@ -33,31 +33,28 @@ void HUD::Load()
 	m_remaininghpString = std::to_string(NULL);
 	m_convertedHP = m_remaininghpString.c_str();
 
-	m_ballSpeedLabel               = Text(24, "SPEED LEVEL");
-	m_ballSpeedText                = Text(24, m_convertedBallSpeed);
-	m_LivesLabel                   = Text(24, "LIVES");
-	m_LivesText                    = Text(24, m_convertedLives);
-	m_levelLabel                   = Text(24, "STAGE");
-	m_levelText                    = Text(24, m_convertedLevel);
-	m_remainingHP                  = Text(22, m_convertedHP);
-	m_itemDropProgress             = Text(22, "BONUS");
-
-	m_ballSpeedLabel.m_textRect.x  = m_textBoxes[1].x + 12;
-	m_ballSpeedLabel.m_textRect.y  = 24;
+	m_ballSpeedLabel                              = std::make_unique<Text>(24, "SPEED LEVEL");
+	m_ballSpeedText                               = std::make_unique<Text>(24, m_convertedBallSpeed);
+	m_LivesLabel                                  = std::make_unique<Text>(24, "LIVES");
+	m_LivesText                                   = std::make_unique<Text>(24, m_convertedLives);
+	m_levelLabel                                  = std::make_unique<Text>(24, "STAGE");
+	m_levelText                                   = std::make_unique<Text>(24, m_convertedLevel);
+	m_remainingHP                                 = std::make_unique<Text>(22, m_convertedHP);
+	m_itemDropProgress                            = std::make_unique<Text>(22, "BONUS");
 }
 
 void HUD::Unload()
 {
 	m_ScoreBoard.Unload();
 
-	m_ballSpeedLabel.Unload();
-	m_ballSpeedText.Unload();
-	m_LivesLabel.Unload();
-	m_LivesText.Unload();
-	m_levelLabel.Unload();
-	m_levelText.Unload();
-	m_remainingHP.Unload();
-	m_itemDropProgress.Unload();
+	m_ballSpeedLabel->Unload();
+	m_ballSpeedText->Unload();
+	m_LivesLabel->Unload();
+	m_LivesText->Unload();
+	m_levelLabel->Unload();
+	m_levelText->Unload();
+	m_remainingHP->Unload();
+	m_itemDropProgress->Unload();
 }
 
 void HUD::drawHealthBar()
@@ -74,30 +71,29 @@ void HUD::drawProgressBar()
 
 void HUD::drawText()
 {
-	m_ballSpeedLabel.Draw();
-	m_ballSpeedText.Draw(Game::screenWidth - 64, 24);
+	m_ballSpeedLabel->Draw(m_textBoxes[1].x + 12, 24);
+	m_ballSpeedText->Draw(Game::screenWidth - 64, 24);
 
-	m_LivesLabel.Draw(m_ballSpeedLabel.m_textRect.x, m_ballSpeedLabel.m_textRect.y + 24);
-	m_LivesText.Draw(Game::screenWidth - 64, m_LivesLabel.m_textRect.y);
+	m_LivesLabel->Draw(m_ballSpeedLabel->m_textRect.x, m_ballSpeedLabel->m_textRect.y + 24);
+	m_LivesText->Draw(Game::screenWidth - 64, m_LivesLabel->m_textRect.y);
 
-	m_levelLabel.Draw(m_ballSpeedLabel.m_textRect.x, m_ballSpeedLabel.m_textRect.y + 48);
-	m_levelText.Draw(Game::screenWidth - 64, m_levelLabel.m_textRect.y);
+	m_levelLabel->Draw(m_ballSpeedLabel->m_textRect.x, m_ballSpeedLabel->m_textRect.y + 48);
+	m_levelText->Draw(Game::screenWidth - 64, m_levelLabel->m_textRect.y);
 
-	m_remainingHP.Draw(m_textBoxes[3].x + 235, m_textBoxes[3].y - 1);
+	m_remainingHP->Draw(m_textBoxes[3].x + 235, m_textBoxes[3].y - 1);
 
-	m_itemDropProgress.Draw(m_textBoxes[5].x + 210, m_textBoxes[5].y - 1);
+	m_itemDropProgress->Draw(m_textBoxes[5].x + 210, m_textBoxes[5].y - 1);
 }
 
 void HUD::drawBoxes()
 {
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 100);
-	for (size_t i = 0; i < m_blackBoxes.size(); ++i)
+	for (std::size_t i = 0; i < m_blackBoxes.size(); ++i)
 	{
 		SDL_RenderFillRect(Game::Renderer, &m_blackBoxes[i]);
 	}
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
-
 	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
 
 	SDL_RenderDrawRect(Game::Renderer, &m_textBoxes[0]);
@@ -128,20 +124,17 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 
 	m_ScoreBoard.Update(passedLevel);
 
-	m_ballSpeedLabel.Update("SPEED LEVEL");
 	m_ballSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));
-	m_ballSpeedText.Update(m_convertedBallSpeed);
+	m_ballSpeedText->Update(m_convertedBallSpeed);
 
-	m_LivesLabel.Update("LIVES");
 	m_livesString = std::to_string(lives);
-	m_LivesText.Update(m_convertedLives);
+	m_LivesText->Update(m_convertedLives);
 
-	m_levelLabel.Update("STAGE");
 	m_levelString = std::to_string(passedLevel.getLevelPlusOne());
-	m_levelText.Update(m_convertedLevel);
+	m_levelText->Update(m_convertedLevel);
 
 	m_remaininghpString = std::to_string(static_cast<int>(hp / 550.0f * 100));
-	m_remainingHP.Update(m_convertedHP);
+	m_remainingHP->Update(m_convertedHP);
 }
 
 void HUD::setRect(SDL_Rect& r, const unsigned int w, const unsigned int h, const unsigned int x, const unsigned int y)

@@ -6,6 +6,7 @@
 #include <memory>
 #include <random>
 
+#include "GameSettings.h"
 #include "Graphics/Texture.h"
 #include "Game.h"
 
@@ -13,7 +14,7 @@ class Ball
 {
 public:
 	Ball()=default;
-	Ball(unsigned int speed);
+	Ball(Settings::GamePlay::GameDifficulty speed);
 	~Ball()=default;
 
 	void Load();
@@ -34,7 +35,7 @@ public:
 	inline void addSpeed(float speed) { m_speed += speed; }
 	inline void removeSpeed(float speed) { m_speed -= speed; }
 
-	void resetBall(unsigned int w, unsigned int h, unsigned int difficulty);
+	void resetBall(Settings::GamePlay::GameDifficulty speed);
 	double randomizeAng();
 
 	unsigned int m_posX = (Game::screenWidth / 2) - 40;
@@ -43,19 +44,19 @@ public:
 	double m_angle = 0.0;
 
 private:
-	//Ball(const Ball& obj)=delete;
-	//Ball& operator=(const Ball&)=delete;
+	Ball(const Ball& obj)=delete;
+	Ball& operator=(const Ball&)=delete;
 
 	Texture m_ballTexture;
 
-	SDL_Rect m_ballRect = { 0 };
-	const unsigned int m_ballWidth = 50;
-	const unsigned int m_ballHeight = 50;
+	SDL_Rect m_ballRect                = { 0 };
+	const unsigned int m_ballWidth     = 50;
+	const unsigned int m_ballHeight    = 50;
 
-	double m_velocityX = 0.0;
-	double m_velocityY = 0.0;
+	double m_velocityX                 = 0.0;
+	double m_velocityY                 = 0.0;
 
-	float m_speed = 0;
+	float m_speed                      = 0;
 
-	bool m_isDead = false;
+	bool m_isDead                      = false;
 };

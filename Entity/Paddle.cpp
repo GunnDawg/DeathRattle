@@ -7,18 +7,6 @@ m_paddleRect({ w, h, x, y })
 	assert(typeid(h) == typeid(int) && h > 0 && "Paddle height must be greater than 0");
 	assert(typeid(x) == typeid(int) && x > 0 && "Paddle must have an X value");
 	assert(typeid(y) == typeid(int) && y > 0 && "Paddle must have an Y value");
-
-	//m_paddleTexture = Texture("Assets/Graphics/gameplay_scene/paddle_blood.png");
-	//m_paddleTexture.Load();
-
-	//m_paddleTexture2 = Texture("Assets/Graphics/gameplay_scene/paddle_blood2.png");
-	//m_paddleTexture2.Load();
-}
-
-Paddle::~Paddle()
-{
-	//m_paddleTexture.Unload();
-	//m_paddleTexture2.Unload();
 }
 
 void Paddle::Draw()
@@ -46,28 +34,6 @@ void Paddle::Draw()
 	}
 
 	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-
-	//Render a memey shadow on paddles
-	//SDL_Rect border; 
-	//border.w = m_paddleRect.w + 3;
-	//border.h = m_paddleRect.h + 3;
-	//border.x = m_paddleRect.x;
-	//border.y = m_paddleRect.y;
-
-	//SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-	//SDL_RenderFillRect(Game::Renderer, &m_paddleRect);
-
-	//if (m_paddleMarked)
-	//{
-	//	if (m_paddleRect.h == 15)
-	//	{
-	//		SDL_RenderCopy(Game::Renderer, m_paddleTexture2.m_Texture, NULL, &m_paddleRect);
-	//	}
-	//	else
-	//	{
-	//		SDL_RenderCopy(Game::Renderer, m_paddleTexture.m_Texture, NULL, &m_paddleRect);
-	//	}
-	//}
 }
 
 void Paddle::resetPaddles(int x, int y, int w, int h)

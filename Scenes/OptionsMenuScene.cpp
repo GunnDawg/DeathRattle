@@ -1,5 +1,6 @@
 #include "OptionsMenuScene.h"
 #include "Game.h"
+#include "GameSettings.h"
 
 void OptionsMenuScene::on_enter()
 {
@@ -137,7 +138,7 @@ void OptionsMenuScene::on_enter()
 	m_backRed.m_TextureRect.y = m_back.m_TextureRect.y;
 
 	/////////////////////////////////////////////
-	for (size_t i = 0; i < m_skulls.size(); ++i)
+	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
@@ -198,6 +199,15 @@ void OptionsMenuScene::on_enter()
 		m_gameplayMusicEnabled = false;
 	}
 
+	if (Settings::Audio::SoundEffects == 1)
+	{
+		m_soundEffectsEnabled = true;
+	}
+	else
+	{
+		m_soundEffectsEnabled = false;
+	}
+
 	m_thud.Load();
 	m_thud.Play();
 }
@@ -230,7 +240,7 @@ void OptionsMenuScene::on_exit()
 	m_version.Unload();
 	m_cursor.Unload();
 
-	for (size_t i = 0; i < m_skulls.size(); ++i)
+	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Unload();
 	}
@@ -240,9 +250,6 @@ void OptionsMenuScene::on_exit()
 
 void OptionsMenuScene::update()
 {
-	m_cursor.m_TextureRect.x = Game::mouseX;
-	m_cursor.m_TextureRect.y = Game::mouseY;
-
 	if (Game::mouseX >= m_apply.m_TextureRect.x &&
 		Game::mouseX <= m_apply.m_TextureRect.x + m_apply.m_TextureRect.w &&
 		Game::mouseY >= m_apply.m_TextureRect.y &&
@@ -313,6 +320,8 @@ void OptionsMenuScene::update()
 		m_displayCheckMark.m_TextureRect.x = m_windowedBox.x + (m_windowedBox.w / 5);
 		m_displayCheckMark.m_TextureRect.y = m_windowedBox.y - (m_windowedBox.h / 2);
 	}
+
+	m_cursor.setRect(Game::mouseX, Game::mouseY);
 }
 
 void OptionsMenuScene::handle_events()
@@ -324,7 +333,7 @@ void OptionsMenuScene::handle_events()
 		{
 			case SDL_QUIT:
 			{
-				Game::gameStateMachine.pop();
+				Game::isRunning = false;
 			} break;
 
 			case SDL_KEYDOWN:
@@ -343,7 +352,6 @@ void OptionsMenuScene::handle_events()
 
 			case SDL_MOUSEBUTTONDOWN:
 			{
-
 				if (m_isBack)
 				{
 					Game::gameStateMachine.pop();
@@ -366,7 +374,7 @@ void OptionsMenuScene::handle_events()
 					{
 						m_soundEffectsEnabled = true;
 					}
-					else
+					else if (m_soundEffectsEnabled)
 					{
 						m_soundEffectsEnabled = false;
 					}
@@ -377,12 +385,10 @@ void OptionsMenuScene::handle_events()
 					if (!m_menuMusicEnabled)
 					{
 						m_menuMusicEnabled = true;
-						//MusicManager::isMenuMusic = true;
 					}
 					else if (m_menuMusicEnabled)
 					{
 						m_menuMusicEnabled = false;
-						//MusicManager::isMenuMusic = false;
 					}
 				}
 
@@ -392,12 +398,10 @@ void OptionsMenuScene::handle_events()
 					if (!m_gameplayMusicEnabled)
 					{
 						m_gameplayMusicEnabled = true;
-						//MusicManager::isGamePlayMusic = true;
 					}
-					else
+					else if (m_gameplayMusicEnabled)
 					{
 						m_gameplayMusicEnabled = false;
-						//MusicManager::isGamePlayMusic = false;
 					}
 				}
 
@@ -408,19 +412,32 @@ void OptionsMenuScene::handle_events()
 					if (m_menuMusicEnabled)
 					{
 						MusicManager::isMenuMusic = true;
+						Settings::Audio::MenuMusic = 1;
 					}
 					else if (!m_menuMusicEnabled)
 					{
 						MusicManager::isMenuMusic = false;
+						Settings::Audio::MenuMusic = 0;
 					}
 
 					if (m_gameplayMusicEnabled)
 					{
 						MusicManager::isGamePlayMusic = true;
+						Settings::Audio::GamePlayMusic = 1;
 					}
 					else if (!m_gameplayMusicEnabled)
 					{
 						MusicManager::isGamePlayMusic = false;
+						Settings::Audio::GamePlayMusic = 0;
+					}
+
+					if (m_soundEffectsEnabled)
+					{
+						Settings::Audio::SoundEffects = 1;
+					}
+					else if (!m_soundEffectsEnabled)
+					{
+						Settings::Audio::SoundEffects = 0;
 					}
 				}
 

@@ -13,7 +13,8 @@
 class Scoreboard
 {
 public:
-	Scoreboard();
+	Scoreboard()=default;
+	Scoreboard(unsigned int x, unsigned int y);
 	~Scoreboard()=default;
 
 	void Load();
@@ -35,29 +36,28 @@ public:
 	void showFinal();
 
 private:
-	//Scoreboard(const Scoreboard& obj)=delete;
-	//Scoreboard& operator=(const Scoreboard&)=delete;
+	Scoreboard(const Scoreboard& obj)=delete;
+	Scoreboard& operator=(const Scoreboard&)=delete;
 
 	std::unique_ptr<FileIO> m_File;
 
-	const char* m_convertedScore                       = nullptr;
-	const char* m_convertedHighScore                   = nullptr;
-	const char* m_convertedLevelScore                  = nullptr;
-	const char* m_convertedFinalScore                  = nullptr;
+	const char* m_convertedScore                  = nullptr;
+	const char* m_convertedHighScore              = nullptr;
+	const char* m_convertedLevelScore             = nullptr;
+	const char* m_convertedFinalScore             = nullptr;
 
-	Text m_scoreLabel;
-	Text m_scoreText;
-	Text m_highScoreLabel;
-	Text m_highScoreText;
-	Text m_levelScoreLabel;
-	Text m_levelScoreText;
-	Text m_finalScoreLabel;
-	Text m_finalScoreText;
+	std::unique_ptr<Text> m_scoreLabel            = nullptr;
+	std::unique_ptr<Text> m_scoreText             = nullptr;
+	std::unique_ptr<Text> m_highScoreLabel        = nullptr;
+	std::unique_ptr<Text> m_highScoreText         = nullptr;
+	std::unique_ptr<Text> m_levelScoreLabel       = nullptr;
+	std::unique_ptr<Text> m_levelScoreText        = nullptr;
+	std::unique_ptr<Text> m_finalScoreLabel       = nullptr;
+	std::unique_ptr<Text> m_finalScoreText        = nullptr;
 
-	unsigned int m_score                               = 0;
-	unsigned int m_highScore                           = 0;
-	unsigned int m_levelScore                          = 0;
-	std::array<unsigned int, 3> m_difficultyLevel      = { 0, 1, 2 };
+	unsigned int m_score                          = 0;
+	unsigned int m_highScore                      = 0;
+	unsigned int m_levelScore                     = 0;
 
 	std::string m_fs;
 	std::string m_hs;

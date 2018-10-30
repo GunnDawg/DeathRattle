@@ -38,8 +38,7 @@ void LeaderBoardScene::on_exit()
 
 void LeaderBoardScene::update()
 {
-	m_cursor.m_TextureRect.x = Game::mouseX;
-	m_cursor.m_TextureRect.y = Game::mouseY;
+	m_cursor.setRect(Game::mouseX, Game::mouseY);
 }
 
 void LeaderBoardScene::handle_events()

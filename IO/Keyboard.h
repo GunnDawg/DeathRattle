@@ -18,8 +18,8 @@ public:
 	inline bool isEnabled() const { return m_Enabled; }
 
 private:
-	//Keyboard(const Keyboard& obj)=delete;
-	//Keyboard& operator=(const Keyboard&)=delete;
+	Keyboard(const Keyboard& obj)=delete;
+	Keyboard& operator=(const Keyboard&)=delete;
 
 	bool m_Enabled;
 };
