@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "StateMachine/GameState.h"
+#include "SceneManager.h"
 #include "IntroScene.h"
 #include "Graphics/Texture.h"
 #include "../Audio/MusicManager.h"

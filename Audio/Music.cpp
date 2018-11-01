@@ -6,14 +6,6 @@ m_musicFilePath(filePath)
 
 }
 
-Music::~Music()
-{
-	if (m_music != nullptr)
-	{
-		Mix_FreeMusic(m_music);
-	}
-}
-
 void Music::Load()
 {
 	m_music = Mix_LoadMUS(m_musicFilePath);
@@ -22,7 +14,21 @@ void Music::Load()
 		printf("Error loading music file. Error: %s\n", Mix_GetError());
 	}
 
+	printf("MUSIC LOADED: \t\t---> \t%s\n", m_musicFilePath);
+
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
+}
+
+void Music::Unload()
+{
+	Mix_FreeMusic(m_music);
+	printf("MUSIC UNLOADED: \t---> \t%s\n", m_musicFilePath);
+}
+
+void Music::SetVolume(int v)
+{
+	assert(v > 0 && "Volume cannot be divided by 0");
+	Mix_VolumeMusic(MIX_MAX_VOLUME / v);
 }
 
 void Music::Mute()

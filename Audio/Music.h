@@ -12,13 +12,15 @@ class Music
 public:
 	Music()=default;
 	Music(const char* filePath);
-	~Music();
+	~Music()=default;
 
 	void Load();
+	void Unload();
 	inline void Play() const { Mix_PlayMusic(m_music, -1); }
 	inline void Pause() const { Mix_PauseMusic(); }
 	inline void Resume() const { Mix_ResumeMusic(); }
 	inline void Stop() const { Mix_HaltMusic(); }
+	void SetVolume(int v);
 	void Mute();
 	void Unmute();
 

@@ -181,20 +181,20 @@ void OptionsMenuScene::on_enter()
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
-	if (MusicManager::isMenuMusic)
+	if (Settings::Audio::MenuMusic == 1)
 	{
 		m_menuMusicEnabled = true;
 	}
-	else
+	else if (Settings::Audio::MenuMusic == 0)
 	{
 		m_menuMusicEnabled = false;
 	}
 
-	if (MusicManager::isGamePlayMusic)
+	if (Settings::Audio::GamePlayMusic == 1)
 	{
 		m_gameplayMusicEnabled = true;
 	}
-	else
+	else if(Settings::Audio::GamePlayMusic == 0)
 	{
 		m_gameplayMusicEnabled = false;
 	}
@@ -203,7 +203,7 @@ void OptionsMenuScene::on_enter()
 	{
 		m_soundEffectsEnabled = true;
 	}
-	else
+	else if(Settings::Audio::SoundEffects == 0)
 	{
 		m_soundEffectsEnabled = false;
 	}
@@ -405,29 +405,30 @@ void OptionsMenuScene::handle_events()
 					}
 				}
 
-				else if (m_isApply)
+				if (m_isApply)
 				{
 					m_thud.Play();
 
 					if (m_menuMusicEnabled)
 					{
-						MusicManager::isMenuMusic = true;
 						Settings::Audio::MenuMusic = 1;
+						MusicManager::Load(MusicManager::m_MenuMusic);
+						MusicManager::Setvolume(MusicManager::m_MenuMusic, 1.5);
+						MusicManager::Play(MusicManager::m_MenuMusic);
 					}
 					else if (!m_menuMusicEnabled)
 					{
-						MusicManager::isMenuMusic = false;
 						Settings::Audio::MenuMusic = 0;
+						MusicManager::Stop(MusicManager::m_MenuMusic);
+						MusicManager::Unload(MusicManager::m_MenuMusic);
 					}
 
 					if (m_gameplayMusicEnabled)
 					{
-						MusicManager::isGamePlayMusic = true;
 						Settings::Audio::GamePlayMusic = 1;
 					}
 					else if (!m_gameplayMusicEnabled)
 					{
-						MusicManager::isGamePlayMusic = false;
 						Settings::Audio::GamePlayMusic = 0;
 					}
 

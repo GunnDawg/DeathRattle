@@ -92,7 +92,6 @@ void Game::processinput()
 void Game::Update()
 {
 	updateDelta();
-	MusicManager::Update();
 	SDL_GetMouseState(&mouseX, &mouseY);
 	gameStateMachine.update();
 }

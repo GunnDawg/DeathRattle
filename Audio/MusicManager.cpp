@@ -1,56 +1,43 @@
 #include "MusicManager.h"
-
-bool MusicManager::isGamePlayMusic = true;
-bool MusicManager::isMenuMusic = true;
-Music MusicManager::m_music = Music("Assets/Audio/Music/bgmusic.wav");
+#include "GameSettings.h"
+#include "Scenes/SceneManager.h"
 
 MusicManager::~MusicManager()
 {
 
 }
 
-void MusicManager::Load()
+void MusicManager::Load(Music& m)
 {
-	m_music.Load();
+	m.Load();
 }
 
-void MusicManager::Play()
+void MusicManager::Unload(Music& m)
 {
-	m_music.Play();
+	m.Unload();
 }
 
-void MusicManager::Pause()
+void MusicManager::Play(Music& m)
 {
-	m_music.Pause();
+	m.Play();
 }
 
-void MusicManager::Stop()
+void MusicManager::Pause(Music& m)
 {
-	m_music.Stop();
+	m.Pause();
 }
 
-void MusicManager::Resume()
+void MusicManager::Stop(Music& m)
 {
-	m_music.Resume();
+	m.Stop();
 }
 
-void MusicManager::Update()
+void MusicManager::Resume(Music& m)
 {
-	if (!isMenuMusic)
-	{
-		m_music.Pause();
-	}
-	else if(isMenuMusic)
-	{
-		m_music.Resume();
-	}
+	m.Resume();
+}
 
-	else if (!isGamePlayMusic)
-	{
-		m_music.Pause();
-	}
-	else if(isGamePlayMusic)
-	{
-		m_music.Resume();
-	}
+void MusicManager::Setvolume(Music& m, int v)
+{
+	m.SetVolume(v);
 }

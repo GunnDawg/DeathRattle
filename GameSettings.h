@@ -3,8 +3,8 @@ namespace Settings
 {
 	struct GamePlay
 	{
-		enum class GameDifficulty { EASY, MEDIUM, HARD};
-		enum class GameInput { MOUSE, KEYBOARD};
+		enum class GameDifficulty { EASY, MEDIUM, HARD };
+		enum class GameInput { MOUSE, KEYBOARD };
 
 		inline static GameDifficulty Difficulty        = GameDifficulty::MEDIUM;
 		inline static GameInput Input                  = GameInput::MOUSE;

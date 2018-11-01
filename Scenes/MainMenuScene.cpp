@@ -1,4 +1,5 @@
 #include "MainMenuScene.h"
+#include "SceneManager.h"
 #include "PreGameplayScene.h"
 #include "LeaderboardScene.h"
 #include "OptionsMenuScene.h"
@@ -8,6 +9,8 @@
 
 void MainMenuScene::on_enter()
 {
+	SceneManager::SceneType = SceneManager::Type::MENU;
+
 	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Load();
@@ -109,10 +112,11 @@ void MainMenuScene::on_enter()
 	m_exitWhite.m_TextureRect.x = m_exit.m_TextureRect.x;
 	m_exitWhite.m_TextureRect.y = m_exit.m_TextureRect.y;
 
-	MusicManager::Load();
 	if (Settings::Audio::MenuMusic == 1)
 	{
-		MusicManager::Play();
+		MusicManager::Load(MusicManager::m_MenuMusic);
+		MusicManager::Setvolume(MusicManager::m_MenuMusic, 1.5);
+		MusicManager::Play(MusicManager::m_MenuMusic);
 	}
 }
 
@@ -148,6 +152,10 @@ void MainMenuScene::on_exit()
 	}
 
 	m_swoosh.Unload();
+	if (Settings::Audio::MenuMusic == 1)
+	{
+		MusicManager::Unload(MusicManager::m_MenuMusic);
+	}
 }
 
 void MainMenuScene::update()
@@ -222,6 +230,11 @@ void MainMenuScene::handle_events()
 
 					else if (m_isNewGame)
 					{
+						if (Settings::Audio::MenuMusic == 1)
+						{
+							MusicManager::Stop(MusicManager::m_MenuMusic);
+						}
+
 						Game::gameStateMachine.unloadAll();
 						std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
 						Game::gameStateMachine.push(std::move(gamePlayState));

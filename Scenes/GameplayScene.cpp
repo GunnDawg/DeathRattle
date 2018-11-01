@@ -1,10 +1,13 @@
 #include <cstdio>
 #include "GameplayScene.h"
+#include "SceneManager.h"
 #include "Scenes/MainMenuScene.h"
 #include "Game.h"
 
 void GameplayState::on_enter()
 {
+	SceneManager::SceneType = SceneManager::Type::GAMEPLAY;
+
 	printf("<-----LOADING GAME--------->\n");
 
 	switch (Settings::GamePlay::Input)
@@ -47,9 +50,10 @@ void GameplayState::on_enter()
 	m_heal.Load();
 	m_heal.setVolume(4);
 
-	if (Settings::Audio::GamePlayMusic == 0)
+	if (Settings::Audio::GamePlayMusic == 1)
 	{
-		MusicManager::Stop();
+		MusicManager::m_GamePlayMusic.Load();
+		MusicManager::m_GamePlayMusic.Play();
 	}
 }
 
@@ -78,6 +82,11 @@ void GameplayState::on_exit()
 	m_cursor.Unload();
 	m_ball.Unload();
 	m_dungeonLevels.Unload(m_dungeonLevels.getLevel());
+
+	if (Settings::Audio::GamePlayMusic == 1)
+	{
+		MusicManager::Unload(MusicManager::m_GamePlayMusic);
+	}
 }
 
 void GameplayState::handle_events()
@@ -113,37 +122,14 @@ void GameplayState::handle_events()
 
 					case SDLK_SPACE:
 					{
-						if (!m_paused)
+						if (m_newGame)
 						{
-							Mix_PauseMusic();
-							m_paused = true;
-							if (Settings::Audio::SoundEffects == 1)
-							{
-								m_pauseSound.Play();
-							}
-						}
-						else if (m_levelWon)
-						{
-							m_paused = true;
+							m_newGame = false;
+							m_paused = false;
 						}
 						else if (m_paused && !m_gameOver)
 						{
-							Mix_ResumeMusic();
 							m_paused = false;
-							if (Settings::Audio::SoundEffects == 1)
-							{
-								m_pauseSound.Play();
-							}
-						}
-
-						if (!m_keyBoard.isEnabled() && !m_mouse.isEnabled())
-						{
-							printf("No input devices enabled. Enable either the mouse or the keyboard!\n");
-							m_paused = true;
-						}
-						else if (m_newGame)
-						{
-							m_newGame = false;
 						}
 					} break;
 
