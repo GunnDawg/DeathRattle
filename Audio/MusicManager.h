@@ -12,6 +12,11 @@ class MusicManager
 			return instance;
 		}
 
+		MusicManager(const MusicManager&) = delete;
+		MusicManager(MusicManager&&) = delete;
+		MusicManager& operator=(const MusicManager&) = delete;
+		MusicManager& operator=(MusicManager&&) = delete;
+
 		static void Load(Music& m);
 		static void Unload(Music& m);
 		static void Play(Music& m);
@@ -19,17 +24,12 @@ class MusicManager
 		static void Stop(Music& m);
 		static void Resume(Music& m);
 		static void Setvolume(Music& m, int v);
+		inline Music* GamePlayMusic() { return &m_GamePlayMusic; }
 
-		inline static Music m_GamePlayMusic            = Music("Assets/Audio/Music/bgmusic.wav");
-		inline static Music m_MenuMusic                = Music("Assets/Audio/Music/menumusic.wav");
-
-		MusicManager(MusicManager const&)=delete;
-		void operator=(MusicManager const&)=delete;
-		~MusicManager();
-
-		//static Sound IntroSound;
-
+		static inline Music m_GamePlayMusic            = Music("Assets/Audio/Music/bgmusic.wav");
+		static inline Music m_MenuMusic                = Music("Assets/Audio/Music/menumusic.wav");
 
 	private:
 		MusicManager()=default;
+		~MusicManager();
 };

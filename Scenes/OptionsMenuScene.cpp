@@ -407,7 +407,7 @@ void OptionsMenuScene::handle_events()
 
 				if (m_isApply)
 				{
-					m_thud.Play();
+					//m_thud.Play();
 
 					if (m_menuMusicEnabled)
 					{
@@ -415,12 +415,19 @@ void OptionsMenuScene::handle_events()
 						MusicManager::Load(MusicManager::m_MenuMusic);
 						MusicManager::Setvolume(MusicManager::m_MenuMusic, 1.5);
 						MusicManager::Play(MusicManager::m_MenuMusic);
+						//MusicManager::getInstance().Load(MusicManager::m_MenuMusic);
+						//MusicManager::getInstance().Setvolume(MusicManager::m_MenuMusic, 1.5);
+						//MusicManager::getInstance().Play(MusicManager::m_MenuMusic);
 					}
 					else if (!m_menuMusicEnabled)
 					{
 						Settings::Audio::MenuMusic = 0;
 						MusicManager::Stop(MusicManager::m_MenuMusic);
 						MusicManager::Unload(MusicManager::m_MenuMusic);
+						//Game::JukeBox->Stop(Game::JukeBox->m_MenuMusic);
+						//Game::JukeBox->Unload(Game::JukeBox->m_MenuMusic);
+						//MusicManager::getInstance().Stop(MusicManager::m_MenuMusic);
+						//MusicManager::getInstance().Unload(MusicManager::m_MenuMusic);
 					}
 
 					if (m_gameplayMusicEnabled)
@@ -440,6 +447,8 @@ void OptionsMenuScene::handle_events()
 					{
 						Settings::Audio::SoundEffects = 0;
 					}
+
+					Game::gameStateMachine.pop();
 				}
 
 			} break;
@@ -474,6 +483,8 @@ void OptionsMenuScene::draw()
 	SDL_RenderCopyEx(Game::Renderer, m_skulls[0].m_Texture, NULL, &m_skulls[0].m_TextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
 	SDL_RenderCopy(Game::Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
 
+	SDL_RenderCopy(Game::Renderer, m_options.m_Texture, NULL, &m_options.m_TextureRect);
+
 	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
 	SDL_RenderDrawRect(Game::Renderer, &m_optionsBoxOutline);
 	SDL_RenderDrawRect(Game::Renderer, &m_fullScreenBoxOutline);
@@ -481,16 +492,14 @@ void OptionsMenuScene::draw()
 	SDL_RenderDrawRect(Game::Renderer, &m_gameplayMusicBoxOutline);
 	SDL_RenderDrawRect(Game::Renderer, &m_menuMusicBoxOutline);
 	SDL_RenderDrawRect(Game::Renderer, &m_soundEffectsBoxOutline);
-	SDL_RenderCopy(Game::Renderer, m_options.m_Texture, NULL, &m_options.m_TextureRect);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
 
-	SDL_RenderCopy(Game::Renderer, m_options.m_Texture, NULL, &m_options.m_TextureRect);
 	//Display Mode
 	SDL_RenderCopy(Game::Renderer, m_displayMode.m_Texture, NULL, &m_displayMode.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_fullScreen.m_Texture, NULL, &m_fullScreen.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_windowed.m_Texture, NULL, &m_windowed.m_TextureRect);
-
 	SDL_RenderCopy(Game::Renderer, m_displayCheckMark.m_Texture, NULL, &m_displayCheckMark.m_TextureRect);
+
 	//Audio Settings
 	SDL_RenderCopy(Game::Renderer, m_audioSettings.m_Texture, NULL, &m_audioSettings.m_TextureRect);
 	SDL_RenderCopy(Game::Renderer, m_soundEffects.m_Texture, NULL, &m_soundEffects.m_TextureRect);

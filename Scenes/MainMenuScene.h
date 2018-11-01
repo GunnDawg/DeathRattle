@@ -4,6 +4,8 @@
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
 #include "Audio/Sound.h"
+#include "Audio/MusicManager.h"
+#include "Graphics/Animation.h"
 
 class MainMenuScene : public GameState
 {
@@ -15,6 +17,8 @@ public:
 	void draw() override;
 
 private:
+	MusicManager* JukeBox           = &MusicManager::getInstance();
+
 	std::array<Texture, 2> m_skulls = {
 		Texture("Assets/Graphics/common/skull.png"),
 		Texture("Assets/Graphics/common/skull.png")
@@ -36,6 +40,7 @@ private:
 	Texture m_exitWhite             = Texture("Assets/Graphics/main_menu_scene/exit_white.png");
 	Texture m_version               = Texture("Assets/Graphics/common/version.png");
 
+	Animation m_Flames              = Animation("Assets/Graphics/Animations/flames.png", 8, 0);
 
 	SDL_Rect m_titleBox             = { 0 };
 	SDL_Rect m_menuBox              = { 0 };

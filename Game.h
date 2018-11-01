@@ -47,6 +47,6 @@ public:
 	inline static int mouseY                             = 0;
 
 private:
-	Game() = default;
+	Game()=default;
 	~Game();
 };

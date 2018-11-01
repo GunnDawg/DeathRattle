@@ -10,6 +10,7 @@
 #include "Physics/AABBCollision.h"
 #include "Audio/Sound.h"
 #include "GameSettings.h"
+#include "Audio/MusicManager.h"
 
 constexpr unsigned int NUM_PADDLES = 4;
 constexpr unsigned int NUM_ITEMS = 5;
@@ -38,6 +39,8 @@ public:
 	bool checkforWin();
 
 private:
+	MusicManager* JukeBox               = &MusicManager::getInstance();
+
 	std::array<Paddle, NUM_PADDLES> m_paddles = {
 		Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
 		Paddle(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),

@@ -8,21 +8,29 @@ m_musicFilePath(filePath)
 
 void Music::Load()
 {
-	m_music = Mix_LoadMUS(m_musicFilePath);
 	if (m_music == nullptr)
 	{
-		printf("Error loading music file. Error: %s\n", Mix_GetError());
+		m_music = Mix_LoadMUS(m_musicFilePath);
+		if (m_music == nullptr)
+		{
+			printf("Error loading music file. Error: %s\n", Mix_GetError());
+		}
+		else
+		{
+			printf("MUSIC LOADED: \t\t---> \t%s\n", m_musicFilePath);
+			Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
+		}
 	}
-
-	printf("MUSIC LOADED: \t\t---> \t%s\n", m_musicFilePath);
-
-	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 }
 
 void Music::Unload()
 {
-	Mix_FreeMusic(m_music);
-	printf("MUSIC UNLOADED: \t---> \t%s\n", m_musicFilePath);
+	if (m_music != nullptr)
+	{
+		Mix_FreeMusic(m_music);
+		m_music = nullptr;
+		printf("MUSIC UNLOADED: \t---> \t%s\n", m_musicFilePath);
+	}
 }
 
 void Music::SetVolume(int v)

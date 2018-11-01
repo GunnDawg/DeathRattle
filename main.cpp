@@ -6,15 +6,15 @@ int main(int argc, char* args[])
 	(void*)argc;
 	(void*)args;
 
-	Game& game = Game::getInstance();
+	Game* game = &Game::getInstance();
 
-	if (game.Init())
+	if (game->Init())
 	{
-		while (game.isRunning)
+		while (game->isRunning)
 		{
-			game.processinput();
-			game.Update();
-			game.Draw();
+			game->processinput();
+			game->Update();
+			game->Draw();
 		}
 	}
 	else

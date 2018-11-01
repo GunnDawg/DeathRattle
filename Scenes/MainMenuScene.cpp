@@ -114,9 +114,9 @@ void MainMenuScene::on_enter()
 
 	if (Settings::Audio::MenuMusic == 1)
 	{
-		MusicManager::Load(MusicManager::m_MenuMusic);
-		MusicManager::Setvolume(MusicManager::m_MenuMusic, 1.5);
-		MusicManager::Play(MusicManager::m_MenuMusic);
+		JukeBox->Load(MusicManager::m_MenuMusic);
+		JukeBox->Setvolume(MusicManager::m_MenuMusic, 1.5);
+		JukeBox->Play(MusicManager::m_MenuMusic);
 	}
 }
 
@@ -154,7 +154,7 @@ void MainMenuScene::on_exit()
 	m_swoosh.Unload();
 	if (Settings::Audio::MenuMusic == 1)
 	{
-		MusicManager::Unload(MusicManager::m_MenuMusic);
+		JukeBox->Unload(MusicManager::m_MenuMusic);
 	}
 }
 
@@ -205,6 +205,7 @@ void MainMenuScene::update()
 	}
 
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
+	m_Flames.Play(Game::deltaTime);
 }
 
 void MainMenuScene::handle_events()
@@ -232,7 +233,7 @@ void MainMenuScene::handle_events()
 					{
 						if (Settings::Audio::MenuMusic == 1)
 						{
-							MusicManager::Stop(MusicManager::m_MenuMusic);
+							JukeBox->Stop(MusicManager::m_MenuMusic);
 						}
 
 						Game::gameStateMachine.unloadAll();
@@ -354,4 +355,6 @@ void MainMenuScene::draw()
 	SDL_RenderCopy(Game::Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
 
 	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+
+	m_Flames.Draw(0, 0);
 }

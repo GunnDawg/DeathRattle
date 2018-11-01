@@ -7,7 +7,6 @@
 void GameplayState::on_enter()
 {
 	SceneManager::SceneType = SceneManager::Type::GAMEPLAY;
-
 	printf("<-----LOADING GAME--------->\n");
 
 	switch (Settings::GamePlay::Input)
@@ -52,8 +51,8 @@ void GameplayState::on_enter()
 
 	if (Settings::Audio::GamePlayMusic == 1)
 	{
-		MusicManager::m_GamePlayMusic.Load();
-		MusicManager::m_GamePlayMusic.Play();
+		JukeBox->m_GamePlayMusic.Load();
+		JukeBox->m_GamePlayMusic.Play();
 	}
 }
 
@@ -85,7 +84,8 @@ void GameplayState::on_exit()
 
 	if (Settings::Audio::GamePlayMusic == 1)
 	{
-		MusicManager::Unload(MusicManager::m_GamePlayMusic);
+		JukeBox->m_GamePlayMusic.Stop();
+		JukeBox->m_GamePlayMusic.Unload();
 	}
 }
 

@@ -21,4 +21,5 @@ public:
 	std::string m_filePath;
 	SDL_Texture* m_Texture            = nullptr;
 	SDL_Rect m_TextureRect            = { 0 };
+	SDL_Rect m_CropRect               = { 0 };
 };
