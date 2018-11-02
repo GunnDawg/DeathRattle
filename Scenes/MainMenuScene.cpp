@@ -156,7 +156,7 @@ void MainMenuScene::on_exit()
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
-		m_Flames[i].Stop();
+		m_Flames[i].Unload();
 	}
 
 	m_swoosh.Unload();

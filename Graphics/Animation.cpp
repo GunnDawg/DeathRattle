@@ -1,9 +1,10 @@
 #include "Animation.h"
 #include "Game.h"
 
-Animation::Animation(const char* filePath, unsigned int numFramesX, unsigned int numFramesY) :
+Animation::Animation(const char* filePath, unsigned int numFramesX, unsigned int numFramesY, double speed) :
 m_Texture(filePath),
-m_numFramesX(numFramesX), m_numFramesY(numFramesY)
+m_numFramesX(numFramesX), m_numFramesY(numFramesY),
+m_animSpeed(speed)
 {
 	m_Texture.Load();
 
@@ -29,35 +30,30 @@ void Animation::Load(unsigned int x, unsigned int y)
 
 void Animation::Play(double dt)
 {
-	m_frameTime += dt;
-	if (m_frameTime >= 16.00)
+	if (m_isPlaying)
 	{
-		m_frameTime = 0;
-		m_Texture.m_CropRect.x += m_frameWidth;
-		if (m_Texture.m_CropRect.x >= m_Texture.m_TextureRect.w)
+		m_frameTime += dt;
+		if (m_frameTime >= m_animSpeed)
 		{
-			m_Texture.m_CropRect.x = 0;
-			m_Texture.m_CropRect.y += m_frameHeight;
-			if (m_Texture.m_CropRect.y >= m_Texture.m_TextureRect.h)
+			m_frameTime = 0;
+			m_Texture.m_CropRect.x += m_frameWidth;
+			if (m_Texture.m_CropRect.x >= m_Texture.m_TextureRect.w)
 			{
-				m_Texture.m_CropRect.y = 0;
+				m_Texture.m_CropRect.x = 0;
+				if (m_numFramesY > 1)
+				{
+					m_Texture.m_CropRect.y += m_frameHeight;
+					if (m_Texture.m_CropRect.y >= m_Texture.m_TextureRect.h)
+					{
+						m_Texture.m_CropRect.y = 0;
+					}
+				}
 			}
 		}
 	}
 }
 
-void Animation::Stop()
-{
-	m_Texture.Unload();
-}
-
 void Animation::Draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_Texture.m_Texture, &m_Texture.m_CropRect, &m_Texture.m_PosRect);
-}
-
-void Animation::Update(unsigned int x, unsigned int y)
-{
-	m_Texture.m_PosRect.x = x;
-	m_Texture.m_PosRect.y = y;
 }

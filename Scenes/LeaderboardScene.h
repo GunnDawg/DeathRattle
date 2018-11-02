@@ -20,8 +20,8 @@ private:
 	Texture m_background            = Texture("Assets/Graphics/common/main_background.png");
 	Texture m_comingSoon            = Texture("Assets/Graphics/leaderboard_scene/comingsoon.png");
 
-	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
-												   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
+	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+												   Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
 	SDL_Rect m_comingSoonBox        = { 0 };
 

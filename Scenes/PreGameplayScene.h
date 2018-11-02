@@ -31,8 +31,8 @@ private:
 	Texture m_devName;
 	Texture m_version;
 
-	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
-												   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
+	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+												   Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
 	SDL_Rect m_difficultyBox;
 	SDL_Rect m_difficultyBoxOUtline;

@@ -53,8 +53,8 @@ private:
 	Texture m_leftArrow             = Texture("Assets/Graphics/common/left_arrow.png");
 	Texture m_leftArrowWhite        = Texture("Assets/Graphics/common/left_arrow_white.png");
 
-	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
-												   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
+	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+												   Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
 	SDL_Rect m_devNameBox           = { 0 };
 	SDL_Rect m_creditsBox           = { 0 };

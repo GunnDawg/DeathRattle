@@ -34,8 +34,8 @@ private:
 	Texture m_skull                 = Texture("Assets/Graphics/intro_scene/skull.png");
 	Texture m_skullWhite            = Texture("Assets/Graphics/intro_scene/skull_white.png");
 
-	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
-												   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
+	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+												   Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
 	SDL_Rect m_plugBox              = { 0 };
 	SDL_Rect m_skullBox             = { 0 };

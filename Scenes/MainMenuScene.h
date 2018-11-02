@@ -40,8 +40,8 @@ private:
 	Texture m_exitWhite             = Texture("Assets/Graphics/main_menu_scene/exit_white.png");
 	Texture m_version               = Texture("Assets/Graphics/common/version.png");
 
-	std::array<Animation, 2> m_Flames =              { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
-													   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
+	std::array<Animation, 2> m_Flames =              { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+													   Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
 	SDL_Rect m_titleBox             = { 0 };
 	SDL_Rect m_menuBox              = { 0 };

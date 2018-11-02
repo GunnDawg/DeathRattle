@@ -87,8 +87,8 @@ private:
 	Texture m_grimReaper                = Texture("Assets/Graphics/gameplay_scene/grim_reaper.png");
 	Texture m_cursor                    = Texture("Assets/Graphics/common/cursor.png");
 
-	std::array<Animation, 2> m_Flames   = { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
-									        Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
+	std::array<Animation, 2> m_Flames   = { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+									        Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
 	SDL_Rect m_finalScoreBox            = { 0 };
 
