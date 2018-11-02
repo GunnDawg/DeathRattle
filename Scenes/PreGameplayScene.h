@@ -5,6 +5,7 @@
 #include "Graphics/Texture.h"
 #include "Audio/Sound.h"
 #include "Time/Timer.h"
+#include "Graphics/Animation.h"
 
 class PreGameplayScene : public GameState
 {
@@ -29,6 +30,9 @@ private:
 	Texture m_background;
 	Texture m_devName;
 	Texture m_version;
+
+	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
+												   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
 
 	SDL_Rect m_difficultyBox;
 	SDL_Rect m_difficultyBoxOUtline;

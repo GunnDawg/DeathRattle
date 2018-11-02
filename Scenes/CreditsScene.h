@@ -3,6 +3,7 @@
 #include "Audio/Sound.h"
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
+#include "Graphics/Animation.h"
 
 class CreditsScene : public GameState
 {
@@ -51,6 +52,9 @@ private:
 	Texture m_rightArrowWhite       = Texture("Assets/Graphics/common/right_arrow_white.png");
 	Texture m_leftArrow             = Texture("Assets/Graphics/common/left_arrow.png");
 	Texture m_leftArrowWhite        = Texture("Assets/Graphics/common/left_arrow_white.png");
+
+	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
+												   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
 
 	SDL_Rect m_devNameBox           = { 0 };
 	SDL_Rect m_creditsBox           = { 0 };

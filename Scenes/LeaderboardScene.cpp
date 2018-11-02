@@ -13,6 +13,9 @@ void LeaderBoardScene::on_enter()
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
+	m_Flames[0].Load(12, -200);
+	m_Flames[1].Load(942, -200);
+
 	m_comingSoon.Load();
 	m_comingSoon.m_TextureRect.y = (Game::screenHeight / 2) - m_comingSoon.m_TextureRect.h / 2;
 	m_comingSoon.m_TextureRect.x = (Game::screenWidth / 2) - m_comingSoon.m_TextureRect.w / 2;
@@ -33,12 +36,19 @@ void LeaderBoardScene::on_exit()
 	m_background.Unload();
 	m_comingSoon.Unload();
 
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Stop();
+	}
+
 	m_thud.Unload();
 }
 
 void LeaderBoardScene::update()
 {
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
+	m_Flames[0].Play(Game::deltaTime);
+	m_Flames[1].Play(Game::deltaTime);
 }
 
 void LeaderBoardScene::handle_events()
@@ -76,6 +86,10 @@ void LeaderBoardScene::handle_events()
 void LeaderBoardScene::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
+
+	m_Flames[0].Draw();
+	m_Flames[1].Draw();
+
 	SDL_RenderCopy(Game::Renderer, m_comingSoon.m_Texture, NULL, &m_comingSoon.m_TextureRect);
 
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);

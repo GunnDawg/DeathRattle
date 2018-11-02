@@ -21,6 +21,8 @@ void Game::updateDelta()
 	lastTime = currentTime;
 	currentTime = SDL_GetPerformanceCounter();
 	deltaTime = static_cast<double>((currentTime - lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
+
+	//printf("%f\n", deltaTime);
 }
 
 bool Game::Init()

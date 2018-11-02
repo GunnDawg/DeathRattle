@@ -14,6 +14,9 @@ void IntroSceneState::on_enter()
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
+	m_Flames[0].Load(12, -200);
+	m_Flames[1].Load(942, -200);
+
 	m_plug.Load();
 	m_plug.m_TextureRect.x = (Game::screenWidth / 2) - (m_plug.m_TextureRect.w / 2);
 	m_plug.m_TextureRect.y = 0;
@@ -94,6 +97,11 @@ void IntroSceneState::on_exit()
 
 	m_introSound.Unload();
 	//m_scare.Unload();
+
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Stop();
+	}
 }
 
 void IntroSceneState::update()
@@ -157,6 +165,8 @@ void IntroSceneState::update()
 	}
 
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
+	m_Flames[0].Play(Game::deltaTime);
+	m_Flames[1].Play(Game::deltaTime);
 }
 
 void IntroSceneState::handle_events()
@@ -210,6 +220,10 @@ void IntroSceneState::handle_events()
 void IntroSceneState::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
+
+	m_Flames[0].Draw();
+	m_Flames[1].Draw();
+
 	if (m_isBlood)
 	{
 		SDL_RenderCopy(Game::Renderer, m_blood.m_Texture, NULL, &m_blood.m_TextureRect);

@@ -54,6 +54,9 @@ void MainMenuScene::on_enter()
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
+	m_Flames[0].Load(12, -200);
+	m_Flames[1].Load(942, -200);
+
 	m_menuBox.w = 400;
 	m_menuBox.h = 400;
 	m_menuBox.x = (Game::screenWidth / 2) - (m_menuBox.w / 2);
@@ -151,6 +154,11 @@ void MainMenuScene::on_exit()
 		m_skulls[i].Unload();
 	}
 
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Stop();
+	}
+
 	m_swoosh.Unload();
 	if (Settings::Audio::MenuMusic == 1)
 	{
@@ -205,7 +213,8 @@ void MainMenuScene::update()
 	}
 
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
-	m_Flames.Play(Game::deltaTime);
+	m_Flames[0].Play(Game::deltaTime);
+	m_Flames[1].Play(Game::deltaTime);
 }
 
 void MainMenuScene::handle_events()
@@ -288,6 +297,9 @@ void MainMenuScene::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
+	m_Flames[0].Draw();
+	m_Flames[1].Draw();
+
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
 	SDL_RenderFillRect(Game::Renderer, &m_titleBox);
@@ -355,6 +367,4 @@ void MainMenuScene::draw()
 	SDL_RenderCopy(Game::Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
 
 	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
-
-	m_Flames.Draw(0, 0);
 }

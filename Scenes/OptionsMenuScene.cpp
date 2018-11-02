@@ -159,6 +159,9 @@ void OptionsMenuScene::on_enter()
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
+	m_Flames[0].Load(12, -200);
+	m_Flames[1].Load(942, -200);
+
 	m_title.Load();
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
@@ -239,6 +242,11 @@ void OptionsMenuScene::on_exit()
 	m_devName.Unload();
 	m_version.Unload();
 	m_cursor.Unload();
+
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Stop();
+	}
 
 	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
@@ -322,6 +330,8 @@ void OptionsMenuScene::update()
 	}
 
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
+	m_Flames[0].Play(Game::deltaTime);
+	m_Flames[1].Play(Game::deltaTime);
 }
 
 void OptionsMenuScene::handle_events()
@@ -462,6 +472,9 @@ void OptionsMenuScene::handle_events()
 void OptionsMenuScene::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.getTexture(), NULL, &m_background.m_TextureRect);
+
+	m_Flames[0].Draw();
+	m_Flames[1].Draw();
 
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);

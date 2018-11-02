@@ -11,6 +11,7 @@
 #include "Audio/Sound.h"
 #include "GameSettings.h"
 #include "Audio/MusicManager.h"
+#include "Graphics/Animation.h"
 
 constexpr unsigned int NUM_PADDLES = 4;
 constexpr unsigned int NUM_ITEMS = 5;
@@ -85,6 +86,9 @@ private:
 
 	Texture m_grimReaper                = Texture("Assets/Graphics/gameplay_scene/grim_reaper.png");
 	Texture m_cursor                    = Texture("Assets/Graphics/common/cursor.png");
+
+	std::array<Animation, 2> m_Flames   = { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
+									        Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
 
 	SDL_Rect m_finalScoreBox            = { 0 };
 

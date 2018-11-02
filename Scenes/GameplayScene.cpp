@@ -35,6 +35,9 @@ void GameplayState::on_enter()
 		                  m_grimReaper.m_TextureRect.w,
 		                  m_grimReaper.m_TextureRect.h);
 
+	m_Flames[0].Load(12, -200);
+	m_Flames[1].Load(942, -200);
+
 	m_ball.Load();
 
 	m_HUD.Load();
@@ -81,6 +84,11 @@ void GameplayState::on_exit()
 	m_cursor.Unload();
 	m_ball.Unload();
 	m_dungeonLevels.Unload(m_dungeonLevels.getLevel());
+
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Stop();
+	}
 
 	if (Settings::Audio::GamePlayMusic == 1)
 	{
@@ -170,6 +178,12 @@ void GameplayState::handle_events()
 void GameplayState::update()
 {
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
+	m_Flames[0].Play(Game::deltaTime);
+	m_Flames[1].Play(Game::deltaTime);
+	if (Game::deltaTime >= 20.0)
+	{
+		printf("%f\n", Game::deltaTime);
+	}
 
 	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
 
@@ -269,8 +283,9 @@ void GameplayState::drawText()
 void GameplayState::draw()
 {
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
-
 	drawLevel();
+	m_Flames[0].Draw();
+	m_Flames[1].Draw();
 
 	if (m_gameOver || m_levelWon)
 	{
@@ -381,7 +396,7 @@ void GameplayState::checkCollision()
 		if (percent < 0)
 			percent = 0;
 
-		double angle = 0.0f;
+		double angle = 0.0;
 
 		if (paddleHit == &m_paddles[0])
 		{

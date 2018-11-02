@@ -4,6 +4,7 @@
 #include "Audio/Sound.h"
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
+#include "Graphics/Animation.h"
 
 class OptionsMenuScene : public GameState
 {
@@ -46,6 +47,9 @@ private:
 	Texture m_devName                  = Texture("Assets/Graphics/common/dev_name.png");
 	Texture m_version                  = Texture("Assets/Graphics/common/version.png");
 	Texture m_cursor                   = Texture("Assets/Graphics/common/cursor.png");
+
+	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
+												   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
 
 	SDL_Rect m_optionsBox              = { 0 };
 	SDL_Rect m_optionsBoxOutline       = { 0 };

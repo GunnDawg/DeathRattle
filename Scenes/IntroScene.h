@@ -1,9 +1,11 @@
 #pragma once
 #include <memory>
+#include <array>
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
 #include "Audio/Sound.h"
 #include "Time/Timer.h"
+#include "Graphics/Animation.h"
 
 class IntroSceneState : public GameState
 {
@@ -32,6 +34,8 @@ private:
 	Texture m_skull                 = Texture("Assets/Graphics/intro_scene/skull.png");
 	Texture m_skullWhite            = Texture("Assets/Graphics/intro_scene/skull_white.png");
 
+	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4),
+												   Animation("Assets/Graphics/Animations/flames.png", 8, 4) };
 
 	SDL_Rect m_plugBox              = { 0 };
 	SDL_Rect m_skullBox             = { 0 };
