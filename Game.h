@@ -26,16 +26,16 @@ public:
 	Game& operator=(const Game&) = delete;
 	Game& operator=(Game&&) = delete;
 
-	static void updateDelta();
-	static bool Init();
-	static void processinput();
-	static void Update();
-	static void Draw();
+	void updateDelta();
+	bool Init();
+	void processinput();
+	void Update();
+	void Draw();
 
 	inline static GameStateMachine gameStateMachine      = GameStateMachine();
 	inline static SDL_Window* Window                     = nullptr;
 	inline static SDL_Renderer* Renderer                 = nullptr;
-	inline static const char* Title                      = "Keep it Alive!!";
+	inline static const char* Title                      = "KEEP IT ALIVE!! - A pong-like game by GunnGames";
 	inline static unsigned int screenWidth               = 1280;
 	inline static unsigned int screenHeight              = 720;
 	inline static bool isRunning                         = false;

@@ -1,11 +1,4 @@
 #include "MusicManager.h"
-#include "GameSettings.h"
-#include "Scenes/SceneManager.h"
-
-MusicManager::~MusicManager()
-{
-
-}
 
 void MusicManager::Load(Music& m)
 {

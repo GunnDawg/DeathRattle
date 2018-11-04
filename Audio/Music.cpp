@@ -38,15 +38,3 @@ void Music::SetVolume(int v)
 	assert(v > 0 && "Volume cannot be divided by 0");
 	Mix_VolumeMusic(MIX_MAX_VOLUME / v);
 }
-
-void Music::Mute()
-{
-	Mix_VolumeMusic(MIX_MAX_VOLUME - MIX_MAX_VOLUME);
-	m_isMuted = true;
-}
-
-void Music::Unmute()
-{
-	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
-	m_isMuted = false;
-}

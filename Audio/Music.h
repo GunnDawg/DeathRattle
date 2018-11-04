@@ -18,21 +18,14 @@ public:
 	void Unload();
 	inline void Play() const { Mix_PlayMusic(m_music, -1); }
 	inline void Pause() const { Mix_PauseMusic(); }
-	inline void Resume() const { Mix_ResumeMusic(); }
 	inline void Stop() const { Mix_HaltMusic(); }
+	inline void Resume() const { Mix_ResumeMusic(); }
 	void SetVolume(int v);
-	void Mute();
-	void Unmute();
-
-	inline bool isMuted() const { return m_isMuted; }
 
 private:
 	Music(const Music& obj)=delete;
 	Music& operator=(const Music&)=delete;
 
-
 	Mix_Music* m_music             = nullptr;
 	const char* m_musicFilePath    = nullptr;
-
-	bool m_isMuted                 = false;
 };

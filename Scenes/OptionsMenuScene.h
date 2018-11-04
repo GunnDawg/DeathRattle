@@ -5,6 +5,7 @@
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
 #include "Graphics/Animation.h"
+#include "Audio/MusicManager.h"
 
 class OptionsMenuScene : public GameState
 {
@@ -20,6 +21,8 @@ private:
 		Texture("Assets/Graphics/common/skull.png"),
 		Texture("Assets/Graphics/common/skull.png")
 	};
+
+	MusicManager* JukeBox              = &MusicManager::getInstance();
 
 	Texture m_options                  = Texture("Assets/Graphics/options_menu/options.png");
 	Texture m_apply                    = Texture("Assets/Graphics/options_menu/apply.png");

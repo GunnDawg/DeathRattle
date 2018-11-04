@@ -54,8 +54,8 @@ void GameplayState::on_enter()
 
 	if (Settings::Audio::GamePlayMusic == 1)
 	{
-		JukeBox->m_GamePlayMusic.Load();
-		JukeBox->m_GamePlayMusic.Play();
+		JukeBox->Load(JukeBox->GamePlayMusic);
+		JukeBox->Play(JukeBox->GamePlayMusic);
 	}
 }
 
@@ -92,8 +92,8 @@ void GameplayState::on_exit()
 
 	if (Settings::Audio::GamePlayMusic == 1)
 	{
-		JukeBox->m_GamePlayMusic.Stop();
-		JukeBox->m_GamePlayMusic.Unload();
+		JukeBox->Stop(JukeBox->GamePlayMusic);
+		JukeBox->Unload(JukeBox->GamePlayMusic);
 	}
 }
 
@@ -138,6 +138,10 @@ void GameplayState::handle_events()
 						else if (m_paused && !m_gameOver)
 						{
 							m_paused = false;
+						}
+						else if (!m_paused)
+						{
+							m_paused = true;
 						}
 					} break;
 

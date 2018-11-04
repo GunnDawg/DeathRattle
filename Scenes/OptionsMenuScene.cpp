@@ -422,22 +422,15 @@ void OptionsMenuScene::handle_events()
 					if (m_menuMusicEnabled)
 					{
 						Settings::Audio::MenuMusic = 1;
-						MusicManager::Load(MusicManager::m_MenuMusic);
-						MusicManager::Setvolume(MusicManager::m_MenuMusic, 1.5);
-						MusicManager::Play(MusicManager::m_MenuMusic);
-						//MusicManager::getInstance().Load(MusicManager::m_MenuMusic);
-						//MusicManager::getInstance().Setvolume(MusicManager::m_MenuMusic, 1.5);
-						//MusicManager::getInstance().Play(MusicManager::m_MenuMusic);
+						JukeBox->Load(JukeBox->MenuMusic);
+						JukeBox->Setvolume(JukeBox->MenuMusic, 1.5);
+						JukeBox->Play(JukeBox->MenuMusic);
 					}
 					else if (!m_menuMusicEnabled)
 					{
 						Settings::Audio::MenuMusic = 0;
-						MusicManager::Stop(MusicManager::m_MenuMusic);
-						MusicManager::Unload(MusicManager::m_MenuMusic);
-						//Game::JukeBox->Stop(Game::JukeBox->m_MenuMusic);
-						//Game::JukeBox->Unload(Game::JukeBox->m_MenuMusic);
-						//MusicManager::getInstance().Stop(MusicManager::m_MenuMusic);
-						//MusicManager::getInstance().Unload(MusicManager::m_MenuMusic);
+						JukeBox->Stop(JukeBox->MenuMusic);
+						JukeBox->Unload(JukeBox->MenuMusic);
 					}
 
 					if (m_gameplayMusicEnabled)

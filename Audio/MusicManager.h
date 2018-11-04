@@ -1,5 +1,4 @@
 #pragma once
-#include "Sound.h"
 #include "Music.h"
 #include <SDL_mixer.h>
 
@@ -17,19 +16,18 @@ class MusicManager
 		MusicManager& operator=(const MusicManager&) = delete;
 		MusicManager& operator=(MusicManager&&) = delete;
 
-		static void Load(Music& m);
-		static void Unload(Music& m);
-		static void Play(Music& m);
-		static void Pause(Music& m);
-		static void Stop(Music& m);
-		static void Resume(Music& m);
-		static void Setvolume(Music& m, int v);
-		inline Music* GamePlayMusic() { return &m_GamePlayMusic; }
+		void Load(Music& m);
+		void Unload(Music& m);
+		void Play(Music& m);
+		void Pause(Music& m);
+		void Stop(Music& m);
+		void Resume(Music& m);
+		void Setvolume(Music& m, int v);
 
-		static inline Music m_GamePlayMusic            = Music("Assets/Audio/Music/bgmusic.wav");
-		static inline Music m_MenuMusic                = Music("Assets/Audio/Music/menumusic.wav");
+		Music GamePlayMusic            = Music("Assets/Audio/Music/bgmusic.wav");
+		Music MenuMusic                = Music("Assets/Audio/Music/menumusic.wav");
 
 	private:
 		MusicManager()=default;
-		~MusicManager();
+		~MusicManager()=default;
 };

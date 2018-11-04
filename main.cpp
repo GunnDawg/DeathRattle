@@ -3,9 +3,6 @@
 
 int main(int argc, char* args[])
 {
-	(void*)argc;
-	(void*)args;
-
 	Game* game = &Game::getInstance();
 
 	if (game->Init())

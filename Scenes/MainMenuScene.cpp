@@ -117,9 +117,9 @@ void MainMenuScene::on_enter()
 
 	if (Settings::Audio::MenuMusic == 1)
 	{
-		JukeBox->Load(MusicManager::m_MenuMusic);
-		JukeBox->Setvolume(MusicManager::m_MenuMusic, 1.5);
-		JukeBox->Play(MusicManager::m_MenuMusic);
+		JukeBox->Load(JukeBox->MenuMusic);
+		JukeBox->Setvolume(JukeBox->MenuMusic, 1.5);
+		JukeBox->Play(JukeBox->MenuMusic);
 	}
 }
 
@@ -162,7 +162,7 @@ void MainMenuScene::on_exit()
 	m_swoosh.Unload();
 	if (Settings::Audio::MenuMusic == 1)
 	{
-		JukeBox->Unload(MusicManager::m_MenuMusic);
+		JukeBox->Unload(JukeBox->MenuMusic);
 	}
 }
 
@@ -240,17 +240,17 @@ void MainMenuScene::handle_events()
 
 					else if (m_isNewGame)
 					{
-						if (Settings::Audio::MenuMusic == 1)
-						{
-							JukeBox->Stop(MusicManager::m_MenuMusic);
-						}
+						//if (Settings::Audio::MenuMusic == 1)
+						//{
+						//	JukeBox->Stop(JukeBox->MenuMusic);
+						//}
 
-						Game::gameStateMachine.unloadAll();
-						std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
-						Game::gameStateMachine.push(std::move(gamePlayState));
+						//Game::gameStateMachine.unloadAll();
+						//std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
+						//Game::gameStateMachine.push(std::move(gamePlayState));
 
-						//std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
-						//Game::gameStateMachine.push(std::move(preGamePlayState));
+						std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
+						Game::gameStateMachine.push(std::move(preGamePlayState));
 					}
 
 					else if (m_isLeaderBoard)

@@ -31,13 +31,21 @@ private:
 	Texture m_devName;
 	Texture m_version;
 
-	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
-												   Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
+	Texture m_selectDifficulty         = Texture("Assets/Graphics/pregameplay_scene/difficulty.png");
+	Texture m_easyRed                  = Texture("Assets/Graphics/pregameplay_scene/easy_red.png");
+	Texture m_easyWhite                = Texture("Assets/Graphics/pregameplay_scene/easy_white.png");
+	Texture m_mediumRed                = Texture("Assets/Graphics/pregameplay_scene/medium_red.png");
+	Texture m_mediumWhite              = Texture("Assets/Graphics/pregameplay_scene/medium_white.png");
+	Texture m_hardRed                  = Texture("Assets/Graphics/pregameplay_scene/hard_red.png");
+	Texture m_hardWhite                = Texture("Assets/Graphics/pregameplay_scene/hard_white.png");
 
-	SDL_Rect m_difficultyBox;
-	SDL_Rect m_difficultyBoxOUtline;
-	SDL_Rect m_titleBox;
-	SDL_Rect m_devNameBox;
+	std::array<Animation, 2> m_Flames  =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+												    Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
-	Sound m_thud = Sound("Assets/Audio/thud.wav");
+	SDL_Rect m_difficultyBox           = { 0 };
+	SDL_Rect m_difficultyBoxOUtline    = { 0 };
+	SDL_Rect m_titleBox                = { 0 };
+	SDL_Rect m_devNameBox              = { 0 };
+
+	Sound m_thud                       = Sound("Assets/Audio/thud.wav");
 };
