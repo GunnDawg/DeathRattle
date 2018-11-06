@@ -35,8 +35,8 @@ void GameplayState::on_enter()
 		                  m_grimReaper.m_TextureRect.w,
 		                  m_grimReaper.m_TextureRect.h);
 
-	m_Flames[0].Load(12, -200);
-	m_Flames[1].Load(942, -200);
+	m_Flames[0].Load(12, -200, 320, 512);
+	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_ball.Load();
 

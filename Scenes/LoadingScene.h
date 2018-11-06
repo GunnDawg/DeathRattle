@@ -2,6 +2,7 @@
 #include <memory>
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"
+#include "Graphics/Animation.h"
 #include "Time/Timer.h"
 
 class LoadingScene : public GameState
@@ -17,4 +18,5 @@ private:
 	Timer m_timer;
 
 	Texture m_Loading              = Texture("Assets/Graphics/loading_scene/loading.png");
+	Animation m_loadingCircle      = Animation("Assets/Graphics/Animations/loading2.png", 24, 1, 16);
 };

@@ -13,8 +13,8 @@ void LeaderBoardScene::on_enter()
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
-	m_Flames[0].Load(12, -200);
-	m_Flames[1].Load(942, -200);
+	m_Flames[0].Load(12, -200, 320, 512);
+	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_comingSoon.Load();
 	m_comingSoon.m_TextureRect.y = (Game::screenHeight / 2) - m_comingSoon.m_TextureRect.h / 2;

@@ -54,8 +54,8 @@ void MainMenuScene::on_enter()
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
-	m_Flames[0].Load(12, -200);
-	m_Flames[1].Load(942, -200);
+	m_Flames[0].Load(12, -200, 320, 512);
+	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_menuBox.w = 400;
 	m_menuBox.h = 400;
@@ -249,24 +249,28 @@ void MainMenuScene::handle_events()
 						//std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
 						//Game::gameStateMachine.push(std::move(gamePlayState));
 
+						m_isNewGame = false;
 						std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
 						Game::gameStateMachine.push(std::move(preGamePlayState));
 					}
 
 					else if (m_isLeaderBoard)
 					{
+						m_isLeaderBoard = false;
 						std::unique_ptr<GameState> leaderBoardScene = std::make_unique<LeaderBoardScene>();
 						Game::gameStateMachine.push(std::move(leaderBoardScene));
 					}
 
 					else if (m_isOptions)
 					{
+						m_isOptions = false;
 						std::unique_ptr<GameState> optionsMenuScene = std::make_unique<OptionsMenuScene>();
 						Game::gameStateMachine.push(std::move(optionsMenuScene));
 					}
 
 					else if (m_isCredits)
 					{
+						m_isCredits = false;
 						std::unique_ptr<GameState> creditsScene = std::make_unique<CreditsScene>();
 						Game::gameStateMachine.push(std::move(creditsScene));
 					}

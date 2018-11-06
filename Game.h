@@ -8,7 +8,6 @@
 #include <memory>
 
 #include "StateMachine/GameStateMachine.h"
-#include "Audio/MusicManager.h"
 #include "Scenes/LoadingScene.h"
 #include "Scenes/SplashScene.h"
 

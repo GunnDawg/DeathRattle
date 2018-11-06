@@ -11,21 +11,16 @@ m_animSpeed(speed)
 	m_frameWidth = (m_Texture.m_TextureRect.w / m_numFramesX);
 	m_frameHeight = (m_Texture.m_TextureRect.h / m_numFramesY);
 
-	m_Texture.m_CropRect.w = 128;
-	m_Texture.m_CropRect.h = 256;
-	m_Texture.m_CropRect.x = 0;
-	m_Texture.m_CropRect.y = 0;
-
-	m_Texture.m_PosRect.x = 0;
-	m_Texture.m_PosRect.y = 0;
-	m_Texture.m_PosRect.w = 320;
-	m_Texture.m_PosRect.h = 512;
+	m_Texture.m_CropRect.w = m_frameWidth;
+	m_Texture.m_CropRect.h = m_frameHeight;
 }
 
-void Animation::Load(unsigned int x, unsigned int y)
+void Animation::Load(unsigned int x, unsigned int y, unsigned int w, unsigned int h)
 {
 	m_Texture.m_PosRect.x = x;
 	m_Texture.m_PosRect.y = y;
+	m_Texture.m_PosRect.w = w;
+	m_Texture.m_PosRect.h = h;
 }
 
 void Animation::Play(double dt)

@@ -8,7 +8,7 @@ m_soundFilePath(filePath)
 
 Sound::~Sound()
 {
-
+	printf("test\n");
 }
 
 void Sound::Load()
@@ -29,6 +29,7 @@ void Sound::Unload()
 	if (m_chunk != nullptr)
 	{
 		Mix_FreeChunk(m_chunk);
+		m_chunk = nullptr;
 		printf("SOUND UNLOADED: \t---> \t%s\n", m_soundFilePath);
 	}
 }

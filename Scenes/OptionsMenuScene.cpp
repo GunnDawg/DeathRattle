@@ -159,8 +159,8 @@ void OptionsMenuScene::on_enter()
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
-	m_Flames[0].Load(12, -200);
-	m_Flames[1].Load(942, -200);
+	m_Flames[0].Load(12, -200, 320, 512);
+	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_title.Load();
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);

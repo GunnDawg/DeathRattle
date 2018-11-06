@@ -7,15 +7,6 @@ m_filePath(filePath.data())
 
 }
 
-Texture::~Texture()
-{
-	if (m_Texture != nullptr)
-	{
-		SDL_DestroyTexture(m_Texture);
-		printf("TEXTURE DESTROYED: \t---> \t%s\n", m_filePath);
-	}
-}
-
 void Texture::Load()
 {
 	m_Texture = IMG_LoadTexture(Game::Renderer, m_filePath.c_str());
@@ -38,10 +29,12 @@ void Texture::Load()
 
 void Texture::Unload()
 {
-	SDL_DestroyTexture(m_Texture);
-	m_Texture = nullptr;
-	printf("TEXTURE UNLOADED: \t---> \t%s\n", m_filePath);
-
+	if (m_Texture != nullptr)
+	{
+		SDL_DestroyTexture(m_Texture);
+		m_Texture = nullptr;
+		printf("TEXTURE UNLOADED: \t---> \t%s\n", m_filePath);
+	}
 }
 
 void Texture::setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h)
