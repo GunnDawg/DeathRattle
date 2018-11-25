@@ -47,8 +47,10 @@ void LeaderBoardScene::on_exit()
 void LeaderBoardScene::update()
 {
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
-	m_Flames[0].Play(Game::deltaTime);
-	m_Flames[1].Play(Game::deltaTime);
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Play(Game::deltaTime);
+	}
 }
 
 void LeaderBoardScene::handle_events()
@@ -72,13 +74,13 @@ void LeaderBoardScene::handle_events()
 						Game::gameStateMachine.pop();
 					} break;
 
-					default:
-						break;
+				default:
+					break;
 				}
 			} break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 	}
 }
@@ -87,8 +89,10 @@ void LeaderBoardScene::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
-	m_Flames[0].Draw();
-	m_Flames[1].Draw();
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Draw();
+	}
 
 	SDL_RenderCopy(Game::Renderer, m_comingSoon.m_Texture, NULL, &m_comingSoon.m_TextureRect);
 

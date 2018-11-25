@@ -17,10 +17,8 @@ public:
 	void draw() override;
 
 private:
-	std::array<Texture, 2> m_skulls = {
-		Texture("Assets/Graphics/common/skull.png"),
-		Texture("Assets/Graphics/common/skull.png")
-	};
+	std::array<Texture, 2> m_skulls    = { Texture("Assets/Graphics/common/skull.png"),
+										   Texture("Assets/Graphics/common/skull.png") };
 
 	MusicManager* JukeBox              = &MusicManager::getInstance();
 
@@ -51,8 +49,8 @@ private:
 	Texture m_version                  = Texture("Assets/Graphics/common/version.png");
 	Texture m_cursor                   = Texture("Assets/Graphics/common/cursor.png");
 
-	std::array<Animation, 2> m_Flames =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
-												   Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
+	std::array<Animation, 2> m_Flames  = { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+									       Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
 	SDL_Rect m_optionsBox              = { 0 };
 	SDL_Rect m_optionsBoxOutline       = { 0 };

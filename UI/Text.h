@@ -1,5 +1,4 @@
 #pragma once
-
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
@@ -15,6 +14,7 @@ public:
 
 	void Draw(unsigned int x, unsigned int y);
 	void Update(const std::string_view newText);
+	void Update(const SDL_Color& newColor);
 	void Unload();
 
 	SDL_Rect m_textRect                 = { 0 };

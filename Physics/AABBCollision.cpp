@@ -7,8 +7,8 @@ bool AABBCollision::CheckCollision(SDL_Rect firstRect, SDL_Rect secondRect) cons
 		firstRect.y + firstRect.h >= secondRect.y &&
 		secondRect.y + secondRect.h >= firstRect.y)
 	{
-		return(true);
+		return true;
 	}
 
-	return(false);
+	return false;
 }

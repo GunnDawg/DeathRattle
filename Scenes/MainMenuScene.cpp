@@ -1,5 +1,4 @@
 #include "MainMenuScene.h"
-#include "SceneManager.h"
 #include "PreGameplayScene.h"
 #include "LeaderboardScene.h"
 #include "OptionsMenuScene.h"
@@ -9,8 +8,6 @@
 
 void MainMenuScene::on_enter()
 {
-	SceneManager::SceneType = SceneManager::Type::MENU;
-
 	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Load();
@@ -45,7 +42,7 @@ void MainMenuScene::on_enter()
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
 	m_version.Load();
-	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
+	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w));
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
 	m_background.Load();
@@ -213,8 +210,10 @@ void MainMenuScene::update()
 	}
 
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
-	m_Flames[0].Play(Game::deltaTime);
-	m_Flames[1].Play(Game::deltaTime);
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Play(Game::deltaTime);
+	}
 }
 
 void MainMenuScene::handle_events()
@@ -240,18 +239,18 @@ void MainMenuScene::handle_events()
 
 					else if (m_isNewGame)
 					{
-						//if (Settings::Audio::MenuMusic == 1)
-						//{
-						//	JukeBox->Stop(JukeBox->MenuMusic);
-						//}
+						if (Settings::Audio::MenuMusic == 1)
+						{
+							JukeBox->Stop(JukeBox->MenuMusic);
+						}
 
-						//Game::gameStateMachine.unloadAll();
-						//std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
-						//Game::gameStateMachine.push(std::move(gamePlayState));
+						Game::gameStateMachine.unloadAll();
+						std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
+						Game::gameStateMachine.push(std::move(gamePlayState));
 
-						m_isNewGame = false;
-						std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
-						Game::gameStateMachine.push(std::move(preGamePlayState));
+						//m_isNewGame = false;
+						//std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
+						//Game::gameStateMachine.push(std::move(preGamePlayState));
 					}
 
 					else if (m_isLeaderBoard)
@@ -285,13 +284,13 @@ void MainMenuScene::handle_events()
 							Game::isRunning = false;
 						} break;
 
-						default:
-							break;
+					default:
+						break;
 					}
 				} break;
 
-				default:
-					break;
+			default:
+				break;
 			}
 		}
 	}
@@ -301,8 +300,10 @@ void MainMenuScene::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
-	m_Flames[0].Draw();
-	m_Flames[1].Draw();
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Draw();
+	}
 
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);

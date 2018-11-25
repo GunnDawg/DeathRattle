@@ -25,6 +25,7 @@ public:
 	void update() override;
 	void handle_events() override;
 	void draw() override;
+
 	void drawCursor();
 	void drawLevel();
 	void drawPaddles();
@@ -32,12 +33,12 @@ public:
 	void drawText();
 	void resetGame();
 
-	Paddle* getPaddle();
-
 	void checkCollision();
 	void checkforBonus();
 	void checkforGameOver();
 	bool checkforWin();
+
+	Paddle* getPaddle();
 
 private:
 	MusicManager* JukeBox               = &MusicManager::getInstance();
@@ -64,8 +65,7 @@ private:
 
 	LevelSet m_dungeonLevels            = LevelSet("Assets/Graphics/Levels/Dungeon/");
 
-	//Ball m_ball                         = Ball(Settings::GamePlay::Difficulty);
-	Ball m_ball                           = Ball(Settings::GamePlay::Difficulty);
+	Ball m_ball                         = Ball(Settings::GamePlay::Difficulty);
 
 	AABBCollision m_collider;
 

@@ -4,9 +4,9 @@
 class Timer
 {
 public:
-	void start();
-	void stop();
-	void reset();
+	void Start();
+	void Stop();
+	//void reset();
 
 	double elapsedMilliseconds();
 	double elapsedSeconds();
@@ -14,5 +14,6 @@ public:
 private:
 	std::chrono::time_point<std::chrono::system_clock> m_StartTime;
 	std::chrono::time_point<std::chrono::system_clock> m_EndTime;
+
 	bool m_bRunning = false;
 };

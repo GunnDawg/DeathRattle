@@ -20,7 +20,7 @@ void SplashScene::on_enter()
 	m_introSound.Load();
 	m_introSound.Play();
 
-	m_timer.start();
+	m_timer.Start();
 }
 
 void SplashScene::on_exit()
@@ -67,8 +67,8 @@ void SplashScene::handle_events()
 				Game::isRunning = false;
 			} break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 		
 	}

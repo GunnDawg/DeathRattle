@@ -119,6 +119,15 @@ void Scoreboard::Update(const LevelSet& passedLevel)
 	default:
 		break;
 	}
+
+	if (m_score >= m_levelScore)
+	{
+		m_scoreText->Update({ 0, 255, 0, 255 });
+	}
+	else
+	{
+		m_scoreText->Update({ 255, 255, 255, 255 });
+	}
 }
 
 void Scoreboard::Draw()

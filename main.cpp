@@ -5,20 +5,18 @@ int main(int argc, char* args[])
 {
 	Game* game = &Game::getInstance();
 
-	if (game->Init())
-	{
-		while (game->isRunning)
-		{
-			game->processinput();
-			game->Update();
-			game->Draw();
-		}
-	}
-	else
+	if (!game->Init())
 	{
 		printf("Error starting Game. Please Restart!\n");
-		return(EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
-	return(EXIT_SUCCESS);
+	while (Game::isRunning)
+	{
+		game->processinput();
+		game->Update();
+		game->Draw();
+	}
+
+	return EXIT_SUCCESS;
 }

@@ -103,11 +103,11 @@ void Ball::setAngle(double angle)
 
 double Ball::randomizeAng()
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<double> dis(-3.0f, 3.0f);
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	static std::uniform_real_distribution<double> dis(-3.0f, 3.0f);
 
 	double r = dis(gen);
 
-	return(r);
+	return r;
 }

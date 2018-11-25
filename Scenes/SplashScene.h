@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include "StateMachine/GameState.h"
-#include "SceneManager.h"
 #include "IntroScene.h"
 #include "Graphics/Texture.h"
 #include "Audio/Sound.h"
@@ -18,8 +17,8 @@ public:
 
 private:
 	Texture m_background            = Texture("Assets/Graphics/splash_scene/background.png");
-	Texture m_logo                  = Texture("Assets/Graphics/common/GGlogo.png");
 	Texture m_production            = Texture("Assets/Graphics/splash_scene/production.png");
+	Texture m_logo                  = Texture("Assets/Graphics/common/GGlogo.png");
 
 	Sound m_introSound              = Sound("Assets/Audio/intro.wav");
 

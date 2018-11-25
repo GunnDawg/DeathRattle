@@ -23,13 +23,14 @@ private:
 
 	Timer m_timer;
 
-	std::array<Texture, 2> m_skulls;
+	std::array<Texture, 2> m_skulls    = { Texture("Assets/Graphics/common/skull.png"),
+										   Texture("Assets/Graphics/common/skull.png") };
 
-	Texture m_cursor;
-	Texture m_title;
-	Texture m_background;
-	Texture m_devName;
-	Texture m_version;
+	Texture m_cursor                   = Texture("Assets/Graphics/common/cursor.png");
+	Texture m_title                    = Texture("Assets/Graphics/common/title.png");
+	Texture m_background               = Texture("Assets/Graphics/common/main_background.png");
+	Texture m_devName                  = Texture("Assets/Graphics/common/dev_name.png");
+	Texture m_version                  = Texture("Assets/Graphics/common/version.png");
 
 	Texture m_selectDifficulty         = Texture("Assets/Graphics/pregameplay_scene/difficulty.png");
 	Texture m_easyRed                  = Texture("Assets/Graphics/pregameplay_scene/easy_red.png");
@@ -39,8 +40,8 @@ private:
 	Texture m_hardRed                  = Texture("Assets/Graphics/pregameplay_scene/hard_red.png");
 	Texture m_hardWhite                = Texture("Assets/Graphics/pregameplay_scene/hard_white.png");
 
-	std::array<Animation, 2> m_Flames  =          { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
-												    Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
+	std::array<Animation, 2> m_Flames  = { Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00),
+									       Animation("Assets/Graphics/Animations/flames.png", 8, 4, 16.00) };
 
 	SDL_Rect m_difficultyBox           = { 0 };
 	SDL_Rect m_difficultyBoxOUtline    = { 0 };

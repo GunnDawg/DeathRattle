@@ -15,7 +15,6 @@ void PreGameplayScene::on_enter()
 
 	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
-		m_skulls[i] = Texture("Assets/Graphics/common/skull.png");
 		m_skulls[i].Load();
 		m_skulls[i].m_TextureRect.w = 100;
 		m_skulls[i].m_TextureRect.h = 100;
@@ -25,12 +24,10 @@ void PreGameplayScene::on_enter()
 	m_skulls[0].m_TextureRect.x = 125;
 	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
-	m_cursor = Texture("Assets/Graphics/common/cursor.png");
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
-	m_title = Texture("Assets/Graphics/common/title.png");
 	m_title.Load();
 	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
@@ -40,7 +37,6 @@ void PreGameplayScene::on_enter()
 	m_titleBox.w = Game::screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
-	m_background = Texture("Assets/Graphics/common/main_background.png");
 	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
@@ -75,12 +71,10 @@ void PreGameplayScene::on_enter()
 	m_hardWhite.m_TextureRect.x = m_hardRed.m_TextureRect.x;
 	m_hardWhite.m_TextureRect.y = m_hardRed.m_TextureRect.y;
 
-	m_devName = Texture("Assets/Graphics/common/dev_name.png");
 	m_devName.Load();
 	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
 	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
 
-	m_version = Texture("Assets/Graphics/common/version.png");
 	m_version.Load();
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
@@ -126,8 +120,10 @@ void PreGameplayScene::on_exit()
 void PreGameplayScene::update()
 {
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
-	m_Flames[0].Play(Game::deltaTime);
-	m_Flames[1].Play(Game::deltaTime);
+	for(std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Play(Game::deltaTime);
+	}
 }
 
 void PreGameplayScene::handle_events()
@@ -150,11 +146,14 @@ void PreGameplayScene::handle_events()
 					{
 						Game::gameStateMachine.pop();
 					} break;
+					
+				default:
+					break;
 				}
 			} break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 	}
 }
@@ -163,8 +162,10 @@ void PreGameplayScene::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
-	m_Flames[0].Draw();
-	m_Flames[1].Draw();
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Draw();
+	}
 
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);

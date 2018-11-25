@@ -1,12 +1,10 @@
 #include <cstdio>
 #include "GameplayScene.h"
-#include "SceneManager.h"
 #include "Scenes/MainMenuScene.h"
 #include "Game.h"
 
 void GameplayState::on_enter()
 {
-	SceneManager::SceneType = SceneManager::Type::GAMEPLAY;
 	printf("<-----LOADING GAME--------->\n");
 
 	switch (Settings::GamePlay::Input)
@@ -23,8 +21,8 @@ void GameplayState::on_enter()
 			m_keyBoard.On();
 		} break;
 
-		default:
-			printf("Invalid input mode set.\n");
+	default:
+		printf("Invalid input mode set.\n");
 	}
 
 	m_cursor.Load();
@@ -168,13 +166,13 @@ void GameplayState::handle_events()
 						}
 					} break;
 
-					default:
-						break;
+				default:
+					break;
 				}
 			} break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 	}
 }
@@ -182,11 +180,9 @@ void GameplayState::handle_events()
 void GameplayState::update()
 {
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
-	m_Flames[0].Play(Game::deltaTime);
-	m_Flames[1].Play(Game::deltaTime);
-	if (Game::deltaTime >= 20.0)
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
-		printf("%f\n", Game::deltaTime);
+		m_Flames[i].Play(Game::deltaTime);
 	}
 
 	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
@@ -288,8 +284,11 @@ void GameplayState::draw()
 {
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
 	drawLevel();
-	m_Flames[0].Draw();
-	m_Flames[1].Draw();
+
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Draw();
+	}
 
 	if (m_gameOver || m_levelWon)
 	{
@@ -333,25 +332,25 @@ Paddle* GameplayState::getPaddle()
 {
 	if (m_collider.CheckCollision(m_paddles[0].getRect(), m_ball.getRect()))
 	{
-		return(&m_paddles[0]);
+		return &m_paddles[0];
 	}
 
 	if (m_collider.CheckCollision(m_paddles[1].getRect(), m_ball.getRect()))
 	{
-		return(&m_paddles[1]);
+		return &m_paddles[1];
 	}
 
 	if (m_collider.CheckCollision(m_paddles[2].getRect(), m_ball.getRect()))
 	{
-		return(&m_paddles[2]);
+		return &m_paddles[2];
 	}
 
 	if (m_collider.CheckCollision(m_paddles[3].getRect(), m_ball.getRect()))
 	{
-		return(&m_paddles[3]);
+		return &m_paddles[3];
 	}
 
-	return(nullptr);
+	return nullptr;
 }
 
 void GameplayState::checkCollision()
@@ -541,10 +540,10 @@ bool GameplayState::checkforWin()
 	{
 		m_dungeonLevels.nextLevel();
 
-		return(true);
+		return true;
 	}
 
-	return(false);
+	return false;
 }
 
 void GameplayState::resetGame()

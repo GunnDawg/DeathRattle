@@ -46,6 +46,11 @@ void Animation::Play(double dt)
 			}
 		}
 	}
+	else
+	{
+		m_frameTime = 0.0;
+		m_Texture.m_CropRect.x = m_frameWidth;
+	}
 }
 
 void Animation::Draw()

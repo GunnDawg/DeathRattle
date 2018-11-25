@@ -56,6 +56,16 @@ void Text::Update(const std::string_view newText)
 	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
 }
 
+void Text::Update(const SDL_Color& newColor)
+{
+	SDL_DestroyTexture(m_textTexture);
+	m_textTexture = nullptr;
+
+	m_fontColor = newColor;
+	loadFont();
+	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
+}
+
 void Text::Unload()
 {
 	SDL_DestroyTexture(m_textTexture);

@@ -21,7 +21,7 @@ unsigned int FileIO::Read()
 
 	inFile.close();
 
-	return(value);
+	return value;
 }
 
 void FileIO::Write(unsigned int highScore)

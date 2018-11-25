@@ -14,20 +14,20 @@ void IntroSceneState::on_enter()
 	m_background.m_TextureRect.w = Game::screenWidth;
 	m_background.m_TextureRect.h = Game::screenHeight;
 
+	m_title.Load();
+	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
+	m_title.m_TextureRect.y = (Game::screenHeight / 2) - (m_title.m_TextureRect.h / 2) - 60;
+
+	m_howLong.Load();
+	m_howLong.m_TextureRect.x = (Game::screenWidth / 2) - (m_howLong.m_TextureRect.w / 2);
+	m_howLong.m_TextureRect.y = m_title.m_TextureRect.y + 85;
+
 	m_Flames[0].Load(12, -200, 320, 512);
 	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_plug.Load();
 	m_plug.m_TextureRect.x = (Game::screenWidth / 2) - (m_plug.m_TextureRect.w / 2);
 	m_plug.m_TextureRect.y = 0;
-
-	m_keepIt.Load();
-	m_keepIt.m_TextureRect.x = (Game::screenWidth / 2) - (m_keepIt.m_TextureRect.w / 2);
-	m_keepIt.m_TextureRect.y = 0 - (m_keepIt.m_TextureRect.h);
-
-	m_alive.Load();
-	m_alive.m_TextureRect.x = (Game::screenWidth / 2) - (m_alive.m_TextureRect.w / 2) + 25;
-	m_alive.m_TextureRect.y = 720;
 
 	m_blood.Load();
 	m_blood.m_TextureRect.x = (Game::screenWidth / 2) - (m_blood.m_TextureRect.w / 2);
@@ -72,7 +72,7 @@ void IntroSceneState::on_enter()
 	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
-	m_timer.start();
+	m_timer.Start();
 
 	m_introSound.Load();
 	m_introSound.Play();
@@ -85,9 +85,9 @@ void IntroSceneState::on_exit()
 {
 	m_cursor.Unload();
 	m_background.Unload();
+	m_title.Unload();
+	m_howLong.Unload();
 	m_plug.Unload();
-	m_keepIt.Unload();
-	m_alive.Unload();
 	m_blood.Unload();
 	m_skullWhite.Unload();
 	m_skull.Unload();
@@ -106,22 +106,10 @@ void IntroSceneState::on_exit()
 
 void IntroSceneState::update()
 {
-	if(m_keepIt.m_TextureRect.y <= 200)
-	{
-		m_keepIt.m_TextureRect.y += 0.85 * Game::deltaTime;
-		//m_keepIt.m_TextureRect.y += 20;
-	}
-
-	if(m_alive.m_TextureRect.y >= 300)
-	{
-		m_alive.m_TextureRect.y -= 1.05 * Game::deltaTime;
-		//m_alive.m_TextureRect.y -= 25;
-	}
-
 	if (m_timer.elapsedMilliseconds() > 200)
 	{
 		m_isBlood = true;
-		m_timer.stop();
+		m_timer.Stop();
 	}
 
 	if (Game::mouseX >= m_skullCollider.x &&
@@ -165,8 +153,10 @@ void IntroSceneState::update()
 	}
 
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
-	m_Flames[0].Play(Game::deltaTime);
-	m_Flames[1].Play(Game::deltaTime);
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Play(Game::deltaTime);
+	}
 }
 
 void IntroSceneState::handle_events()
@@ -187,7 +177,7 @@ void IntroSceneState::handle_events()
 				{
 					case SDLK_RETURN:
 					{
-						m_timer.start();
+						m_timer.Start();
 						m_isClicked = true;
 						m_isSkull = true;
 					} break;
@@ -197,8 +187,8 @@ void IntroSceneState::handle_events()
 						Game::isRunning = false;
 					} break;
 
-					default:
-						break;
+				default:
+					break;
 				}
 			} break;
 
@@ -206,13 +196,13 @@ void IntroSceneState::handle_events()
 			{
 				if (m_isSkull)
 				{
-					m_timer.start();
+					m_timer.Start();
 					m_isClicked = true;
 				}
 			} break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 	}
 }
@@ -221,37 +211,36 @@ void IntroSceneState::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
-	m_Flames[0].Draw();
-	m_Flames[1].Draw();
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Draw();
+	}
 
 	if (m_isBlood)
 	{
 		SDL_RenderCopy(Game::Renderer, m_blood.m_Texture, NULL, &m_blood.m_TextureRect);
+		SDL_RenderCopy(Game::Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
+		SDL_RenderCopy(Game::Renderer, m_howLong.m_Texture, NULL, &m_howLong.m_TextureRect);
 	}
-	SDL_RenderCopyEx(Game::Renderer, m_keepIt.m_Texture, NULL, &m_keepIt.m_TextureRect, -25, NULL, SDL_FLIP_NONE);
-	SDL_RenderCopyEx(Game::Renderer, m_alive.m_Texture, NULL, &m_alive.m_TextureRect, -25, NULL, SDL_FLIP_NONE);
 
-	if (m_alive.m_TextureRect.y <= 325)
+	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
+	SDL_RenderFillRect(Game::Renderer, &m_plugBox);
+	SDL_RenderFillRect(Game::Renderer, &m_skullBox);
+	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
+
+	if (m_isSkull)
 	{
-		SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
-		SDL_RenderFillRect(Game::Renderer, &m_plugBox);
-		SDL_RenderFillRect(Game::Renderer, &m_skullBox);
-		SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-		SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
-
-		if (m_isSkull)
-		{
-			SDL_RenderCopy(Game::Renderer, m_skull.m_Texture, NULL, &m_skull.m_TextureRect);
-		}
-		else
-		{
-			SDL_RenderCopy(Game::Renderer, m_skullWhite.m_Texture, NULL, &m_skullWhite.m_TextureRect);
-		}
-		SDL_RenderCopy(Game::Renderer, m_press.m_Texture, NULL, &m_press.m_TextureRect);
-		SDL_RenderCopy(Game::Renderer, m_enter.m_Texture, NULL, &m_enter.m_TextureRect);
-		SDL_RenderCopy(Game::Renderer, m_plug.m_Texture, NULL, &m_plug.m_TextureRect);
+		SDL_RenderCopy(Game::Renderer, m_skull.m_Texture, NULL, &m_skull.m_TextureRect);
 	}
+	else
+	{
+		SDL_RenderCopy(Game::Renderer, m_skullWhite.m_Texture, NULL, &m_skullWhite.m_TextureRect);
+	}
+	SDL_RenderCopy(Game::Renderer, m_press.m_Texture, NULL, &m_press.m_TextureRect);
+	SDL_RenderCopy(Game::Renderer, m_enter.m_Texture, NULL, &m_enter.m_TextureRect);
+	SDL_RenderCopy(Game::Renderer, m_plug.m_Texture, NULL, &m_plug.m_TextureRect);
 
 	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }

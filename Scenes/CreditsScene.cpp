@@ -215,8 +215,10 @@ void CreditsScene::update()
 	}
 
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
-	m_Flames[0].Play(Game::deltaTime);
-	m_Flames[1].Play(Game::deltaTime);
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Play(Game::deltaTime);
+	}
 }
 
 void CreditsScene::handle_events()
@@ -270,13 +272,13 @@ void CreditsScene::handle_events()
 						Game::gameStateMachine.pop();
 					} break;
 
-					default:
-						break;
+				default:
+					break;
 				}
 			} break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 	}
 }
@@ -285,8 +287,10 @@ void CreditsScene::draw()
 {
 	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
-	m_Flames[0].Draw();
-	m_Flames[1].Draw();
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Draw();
+	}
 
 	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
