@@ -13,9 +13,9 @@
 #include "Audio/MusicManager.h"
 #include "Graphics/Animation.h"
 
-constexpr unsigned int NUM_PADDLES = 4;
-constexpr unsigned int NUM_ITEMS = 5;
-constexpr unsigned int NUM_LEVEL_SETS = 2;
+constexpr unsigned int NUM_PADDLES      = 4;
+constexpr unsigned int NUM_ITEMS        = 5;
+constexpr unsigned int NUM_LEVEL_SETS   = 2;
 
 class GameplayState : public GameState
 {

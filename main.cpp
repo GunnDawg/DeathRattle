@@ -1,5 +1,6 @@
 #include <cstdio>
 #include "Game.h"
+#include "GameSettings.h"
 
 int main(int argc, char* args[])
 {
@@ -13,10 +14,13 @@ int main(int argc, char* args[])
 
 	while (Game::isRunning)
 	{
-		game->processinput();
+		game->ProcessInput();
 		game->Update();
 		game->Draw();
 	}
+
+	game->DestroyGame();
+	game = nullptr;
 
 	return EXIT_SUCCESS;
 }

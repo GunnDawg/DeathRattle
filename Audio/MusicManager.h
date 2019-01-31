@@ -7,14 +7,29 @@ class MusicManager
 	public:
 		static MusicManager& getInstance()
 		{
-			static MusicManager instance;
-			return instance;
+			static MusicManager* instance = nullptr;
+			if (instance == nullptr)
+			{
+				instance = new MusicManager;
+			}
+
+			return *instance;
 		}
 
-		MusicManager(const MusicManager&) = delete;
-		MusicManager(MusicManager&&) = delete;
-		MusicManager& operator=(const MusicManager&) = delete;
-		MusicManager& operator=(MusicManager&&) = delete;
+		static void DestroyMusicManager()
+		{
+			static MusicManager* instance = &getInstance();
+			if (instance != nullptr)
+			{
+				delete instance;
+				instance = nullptr;
+			}
+		}
+
+		MusicManager(const MusicManager&)=delete;
+		MusicManager(MusicManager&&)=delete;
+		MusicManager& operator=(const MusicManager&)=delete;
+		MusicManager& operator=(MusicManager&&)=delete;
 
 		void Load(Music& m);
 		void Unload(Music& m);

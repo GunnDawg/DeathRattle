@@ -3,13 +3,22 @@
 
 Game::~Game()
 {
-	gameStateMachine.unloadAll();
+	if (!gameStateMachine.m_gameStates.empty())
+	{
+		gameStateMachine.unloadAll();
+	}
 
-	SDL_DestroyRenderer(Renderer);
-	Renderer = nullptr;
+	if (Renderer != nullptr)
+	{
+		SDL_DestroyRenderer(Renderer);
+		Renderer = nullptr;
+	}
 
-	SDL_DestroyWindow(Window);
-	Window = nullptr;
+	if (Window != nullptr)
+	{
+		SDL_DestroyWindow(Window);
+		Window = nullptr;
+	}
 
 	Mix_Quit();
 	TTF_Quit();
@@ -17,48 +26,22 @@ Game::~Game()
 	SDL_Quit();
 }
 
-double calcAverateStep(std::array<double, 1000> timearray) {
-	double avrg = 0.0;
-	int a = 0;
-	for (a = 0; a < timearray.size(); a++) {
-		avrg += timearray[a];
-	}
-
-	return avrg / static_cast<double>(timearray.size());
-}
-
 void Game::updateDelta()
 {
-	//std::array<unsigned int, 1000> times;
+	lastTime = currentTime;
+	currentTime = SDL_GetPerformanceCounter();
+	deltaTime = static_cast<double>((currentTime - lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
 
-	if (index >= 0 && index < times.size())
-	{
-		++index;
-	}
-	else
-	{
-		index = 0;
-	}
+	//end = std::chrono::high_resolution_clock::now();
+	//deltaTime = std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count();
+	//start = end;
 
-	//lastTime = currentTime;
-	//currentTime = SDL_GetPerformanceCounter();
-	//deltaTime = static_cast<double>((currentTime - lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
-
-	end = std::chrono::high_resolution_clock::now();
-	deltaTime = std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count();
-	//times[index] = std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count();
-	//deltaTime = calcAverateStep(times);
-	start = end;
-
-	if (deltaTime > 20.0)
-	{
-		printf("%F\n", deltaTime);
-	}
+	printf("%F\n", deltaTime);
 }
 
 bool Game::Init()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
 	{
 		printf("Error starting SDL. Error: %s\n", SDL_GetError());
 		return false;
@@ -85,12 +68,12 @@ bool Game::Init()
 
 	Window = SDL_CreateWindow
 	(
-		Title,
+		"Death Rattle",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		screenWidth,
-		screenHeight,
-		SDL_WINDOW_SHOWN
+		Settings::Display::WindowWidth,
+		Settings::Display::WindowHeight,
+		Settings::Display::WindowMode
 	);
 	if (Window == nullptr)
 	{
@@ -117,7 +100,7 @@ bool Game::Init()
 	return true;
 }
 
-void Game::processinput()
+void Game::ProcessInput()
 {
 	gameStateMachine.handleEvents();
 }

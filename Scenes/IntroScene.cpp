@@ -95,7 +95,7 @@ void IntroSceneState::on_exit()
 	m_enter.Unload();
 	m_version.Unload();
 
-	m_introSound.Unload();
+	//m_introSound.Unload();
 	//m_scare.Unload();
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
