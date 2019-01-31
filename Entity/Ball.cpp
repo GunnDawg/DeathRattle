@@ -89,8 +89,8 @@ void Ball::Draw()
 
 void Ball::Update()
 {
-	m_posX += static_cast<int>(m_velocityX * Game::deltaTime);
-	m_posY += static_cast<int>(m_velocityY * Game::deltaTime);
+	m_posX += static_cast<int>(m_velocityX * Game::avgDeltaTime);
+	m_posY += static_cast<int>(m_velocityY * Game::avgDeltaTime);
 }
 
 void Ball::setAngle(double angle)

@@ -67,7 +67,7 @@ public:
 	inline static double deltaTime                              = 0.0;
 	int totalUpdates = 0;
 	double totalDeltaTime = 0.0;
-	double avgDeltaTime = 0.0;
+	inline static double avgDeltaTime = 0.0;
 
 	//inline static float deltaTime                               = 0.0f;
 	//std::chrono::high_resolution_clock::time_point start        = std::chrono::high_resolution_clock::now();

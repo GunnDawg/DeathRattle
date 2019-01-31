@@ -32,11 +32,14 @@ void Game::updateDelta()
 	currentTime = SDL_GetPerformanceCounter();
 	deltaTime = static_cast<double>((currentTime - lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
 
-	totalDeltaTime += deltaTime;
+	if (deltaTime < 100)
+	{
+		totalDeltaTime += deltaTime;
+	}
 	totalUpdates += 1;
 	avgDeltaTime = totalDeltaTime / totalUpdates;
 
-	printf("%F\n", avgDeltaTime);
+	printf("%f\n", avgDeltaTime);
 }
 
 bool Game::Init()
