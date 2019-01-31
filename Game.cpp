@@ -32,11 +32,11 @@ void Game::updateDelta()
 	currentTime = SDL_GetPerformanceCounter();
 	deltaTime = static_cast<double>((currentTime - lastTime) * 1000 / static_cast<double>(SDL_GetPerformanceFrequency()));
 
-	//end = std::chrono::high_resolution_clock::now();
-	//deltaTime = std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count();
-	//start = end;
+	totalDeltaTime += deltaTime;
+	totalUpdates += 1;
+	avgDeltaTime = totalDeltaTime / totalUpdates;
 
-	printf("%F\n", deltaTime);
+	printf("%F\n", avgDeltaTime);
 }
 
 bool Game::Init()

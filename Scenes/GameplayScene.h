@@ -57,7 +57,7 @@ private:
 	std::string m_LivesString;
 
 	Keyboard m_keyBoard                 = Keyboard(false);
-	Mouse m_mouse                       = Mouse(true);
+	Mouse m_mouse                       = Mouse(false);
 	int m_mouseX                        = 0;
 	int m_mouseY                        = 0;
 

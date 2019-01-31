@@ -21,6 +21,15 @@ void GameplayState::on_enter()
 			m_keyBoard.On();
 		} break;
 
+		case Settings::GamePlay::GameInput::GAMEPAD:
+		{
+			m_mouse.Off();
+			m_keyBoard.Off();
+
+			printf("Controller support coming soon!!\n");
+			Game::isRunning = false;
+		} break;
+
 	default:
 		printf("Invalid input mode set.\n");
 	}

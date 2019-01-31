@@ -17,7 +17,7 @@
 class Game
 {
 public:
-	static Game& getInstance()
+	static Game& GetInstance()
 	{
 		static Game* instance = nullptr;
 
@@ -32,7 +32,7 @@ public:
 
 	static void DestroyGame()
 	{
-		static Game* instance = &getInstance();
+		static Game* instance = &GetInstance();
 
 		if (instance != nullptr)
 		{
@@ -62,9 +62,12 @@ public:
 	inline static unsigned int screenHeight                     = Settings::Display::WindowHeight;
 	inline static bool isRunning                                = false;
 
-	Uint64 currentTime                                   = 0ULL;
-	Uint64 lastTime                                      = 0ULL;
-	inline static double deltaTime                       = 0.0;
+	Uint64 currentTime                                          = 0ULL;
+	Uint64 lastTime                                             = 0ULL;
+	inline static double deltaTime                              = 0.0;
+	int totalUpdates = 0;
+	double totalDeltaTime = 0.0;
+	double avgDeltaTime = 0.0;
 
 	//inline static float deltaTime                               = 0.0f;
 	//std::chrono::high_resolution_clock::time_point start        = std::chrono::high_resolution_clock::now();

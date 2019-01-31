@@ -4,7 +4,7 @@
 
 int main(int argc, char* args[])
 {
-	Game* game = &Game::getInstance();
+	Game* game = &Game::GetInstance();
 
 	if (!game->Init())
 	{
