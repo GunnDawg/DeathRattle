@@ -24,7 +24,6 @@ public:
 		if (instance == nullptr)
 		{
 			instance = new Game();
-			printf("Game Created!!\n");
 		}
 
 		return *instance;
@@ -38,8 +37,6 @@ public:
 		{
 			delete instance;
 			instance = nullptr;
-
-			printf("Game Destroyed!!\n");
 		}
 	}
 
@@ -65,13 +62,9 @@ public:
 	Uint64 currentTime                                          = 0ULL;
 	Uint64 lastTime                                             = 0ULL;
 	inline static double deltaTime                              = 0.0;
-	int totalUpdates = 0;
-	double totalDeltaTime = 0.0;
-	inline static double avgDeltaTime = 0.0;
-
-	//inline static float deltaTime                               = 0.0f;
-	//std::chrono::high_resolution_clock::time_point start        = std::chrono::high_resolution_clock::now();
-	//std::chrono::high_resolution_clock::time_point end;
+	int totalUpdates                                            = 0;
+	double totalDeltaTime                                       = 0.0;
+	inline static double avgDeltaTime                           = 0.0;
 
 	inline static int mouseX                                    = 0;
 	inline static int mouseY                                    = 0;
