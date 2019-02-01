@@ -1,0 +1,26 @@
+2/1/2019
+* (PROJECT FILES)
+ - Fix the library directories and add a Dependencies folder to the build folder.
+
+* (BUGS)
+ - Continue to test the delta clock. Taking the average does seem to be working though.
+ - Fix micro stutter. Find what's causing the main thread to pause. Could be related to the delta clock.
+
+* (PERFORMANCE)
+ - Implement spdlog and replace it with all the printf() calls.
+ - Continue to look for ways to shorten code, it's a mess.
+
+* (ORGANIZATION)
+ - Consider some type of asset manager. This will help with the messy code, but try to avoid an
+   entity component system for now. A Data Oriented Design would have been useful here, but
+   it's probably too late :(
+ - Start using assertions at the public call sites of all objects/classes. This means asserting all
+   paramatized constructors either for NULL checks, range checks, or type checks.
+
+* (FEATURES)
+ - When we have proper logging and a steril release build, start to look into
+   the item system AGAIN (grrrr).
+
+* (GAMEPLAY)
+ - Need to decide what we're gonna do with the level system. Is it even neccessary
+   anymore? Do we want just one progressive level? And if so, how will that work?
