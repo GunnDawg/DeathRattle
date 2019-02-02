@@ -181,7 +181,7 @@ void OptionsMenuScene::on_enter()
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
 	m_version.Load();
-	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
+	m_version.m_TextureRect.x = (Game::screenWidth - m_version.m_TextureRect.w);
 	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
 
 	if (Settings::Audio::MenuMusic == 1)
