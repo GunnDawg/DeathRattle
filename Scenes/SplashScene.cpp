@@ -41,7 +41,7 @@ void SplashScene::update()
 
 	if (m_production.m_TextureRect.y >= 540)
 	{
-		m_production.m_TextureRect.y -= 0.12 * Game::avgDeltaTime;
+		m_production.m_TextureRect.y -= 0.123 * Game::avgDeltaTime;
 	}
 
 	if (m_timer.elapsedSeconds() > 7.0)
