@@ -7,7 +7,6 @@
 #include <cstdio>
 #include <array>
 #include <memory>
-#include <chrono>
 
 #include "GameSettings.h"
 #include "StateMachine/GameStateMachine.h"

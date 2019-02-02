@@ -69,6 +69,24 @@ bool Game::Init()
 		return false;
 	}
 
+	Uint32 WindowFlags = 0;
+
+	switch (Settings::Display::WindowMode)
+	{
+		case 0:
+		{
+			WindowFlags = SDL_WINDOW_SHOWN;
+		} break;
+
+		case 1:
+		{
+			WindowFlags = SDL_WINDOW_FULLSCREEN_DESKTOP;
+		} break;
+
+		default:
+			break;
+	}
+
 	Window = SDL_CreateWindow
 	(
 		"Death Rattle",
@@ -76,13 +94,14 @@ bool Game::Init()
 		SDL_WINDOWPOS_CENTERED,
 		Settings::Display::WindowWidth,
 		Settings::Display::WindowHeight,
-		Settings::Display::WindowMode
+		WindowFlags
 	);
 	if (Window == nullptr)
 	{
 		printf("Error creating SDL_Window. Error: %s\n", SDL_GetError());
 		return false;
 	}
+
 
 	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (Renderer == nullptr)
@@ -91,11 +110,11 @@ bool Game::Init()
 		return false;
 	}
 
-	std::unique_ptr<GameState> loadingSceneState = std::make_unique<LoadingScene>();
-	gameStateMachine.push(std::move(loadingSceneState));
+	//std::unique_ptr<GameState> loadingSceneState = std::make_unique<LoadingScene>();
+	//gameStateMachine.push(std::move(loadingSceneState));
 
-	//std::unique_ptr<GameState> splashSceneState = std::make_unique<SplashScene>();
-	//gameStateMachine.push(std::move(splashSceneState));
+	std::unique_ptr<GameState> splashSceneState = std::make_unique<SplashScene>();
+	gameStateMachine.push(std::move(splashSceneState));
 
 	SDL_ShowCursor(0);
 	isRunning = true;

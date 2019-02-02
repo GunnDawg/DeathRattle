@@ -1,5 +1,4 @@
 #pragma once
-#include <SDL.h>
 
 namespace Settings
 {
@@ -14,7 +13,7 @@ namespace Settings
 
 	struct Display
 	{
-		inline static SDL_WindowFlags WindowMode       = SDL_WINDOW_SHOWN;
+		inline static unsigned int WindowMode          = 1;
 		inline static unsigned int WindowWidth         = 1280;
 		inline static unsigned int WindowHeight        = 720;
 	};
