@@ -13,7 +13,7 @@ namespace Settings
 
 	struct Display
 	{
-		inline static unsigned int WindowMode          = 1;
+		inline static unsigned int WindowMode          = 0;
 		inline static unsigned int WindowWidth         = 1280;
 		inline static unsigned int WindowHeight        = 720;
 	};
