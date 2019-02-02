@@ -129,10 +129,10 @@ void IntroSceneState::update()
 		m_isSkull = false;
 		m_scare.Play();
 
-		m_skull.m_TextureRect.w += 200;
-		m_skull.m_TextureRect.h += 200;
-		m_skull.m_TextureRect.x -= 100;
-		m_skull.m_TextureRect.y -= 100;
+		m_skull.m_TextureRect.w += (10.00 * Game::avgDeltaTime);
+		m_skull.m_TextureRect.h += (10.00 * Game::avgDeltaTime);
+		m_skull.m_TextureRect.x -= (5.00  * Game::avgDeltaTime);
+		m_skull.m_TextureRect.y -= (5.00  * Game::avgDeltaTime);
 
 		m_skullWhite.m_TextureRect.w = m_skull.m_TextureRect.w;
 		m_skullWhite.m_TextureRect.h = m_skull.m_TextureRect.h;
@@ -155,7 +155,7 @@ void IntroSceneState::update()
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
-		m_Flames[i].Play(Game::deltaTime);
+		m_Flames[i].Play(Game::avgDeltaTime);
 	}
 }
 
