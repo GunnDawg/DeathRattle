@@ -1,10 +1,13 @@
 2/1/2019
 * (PROJECT FILES)
- - Fix the library directories and add a Dependencies folder to the build folder.
+ - Fix the library directories and add a Dependencies folder to the solution directory.
 
 * (BUGS)
  - Continue to test the delta clock. Taking the average does seem to be working though.
  - Fix micro stutter. Find what's causing the main thread to pause. Could be related to the delta clock.
+
+ * (CODE CLEANUP)
+  - Change all member initialization from value initialization to uniformm initialization
 
 * (PERFORMANCE)
  - Implement spdlog and replace it with all the printf() calls.
