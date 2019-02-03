@@ -44,6 +44,8 @@ void Game::updateDelta()
 
 bool Game::Init()
 {
+	Gunn::Log::Init();
+
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
 	{
 		printf("Error starting SDL. Error: %s\n", SDL_GetError());

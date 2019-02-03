@@ -1,6 +1,4 @@
-#include <cstdio>
 #include "Game.h"
-#include "GameSettings.h"
 
 #pragma comment(lib, "SDL2.lib")
 #pragma comment(lib, "SDL2main.lib")
@@ -14,7 +12,6 @@ int main(int argc, char* args[])
 
 	if (!game->Init())
 	{
-		printf("Error starting Game. Please Restart!\n");
 		return EXIT_FAILURE;
 	}
 

@@ -8,6 +8,8 @@
 #include <array>
 #include <memory>
 
+#include "Log/Log.h"
+
 #include "GameSettings.h"
 #include "StateMachine/GameStateMachine.h"
 #include "Scenes/LoadingScene.h"
