@@ -17,7 +17,6 @@ LevelSet::LevelSet(const char* filePath)
 LevelSet::~LevelSet()
 {
 	Unload(m_levelNum);
-	printf("Levelset DTOR\n");
 }
 
 void LevelSet::Load()

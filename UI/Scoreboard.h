@@ -1,6 +1,5 @@
 #pragma once
 #include <SDL.h>
-#include <cstdio>
 #include <cassert>
 #include <array>
 #include <string>

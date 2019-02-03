@@ -14,7 +14,7 @@ unsigned int FileIO::Read()
 	inFile.open(m_file);
 	if (inFile.fail())
 	{
-		printf("Error opening file %s\n", m_file.c_str());
+		GUNN_CORE_ERROR("Error opening file: {0}", m_file.c_str());
 	}
 
 	inFile >> value;
@@ -30,7 +30,7 @@ void FileIO::Write(unsigned int highScore)
 	outFile.open(m_file);
 	if (outFile.fail())
 	{
-		printf("Error writing to file %s\n", m_file.c_str());
+		GUNN_CORE_ERROR("Error writing to file: {0}", m_file.c_str());
 	}
 
 	outFile << highScore;

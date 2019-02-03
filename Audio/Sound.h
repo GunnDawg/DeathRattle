@@ -1,14 +1,14 @@
 #pragma once
 #include <SDL_mixer.h>
-#include <cstdio>
 #include <cassert>
+#include "Log/Log.h"
 
 class Sound
 {
 public:
 	Sound()=default;
 	Sound(const char* filePath);
-	~Sound();
+	~Sound()=default;
 
 	void Load();
 	void Unload();

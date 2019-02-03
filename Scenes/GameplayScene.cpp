@@ -1,11 +1,9 @@
-#include <cstdio>
 #include "GameplayScene.h"
 #include "Scenes/MainMenuScene.h"
-#include "Game.h"
 
 void GameplayState::on_enter()
 {
-	printf("<-----LOADING GAME--------->\n");
+	GUNN_CORE_INFO("<-----LOADING GAME--------->");
 
 	switch (Settings::GamePlay::Input)
 	{
@@ -26,12 +24,12 @@ void GameplayState::on_enter()
 			m_mouse.Off();
 			m_keyBoard.Off();
 
-			printf("Controller support coming soon!!\n");
+			GUNN_CORE_ERROR("Controller support coming soon!!");
 			Game::isRunning = false;
 		} break;
 
 	default:
-		printf("Invalid input mode set.\n");
+		GUNN_CORE_ERROR("Invalid input mode set.");
 	}
 
 	m_cursor.Load();
@@ -68,7 +66,7 @@ void GameplayState::on_enter()
 
 void GameplayState::on_exit()
 {
-	printf("<-----UNLOADING GAME--------->\n");
+	GUNN_CORE_INFO("<-----UNLOADING GAME--------->\n");
 
 	m_HUD.Unload();
 

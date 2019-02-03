@@ -2,7 +2,6 @@
 
 #include <SDL.h>
 #include <cassert>
-#include <cstdio>
 #include <typeinfo>
 #include "Graphics/Texture.h"
 #include "Game.h"

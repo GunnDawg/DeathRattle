@@ -13,11 +13,11 @@ void Music::Load()
 		m_music = Mix_LoadMUS(m_musicFilePath);
 		if (m_music == nullptr)
 		{
-			printf("Error loading music file. Error: %s\n", Mix_GetError());
+			GUNN_CORE_ERROR("Error loading music file: {0}. Error: {1}",m_musicFilePath, Mix_GetError());
 		}
 		else
 		{
-			printf("MUSIC LOADED: \t\t---> \t%s\n", m_musicFilePath);
+			GUNN_CORE_INFO("MUSIC LOADED: {0}", m_musicFilePath);
 			Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 		}
 	}
@@ -29,7 +29,7 @@ void Music::Unload()
 	{
 		Mix_FreeMusic(m_music);
 		m_music = nullptr;
-		printf("MUSIC UNLOADED: \t---> \t%s\n", m_musicFilePath);
+		GUNN_CORE_INFO("MUSIC UNLOADED: {0}", m_musicFilePath);
 	}
 }
 

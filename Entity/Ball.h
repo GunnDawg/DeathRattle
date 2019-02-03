@@ -2,13 +2,10 @@
 
 #include <SDL.h>
 #include <cassert>
-#include <cstdio>
-#include <memory>
 #include <random>
 
 #include "GameSettings.h"
 #include "Graphics/Texture.h"
-#include "Game.h"
 
 class Ball
 {
@@ -38,8 +35,8 @@ public:
 	void resetBall(Settings::GamePlay::GameDifficulty speed);
 	double randomizeAng();
 
-	unsigned int m_posX = (Game::screenWidth / 2) - 40;
-	unsigned int m_posY = (Game::screenHeight / 2) - 25;
+	unsigned int m_posX = (Settings::Display::WindowWidth / 2) - 40;
+	unsigned int m_posY = (Settings::Display::WindowHeight / 2) - 25;
 
 	double m_angle = 0.0;
 

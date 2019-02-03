@@ -12,17 +12,17 @@ void Texture::Load()
 	m_Texture = IMG_LoadTexture(Game::Renderer, m_filePath.c_str());
 	if (m_Texture == nullptr)
 	{
-		printf("TEXTURE: \t---> Error loading texture file. Error: \t%s\n", IMG_GetError());
+		GUNN_CORE_ERROR("TEXTURE: Error loading texture file: {0}. Error: {1}",m_filePath, IMG_GetError());
 	}
 	else
 	{
 		if (SDL_QueryTexture(m_Texture, nullptr, nullptr, &m_TextureRect.w, &m_TextureRect.h) == -1)
 		{
-			printf("TEXTURE: \t---> \t%s is invalid\n", SDL_GetError());
+			GUNN_CORE_ERROR("TEXTURE: {0} is invalid. Error: {1}",m_filePath, IMG_GetError());
 		}
 		else
 		{
-			printf("TEXTURE LOADED: \t---> \t%s\n", m_filePath);
+			GUNN_CORE_INFO("TEXTURE LOADED: {0}", m_filePath);
 		}
 	}
 }
@@ -33,7 +33,7 @@ void Texture::Unload()
 	{
 		SDL_DestroyTexture(m_Texture);
 		m_Texture = nullptr;
-		printf("TEXTURE UNLOADED: \t---> \t%s\n", m_filePath);
+		GUNN_CORE_INFO("TEXTURE UNLOADED: {0}", m_filePath);
 	}
 }
 

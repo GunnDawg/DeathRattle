@@ -13,6 +13,7 @@ int main(int argc, char* args[])
 	if (!game->Init())
 	{
 		return EXIT_FAILURE;
+		GUNN_CORE_FATAL("Failed to initialize game. Please restart!");
 	}
 
 	while (Game::isRunning)

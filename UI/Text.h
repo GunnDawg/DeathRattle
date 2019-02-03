@@ -3,7 +3,7 @@
 #include <SDL_ttf.h>
 #include <string>
 #include <cassert>
-#include <cstdio>
+#include "Log/Log.h"
 
 class Text
 {

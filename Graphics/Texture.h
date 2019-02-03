@@ -1,8 +1,8 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_image.h>
-#include <cstdio>
 #include <string>
+#include "Log/Log.h"
 
 class Texture
 {

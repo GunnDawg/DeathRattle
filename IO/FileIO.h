@@ -1,9 +1,9 @@
 #pragma once
 
 #include <cassert>
-#include <cstdio>
 #include <fstream>
 #include <string>
+#include "Log/Log.h"
 
 class FileIO
 {

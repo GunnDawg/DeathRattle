@@ -2,7 +2,6 @@
 
 #include <SDL.h>
 #include <cassert>
-#include <cstdio>
 #include "Entity/Paddle.h"
 
 class Keyboard

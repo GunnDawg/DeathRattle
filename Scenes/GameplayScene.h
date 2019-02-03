@@ -1,4 +1,5 @@
 #pragma once
+#include "Game.h"
 #include "StateMachine/GameState.h"
 #include "Entity/Ball.h"
 #include "Entity/Paddle.h"
@@ -12,6 +13,7 @@
 #include "GameSettings.h"
 #include "Audio/MusicManager.h"
 #include "Graphics/Animation.h"
+#include "Log/Log.h"
 
 constexpr unsigned int NUM_PADDLES      = 4;
 constexpr unsigned int NUM_ITEMS        = 5;

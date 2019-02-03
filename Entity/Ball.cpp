@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include "Game.h"
 
 Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 {
@@ -30,8 +31,8 @@ Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 
 void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 {
-	m_posX = (Game::screenWidth / 2) - 40;
-	m_posY = (Game::screenHeight / 2) - 25;
+	m_posX = (Settings::Display::WindowWidth / 2) - 40;
+	m_posY = (Settings::Display::WindowHeight / 2) - 25;
 
 	setAngle(randomizeAng());
 	m_isDead = false;

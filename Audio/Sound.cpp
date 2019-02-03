@@ -6,21 +6,16 @@ m_soundFilePath(filePath)
 	
 }
 
-Sound::~Sound()
-{
-	printf("test\n");
-}
-
 void Sound::Load()
 {
 	m_chunk = Mix_LoadWAV(m_soundFilePath);
 	if (m_chunk == nullptr)
 	{
-		printf("Error loading audio file. Error: %s\n", Mix_GetError());
+		GUNN_CORE_ERROR("Error loading audio file: {0}. Error: {1}",m_soundFilePath, Mix_GetError());
 	}
 	else
 	{
-		printf("SOUND LOADED: \t\t---> \t%s\n", m_soundFilePath);
+		GUNN_CORE_INFO("SOUND LOADED: {0}", m_soundFilePath);
 	}
 }
 
@@ -30,7 +25,7 @@ void Sound::Unload()
 	{
 		Mix_FreeChunk(m_chunk);
 		m_chunk = nullptr;
-		printf("SOUND UNLOADED: \t---> \t%s\n", m_soundFilePath);
+		GUNN_CORE_INFO("SOUND UNLOADED: {0}", m_soundFilePath);
 	}
 }
 

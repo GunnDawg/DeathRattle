@@ -39,7 +39,7 @@ void Game::updateDelta()
 	totalUpdates += 1;
 	avgDeltaTime = totalDeltaTime / totalUpdates;
 
-	printf("%f\n", avgDeltaTime);
+	//printf("%f\n", avgDeltaTime);
 }
 
 bool Game::Init()
@@ -48,26 +48,26 @@ bool Game::Init()
 
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
 	{
-		printf("Error starting SDL. Error: %s\n", SDL_GetError());
+		GUNN_CORE_FATAL("Error starting SDL. Error: {0}", SDL_GetError());
 		return false;
 	}
 
 	if ((IMG_Init(IMG_INIT_PNG != IMG_INIT_PNG)))
 	{
-		printf("IMG_Init: Failed to init required PNG support!\n");
-		printf("IMG_Init: %s\n", IMG_GetError());
+		GUNN_CORE_FATAL("IMG_Init: Failed to init required PNG support!");
+		GUNN_CORE_FATAL("IMG_Init: {0}", IMG_GetError());
 		return false;
 	}
 
 	if (TTF_Init() != 0)
 	{
-		printf("Error starting SDL_TTF. Error: %s\n", TTF_GetError());
+		GUNN_CORE_FATAL("Error starting SDL_TTF. Error: {0}", TTF_GetError());
 		return false;
 	}
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) != 0)
 	{
-		printf("Error starting SDL_Mixer. Error: %s\n", Mix_GetError());
+		GUNN_CORE_FATAL("Error starting SDL_Mixer. Error: {0}", Mix_GetError());
 		return false;
 	}
 
@@ -100,7 +100,7 @@ bool Game::Init()
 	);
 	if (Window == nullptr)
 	{
-		printf("Error creating SDL_Window. Error: %s\n", SDL_GetError());
+		GUNN_CORE_FATAL("Error creating SDL_Window. Error: {0}", SDL_GetError());
 		return false;
 	}
 
@@ -108,7 +108,7 @@ bool Game::Init()
 	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (Renderer == nullptr)
 	{
-		printf("Error creating SDL_Renderer. Error: %s\n", SDL_GetError());
+		GUNN_CORE_FATAL("Error creating SDL_Renderer. Error: {0}", SDL_GetError());
 		return false;
 	}
 
