@@ -4,8 +4,8 @@
  - Come up with a way to pack/compress and unpack/decompress asset files.
 
 * (BUGS)
- - (Testing)Continue to optimize the delta clock. Taking the average does seem to be working though.
- - (Testing)Fix micro stutter. Find what's causing the main thread to pause. Could be related to the delta clock.
+ - (Testing) Continue to optimize the delta clock. Taking the average does seem to be working though.
+ - (Testing) Fix micro stutter. Find what's causing the main thread to pause. Could be related to the delta clock.
 
 * (ENGINE)
  - Consider some type of asset manager. This will help with the messy code, but try to avoid an
@@ -13,7 +13,7 @@
    it's probably too late :(
  - Start using assertions at the public call sites of all objects/classes. This means asserting all
    paramatized constructors either for NULL checks, range checks, or type checks.
- - (IN PROGRESS)Implement spdlog and replace it with all the printf() calls.
+ - (DONE) Implement spdlog and replace it with all the printf() calls.
 
 * (CODE CLEAN UP)
  - Get rid of the excess UI RECTS (borders), and just call SDL_DrawRect on the original UI RECTS.
@@ -21,8 +21,7 @@
  - Continue to look for ways to shorten code, it's a mess.
 
 * (FEATURES)
- - When we have proper logging and a steril release build, start to look into
-   the item system AGAIN (grrrr).
+ - Start to look into the item system AGAIN (grrrr).
  - Implement a controller type in the options menu. The implementation for keyboard or mouse
    is already there, just needs to be implemented. Also look into gamepad implementation.
  - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
