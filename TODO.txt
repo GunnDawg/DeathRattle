@@ -1,33 +1,47 @@
-2/1/2019
-* (PROJECT FILES)
- - (DONE) Fix the library directories and add a Dependencies folder to the solution directory.
- - Come up with a way to pack/compress and unpack/decompress asset files.
+///////////////////////////////////////////////////////////
+/// Author: Calvin Gunn                                 ///
+/// Project: Death Rattle Pong Game                     ///
+/// Version: 0.0.1                                      ///
+/// Document: TODO List                                 ///
+///////////////////////////////////////////////////////////
 
-* (BUGS)
- - (Testing) Continue to optimize the delta clock. Taking the average does seem to be working though.
- - (Testing) Fix micro stutter. Find what's causing the main thread to pause. Could be related to the delta clock.
+-==(CORE)-==
 
-* (ENGINE)
- - Consider some type of asset manager. This will help with the messy code, but try to avoid an
-   entity component system for now. A Data Oriented Design would have been useful here, but
-   it's probably too late :(
- - Start using assertions at the public call sites of all objects/classes. This means asserting all
-   paramatized constructors either for NULL checks, range checks, or type checks.
- - (DONE) Implement spdlog and replace it with all the printf() calls.
+	* (PERFORMANCE)
+	 - (IN PROGRESS) HUD::Update() is causing higher than normal latency on the CPU due to Text::Update() reloading
+	   the .ttf every frame. Let's store a pointer to the .ttf in the constructor and figure out a HAS_SCORE_CHANGED flag
+	   system. This will reduce the amount of unnecessary calls to Text::Update(), and HUD::Update() significantly.
 
-* (CODE CLEAN UP)
- - Get rid of the excess UI RECTS (borders), and just call SDL_DrawRect on the original UI RECTS.
-   The extra outline RECT is a waste.
- - Continue to look for ways to shorten code, it's a mess.
+	* (ENGINE)
+	 - Consider some type of asset manager. This will help with the messy code, but try to avoid an
+	   entity component system for now. A Data Oriented Design would have been useful here, but
+	   it's probably too late :(
+	 - Start using assertions at the public call sites of all objects/classes. This means asserting all
+	   paramatized constructors either for NULL checks, range checks, or type checks.
+	 - Implement a controller type in the options menu. The implementation for keyboard or mouse
+       is already there, just needs to be implemented. Also look into gamepad implementation.
+     - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
 
-* (FEATURES)
- - Start to look into the item system AGAIN (grrrr).
- - Implement a controller type in the options menu. The implementation for keyboard or mouse
-   is already there, just needs to be implemented. Also look into gamepad implementation.
- - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
+	* (CODE CLEAN UP)
+	 - Get rid of the excess UI RECTS (borders), and just call SDL_DrawRect on the original UI RECTS.
+	   The extra outline RECT is a waste.
+	 - Continue to look for ways to shorten code, it's a mess.
 
-* (GAMEPLAY)
- - Need to decide what we're gonna do with the level system. Is it even neccessary
-   anymore? Do we want just one progressive level? And if so, how will that work?
- - Rework and come up with a better win / loss screen. Highly dependent on how we decide
-   to handle the level / progression system.
+	* (BUGS)
+	 - Level Score isn't populating until after the game has started. This isn't really a big issue though
+	   because we're going to start work on a new level/progression system anyways.
+
+-==(GAMEPLAY)-==
+
+	* (NEW LEVEL SYSTEM)
+	 - Single stage, multiple levels.
+	 - Level progression is based on score.
+	 - Ball speed will ONLY increase with the level, and will no longer increase by hitting a marked paddle.
+	   However, hitting a marked paddle will now deal more damage.
+ 
+	* (NEW ITEM SYSTEM)
+	 - Item drops will spawn every 5 seconds for the first level. After that, the time between item spawns
+	   will be increased by 5 seconds per level.
+	 - Items will be inventorized, rather than use on pickup. This will allow the player to choose when an item
+	   can be used.
+	 - Debuff items will be used on pickup as they are NOT a good thing to get, you want to avoid those.
