@@ -41,6 +41,8 @@ void HUD::Load()
 	m_levelText                                   = std::make_unique<Text>(24, m_convertedLevel);
 	m_remainingHP                                 = std::make_unique<Text>(22, m_convertedHP);
 	m_itemDropProgress                            = std::make_unique<Text>(22, "BONUS");
+
+	m_ScoreBoard.Load();
 }
 
 void HUD::Unload()
@@ -122,7 +124,12 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 
 	m_textBoxes[5].w = progress;
 
-	m_ScoreBoard.Update(passedLevel);
+	//m_ScoreBoard.Update(passedLevel);
+
+	if (m_ScoreBoard.SCORE_NEEDS_UPDATED)
+	{
+		m_ScoreBoard.Update(passedLevel);
+	}
 
 	m_ballSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));
 	m_ballSpeedText->Update(m_convertedBallSpeed);

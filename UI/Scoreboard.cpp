@@ -84,7 +84,10 @@ void Scoreboard::Update(const LevelSet& passedLevel)
 		m_convertedHighScore = m_hs.data();
 	}
 
-	m_scoreText->Update(m_convertedScore);
+	if (SCORE_NEEDS_UPDATED)
+	{
+		m_scoreText->Update(m_convertedScore);
+	}
 	m_highScoreText->Update(m_convertedHighScore);
 	m_levelScoreText->Update(m_convertedLevelScore);
 	m_finalScoreText->Update(m_convertedFinalScore);

@@ -25,6 +25,8 @@ private:
 
 	void loadFont();
 
+	TTF_Font* m_Font                    = nullptr;
+
 	std::string m_fontPath              = "Assets/Fonts/8BIT.ttf";
 	std::string m_fontValue             = { };
 	unsigned int m_fontSize             = 0;

@@ -21,6 +21,8 @@ public:
 	void Draw();
 	void recordHighScore() const;
 
+	bool SCORE_NEEDS_UPDATED = true;
+
 	inline unsigned int getScore() const { return m_score; }
 	inline unsigned int getHighScore() const { return m_highScore; }
 	inline unsigned int getLevelScore() const { return m_levelScore; }
