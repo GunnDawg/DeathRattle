@@ -332,7 +332,7 @@ void OptionsMenuScene::update()
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
-		m_Flames[i].Play(Game::deltaTime);
+		m_Flames[i].Play(Game::avgDeltaTime);
 	}
 }
 

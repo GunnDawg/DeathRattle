@@ -45,10 +45,12 @@ void GameplayState::on_enter()
 
 	m_ball.Load();
 
-	m_HUD.Load();
-
 	m_dungeonLevels.Load();
 	m_dungeonLevels.setScores({ 10, 50, 175, 250, 300 });
+
+	m_HUD.Load();
+	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
+	m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = false;
 
 	m_hitSound.Load();
 	m_hitBadSound.Load();
@@ -186,13 +188,18 @@ void GameplayState::handle_events()
 
 void GameplayState::update()
 {
+	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
+
+	if (m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED)
+	{
+		GUNN_CORE_FATAL("UPDATING SCORE!");
+	}
+
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
-		m_Flames[i].Play(Game::deltaTime);
+		m_Flames[i].Play(Game::avgDeltaTime);
 	}
-
-	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
 
 	if (m_health <= 0)
 	{
@@ -214,15 +221,10 @@ void GameplayState::update()
 		}
 		else if (m_keyBoard.isEnabled())
 		{
-			m_keyBoard.Update(Game::deltaTime, 1.75, Game::screenWidth, Game::screenHeight, m_paddles[0], m_paddles[1], m_paddles[2], m_paddles[3]);
+			m_keyBoard.Update(Game::avgDeltaTime, 1.75, Game::screenWidth, Game::screenHeight, m_paddles[0], m_paddles[1], m_paddles[2], m_paddles[3]);
 		}
 
-		m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
-
-		if (!m_paused)
-		{
-			m_ball.Update();
-		}
+		m_ball.Update();
 
 		checkforGameOver();
 		checkCollision();
@@ -365,6 +367,10 @@ void GameplayState::checkCollision()
 	Paddle* paddleHit = getPaddle();
 	if (paddleHit == nullptr)
 	{
+		if (!m_paused)
+		{
+			m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = false;
+		}
 		return;
 	}
 	else if (paddleHit != nullptr)
@@ -465,10 +471,12 @@ void GameplayState::checkCollision()
 		if (m_HUD.m_ScoreBoard.getScore() > 0 && paddleHit->isMarked())
 		{
 			m_HUD.m_ScoreBoard.decreaseScore(1);
+			m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = true;
 		}
 		else if (!paddleHit->isMarked())
 		{
 			m_HUD.m_ScoreBoard.increaseScore(1);
+			m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = true;
 		}
 
 		paddleHit->setHit(true);
