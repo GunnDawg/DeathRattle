@@ -1,16 +1,11 @@
-///////////////////////////////////////////////////////////
-/// Author: Calvin Gunn                                 ///
-/// Project: Death Rattle Pong Game                     ///
-/// Version: 0.0.1                                      ///
-/// Document: TODO List                                 ///
-///////////////////////////////////////////////////////////
+/////////////////////////////////////////
+/// Author: Calvin Gunn               ///
+/// Document: TODO List               ///
+/// Project: Death Rattle Pong Game   ///
+/// Current Version: 0.0.1            ///
+/////////////////////////////////////////
 
 -==(CORE)-==
-
-	* (PERFORMANCE)
-	 - (IN PROGRESS) HUD::Update() is causing higher than normal latency on the CPU due to Text::Update() reloading
-	   the .ttf every frame. Let's store a pointer to the .ttf in the constructor and figure out a HAS_SCORE_CHANGED flag
-	   system. This will reduce the amount of unnecessary calls to Text::Update(), and HUD::Update() significantly.
 
 	* (ENGINE)
 	 - Consider some type of asset manager. This will help with the messy code, but try to avoid an
@@ -20,16 +15,27 @@
 	   paramatized constructors either for NULL checks, range checks, or type checks.
 	 - Implement a controller type in the options menu. The implementation for keyboard or mouse
        is already there, just needs to be implemented. Also look into gamepad implementation.
+     - Detect user screen resolution and send it to the window at runtime. Might consider an external
+	   launcher later, where the user can set this themself, along with other options.
      - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
+
+	* (PERFORMANCE)
+	 - (IN PROGRESS) HUD::Update() is causing higher than normal latency on the CPU due to Text::Update() reloading
+	   the .ttf every frame. Let's store a pointer to the .ttf in the constructor and figure out a HAS_SCORE_CHANGED flag
+	   system. This will reduce the amount of unnecessary calls to Text::Update(), and HUD::Update() significantly.
 
 	* (CODE CLEAN UP)
 	 - Get rid of the excess UI RECTS (borders), and just call SDL_DrawRect on the original UI RECTS.
 	   The extra outline RECT is a waste.
+	 - Figure out a better, cleaner way to initialize and load objects. Cluttering the on_enter() of every
+	   scene is just sloppy. There has to be a better way. Maybe the asset manager is the solution?
 	 - Continue to look for ways to shorten code, it's a mess.
 
 	* (BUGS)
 	 - Level Score isn't populating until after the game has started. This isn't really a big issue though
-	   because we're going to start work on a new level/progression system anyways.
+	   because we're going to start working on a new level/progression system anyways.
+	 - Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
+	   towards a NULL texture.
 
 -==(GAMEPLAY)-==
 
@@ -45,3 +51,5 @@
 	 - Items will be inventorized, rather than use on pickup. This will allow the player to choose when an item
 	   can be used.
 	 - Debuff items will be used on pickup as they are NOT a good thing to get, you want to avoid those.
+	 - Item inventory UI will be where the BONUS meter currently is. BONUS meter will be removed, as we'll no
+	   longer be using it.
