@@ -36,10 +36,9 @@ void Game::updateDelta()
 	{
 		totalDeltaTime += deltaTime;
 	}
+
 	totalUpdates += 1;
 	avgDeltaTime = totalDeltaTime / totalUpdates;
-
-	//printf("%f\n", avgDeltaTime);
 }
 
 bool Game::Init()

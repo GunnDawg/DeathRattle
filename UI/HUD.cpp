@@ -124,9 +124,7 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 
 	m_textBoxes[5].w = progress;
 
-	//m_ScoreBoard.Update(passedLevel);
-
-	if (m_ScoreBoard.SCORE_NEEDS_UPDATED)
+	if (m_ScoreBoard.SCORE_NEEDS_UPDATED || m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED)
 	{
 		m_ScoreBoard.Update(passedLevel);
 	}

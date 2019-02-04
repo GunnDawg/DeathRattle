@@ -188,11 +188,14 @@ void GameplayState::handle_events()
 
 void GameplayState::update()
 {
-	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
-
 	if (m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED)
 	{
 		GUNN_CORE_FATAL("UPDATING SCORE!");
+	}
+
+	if (m_HUD.m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED)
+	{
+		GUNN_CORE_FATAL("HIGH SCORE UPDATED!");
 	}
 
 	m_cursor.setRect(Game::mouseX, Game::mouseY);
@@ -229,6 +232,8 @@ void GameplayState::update()
 		checkforGameOver();
 		checkCollision();
 		checkforBonus();
+
+		m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
 	}
 }
 
@@ -370,6 +375,7 @@ void GameplayState::checkCollision()
 		if (!m_paused)
 		{
 			m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = false;
+			m_HUD.m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED = false;
 		}
 		return;
 	}
@@ -477,6 +483,11 @@ void GameplayState::checkCollision()
 		{
 			m_HUD.m_ScoreBoard.increaseScore(1);
 			m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = true;
+		}
+
+		if (m_HUD.m_ScoreBoard.getScore() >= m_HUD.m_ScoreBoard.getHighScore())
+		{
+			m_HUD.m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED = true;
 		}
 
 		paddleHit->setHit(true);

@@ -64,9 +64,6 @@ void Scoreboard::Unload()
 
 void Scoreboard::Update(const LevelSet& passedLevel)
 {
-	m_s = std::to_string(m_score);
-	m_convertedScore = m_s.data();
-
 	m_fs = std::to_string(m_score);
 	m_convertedFinalScore = m_fs.data();
 
@@ -86,9 +83,15 @@ void Scoreboard::Update(const LevelSet& passedLevel)
 
 	if (SCORE_NEEDS_UPDATED)
 	{
+		m_s = std::to_string(m_score);
+		m_convertedScore = m_s.data();
 		m_scoreText->Update(m_convertedScore);
 	}
-	m_highScoreText->Update(m_convertedHighScore);
+	if (HIGHSCORE_NEEDS_UPDATED)
+	{
+		m_highScoreText->Update(m_convertedHighScore);
+	}
+
 	m_levelScoreText->Update(m_convertedLevelScore);
 	m_finalScoreText->Update(m_convertedFinalScore);
 
