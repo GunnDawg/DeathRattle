@@ -1,5 +1,4 @@
 #pragma once
-
 #include <cassert>
 #include <memory>
 #include <array>
@@ -7,11 +6,10 @@
 #include <sstream>
 #include "Graphics/Texture.h"
 #include "Entity/Paddle.h"
-#include "Game.h"
-
-class Game;
 
 constexpr unsigned int LEVEL_COUNT = 5;
+
+class Game;
 
 class LevelSet
 {
@@ -35,12 +33,12 @@ public:
 private:
 	Game* game = nullptr;
 
-	LevelSet(const LevelSet& obj)=delete;
-	LevelSet& operator=(const LevelSet&)=delete;
-
 	std::string m_filename;
 	std::array<Texture, LEVEL_COUNT> m_levelTextures = { };
 	std::array<unsigned int, LEVEL_COUNT> m_levelScore = { 0 };
 
 	unsigned int m_levelNum = 0;
+
+	LevelSet(const LevelSet& obj) = delete;
+	LevelSet& operator=(const LevelSet&) = delete;
 };

@@ -40,10 +40,7 @@ public:
 	void showFinal();
 
 private:
-	Game* game = nullptr;
-
-	Scoreboard(const Scoreboard& obj)=delete;
-	Scoreboard& operator=(const Scoreboard&)=delete;
+	Game* game                                    = nullptr;
 
 	std::unique_ptr<FileIO> m_File;
 
@@ -69,4 +66,7 @@ private:
 	std::string m_hs;
 	std::string m_s;
 	std::string m_ls;
+
+	Scoreboard(const Scoreboard& obj) = delete;
+	Scoreboard& operator=(const Scoreboard&) = delete;
 };

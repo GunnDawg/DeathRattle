@@ -1,5 +1,6 @@
 #include "GameplayScene.h"
 #include "Scenes/MainMenuScene.h"
+#include "Game.h"
 
 void GameplayState::on_enter()
 {
@@ -34,14 +35,14 @@ void GameplayState::on_enter()
 		GUNN_CORE_ERROR("Invalid input mode set.");
 	}
 
-	m_cursor.Load();
-
 	m_paddles = {
 		Paddle((game->screenWidth / 6.5), 15, (game->screenWidth / 2) - (175 / 2), 30),
 		Paddle(15, (game->screenHeight / 4), game->screenWidth - 45, (game->screenHeight / 2) - (175 / 2)),
 		Paddle((game->screenWidth / 6.5), 15, (game->screenWidth / 2) - (175 / 2), game->screenHeight - 45),
 		Paddle(15, (game->screenHeight / 4), 30, (game->screenHeight / 2) - (175 / 2))
 	};
+
+	m_cursor.Load();
 
 	m_grimReaper.Load();
 	m_grimReaper.setRect((game->screenWidth / 2) - (m_grimReaper.m_TextureRect.w / 2),

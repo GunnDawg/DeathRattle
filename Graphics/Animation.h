@@ -10,8 +10,6 @@ public:
 	Animation(const char* filePath, unsigned int numFramesX, unsigned int numFramesY, double speed);
 	~Animation()=default;
 
-	Game* game                           = nullptr;
-
 	void Load(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 	inline void Unload() { m_Texture.Unload(); }
 	void Play(double dt);
@@ -20,6 +18,8 @@ public:
 	void Draw();
 
 private:
+	Game* game                           = nullptr;
+
 	Texture m_Texture;
 
 	const unsigned int m_numFramesX      = 0;

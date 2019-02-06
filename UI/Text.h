@@ -14,8 +14,6 @@ public:
 	Text(unsigned int fontSize, const std::string_view text);
 	~Text()=default;
 
-	Game* game                          = nullptr;
-
 	void Draw(unsigned int x, unsigned int y);
 	void Update(const std::string_view newText);
 	void Update(const SDL_Color& newColor);
@@ -24,8 +22,7 @@ public:
 	SDL_Rect m_textRect                 = { 0 };
 
 private:
-	Text(const Text& obj)=delete;
-	Text& operator=(const Text&)=delete;
+	Game* game                          = nullptr;
 
 	void loadFont();
 
@@ -37,4 +34,7 @@ private:
 	SDL_Color m_fontColor               = { 255, 255, 255, 255 };
 
 	SDL_Texture* m_textTexture          = nullptr;
+
+	Text(const Text& obj) = delete;
+	Text& operator=(const Text&) = delete;
 };

@@ -1,5 +1,5 @@
 #include "PreGameplayScene.h"
-#include "../Game.h"
+#include "Game.h"
 
 void PreGameplayScene::on_enter()
 {

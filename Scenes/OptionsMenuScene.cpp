@@ -1,6 +1,6 @@
 #include "OptionsMenuScene.h"
-#include "Game.h"
 #include "GameSettings.h"
+#include "Game.h"
 
 void OptionsMenuScene::on_enter()
 {

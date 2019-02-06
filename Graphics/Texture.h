@@ -13,8 +13,6 @@ public:
 	Texture(const std::string_view filePath);
 	~Texture()=default;
 
-	Game* game                           = nullptr;
-
 	void Load();
 	void Unload();
 	void setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
@@ -27,4 +25,7 @@ public:
 	SDL_Rect m_TextureRect               = { 0 };
 	SDL_Rect m_CropRect                  = { 0 };
 	SDL_Rect m_PosRect                   = { 0 };
+
+private:
+	Game* game                           = nullptr;
 };

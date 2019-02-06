@@ -59,6 +59,8 @@ void HUD::Unload()
 	m_levelText->Unload();
 	m_remainingHP->Unload();
 	m_itemDropProgress->Unload();
+
+	game = nullptr;
 }
 
 void HUD::drawHealthBar()

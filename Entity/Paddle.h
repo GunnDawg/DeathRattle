@@ -1,10 +1,8 @@
 #pragma once
-
 #include <SDL.h>
 #include <cassert>
 #include <typeinfo>
 #include "Graphics/Texture.h"
-#include "Game.h"
 
 class Game;
 
@@ -14,8 +12,6 @@ public:
 	Paddle()=default;
 	Paddle(int x, int y, int w, int h);
 	~Paddle()=default;
-
-	Game* game = nullptr;
 
 	bool isMarked() const { return m_paddleMarked; }
 
@@ -31,10 +27,12 @@ public:
 	void setHit(bool hit);
 
 private:
-	//Paddle(const Paddle& objt)=delete;
-	//Paddle& operator=(const Paddle&)=delete;
+	Game* game                        = nullptr;
 
 	SDL_Rect m_paddleRect             = { 0 };
 	double m_moveSpeed                = 0.0;
 	bool m_paddleMarked               = false;
+
+	Paddle(const Paddle& objt) = delete;
+	//Paddle& operator=(const Paddle&) = delete;
 };

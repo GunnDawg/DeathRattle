@@ -1,5 +1,4 @@
 #pragma once
-
 #include <SDL.h>
 #include <cassert>
 #include <random>
@@ -43,9 +42,6 @@ public:
 	double m_angle = 0.0;
 
 private:
-	Ball(const Ball& obj)=delete;
-	Ball& operator=(const Ball&)=delete;
-
 	Game* game                         = nullptr;
 
 	Texture m_ballTexture;
@@ -60,4 +56,7 @@ private:
 	float m_speed                      = 0;
 
 	bool m_isDead                      = false;
+
+	Ball(const Ball& obj) = delete;
+	Ball& operator=(const Ball&) = delete;
 };

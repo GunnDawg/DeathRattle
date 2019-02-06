@@ -30,10 +30,7 @@ public:
 	Scoreboard m_ScoreBoard = Scoreboard(24, 24);
 
 private:
-	Game* game = nullptr;
-
-	HUD(const HUD& obj)=default;
-	HUD& operator=(const HUD&)=default;
+	Game* game                                              = nullptr;
 
 	void drawHealthBar();
 	void drawProgressBar();
@@ -65,4 +62,7 @@ private:
 	std::unique_ptr<Text> m_itemDropProgress                = nullptr;
 
 	bool m_isShowing                                        = true;
+
+	HUD(const HUD& obj) = default;
+	HUD& operator=(const HUD&) = default;
 };
