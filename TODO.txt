@@ -60,3 +60,4 @@
 	 - (DONE) Everywhere we pass things like ScreenWidth, ScreenHeight, and Renderer we need to be creating an instance
 	   of "Game" and use it's instance to access those data members.
 	 - (DONE) Get rid of all static members inside the Game class.
+
