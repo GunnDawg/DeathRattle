@@ -8,6 +8,8 @@
 
 int main(int argc, char* args[])
 {
+	Gunn::Log::Init();
+
 	Game* game = &Game::GetInstance();
 
 	if (!game->Init())
@@ -16,7 +18,7 @@ int main(int argc, char* args[])
 		GUNN_CORE_FATAL("Failed to initialize game. Please restart!");
 	}
 
-	while (Game::isRunning)
+	while (game->isRunning)
 	{
 		game->ProcessInput();
 		game->Update();

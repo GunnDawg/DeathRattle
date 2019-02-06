@@ -6,6 +6,8 @@
 #include "Graphics/Texture.h"
 #include "Graphics/Animation.h"
 
+class Game;
+
 class LeaderBoardScene : public GameState
 {
 public:
@@ -16,6 +18,8 @@ public:
 	void draw() override;
 
 private:
+	Game* game                        = nullptr;
+
 	Texture m_cursor                  = Texture("Assets/Graphics/common/cursor.png");
 	Texture m_background              = Texture("Assets/Graphics/common/main_background.png");
 	Texture m_comingSoon              = Texture("Assets/Graphics/leaderboard_scene/comingsoon.png");

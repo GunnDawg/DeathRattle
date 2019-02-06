@@ -4,12 +4,12 @@
 Texture::Texture(const std::string_view filePath) :
 m_filePath(filePath.data())
 {
-
+	game = &Game::GetInstance();
 }
 
 void Texture::Load()
 {
-	m_Texture = IMG_LoadTexture(Game::Renderer, m_filePath.c_str());
+	m_Texture = IMG_LoadTexture(game->Renderer, m_filePath.c_str());
 	if (m_Texture == nullptr)
 	{
 		GUNN_CORE_ERROR("TEXTURE: Error loading texture file: {0}. Error: {1}",m_filePath, IMG_GetError());

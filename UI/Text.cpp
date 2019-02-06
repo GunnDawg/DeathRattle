@@ -7,6 +7,8 @@ m_fontValue(text.data()), m_fontSize(fontSize)
 	assert(typeid(fontSize) == typeid(unsigned int) && fontSize > 0 && "Text must have a font size");
 	assert(typeid(text) == typeid(std::string_view) && !text.empty() && "Text cannot have an empty value");
 
+	game = &Game::GetInstance();
+
 	loadFont();
 	SDL_QueryTexture(m_textTexture, nullptr, nullptr, &m_textRect.w, &m_textRect.h);
 
@@ -27,7 +29,7 @@ void Text::loadFont()
 		GUNN_CORE_ERROR("Error creating text surface: {0}. Error: {1}", m_fontPath.data(), TTF_GetError());
 	}
 
-	m_textTexture = SDL_CreateTextureFromSurface(Game::Renderer, textSurface);
+	m_textTexture = SDL_CreateTextureFromSurface(game->Renderer, textSurface);
 	if (!m_textTexture)
 	{
 		GUNN_CORE_ERROR("Error creating text texture: {0}", SDL_GetError());
@@ -43,7 +45,7 @@ void Text::Draw(unsigned int x, unsigned int y)
 	m_textRect.x = x;
 	m_textRect.y = y;
 
-	SDL_RenderCopy(Game::Renderer, m_textTexture, nullptr, &m_textRect);
+	SDL_RenderCopy(game->Renderer, m_textTexture, nullptr, &m_textRect);
 }
 
 void Text::Update(const std::string_view newText)

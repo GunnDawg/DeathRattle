@@ -30,6 +30,9 @@
 	 - Figure out a better, cleaner way to initialize and load objects. Cluttering the on_enter() of every
 	   scene is just sloppy. There has to be a better way. Maybe the asset manager is the solution?
 	 - Continue to look for ways to shorten code, it's a mess.
+	 - Everywhere we pass things like ScreenWidth, ScreenHeight, and Renderer we need to be creating an instance
+	   of "Game" and use it's instance to access those data members.
+	 - Get rid of all static members inside the Game class.
 
 	* (BUGS)
 	 - Level Score isn't populating until after the game has started. This isn't really a big issue though

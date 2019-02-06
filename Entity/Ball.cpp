@@ -3,6 +3,8 @@
 
 Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 {
+	game = &Game::GetInstance();
+
 	switch (speed)
 	{
 		case Settings::GamePlay::GameDifficulty::EASY:
@@ -80,18 +82,18 @@ void Ball::Draw()
 	{
 		SDL_SetTextureColorMod(m_ballTexture.getTexture(), 255, 0, 0);
 	}
-	else if (!m_isDead)
+	else
 	{
 		SDL_SetTextureColorMod(m_ballTexture.getTexture(), 255, 255, 255);
 	}
 
-	SDL_RenderCopy(Game::Renderer, m_ballTexture.getTexture(), nullptr, &m_ballRect);
+	SDL_RenderCopy(game->Renderer, m_ballTexture.getTexture(), nullptr, &m_ballRect);
 }
 
 void Ball::Update()
 {
-	m_posX += static_cast<int>(m_velocityX * Game::avgDeltaTime);
-	m_posY += static_cast<int>(m_velocityY * Game::avgDeltaTime);
+	m_posX += static_cast<int>(m_velocityX * game->avgDeltaTime);
+	m_posY += static_cast<int>(m_velocityY * game->avgDeltaTime);
 }
 
 void Ball::setAngle(double angle)

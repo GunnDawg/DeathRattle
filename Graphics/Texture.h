@@ -4,12 +4,16 @@
 #include <string>
 #include "Log/Log.h"
 
+class Game;
+
 class Texture
 {
 public:
 	Texture()=default;
 	Texture(const std::string_view filePath);
 	~Texture()=default;
+
+	Game* game                           = nullptr;
 
 	void Load();
 	void Unload();
@@ -19,8 +23,8 @@ public:
 	inline SDL_Texture* getTexture() const { return m_Texture; }
 
 	std::string m_filePath;
-	SDL_Texture* m_Texture            = nullptr;
-	SDL_Rect m_TextureRect            = { 0 };
-	SDL_Rect m_CropRect               = { 0 };
-	SDL_Rect m_PosRect                = { 0 };
+	SDL_Texture* m_Texture               = nullptr;
+	SDL_Rect m_TextureRect               = { 0 };
+	SDL_Rect m_CropRect                  = { 0 };
+	SDL_Rect m_PosRect                   = { 0 };
 };

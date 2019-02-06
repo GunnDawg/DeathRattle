@@ -6,12 +6,16 @@
 #include "Graphics/Texture.h"
 #include "Game.h"
 
+class Game;
+
 class Paddle
 {
 public:
 	Paddle()=default;
 	Paddle(int x, int y, int w, int h);
 	~Paddle()=default;
+
+	Game* game = nullptr;
 
 	bool isMarked() const { return m_paddleMarked; }
 
@@ -27,8 +31,8 @@ public:
 	void setHit(bool hit);
 
 private:
-	Paddle(const Paddle& objt)=delete;
-	Paddle& operator=(const Paddle&)=delete;
+	//Paddle(const Paddle& objt)=delete;
+	//Paddle& operator=(const Paddle&)=delete;
 
 	SDL_Rect m_paddleRect             = { 0 };
 	double m_moveSpeed                = 0.0;

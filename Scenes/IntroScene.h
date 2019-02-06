@@ -7,6 +7,8 @@
 #include "Time/Timer.h"
 #include "Graphics/Animation.h"
 
+class Game;
+
 class IntroSceneState : public GameState
 {
 public:
@@ -17,6 +19,8 @@ public:
 	void draw() override;
 
 private:
+	Game* game                        = nullptr;
+
 	Timer m_timer;
 
 	Texture m_cursor                  = Texture("Assets/Graphics/common/cursor.png");

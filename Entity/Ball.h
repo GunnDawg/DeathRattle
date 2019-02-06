@@ -7,6 +7,8 @@
 #include "GameSettings.h"
 #include "Graphics/Texture.h"
 
+class Game;
+
 class Ball
 {
 public:
@@ -43,6 +45,8 @@ public:
 private:
 	Ball(const Ball& obj)=delete;
 	Ball& operator=(const Ball&)=delete;
+
+	Game* game                         = nullptr;
 
 	Texture m_ballTexture;
 

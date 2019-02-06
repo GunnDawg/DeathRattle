@@ -7,6 +7,8 @@
 #include "Graphics/Animation.h"
 #include "Audio/MusicManager.h"
 
+class Game;
+
 class OptionsMenuScene : public GameState
 {
 public:
@@ -17,6 +19,8 @@ public:
 	void draw() override;
 
 private:
+	Game* game                         = nullptr;
+
 	std::array<Texture, 2> m_skulls    = { Texture("Assets/Graphics/common/skull.png"),
 										   Texture("Assets/Graphics/common/skull.png") };
 

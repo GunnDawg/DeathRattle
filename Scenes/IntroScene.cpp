@@ -4,6 +4,8 @@
 
 void IntroSceneState::on_enter()
 {
+	game = &Game::GetInstance();
+
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
@@ -11,37 +13,37 @@ void IntroSceneState::on_enter()
 	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
-	m_background.m_TextureRect.w = Game::screenWidth;
-	m_background.m_TextureRect.h = Game::screenHeight;
+	m_background.m_TextureRect.w = game->screenWidth;
+	m_background.m_TextureRect.h = game->screenHeight;
 
 	m_title.Load();
-	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
-	m_title.m_TextureRect.y = (Game::screenHeight / 2) - (m_title.m_TextureRect.h / 2) - 60;
+	m_title.m_TextureRect.x = (game->screenWidth / 2) - (m_title.m_TextureRect.w / 2);
+	m_title.m_TextureRect.y = (game->screenHeight / 2) - (m_title.m_TextureRect.h / 2) - 60;
 
 	m_howLong.Load();
-	m_howLong.m_TextureRect.x = (Game::screenWidth / 2) - (m_howLong.m_TextureRect.w / 2);
+	m_howLong.m_TextureRect.x = (game->screenWidth / 2) - (m_howLong.m_TextureRect.w / 2);
 	m_howLong.m_TextureRect.y = m_title.m_TextureRect.y + 85;
 
 	m_Flames[0].Load(12, -200, 320, 512);
 	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_plug.Load();
-	m_plug.m_TextureRect.x = (Game::screenWidth / 2) - (m_plug.m_TextureRect.w / 2);
+	m_plug.m_TextureRect.x = (game->screenWidth / 2) - (m_plug.m_TextureRect.w / 2);
 	m_plug.m_TextureRect.y = 0;
 
 	m_blood.Load();
-	m_blood.m_TextureRect.x = (Game::screenWidth / 2) - (m_blood.m_TextureRect.w / 2);
-	m_blood.m_TextureRect.y = (Game::screenHeight / 2) - (m_blood.m_TextureRect.h / 2);
+	m_blood.m_TextureRect.x = (game->screenWidth / 2) - (m_blood.m_TextureRect.w / 2);
+	m_blood.m_TextureRect.y = (game->screenHeight / 2) - (m_blood.m_TextureRect.h / 2);
 
-	m_skullBox.w = Game::screenWidth;
+	m_skullBox.w = game->screenWidth;
 	m_skullBox.h = 100;
-	m_skullBox.x = (Game::screenWidth / 2) - (m_skullBox.w / 2);
+	m_skullBox.x = (game->screenWidth / 2) - (m_skullBox.w / 2);
 	m_skullBox.y = 550;
 
 	m_skullWhite.Load();
 	m_skullWhite.m_TextureRect.w = 125;
 	m_skullWhite.m_TextureRect.h = 125;
-	m_skullWhite.m_TextureRect.x = (Game::screenWidth / 2) - m_skullWhite.m_TextureRect.w / 2;
+	m_skullWhite.m_TextureRect.x = (game->screenWidth / 2) - m_skullWhite.m_TextureRect.w / 2;
 	m_skullWhite.m_TextureRect.y = m_skullBox.y - 10;
 
 	m_skullCollider.w = m_skullWhite.m_TextureRect.w / 2;
@@ -65,12 +67,12 @@ void IntroSceneState::on_enter()
 
 	m_plugBox.x = 0;
 	m_plugBox.y = m_plug.m_TextureRect.y;
-	m_plugBox.w = Game::screenWidth;
+	m_plugBox.w = game->screenWidth;
 	m_plugBox.h = m_plug.m_TextureRect.h;
 
 	m_version.Load();
-	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
-	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
+	m_version.m_TextureRect.x = ((game->screenWidth - m_version.m_TextureRect.w) - 20);
+	m_version.m_TextureRect.y = (game->screenHeight - m_version.m_TextureRect.h);
 
 	m_timer.Start();
 
@@ -102,20 +104,29 @@ void IntroSceneState::on_exit()
 	{
 		m_Flames[i].Unload();
 	}
+
+	game = nullptr;
 }
 
 void IntroSceneState::update()
 {
+	m_cursor.setRect(game->mouseX, game->mouseY);
+
+	for (std::size_t i = 0; i < m_Flames.size(); ++i)
+	{
+		m_Flames[i].Play(game->avgDeltaTime);
+	}
+
 	if (m_timer.elapsedMilliseconds() > 200)
 	{
 		m_isBlood = true;
 		m_timer.Stop();
 	}
 
-	if (Game::mouseX >= m_skullCollider.x &&
-		Game::mouseX <= m_skullCollider.x + m_skullCollider.w &&
-		Game::mouseY >= m_skullCollider.y &&
-		Game::mouseY <= m_skullCollider.y + m_skullCollider.h)
+	if (game->mouseX >= m_skullCollider.x &&
+		game->mouseX <= m_skullCollider.x + m_skullCollider.w &&
+		game->mouseY >= m_skullCollider.y &&
+		game->mouseY <= m_skullCollider.y + m_skullCollider.h)
 	{
 		m_isSkull = true;
 	}
@@ -129,10 +140,10 @@ void IntroSceneState::update()
 		m_isSkull = false;
 		m_scare.Play();
 
-		m_skull.m_TextureRect.w += (10.00 * Game::avgDeltaTime);
-		m_skull.m_TextureRect.h += (10.00 * Game::avgDeltaTime);
-		m_skull.m_TextureRect.x -= (5.00  * Game::avgDeltaTime);
-		m_skull.m_TextureRect.y -= (5.00  * Game::avgDeltaTime);
+		m_skull.m_TextureRect.w += (10.00 * game->avgDeltaTime);
+		m_skull.m_TextureRect.h += (10.00 * game->avgDeltaTime);
+		m_skull.m_TextureRect.x -= (5.00  * game->avgDeltaTime);
+		m_skull.m_TextureRect.y -= (5.00  * game->avgDeltaTime);
 
 		m_skullWhite.m_TextureRect.w = m_skull.m_TextureRect.w;
 		m_skullWhite.m_TextureRect.h = m_skull.m_TextureRect.h;
@@ -145,17 +156,11 @@ void IntroSceneState::update()
 
 		if (m_timer.elapsedMilliseconds() > 250)
 		{
-			Game::gameStateMachine.pop();
+			game->gameStateMachine.pop();
 
 			std::unique_ptr<GameState> mainMenuState = std::make_unique<MainMenuScene>();
-			Game::gameStateMachine.push(std::move(mainMenuState));
+			game->gameStateMachine.push(std::move(mainMenuState));
 		}
-	}
-
-	m_cursor.setRect(Game::mouseX, Game::mouseY);
-	for (std::size_t i = 0; i < m_Flames.size(); ++i)
-	{
-		m_Flames[i].Play(Game::avgDeltaTime);
 	}
 }
 
@@ -168,7 +173,7 @@ void IntroSceneState::handle_events()
 		{
 			case SDL_QUIT:
 			{
-				Game::isRunning = false;
+				game->isRunning = false;
 			} break;
 
 			case SDL_KEYDOWN:
@@ -184,7 +189,7 @@ void IntroSceneState::handle_events()
 
 					case SDLK_ESCAPE:
 					{
-						Game::isRunning = false;
+						game->isRunning = false;
 					} break;
 
 				default:
@@ -209,7 +214,7 @@ void IntroSceneState::handle_events()
 
 void IntroSceneState::draw()
 {
-	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
@@ -218,29 +223,29 @@ void IntroSceneState::draw()
 
 	if (m_isBlood)
 	{
-		SDL_RenderCopy(Game::Renderer, m_blood.m_Texture, NULL, &m_blood.m_TextureRect);
-		SDL_RenderCopy(Game::Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
-		SDL_RenderCopy(Game::Renderer, m_howLong.m_Texture, NULL, &m_howLong.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_blood.m_Texture, NULL, &m_blood.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_howLong.m_Texture, NULL, &m_howLong.m_TextureRect);
 	}
 
-	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
-	SDL_RenderFillRect(Game::Renderer, &m_plugBox);
-	SDL_RenderFillRect(Game::Renderer, &m_skullBox);
-	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
+	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 200);
+	SDL_RenderFillRect(game->Renderer, &m_plugBox);
+	SDL_RenderFillRect(game->Renderer, &m_skullBox);
+	SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_NONE);
 
 	if (m_isSkull)
 	{
-		SDL_RenderCopy(Game::Renderer, m_skull.m_Texture, NULL, &m_skull.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_skull.m_Texture, NULL, &m_skull.m_TextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(Game::Renderer, m_skullWhite.m_Texture, NULL, &m_skullWhite.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_skullWhite.m_Texture, NULL, &m_skullWhite.m_TextureRect);
 	}
-	SDL_RenderCopy(Game::Renderer, m_press.m_Texture, NULL, &m_press.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_enter.m_Texture, NULL, &m_enter.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_plug.m_Texture, NULL, &m_plug.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_press.m_Texture, NULL, &m_press.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_enter.m_Texture, NULL, &m_enter.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_plug.m_Texture, NULL, &m_plug.m_TextureRect);
 
-	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }

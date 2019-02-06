@@ -5,6 +5,8 @@ void GameplayState::on_enter()
 {
 	GUNN_CORE_INFO("<-----LOADING GAME--------->");
 
+	game = &Game::GetInstance();
+
 	switch (Settings::GamePlay::Input)
 	{
 		case Settings::GamePlay::GameInput::MOUSE:
@@ -25,7 +27,7 @@ void GameplayState::on_enter()
 			m_keyBoard.Off();
 
 			GUNN_CORE_ERROR("Controller support coming soon!!");
-			Game::isRunning = false;
+			game->isRunning = false;
 		} break;
 
 	default:
@@ -34,9 +36,16 @@ void GameplayState::on_enter()
 
 	m_cursor.Load();
 
+	m_paddles = {
+		Paddle((game->screenWidth / 6.5), 15, (game->screenWidth / 2) - (175 / 2), 30),
+		Paddle(15, (game->screenHeight / 4), game->screenWidth - 45, (game->screenHeight / 2) - (175 / 2)),
+		Paddle((game->screenWidth / 6.5), 15, (game->screenWidth / 2) - (175 / 2), game->screenHeight - 45),
+		Paddle(15, (game->screenHeight / 4), 30, (game->screenHeight / 2) - (175 / 2))
+	};
+
 	m_grimReaper.Load();
-	m_grimReaper.setRect((Game::screenWidth / 2) - (m_grimReaper.m_TextureRect.w / 2),
-		                  Game::screenHeight - m_grimReaper.m_TextureRect.h,
+	m_grimReaper.setRect((game->screenWidth / 2) - (m_grimReaper.m_TextureRect.w / 2),
+		                  game->screenHeight - m_grimReaper.m_TextureRect.h,
 		                  m_grimReaper.m_TextureRect.w,
 		                  m_grimReaper.m_TextureRect.h);
 
@@ -102,6 +111,8 @@ void GameplayState::on_exit()
 		JukeBox->Stop(JukeBox->GamePlayMusic);
 		JukeBox->Unload(JukeBox->GamePlayMusic);
 	}
+
+	game = nullptr;
 }
 
 void GameplayState::handle_events()
@@ -113,7 +124,7 @@ void GameplayState::handle_events()
 		{
 			case SDL_QUIT:
 			{
-				Game::isRunning = false;
+				game->isRunning = false;
 			} break;
 
 			case SDL_KEYDOWN:
@@ -124,10 +135,10 @@ void GameplayState::handle_events()
 					{
 						if (m_paused || m_gameOver || m_levelWon)
 						{
-							Game::gameStateMachine.pop();
+							game->gameStateMachine.pop();
 
 							std::unique_ptr<GameState> mainMenuState = std::make_unique<MainMenuScene>();
-							Game::gameStateMachine.push(std::move(mainMenuState));
+							game->gameStateMachine.push(std::move(mainMenuState));
 						}
 						else
 						{
@@ -198,10 +209,10 @@ void GameplayState::update()
 		GUNN_CORE_FATAL("HIGH SCORE UPDATED!");
 	}
 
-	m_cursor.setRect(Game::mouseX, Game::mouseY);
+	m_cursor.setRect(game->mouseX, game->mouseY);
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
-		m_Flames[i].Play(Game::avgDeltaTime);
+		m_Flames[i].Play(game->avgDeltaTime);
 	}
 
 	if (m_health <= 0)
@@ -224,7 +235,7 @@ void GameplayState::update()
 		}
 		else if (m_keyBoard.isEnabled())
 		{
-			m_keyBoard.Update(Game::avgDeltaTime, 1.75, Game::screenWidth, Game::screenHeight, m_paddles[0], m_paddles[1], m_paddles[2], m_paddles[3]);
+			m_keyBoard.Update(game->avgDeltaTime, 1.75, game->screenWidth, game->screenHeight, m_paddles[0], m_paddles[1], m_paddles[2], m_paddles[3]);
 		}
 
 		m_ball.Update();
@@ -239,7 +250,7 @@ void GameplayState::update()
 
 void GameplayState::drawCursor()
 {
-	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }
 
 void GameplayState::drawLevel()
@@ -270,33 +281,33 @@ void GameplayState::drawText()
 	if (m_gameOver)
 	{
 		SDL_Rect rect = m_grimReaper.m_TextureRect;
-		SDL_RenderCopy(Game::Renderer, m_grimReaper.getTexture(), nullptr, &rect);
-		m_gameOverText.Draw((Game::screenWidth / 2) - (m_gameOverText.m_textRect.w / 2), (Game::screenHeight / 2) - 150);
-		m_gameOverNewGameText.Draw((Game::screenWidth / 2) - 225, (Game::screenHeight / 2) - 90);
+		SDL_RenderCopy(game->Renderer, m_grimReaper.getTexture(), nullptr, &rect);
+		m_gameOverText.Draw((game->screenWidth / 2) - (m_gameOverText.m_textRect.w / 2), (game->screenHeight / 2) - 150);
+		m_gameOverNewGameText.Draw((game->screenWidth / 2) - 225, (game->screenHeight / 2) - 90);
 	}
 
 	else if (m_levelWon)
 	{
-		m_levelPassed.Draw((Game::screenWidth / 2) - (m_levelPassed.m_textRect.w / 2), (Game::screenHeight / 2) - 150);
-		m_levelPassedContinue.Draw((Game::screenWidth / 2) - (m_levelPassedContinue.m_textRect.w / 2), (Game::screenHeight / 2) - 90);
+		m_levelPassed.Draw((game->screenWidth / 2) - (m_levelPassed.m_textRect.w / 2), (game->screenHeight / 2) - 150);
+		m_levelPassedContinue.Draw((game->screenWidth / 2) - (m_levelPassedContinue.m_textRect.w / 2), (game->screenHeight / 2) - 90);
 	}
 
 	else if (m_paused && !m_newGame)
 	{
-		m_pausedText.Draw((Game::screenWidth / 2) - (m_pausedText.m_textRect.w / 2), (Game::screenHeight / 2) - 150);
-		m_pressSpaceText.Draw((Game::screenWidth / 2) - (m_pressSpaceText.m_textRect.w / 2), (Game::screenHeight / 2) - 90);
+		m_pausedText.Draw((game->screenWidth / 2) - (m_pausedText.m_textRect.w / 2), (game->screenHeight / 2) - 150);
+		m_pressSpaceText.Draw((game->screenWidth / 2) - (m_pressSpaceText.m_textRect.w / 2), (game->screenHeight / 2) - 90);
 	}
 
 	else if (m_paused && m_newGame)
 	{
-		m_gameTitle.Draw((Game::screenWidth / 2) - (m_gameTitle.m_textRect.w / 2), (Game::screenHeight / 2) - 150);
-		m_gameTitleStart.Draw((Game::screenWidth / 2) - 185, (Game::screenHeight / 2) - 90);
+		m_gameTitle.Draw((game->screenWidth / 2) - (m_gameTitle.m_textRect.w / 2), (game->screenHeight / 2) - 150);
+		m_gameTitleStart.Draw((game->screenWidth / 2) - 185, (game->screenHeight / 2) - 90);
 	}
 }
 
 void GameplayState::draw()
 {
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 255);
 	drawLevel();
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
@@ -308,22 +319,22 @@ void GameplayState::draw()
 	{
 		m_finalScoreBox.w = 700;
 		m_finalScoreBox.h = 300;
-		m_finalScoreBox.x = (Game::screenWidth / 2) - (m_finalScoreBox.w / 2);
-		m_finalScoreBox.y = (Game::screenHeight / 2) - (m_finalScoreBox.h / 2) - 50;
+		m_finalScoreBox.x = (game->screenWidth / 2) - (m_finalScoreBox.w / 2);
+		m_finalScoreBox.y = (game->screenHeight / 2) - (m_finalScoreBox.h / 2) - 50;
 
 		m_finalScoreBoxOutline.x = m_finalScoreBox.x;
 		m_finalScoreBoxOutline.y = m_finalScoreBox.y;
 		m_finalScoreBoxOutline.w = m_finalScoreBox.w;
 		m_finalScoreBoxOutline.h = m_finalScoreBox.h;
 
-		SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
-		SDL_RenderFillRect(Game::Renderer, &m_finalScoreBox);
-		SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
+		SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 170);
+		SDL_RenderFillRect(game->Renderer, &m_finalScoreBox);
+		SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_NONE);
 
-		SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(Game::Renderer, &m_finalScoreBoxOutline);
-		SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
+		SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
+		SDL_RenderDrawRect(game->Renderer, &m_finalScoreBoxOutline);
+		SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 170);
 
 		m_HUD.m_ScoreBoard.showFinal();
 		m_HUD.setShowing(false);
@@ -532,7 +543,7 @@ void GameplayState::checkforBonus()
 
 void GameplayState::checkforGameOver()
 {
-	if (m_health <= 0 || m_ball.getRect().x <= 0 || m_ball.getRect().x > Game::screenWidth - m_ball.getRect().w || m_ball.getRect().y < 0 || m_ball.getRect().y > Game::screenHeight - m_ball.getRect().h)
+	if (m_health <= 0 || m_ball.getRect().x <= 0 || m_ball.getRect().x > game->screenWidth - m_ball.getRect().w || m_ball.getRect().y < 0 || m_ball.getRect().y > game->screenHeight - m_ball.getRect().h)
 	{
 		m_health = 0;
 		m_bonusProgress = 0;
@@ -601,10 +612,10 @@ void GameplayState::resetGame()
 		}
 	}
 
-	m_paddles[0].resetPaddles((Game::screenWidth / 2) - (175 / 2), 30, (Game::screenWidth / 6.5), 15);
-	m_paddles[1].resetPaddles(Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2), 15, (Game::screenHeight / 4));
-	m_paddles[2].resetPaddles((Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45, (Game::screenWidth / 6.5), 15);
-	m_paddles[3].resetPaddles(30, (Game::screenHeight / 2) - (175 / 2), 15, (Game::screenHeight / 4));
+	m_paddles[0].resetPaddles((game->screenWidth / 2) - (175 / 2), 30, (game->screenWidth / 6.5), 15);
+	m_paddles[1].resetPaddles(game->screenWidth - 45, (game->screenHeight / 2) - (175 / 2), 15, (game->screenHeight / 4));
+	m_paddles[2].resetPaddles((game->screenWidth / 2) - (175 / 2), game->screenHeight - 45, (game->screenWidth / 6.5), 15);
+	m_paddles[3].resetPaddles(30, (game->screenHeight / 2) - (175 / 2), 15, (game->screenHeight / 4));
 
 	m_HUD.m_ScoreBoard.resetScore();
 	m_HUD.setShowing(true);

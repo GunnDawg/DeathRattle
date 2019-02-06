@@ -4,10 +4,12 @@
 
 void OptionsMenuScene::on_enter()
 {
+	game = &Game::GetInstance();
+
 	m_optionsBox.w = 800;
 	m_optionsBox.h = 500;
-	m_optionsBox.x = (Game::screenWidth / 2) - (m_optionsBox.w / 2);
-	m_optionsBox.y = (Game::screenHeight / 2) - (m_optionsBox.h / 2) + 50;
+	m_optionsBox.x = (game->screenWidth / 2) - (m_optionsBox.w / 2);
+	m_optionsBox.y = (game->screenHeight / 2) - (m_optionsBox.h / 2) + 50;
 
 	m_optionsBoxOutline.w = m_optionsBox.w;
 	m_optionsBoxOutline.h = m_optionsBox.h;
@@ -15,7 +17,7 @@ void OptionsMenuScene::on_enter()
 	m_optionsBoxOutline.y = m_optionsBox.y;
 
 	m_options.Load();
-	m_options.m_TextureRect.x = (Game::screenWidth / 2) - (m_options.m_TextureRect.w / 2);
+	m_options.m_TextureRect.x = (game->screenWidth / 2) - (m_options.m_TextureRect.w / 2);
 	m_options.m_TextureRect.y = m_optionsBox.y + 20;
 
 	m_displayCheckMark.Load();
@@ -147,7 +149,7 @@ void OptionsMenuScene::on_enter()
 	}
 
 	m_skulls[0].m_TextureRect.x = 125;
-	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
+	m_skulls[1].m_TextureRect.x = (game->screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
@@ -156,33 +158,33 @@ void OptionsMenuScene::on_enter()
 	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
-	m_background.m_TextureRect.w = Game::screenWidth;
-	m_background.m_TextureRect.h = Game::screenHeight;
+	m_background.m_TextureRect.w = game->screenWidth;
+	m_background.m_TextureRect.h = game->screenHeight;
 
 	m_Flames[0].Load(12, -200, 320, 512);
 	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_title.Load();
-	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
+	m_title.m_TextureRect.x = (game->screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
 
 	m_titleBox.x = 0;
 	m_titleBox.y = m_title.m_TextureRect.y;
-	m_titleBox.w = Game::screenWidth;
+	m_titleBox.w = game->screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
 	m_devName.Load();
-	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
-	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
+	m_devName.m_TextureRect.x = (game->screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
+	m_devName.m_TextureRect.y = (game->screenHeight - m_devName.m_TextureRect.h);
 
 	m_devNameBox.h = m_devName.m_TextureRect.h;
-	m_devNameBox.w = Game::screenWidth;
+	m_devNameBox.w = game->screenWidth;
 	m_devNameBox.x = 0;
 	m_devNameBox.y = m_devName.m_TextureRect.y;
 
 	m_version.Load();
-	m_version.m_TextureRect.x = (Game::screenWidth - m_version.m_TextureRect.w);
-	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
+	m_version.m_TextureRect.x = (game->screenWidth - m_version.m_TextureRect.w);
+	m_version.m_TextureRect.y = (game->screenHeight - m_version.m_TextureRect.h);
 
 	if (Settings::Audio::MenuMusic == 1)
 	{
@@ -254,56 +256,58 @@ void OptionsMenuScene::on_exit()
 	}
 
 	m_thud.Unload();
+
+	game = nullptr;
 }
 
 void OptionsMenuScene::update()
 {
-	if (Game::mouseX >= m_apply.m_TextureRect.x &&
-		Game::mouseX <= m_apply.m_TextureRect.x + m_apply.m_TextureRect.w &&
-		Game::mouseY >= m_apply.m_TextureRect.y &&
-		Game::mouseY <= m_apply.m_TextureRect.y + m_apply.m_TextureRect.h)
+	if (game->mouseX >= m_apply.m_TextureRect.x &&
+		game->mouseX <= m_apply.m_TextureRect.x + m_apply.m_TextureRect.w &&
+		game->mouseY >= m_apply.m_TextureRect.y &&
+		game->mouseY <= m_apply.m_TextureRect.y + m_apply.m_TextureRect.h)
 	{
 		m_isApply = true;
 	}
-	else if (Game::mouseX >= m_back.m_TextureRect.x &&
-		Game::mouseX <= m_back.m_TextureRect.x + m_back.m_TextureRect.w &&
-		Game::mouseY >= m_back.m_TextureRect.y &&
-		Game::mouseY <= m_back.m_TextureRect.y + m_back.m_TextureRect.h)
+	else if (game->mouseX >= m_back.m_TextureRect.x &&
+		game->mouseX <= m_back.m_TextureRect.x + m_back.m_TextureRect.w &&
+		game->mouseY >= m_back.m_TextureRect.y &&
+		game->mouseY <= m_back.m_TextureRect.y + m_back.m_TextureRect.h)
 	{
 		m_isBack = true;
 	}
-	else if (Game::mouseX >= m_fullScreenBox.x &&
-		Game::mouseX <= m_fullScreenBox.x + m_fullScreenBox.w &&
-		Game::mouseY >= m_fullScreenBox.y &&
-		Game::mouseY <= m_fullScreenBox.y + m_fullScreenBox.h)
+	else if (game->mouseX >= m_fullScreenBox.x &&
+		game->mouseX <= m_fullScreenBox.x + m_fullScreenBox.w &&
+		game->mouseY >= m_fullScreenBox.y &&
+		game->mouseY <= m_fullScreenBox.y + m_fullScreenBox.h)
 	{
 		m_isFullScreen = true;
 	}
-	else if (Game::mouseX >= m_windowedBox.x &&
-		Game::mouseX <= m_windowedBox.x + m_windowedBox.w &&
-		Game::mouseY >= m_windowedBox.y &&
-		Game::mouseY <= m_windowedBox.y + m_windowedBox.h)
+	else if (game->mouseX >= m_windowedBox.x &&
+		game->mouseX <= m_windowedBox.x + m_windowedBox.w &&
+		game->mouseY >= m_windowedBox.y &&
+		game->mouseY <= m_windowedBox.y + m_windowedBox.h)
 	{
 		m_isWindowed = true;
 	}
-	else if (Game::mouseX >= m_soundEffectsBox.x &&
-		Game::mouseX <= m_soundEffectsBox.x + m_soundEffectsBox.w &&
-		Game::mouseY >= m_soundEffectsBox.y &&
-		Game::mouseY <= m_soundEffectsBox.y + m_soundEffectsBox.h)
+	else if (game->mouseX >= m_soundEffectsBox.x &&
+		game->mouseX <= m_soundEffectsBox.x + m_soundEffectsBox.w &&
+		game->mouseY >= m_soundEffectsBox.y &&
+		game->mouseY <= m_soundEffectsBox.y + m_soundEffectsBox.h)
 	{
 		m_isSoundEffects = true;
 	}
-	else if (Game::mouseX >= m_menuMusicBox.x &&
-		Game::mouseX <= m_menuMusicBox.x + m_menuMusicBox.w &&
-		Game::mouseY >= m_menuMusicBox.y &&
-		Game::mouseY <= m_menuMusicBox.y + m_menuMusicBox.h)
+	else if (game->mouseX >= m_menuMusicBox.x &&
+		game->mouseX <= m_menuMusicBox.x + m_menuMusicBox.w &&
+		game->mouseY >= m_menuMusicBox.y &&
+		game->mouseY <= m_menuMusicBox.y + m_menuMusicBox.h)
 	{
 		m_isMenuMusic = true;
 	}
-	else if (Game::mouseX >= m_gameplayMusicBox.x &&
-		Game::mouseX <= m_gameplayMusicBox.x + m_gameplayMusicBox.w &&
-		Game::mouseY >= m_gameplayMusicBox.y &&
-		Game::mouseY <= m_gameplayMusicBox.y + m_gameplayMusicBox.h)
+	else if (game->mouseX >= m_gameplayMusicBox.x &&
+		game->mouseX <= m_gameplayMusicBox.x + m_gameplayMusicBox.w &&
+		game->mouseY >= m_gameplayMusicBox.y &&
+		game->mouseY <= m_gameplayMusicBox.y + m_gameplayMusicBox.h)
 	{
 		m_isGameplayMusic = true;
 	}
@@ -329,10 +333,10 @@ void OptionsMenuScene::update()
 		m_displayCheckMark.m_TextureRect.y = m_windowedBox.y - (m_windowedBox.h / 2);
 	}
 
-	m_cursor.setRect(Game::mouseX, Game::mouseY);
+	m_cursor.setRect(game->mouseX, game->mouseY);
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
-		m_Flames[i].Play(Game::avgDeltaTime);
+		m_Flames[i].Play(game->avgDeltaTime);
 	}
 }
 
@@ -345,7 +349,7 @@ void OptionsMenuScene::handle_events()
 		{
 			case SDL_QUIT:
 			{
-				Game::isRunning = false;
+				game->isRunning = false;
 			} break;
 
 			case SDL_KEYDOWN:
@@ -354,7 +358,7 @@ void OptionsMenuScene::handle_events()
 				{
 					case SDLK_ESCAPE:
 					{
-						Game::gameStateMachine.pop();
+						game->gameStateMachine.pop();
 					} break;
 
 				default:
@@ -366,7 +370,7 @@ void OptionsMenuScene::handle_events()
 			{
 				if (m_isBack)
 				{
-					Game::gameStateMachine.pop();
+					game->gameStateMachine.pop();
 				}
 
 				if (m_isFullScreen)
@@ -453,7 +457,7 @@ void OptionsMenuScene::handle_events()
 						Settings::Audio::SoundEffects = 0;
 					}
 
-					Game::gameStateMachine.pop();
+					game->gameStateMachine.pop();
 				}
 
 			} break;
@@ -466,88 +470,88 @@ void OptionsMenuScene::handle_events()
 
 void OptionsMenuScene::draw()
 {
-	SDL_RenderCopy(Game::Renderer, m_background.getTexture(), NULL, &m_background.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_background.getTexture(), NULL, &m_background.m_TextureRect);
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
 		m_Flames[i].Draw();
 	}
 
-	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
-	SDL_RenderFillRect(Game::Renderer, &m_titleBox);
-	SDL_RenderFillRect(Game::Renderer, &m_devNameBox);
-	SDL_RenderFillRect(Game::Renderer, &m_fullScreenBox);
-	SDL_RenderFillRect(Game::Renderer, &m_windowedBox);
-	SDL_RenderFillRect(Game::Renderer, &m_menuMusicBox);
-	SDL_RenderFillRect(Game::Renderer, &m_gameplayMusicBox);
-	SDL_RenderFillRect(Game::Renderer, &m_soundEffectsBox);
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
-	SDL_RenderFillRect(Game::Renderer, &m_optionsBox);
-	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
+	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 170);
+	SDL_RenderFillRect(game->Renderer, &m_titleBox);
+	SDL_RenderFillRect(game->Renderer, &m_devNameBox);
+	SDL_RenderFillRect(game->Renderer, &m_fullScreenBox);
+	SDL_RenderFillRect(game->Renderer, &m_windowedBox);
+	SDL_RenderFillRect(game->Renderer, &m_menuMusicBox);
+	SDL_RenderFillRect(game->Renderer, &m_gameplayMusicBox);
+	SDL_RenderFillRect(game->Renderer, &m_soundEffectsBox);
+	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 200);
+	SDL_RenderFillRect(game->Renderer, &m_optionsBox);
+	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_NONE);
 
-	SDL_RenderCopy(Game::Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
 
-	SDL_RenderCopyEx(Game::Renderer, m_skulls[0].m_Texture, NULL, &m_skulls[0].m_TextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
-	SDL_RenderCopy(Game::Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
+	SDL_RenderCopyEx(game->Renderer, m_skulls[0].m_Texture, NULL, &m_skulls[0].m_TextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
+	SDL_RenderCopy(game->Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
 
-	SDL_RenderCopy(Game::Renderer, m_options.m_Texture, NULL, &m_options.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_options.m_Texture, NULL, &m_options.m_TextureRect);
 
-	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-	SDL_RenderDrawRect(Game::Renderer, &m_optionsBoxOutline);
-	SDL_RenderDrawRect(Game::Renderer, &m_fullScreenBoxOutline);
-	SDL_RenderDrawRect(Game::Renderer, &m_windowedBoxOutline);
-	SDL_RenderDrawRect(Game::Renderer, &m_gameplayMusicBoxOutline);
-	SDL_RenderDrawRect(Game::Renderer, &m_menuMusicBoxOutline);
-	SDL_RenderDrawRect(Game::Renderer, &m_soundEffectsBoxOutline);
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
+	SDL_RenderDrawRect(game->Renderer, &m_optionsBoxOutline);
+	SDL_RenderDrawRect(game->Renderer, &m_fullScreenBoxOutline);
+	SDL_RenderDrawRect(game->Renderer, &m_windowedBoxOutline);
+	SDL_RenderDrawRect(game->Renderer, &m_gameplayMusicBoxOutline);
+	SDL_RenderDrawRect(game->Renderer, &m_menuMusicBoxOutline);
+	SDL_RenderDrawRect(game->Renderer, &m_soundEffectsBoxOutline);
+	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 255);
 
 	//Display Mode
-	SDL_RenderCopy(Game::Renderer, m_displayMode.m_Texture, NULL, &m_displayMode.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_fullScreen.m_Texture, NULL, &m_fullScreen.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_windowed.m_Texture, NULL, &m_windowed.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_displayCheckMark.m_Texture, NULL, &m_displayCheckMark.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_displayMode.m_Texture, NULL, &m_displayMode.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_fullScreen.m_Texture, NULL, &m_fullScreen.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_windowed.m_Texture, NULL, &m_windowed.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_displayCheckMark.m_Texture, NULL, &m_displayCheckMark.m_TextureRect);
 
 	//Audio Settings
-	SDL_RenderCopy(Game::Renderer, m_audioSettings.m_Texture, NULL, &m_audioSettings.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_soundEffects.m_Texture, NULL, &m_soundEffects.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_menuMusic.m_Texture, NULL, &m_menuMusic.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_gameplayMusic.m_Texture, NULL, &m_gameplayMusic.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_audioSettings.m_Texture, NULL, &m_audioSettings.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_soundEffects.m_Texture, NULL, &m_soundEffects.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_menuMusic.m_Texture, NULL, &m_menuMusic.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_gameplayMusic.m_Texture, NULL, &m_gameplayMusic.m_TextureRect);
 
 	if (m_soundEffectsEnabled)
 	{
-		SDL_RenderCopy(Game::Renderer, m_soundEffectsCheckMark.m_Texture, NULL, &m_soundEffectsCheckMark.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_soundEffectsCheckMark.m_Texture, NULL, &m_soundEffectsCheckMark.m_TextureRect);
 	}
 
 	if (m_menuMusicEnabled)
 	{
-		SDL_RenderCopy(Game::Renderer, m_menuMusicCheckMark.m_Texture, NULL, &m_menuMusicCheckMark.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_menuMusicCheckMark.m_Texture, NULL, &m_menuMusicCheckMark.m_TextureRect);
 	}
 
 	if (m_gameplayMusicEnabled)
 	{
-		SDL_RenderCopy(Game::Renderer, m_gameplayMusicCheckMark.m_Texture, NULL, &m_gameplayMusicCheckMark.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_gameplayMusicCheckMark.m_Texture, NULL, &m_gameplayMusicCheckMark.m_TextureRect);
 	}
 
 	if (m_isApply)
 	{
-		SDL_RenderCopy(Game::Renderer, m_applyRed.m_Texture, NULL, &m_applyRed.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_applyRed.m_Texture, NULL, &m_applyRed.m_TextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(Game::Renderer, m_apply.m_Texture, NULL, &m_apply.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_apply.m_Texture, NULL, &m_apply.m_TextureRect);
 	}
 
 	if (m_isBack)
 	{
-		SDL_RenderCopy(Game::Renderer, m_backRed.m_Texture, NULL, &m_backRed.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_backRed.m_Texture, NULL, &m_backRed.m_TextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(Game::Renderer, m_back.m_Texture, NULL, &m_back.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_back.m_Texture, NULL, &m_back.m_TextureRect);
 	}
 
-	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }

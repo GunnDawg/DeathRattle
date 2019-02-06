@@ -5,6 +5,8 @@ LevelSet::LevelSet(const char* filePath)
 {
 	assert(typeid(filePath) == typeid(const char*) && filePath > 0);
 
+	game = &Game::GetInstance();
+
 	for (std::size_t i = 0; i < m_levelTextures.size(); i++)
 	{
 		std::ostringstream out;
@@ -22,7 +24,7 @@ LevelSet::~LevelSet()
 void LevelSet::Load()
 {
 	m_levelTextures[m_levelNum].Load();
-	m_levelTextures[m_levelNum].setRect(0, 0, Game::screenWidth, Game::screenHeight);
+	m_levelTextures[m_levelNum].setRect(0, 0, game->screenWidth, game->screenHeight);
 }
 
 void LevelSet::Unload(int x)
@@ -41,7 +43,7 @@ void LevelSet::setScores(std::array<int, LEVEL_COUNT> s)
 void LevelSet::Draw()
 {
 	SDL_Rect rect = m_levelTextures[m_levelNum].m_TextureRect;
-	SDL_RenderCopy(Game::Renderer, m_levelTextures[m_levelNum].m_Texture, nullptr, &rect);
+	SDL_RenderCopy(game->Renderer, m_levelTextures[m_levelNum].m_Texture, nullptr, &rect);
 }
 
 void LevelSet::setLevel(unsigned int x)

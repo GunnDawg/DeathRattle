@@ -6,6 +6,8 @@ m_Texture(filePath),
 m_numFramesX(numFramesX), m_numFramesY(numFramesY),
 m_animSpeed(speed)
 {
+	game = &Game::GetInstance();
+
 	m_Texture.Load();
 
 	m_frameWidth = (m_Texture.m_TextureRect.w / m_numFramesX);
@@ -55,5 +57,5 @@ void Animation::Play(double dt)
 
 void Animation::Draw()
 {
-	SDL_RenderCopy(Game::Renderer, m_Texture.m_Texture, &m_Texture.m_CropRect, &m_Texture.m_PosRect);
+	SDL_RenderCopy(game->Renderer, m_Texture.m_Texture, &m_Texture.m_CropRect, &m_Texture.m_PosRect);
 }

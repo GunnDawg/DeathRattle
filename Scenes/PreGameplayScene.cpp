@@ -3,10 +3,12 @@
 
 void PreGameplayScene::on_enter()
 {
+	game = &Game::GetInstance();
+
 	m_difficultyBox.w = 800;
 	m_difficultyBox.h = 450;
-	m_difficultyBox.x = (Game::screenWidth / 2) - (m_difficultyBox.w / 2);
-	m_difficultyBox.y = (Game::screenHeight / 2) - (m_difficultyBox.h / 2) + 25;
+	m_difficultyBox.x = (game->screenWidth / 2) - (m_difficultyBox.w / 2);
+	m_difficultyBox.y = (game->screenHeight / 2) - (m_difficultyBox.h / 2) + 25;
 
 	m_difficultyBoxOUtline.w = m_difficultyBox.w;
 	m_difficultyBoxOUtline.h = m_difficultyBox.h;
@@ -22,64 +24,64 @@ void PreGameplayScene::on_enter()
 	}
 
 	m_skulls[0].m_TextureRect.x = 125;
-	m_skulls[1].m_TextureRect.x = (Game::screenWidth - m_skulls[1].m_TextureRect.w) - 125;
+	m_skulls[1].m_TextureRect.x = (game->screenWidth - m_skulls[1].m_TextureRect.w) - 125;
 
 	m_cursor.Load();
 	m_cursor.m_TextureRect.w = 48;
 	m_cursor.m_TextureRect.h = 48;
 
 	m_title.Load();
-	m_title.m_TextureRect.x = (Game::screenWidth / 2) - (m_title.m_TextureRect.w / 2);
+	m_title.m_TextureRect.x = (game->screenWidth / 2) - (m_title.m_TextureRect.w / 2);
 	m_title.m_TextureRect.y = 0;
 
 	m_titleBox.x = 0;
 	m_titleBox.y = m_title.m_TextureRect.y;
-	m_titleBox.w = Game::screenWidth;
+	m_titleBox.w = game->screenWidth;
 	m_titleBox.h = m_title.m_TextureRect.h;
 
 	m_background.Load();
 	m_background.m_TextureRect.x = 0;
 	m_background.m_TextureRect.y = 0;
-	m_background.m_TextureRect.w = Game::screenWidth;
-	m_background.m_TextureRect.h = Game::screenHeight;
+	m_background.m_TextureRect.w = game->screenWidth;
+	m_background.m_TextureRect.h = game->screenHeight;
 
 	m_Flames[0].Load(12, -200, 320, 512);
 	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_selectDifficulty.Load();
-	m_selectDifficulty.m_TextureRect.x = (Game::screenWidth / 2) - (m_selectDifficulty.m_TextureRect.w / 2);
+	m_selectDifficulty.m_TextureRect.x = (game->screenWidth / 2) - (m_selectDifficulty.m_TextureRect.w / 2);
 	m_selectDifficulty.m_TextureRect.y = m_difficultyBox.y + 20;
 
 	m_easyRed.Load();
-	m_easyRed.m_TextureRect.x = (Game::screenWidth / 2) - (m_easyRed.m_TextureRect.w / 2);
+	m_easyRed.m_TextureRect.x = (game->screenWidth / 2) - (m_easyRed.m_TextureRect.w / 2);
 	m_easyRed.m_TextureRect.y = m_selectDifficulty.m_TextureRect.y + 100;
 	m_easyWhite.Load();
 	m_easyWhite.m_TextureRect.x = m_easyRed.m_TextureRect.x;
 	m_easyWhite.m_TextureRect.y = m_easyRed.m_TextureRect.y;
 
 	m_mediumRed.Load();
-	m_mediumRed.m_TextureRect.x = (Game::screenWidth / 2) - (m_mediumRed.m_TextureRect.w / 2);
+	m_mediumRed.m_TextureRect.x = (game->screenWidth / 2) - (m_mediumRed.m_TextureRect.w / 2);
 	m_mediumRed.m_TextureRect.y = m_easyRed.m_TextureRect.y + 65;
 	m_mediumWhite.Load();
 	m_mediumWhite.m_TextureRect.x = m_mediumRed.m_TextureRect.x;
 	m_mediumWhite.m_TextureRect.y = m_mediumRed.m_TextureRect.y;
 
 	m_hardRed.Load();
-	m_hardRed.m_TextureRect.x = (Game::screenWidth / 2) - (m_hardRed.m_TextureRect.w / 2);
+	m_hardRed.m_TextureRect.x = (game->screenWidth / 2) - (m_hardRed.m_TextureRect.w / 2);
 	m_hardRed.m_TextureRect.y = m_mediumRed.m_TextureRect.y + 65;
 	m_hardWhite.Load();
 	m_hardWhite.m_TextureRect.x = m_hardRed.m_TextureRect.x;
 	m_hardWhite.m_TextureRect.y = m_hardRed.m_TextureRect.y;
 
 	m_devName.Load();
-	m_devName.m_TextureRect.x = (Game::screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
-	m_devName.m_TextureRect.y = (Game::screenHeight - m_devName.m_TextureRect.h);
+	m_devName.m_TextureRect.x = (game->screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
+	m_devName.m_TextureRect.y = (game->screenHeight - m_devName.m_TextureRect.h);
 
 	m_version.Load();
-	m_version.m_TextureRect.x = ((Game::screenWidth - m_version.m_TextureRect.w) - 20);
-	m_version.m_TextureRect.y = (Game::screenHeight - m_version.m_TextureRect.h);
+	m_version.m_TextureRect.x = ((game->screenWidth - m_version.m_TextureRect.w) - 20);
+	m_version.m_TextureRect.y = (game->screenHeight - m_version.m_TextureRect.h);
 
-	m_devNameBox.w = Game::screenWidth;
+	m_devNameBox.w = game->screenWidth;
 	m_devNameBox.h = m_devName.m_TextureRect.h;
 	m_devNameBox.x = 0;
 	m_devNameBox.y = m_devName.m_TextureRect.y;
@@ -115,14 +117,16 @@ void PreGameplayScene::on_exit()
 	m_hardWhite.Unload();
 
 	m_thud.Unload();
+
+	game = nullptr;
 }
 
 void PreGameplayScene::update()
 {
-	m_cursor.setRect(Game::mouseX, Game::mouseY);
+	m_cursor.setRect(game->mouseX, game->mouseY);
 	for(std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
-		m_Flames[i].Play(Game::avgDeltaTime);
+		m_Flames[i].Play(game->avgDeltaTime);
 	}
 }
 
@@ -135,7 +139,7 @@ void PreGameplayScene::handle_events()
 		{
 			case SDL_QUIT:
 			{
-				Game::isRunning = false;
+				game->isRunning = false;
 			} break;
 
 			case SDL_KEYDOWN:
@@ -144,7 +148,7 @@ void PreGameplayScene::handle_events()
 				{
 					case SDLK_ESCAPE:
 					{
-						Game::gameStateMachine.pop();
+						game->gameStateMachine.pop();
 					} break;
 					
 				default:
@@ -160,35 +164,35 @@ void PreGameplayScene::handle_events()
 
 void PreGameplayScene::draw()
 {
-	SDL_RenderCopy(Game::Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
 		m_Flames[i].Draw();
 	}
 
-	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 170);
-	SDL_RenderFillRect(Game::Renderer, &m_titleBox);
-	SDL_RenderFillRect(Game::Renderer, &m_devNameBox);
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 200);
-	SDL_RenderFillRect(Game::Renderer, &m_difficultyBox);
-	SDL_SetRenderDrawBlendMode(Game::Renderer, SDL_BLENDMODE_NONE);
+	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 170);
+	SDL_RenderFillRect(game->Renderer, &m_titleBox);
+	SDL_RenderFillRect(game->Renderer, &m_devNameBox);
+	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 200);
+	SDL_RenderFillRect(game->Renderer, &m_difficultyBox);
+	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_NONE);
 
-	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-	SDL_RenderDrawRect(Game::Renderer, &m_difficultyBoxOUtline);
+	SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
+	SDL_RenderDrawRect(game->Renderer, &m_difficultyBoxOUtline);
 
-	SDL_RenderCopyEx(Game::Renderer, m_skulls[0].m_Texture, NULL, &m_skulls[0].m_TextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
-	SDL_RenderCopy(Game::Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
+	SDL_RenderCopyEx(game->Renderer, m_skulls[0].m_Texture, NULL, &m_skulls[0].m_TextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
+	SDL_RenderCopy(game->Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
 
-	SDL_RenderCopy(Game::Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
 
-	SDL_RenderCopy(Game::Renderer, m_selectDifficulty.m_Texture, NULL, &m_selectDifficulty.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_easyRed.m_Texture, NULL, &m_easyRed.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_mediumRed.m_Texture, NULL, &m_mediumRed.m_TextureRect);
-	SDL_RenderCopy(Game::Renderer, m_hardRed.m_Texture, NULL, &m_hardRed.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_selectDifficulty.m_Texture, NULL, &m_selectDifficulty.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_easyRed.m_Texture, NULL, &m_easyRed.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_mediumRed.m_Texture, NULL, &m_mediumRed.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_hardRed.m_Texture, NULL, &m_hardRed.m_TextureRect);
 
-	SDL_RenderCopy(Game::Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 }

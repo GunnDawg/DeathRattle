@@ -1,4 +1,5 @@
 #include "Paddle.h"
+#include "Game.h"
 
 Paddle::Paddle(int x, int y, int w, int h) :
 m_paddleRect({ w, h, x, y })
@@ -7,6 +8,8 @@ m_paddleRect({ w, h, x, y })
 	assert(typeid(h) == typeid(int) && h > 0 && "Paddle height must be greater than 0");
 	assert(typeid(x) == typeid(int) && x > 0 && "Paddle must have an X value");
 	assert(typeid(y) == typeid(int) && y > 0 && "Paddle must have an Y value");
+
+	game = &Game::GetInstance();
 }
 
 void Paddle::Draw()
@@ -18,22 +21,22 @@ void Paddle::Draw()
 	border.x = m_paddleRect.x;
 	border.y = m_paddleRect.y;
 
-	SDL_SetRenderDrawColor(Game::Renderer, 0, 0, 0, 255);
-	SDL_RenderFillRect(Game::Renderer, &border);
+	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 255);
+	SDL_RenderFillRect(game->Renderer, &border);
 
 	if (m_paddleMarked)
 	{
 		//SDL_SetRenderDrawColor(passedRender, 136, 4, 7, 255);
-		SDL_SetRenderDrawColor(Game::Renderer, 255, 0, 0, 255);
-		SDL_RenderFillRect(Game::Renderer, &m_paddleRect);
+		SDL_SetRenderDrawColor(game->Renderer, 255, 0, 0, 255);
+		SDL_RenderFillRect(game->Renderer, &m_paddleRect);
 	}
 	else
 	{
-		SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
-		SDL_RenderFillRect(Game::Renderer, &m_paddleRect);
+		SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
+		SDL_RenderFillRect(game->Renderer, &m_paddleRect);
 	}
 
-	SDL_SetRenderDrawColor(Game::Renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
 }
 
 void Paddle::resetPaddles(int x, int y, int w, int h)

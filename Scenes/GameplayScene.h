@@ -15,6 +15,8 @@
 #include "Graphics/Animation.h"
 #include "Log/Log.h"
 
+class Game;
+
 constexpr unsigned int NUM_PADDLES      = 4;
 constexpr unsigned int NUM_ITEMS        = 5;
 constexpr unsigned int NUM_LEVEL_SETS   = 2;
@@ -43,14 +45,12 @@ public:
 	Paddle* getPaddle();
 
 private:
+
+	Game* game                          = nullptr;
+
 	MusicManager* JukeBox               = &MusicManager::getInstance();
 
-	std::array<Paddle, NUM_PADDLES> m_paddles = {
-		Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), 30),
-		Paddle(15, (Game::screenHeight / 4), Game::screenWidth - 45, (Game::screenHeight / 2) - (175 / 2)),
-		Paddle((Game::screenWidth / 6.5), 15, (Game::screenWidth / 2) - (175 / 2), Game::screenHeight - 45),
-		Paddle(15, (Game::screenHeight / 4), 30, (Game::screenHeight / 2) - (175 / 2))
-	};
+	std::array<Paddle, NUM_PADDLES> m_paddles;
 
 	int m_health                        = 550;
 	int m_bonusProgress                 = 0;

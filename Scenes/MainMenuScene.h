@@ -7,6 +7,8 @@
 #include "Graphics/Texture.h"
 #include "Audio/Sound.h"
 
+class Game;
+
 class MainMenuScene : public GameState
 {
 public:
@@ -17,6 +19,8 @@ public:
 	void draw() override;
 
 private:
+	Game* game                        = nullptr;
+
 	MusicManager* JukeBox             = &MusicManager::getInstance();
 
 	std::array<Texture, 2> m_skulls   = { Texture("Assets/Graphics/common/skull.png"),

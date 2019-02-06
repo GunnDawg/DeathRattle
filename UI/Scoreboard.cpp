@@ -6,6 +6,8 @@ Scoreboard::Scoreboard(unsigned int x, unsigned int y)
 	assert(typeid(x) == typeid(unsigned int) && x > 0 && "Scoreboard must have an X value");
 	assert(typeid(y) == typeid(unsigned int) && y > 0 && "Scoreboard must have an Y value");
 
+	game = &Game::GetInstance();
+
 	m_File                         = std::make_unique<FileIO>("ProfileData/highscore.txt");
 
 	Load();
@@ -155,6 +157,6 @@ void Scoreboard::recordHighScore() const
 
 void Scoreboard::showFinal()
 {
-	m_finalScoreLabel->Draw((Game::screenWidth / 2) - (m_finalScoreLabel->m_textRect.w / 2), (Game::screenHeight / 2) - 70);
-	m_finalScoreText->Draw((Game::screenWidth / 2) - (m_finalScoreText->m_textRect.w / 2), m_finalScoreLabel->m_textRect.y + 50);
+	m_finalScoreLabel->Draw((game->screenWidth / 2) - (m_finalScoreLabel->m_textRect.w / 2), (game->screenHeight / 2) - 70);
+	m_finalScoreText->Draw((game->screenWidth / 2) - (m_finalScoreText->m_textRect.w / 2), m_finalScoreLabel->m_textRect.y + 50);
 }

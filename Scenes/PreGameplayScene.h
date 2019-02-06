@@ -7,6 +7,8 @@
 #include "Time/Timer.h"
 #include "Graphics/Animation.h"
 
+class Game;
+
 class PreGameplayScene : public GameState
 {
 public:
@@ -17,9 +19,11 @@ public:
 	void draw() override;
 
 private:
-	bool m_isBlood = false;
-	bool m_isSkull = false;
-	bool m_isClicked = false;
+	Game* game                         = nullptr;
+
+	bool m_isBlood                     = false;
+	bool m_isSkull                     = false;
+	bool m_isClicked                   = false;
 
 	Timer m_timer;
 

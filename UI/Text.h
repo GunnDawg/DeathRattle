@@ -5,12 +5,16 @@
 #include <cassert>
 #include "Log/Log.h"
 
+class Game;
+
 class Text
 {
 public:
 	Text()=default;
 	Text(unsigned int fontSize, const std::string_view text);
 	~Text()=default;
+
+	Game* game                          = nullptr;
 
 	void Draw(unsigned int x, unsigned int y);
 	void Update(const std::string_view newText);

@@ -8,6 +8,8 @@
 #include "IO/FileIO.h"
 #include "Level/LevelSet.h"
 
+class Game;
+
 class Scoreboard
 {
 public:
@@ -38,6 +40,8 @@ public:
 	void showFinal();
 
 private:
+	Game* game = nullptr;
+
 	Scoreboard(const Scoreboard& obj)=delete;
 	Scoreboard& operator=(const Scoreboard&)=delete;
 

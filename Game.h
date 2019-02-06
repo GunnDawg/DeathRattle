@@ -17,6 +17,7 @@
 class Game
 {
 public:
+
 	static Game& GetInstance()
 	{
 		static Game* instance = nullptr;
@@ -53,21 +54,21 @@ public:
 
 	inline static GameStateMachine gameStateMachine             = GameStateMachine();
 	SDL_Window* Window                                          = nullptr;
-	inline static SDL_Renderer* Renderer                        = nullptr;
+	SDL_Renderer* Renderer                                      = nullptr;
 	const char* Title                                           = "Death Rattle";
-	inline static unsigned int screenWidth                      = Settings::Display::WindowWidth;
-	inline static unsigned int screenHeight                     = Settings::Display::WindowHeight;
-	inline static bool isRunning                                = false;
+	unsigned int screenWidth                                    = Settings::Display::WindowWidth;
+	unsigned int screenHeight                                   = Settings::Display::WindowHeight;
+	bool isRunning                                              = false;
 
 	Uint64 currentTime                                          = 0ULL;
 	Uint64 lastTime                                             = 0ULL;
-	inline static double deltaTime                              = 0.0;
-	int totalUpdates                                            = 0;
+	unsigned long long totalUpdates                             = 0;
+	double deltaTime                                            = 0.0;
 	double totalDeltaTime                                       = 0.0;
-	inline static double avgDeltaTime                           = 0.0;
+	double avgDeltaTime                                         = 0.0;
 
-	inline static int mouseX                                    = 0;
-	inline static int mouseY                                    = 0;
+	int mouseX                                                  = 0;
+	int mouseY                                                  = 0;
 
 private:
 	Game()=default;

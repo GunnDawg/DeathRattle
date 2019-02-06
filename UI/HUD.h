@@ -11,6 +11,8 @@
 constexpr unsigned int NUM_BOXES = 6;
 constexpr unsigned int NUM_SHADED_BOXES = 4;
 
+class Game;
+
 class HUD
 {
 public:
@@ -28,6 +30,8 @@ public:
 	Scoreboard m_ScoreBoard = Scoreboard(24, 24);
 
 private:
+	Game* game = nullptr;
+
 	HUD(const HUD& obj)=default;
 	HUD& operator=(const HUD&)=default;
 

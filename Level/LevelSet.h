@@ -7,6 +7,9 @@
 #include <sstream>
 #include "Graphics/Texture.h"
 #include "Entity/Paddle.h"
+#include "Game.h"
+
+class Game;
 
 constexpr unsigned int LEVEL_COUNT = 5;
 
@@ -30,6 +33,8 @@ public:
 	inline unsigned int getScore(unsigned int s) const { return m_levelScore[s]; }
 
 private:
+	Game* game = nullptr;
+
 	LevelSet(const LevelSet& obj)=delete;
 	LevelSet& operator=(const LevelSet&)=delete;
 

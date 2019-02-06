@@ -6,6 +6,8 @@
 #include "Audio/Sound.h"
 #include "Time/Timer.h"
 
+class Game;
+
 class SplashScene : public GameState
 {
 public:
@@ -16,6 +18,8 @@ public:
 	void draw() override;
 
 private:
+	Game* game                      = nullptr;
+
 	Texture m_background            = Texture("Assets/Graphics/splash_scene/background.png");
 	Texture m_production            = Texture("Assets/Graphics/splash_scene/production.png");
 	Texture m_logo                  = Texture("Assets/Graphics/common/GGlogo.png");

@@ -24,6 +24,8 @@ Game::~Game()
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
+
+	GUNN_CORE_INFO("PAUSE!");
 }
 
 void Game::updateDelta()
@@ -43,7 +45,7 @@ void Game::updateDelta()
 
 bool Game::Init()
 {
-	Gunn::Log::Init();
+	//Gunn::Log::Init();
 
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
 	{
