@@ -81,9 +81,6 @@ void MainMenuScene::on_enter()
 	m_exit.Load();
 	m_exitWhite.Load();
 
-	m_swoosh.Load();
-	m_swoosh.Play();
-
 	m_newGame.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_newGame.m_TextureRect.w / 2);
 	m_newGame.m_TextureRect.y = m_menuBox.y + 25;
 
@@ -125,9 +122,7 @@ void MainMenuScene::on_enter()
 void MainMenuScene::on_exit()
 {
 	m_cursor.Unload();
-
 	m_background.Unload();
-
 	m_title.Unload();
 
 	m_newGame.Unload();
@@ -156,12 +151,6 @@ void MainMenuScene::on_exit()
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
 		m_Flames[i].Unload();
-	}
-
-	m_swoosh.Unload();
-	if (Settings::Audio::MenuMusic == 1)
-	{
-		JukeBox->Unload(JukeBox->MenuMusic);
 	}
 
 	game = nullptr;

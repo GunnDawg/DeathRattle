@@ -5,7 +5,7 @@
 /// Current Version: 0.0.1            ///
 /////////////////////////////////////////
 
--==(CORE)-==
+-==(CORE)==-
 
 	* (ENGINE)
 	 - Consider some type of asset manager. This will help with the messy code, but try to avoid an
@@ -30,9 +30,6 @@
 	 - Figure out a better, cleaner way to initialize and load objects. Cluttering the on_enter() of every
 	   scene is just sloppy. There has to be a better way. Maybe the asset manager is the solution?
 	 - Continue to look for ways to shorten code, it's a mess.
-	 - Everywhere we pass things like ScreenWidth, ScreenHeight, and Renderer we need to be creating an instance
-	   of "Game" and use it's instance to access those data members.
-	 - Get rid of all static members inside the Game class.
 
 	* (BUGS)
 	 - Level Score isn't populating until after the game has started. This isn't really a big issue though
@@ -40,7 +37,7 @@
 	 - Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
 	   towards a NULL texture.
 
--==(GAMEPLAY)-==
+-==(GAMEPLAY)==-
 
 	* (NEW LEVEL SYSTEM)
 	 - Single stage, multiple levels.
@@ -56,3 +53,10 @@
 	 - Debuff items will be used on pickup as they are NOT a good thing to get, you want to avoid those.
 	 - Item inventory UI will be where the BONUS meter currently is. BONUS meter will be removed, as we'll no
 	   longer be using it.
+
+
+
+-==(COMPLETED)==-
+	 - (DONE) Everywhere we pass things like ScreenWidth, ScreenHeight, and Renderer we need to be creating an instance
+	   of "Game" and use it's instance to access those data members.
+	 - (DONE) Get rid of all static members inside the Game class.

@@ -8,8 +8,6 @@
 
 int main(int argc, char* args[])
 {
-	Gunn::Log::Init();
-
 	Game* game = &Game::GetInstance();
 
 	if (!game->Init())

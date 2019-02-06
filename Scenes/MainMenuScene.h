@@ -50,8 +50,6 @@ private:
 	SDL_Rect m_menuBoxOutline         = { 0 };
 	SDL_Rect m_devNameBox             = { 0 };
 
-	Sound m_swoosh                    = Sound("Assets/Audio/swoosh.wav");
-
 	bool m_isNewGame                  = false;
 	bool m_isOptions                  = false;
 	bool m_isLeaderBoard              = false;

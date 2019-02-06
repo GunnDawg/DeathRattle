@@ -87,5 +87,5 @@ private:
 	bool m_menuMusicEnabled            = true;
 	bool m_gameplayMusicEnabled        = true;
 
-	Sound m_thud = Sound("Assets/Audio/thud.wav");
+	Sound m_thud                       = Sound("Assets/Audio/thud.wav");
 };
