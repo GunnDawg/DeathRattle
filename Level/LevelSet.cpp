@@ -31,7 +31,7 @@ void LevelSet::Unload(int x)
 {
 	m_levelTextures[x].Unload();
 
-	game = nullptr;
+	//game = nullptr;
 }
 
 void LevelSet::setScores(std::array<int, LEVEL_COUNT> s)

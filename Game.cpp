@@ -25,7 +25,7 @@ Game::~Game()
 	IMG_Quit();
 	SDL_Quit();
 
-	GUNN_CORE_INFO("PAUSE!");
+	GUNN_CORE_INFO("GAME INSTANCE DESTROYED!!");
 }
 
 void Game::updateDelta()
