@@ -21,7 +21,7 @@ public:
 	void Unload();
 	void Update(const LevelSet& passedLevel);
 	void Draw();
-	void recordHighScore() const;
+	void recordHighScore();
 
 	bool SCORE_NEEDS_UPDATED                      = false;
 	bool HIGHSCORE_NEEDS_UPDATED                  = true;
@@ -32,10 +32,10 @@ public:
 	inline unsigned int getLevelScore() const { return m_levelScore; }
 
 	inline void setScore(unsigned int x) { m_score = x; }
-	inline void resetScore() { m_score = 0; }
 
-	inline void increaseScore(unsigned int x) { m_score += x; }
-	inline void decreaseScore(unsigned int x) { m_score -= x; }
+	void increaseScore(unsigned int x);
+	void decreaseScore(unsigned int x);
+	void resetScore();
 
 	void showFinal();
 

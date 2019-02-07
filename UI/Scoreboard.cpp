@@ -152,13 +152,31 @@ void Scoreboard::Draw()
 	m_highScoreText->Draw((m_scoreLabel->m_textRect.x) + 240, (m_highScoreLabel->m_textRect.y));
 }
 
-void Scoreboard::recordHighScore() const
+void Scoreboard::recordHighScore()
 {
 	m_File->Write(m_score);
+	HIGHSCORE_NEEDS_UPDATED = true;
 }
 
 void Scoreboard::showFinal()
 {
 	m_finalScoreLabel->Draw((game->screenWidth / 2) - (m_finalScoreLabel->m_textRect.w / 2), (game->screenHeight / 2) - 70);
 	m_finalScoreText->Draw((game->screenWidth / 2) - (m_finalScoreText->m_textRect.w / 2), m_finalScoreLabel->m_textRect.y + 50);
+}
+
+void Scoreboard::increaseScore(unsigned int x)
+{ 
+	m_score += x;
+	SCORE_NEEDS_UPDATED = true;
+}
+void Scoreboard::decreaseScore(unsigned int x)
+{
+	m_score -= x;
+	SCORE_NEEDS_UPDATED = true;
+}
+
+void Scoreboard::resetScore()
+{
+	m_score = 0;
+	SCORE_NEEDS_UPDATED = true;
 }

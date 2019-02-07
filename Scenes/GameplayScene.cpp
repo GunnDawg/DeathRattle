@@ -198,6 +198,8 @@ void GameplayState::handle_events()
 
 void GameplayState::update()
 {
+	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
+
 	m_cursor.setRect(game->mouseX, game->mouseY);
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
@@ -232,8 +234,6 @@ void GameplayState::update()
 		checkforGameOver();
 		checkCollision();
 		checkforBonus();
-
-		m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
 	}
 }
 
@@ -472,17 +472,15 @@ void GameplayState::checkCollision()
 		if (m_HUD.m_ScoreBoard.getScore() > 0 && paddleHit->isMarked())
 		{
 			m_HUD.m_ScoreBoard.decreaseScore(1);
-			m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = true;
 		}
 		else if (!paddleHit->isMarked())
 		{
 			m_HUD.m_ScoreBoard.increaseScore(1);
-			m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = true;
 		}
 
-		if (m_HUD.m_ScoreBoard.getScore() >= m_HUD.m_ScoreBoard.getHighScore())
+		if (m_HUD.m_ScoreBoard.getScore() > m_HUD.m_ScoreBoard.getHighScore())
 		{
-			m_HUD.m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED = true;
+			m_HUD.m_ScoreBoard.recordHighScore();
 		}
 
 		paddleHit->setHit(true);
