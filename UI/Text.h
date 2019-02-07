@@ -34,6 +34,7 @@ private:
 	SDL_Color m_fontColor               = { 255, 255, 255, 255 };
 
 	SDL_Texture* m_textTexture          = nullptr;
+	SDL_Surface* m_textSurface          = nullptr;
 
 	Text(const Text& obj) = delete;
 	Text& operator=(const Text&) = delete;
