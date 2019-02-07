@@ -68,6 +68,37 @@ void Scoreboard::Unload()
 
 void Scoreboard::Update(const LevelSet& passedLevel)
 {
+	switch (passedLevel.getLevel())
+	{
+		case 0:
+		{
+			m_levelScore = passedLevel.getScore(0);
+		} break;
+
+		case 1:
+		{
+			m_levelScore = passedLevel.getScore(1);
+		} break;
+
+		case 2:
+		{
+			m_levelScore = passedLevel.getScore(2);
+		} break;
+
+		case 3:
+		{
+			m_levelScore = passedLevel.getScore(3);
+		} break;
+
+		case 4:
+		{
+			m_levelScore = passedLevel.getScore(4);
+		} break;
+
+		default:
+			break;
+	}
+
 	m_fs = std::to_string(m_score);
 	m_convertedFinalScore = m_fs.data();
 
@@ -98,37 +129,6 @@ void Scoreboard::Update(const LevelSet& passedLevel)
 
 	m_levelScoreText->Update(m_convertedLevelScore);
 	m_finalScoreText->Update(m_convertedFinalScore);
-
-	switch (passedLevel.getLevel())
-	{
-		case 0:
-		{
-			m_levelScore = passedLevel.getScore(0);
-		} break;
-
-		case 1:
-		{
-			m_levelScore = passedLevel.getScore(1);
-		} break;
-
-		case 2:
-		{
-			m_levelScore = passedLevel.getScore(2);
-		} break;
-
-		case 3:
-		{
-			m_levelScore = passedLevel.getScore(3);
-		} break;
-
-		case 4:
-		{
-			m_levelScore = passedLevel.getScore(4);
-		} break;
-
-	default:
-		break;
-	}
 
 	if (m_score >= m_levelScore)
 	{
