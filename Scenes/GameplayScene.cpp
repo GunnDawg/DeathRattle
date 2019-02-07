@@ -58,9 +58,7 @@ void GameplayState::on_enter()
 	m_dungeonLevels.Load();
 	m_dungeonLevels.setScores({ 10, 50, 175, 250, 300 });
 
-	m_HUD.Load();
-	m_HUD.Update(m_dungeonLevels, m_ball, m_lives, m_health, m_bonusProgress);
-	m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = false;
+	m_HUD.Load(m_dungeonLevels);
 
 	m_hitSound.Load();
 	m_hitBadSound.Load();
@@ -200,16 +198,6 @@ void GameplayState::handle_events()
 
 void GameplayState::update()
 {
-	if (m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED)
-	{
-		GUNN_CORE_FATAL("UPDATING SCORE!");
-	}
-
-	if (m_HUD.m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED)
-	{
-		GUNN_CORE_FATAL("HIGH SCORE UPDATED!");
-	}
-
 	m_cursor.setRect(game->mouseX, game->mouseY);
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
@@ -384,11 +372,6 @@ void GameplayState::checkCollision()
 	Paddle* paddleHit = getPaddle();
 	if (paddleHit == nullptr)
 	{
-		if (!m_paused)
-		{
-			m_HUD.m_ScoreBoard.SCORE_NEEDS_UPDATED = false;
-			m_HUD.m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED = false;
-		}
 		return;
 	}
 	else if (paddleHit != nullptr)
