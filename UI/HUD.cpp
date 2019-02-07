@@ -1,7 +1,7 @@
 #include "HUD.h"
 #include "Game.h"
 
-void HUD::Load()
+void HUD::Load(const LevelSet& passedLevel)
 {
 	game = &Game::GetInstance();
 
@@ -45,6 +45,7 @@ void HUD::Load()
 	m_itemDropProgress                            = std::make_unique<Text>(22, "BONUS");
 
 	m_ScoreBoard.Load();
+	m_ScoreBoard.Update(passedLevel);
 }
 
 void HUD::Unload()
@@ -131,6 +132,18 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 	if (m_ScoreBoard.SCORE_NEEDS_UPDATED || m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED)
 	{
 		m_ScoreBoard.Update(passedLevel);
+
+		if (m_ScoreBoard.SCORE_NEEDS_UPDATED)
+		{
+			GUNN_CORE_FATAL("UPDATING SCORE!");
+			m_ScoreBoard.SCORE_NEEDS_UPDATED = false;
+		}
+
+		if (m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED)
+		{
+			GUNN_CORE_FATAL("HIGH SCORE UPDATED!");
+			m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED = false;
+		}
 	}
 
 	m_ballSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));

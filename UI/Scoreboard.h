@@ -23,8 +23,8 @@ public:
 	void Draw();
 	void recordHighScore() const;
 
-	bool SCORE_NEEDS_UPDATED                      = true;
-	bool HIGHSCORE_NEEDS_UPDATED                  = false;
+	bool SCORE_NEEDS_UPDATED                      = false;
+	bool HIGHSCORE_NEEDS_UPDATED                  = true;
 	bool STAGE_SCORE_NEEDS_UPDATED                = false;
 
 	inline unsigned int getScore() const { return m_score; }

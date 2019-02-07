@@ -21,7 +21,7 @@ public:
 
 	inline bool isShowing() const { return m_isShowing; }
 
-	void Load();
+	void Load(const LevelSet& passedLevel);
 	void Unload();
 	void Draw();
 	void Update(const LevelSet& passedLevel, const Ball& passedBall, const unsigned int lives, const unsigned int hp, const unsigned int progress);
