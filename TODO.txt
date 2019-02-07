@@ -21,8 +21,8 @@
 
 	* (PERFORMANCE)
 	 - (IN PROGRESS) HUD::Update() is causing higher than normal latency on the CPU due to Text::Update() reloading
-	   the .ttf every frame. Let's store a pointer to the .ttf in the constructor and figure out a HAS_SCORE_CHANGED flag
-	   system. This will reduce the amount of unnecessary calls to Text::Update(), and HUD::Update() significantly.
+	   the .ttf every frame. We have flags for the SCORE and HIGH SCORE which seems to be working. We need flags for
+	   BALL SPEED, LIVES, and LEVEL SCORE, and LEVEL as well.
 
 	* (CODE CLEAN UP)
 	 - Get rid of the excess UI RECTS (borders), and just call SDL_DrawRect on the original UI RECTS.
