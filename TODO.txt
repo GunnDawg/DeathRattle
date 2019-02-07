@@ -32,8 +32,6 @@
 	 - Continue to look for ways to shorten code, it's a mess.
 
 	* (BUGS)
-	 - Level Score isn't populating until after the game has started. This isn't really a big issue though
-	   because we're going to start working on a new level/progression system anyways.
 	 - Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
 	   towards a NULL texture.
 
@@ -60,4 +58,6 @@
 	 - (DONE) Everywhere we pass things like ScreenWidth, ScreenHeight, and Renderer we need to be creating an instance
 	   of "Game" and use it's instance to access those data members.
 	 - (DONE) Get rid of all static members inside the Game class.
+	 - (DONE) Level Score isn't populating until after the game has started. This isn't really a big issue though
+	   because we're going to start working on a new level/progression system anyways.
 
