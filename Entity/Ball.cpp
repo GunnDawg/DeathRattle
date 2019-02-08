@@ -87,13 +87,22 @@ void Ball::Draw()
 		SDL_SetTextureColorMod(m_ballTexture.getTexture(), 255, 255, 255);
 	}
 
-	SDL_RenderCopy(game->Renderer, m_ballTexture.getTexture(), nullptr, &m_ballRect);
+	SDL_RenderCopyEx(game->Renderer, m_ballTexture.m_Texture, nullptr, &m_ballRect, m_rotation, nullptr, SDL_FLIP_NONE);
 }
 
 void Ball::Update()
 {
 	m_posX += static_cast<int>(m_velocityX * game->avgDeltaTime);
 	m_posY += static_cast<int>(m_velocityY * game->avgDeltaTime);
+
+	if (m_velocityX > 0)
+	{
+		m_rotation += (m_rotationSpeed * game->avgDeltaTime);
+	}
+	else
+	{
+		m_rotation -= (m_rotationSpeed * game->avgDeltaTime);
+	}
 }
 
 void Ball::setAngle(double angle)
