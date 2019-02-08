@@ -63,4 +63,5 @@
 	 - (DONE) HUD::Update() is causing higher than normal latency on the CPU due to Text::Update() reloading
 	   the .ttf every frame. We have flags for the SCORE and HIGH SCORE which seems to be working. We need flags for
 	   BALL SPEED, LIVES, and LEVEL SCORE, and LEVEL as well.
-
+	 - (DONE) Ballspeed is not properly resetting on game over, or next level. Until it hits the first paddle of the next
+	   game, it retains the speed at which the last round/level ended in.
