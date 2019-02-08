@@ -15,6 +15,7 @@ public:
 	~Text()=default;
 
 	void Draw(unsigned int x, unsigned int y);
+	void Draw(unsigned int x, unsigned int y, double rotation);
 	void Update(const std::string_view newText);
 	void Update(const SDL_Color& newColor);
 	void Unload();
@@ -37,5 +38,5 @@ private:
 	SDL_Surface* m_textSurface          = nullptr;
 
 	Text(const Text& obj) = delete;
-	Text& operator=(const Text&) = delete;
+	//Text& operator=(const Text&) = delete;
 };

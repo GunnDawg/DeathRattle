@@ -29,6 +29,11 @@ public:
 
 	Scoreboard m_ScoreBoard = Scoreboard(24, 24);
 
+	bool BALL_SPEED_NEEDS_UPDATED                           = true;
+	bool LIVES_TEXT_NEEDS_UPDATED                           = true;
+	bool HP_TEXT_NEEDS_UPDATED                              = true;
+	bool LEVEL_NUM_NEEDS_UPDATED                            = true;
+
 private:
 	Game* game                                              = nullptr;
 

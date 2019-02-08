@@ -209,6 +209,7 @@ void GameplayState::update()
 	if (m_health <= 0)
 	{
 		m_health = 0;
+		m_HUD.HP_TEXT_NEEDS_UPDATED = true;
 	}
 
 	if (m_paused)
@@ -406,7 +407,7 @@ void GameplayState::checkCollision()
 		double dist = fTopBottom ? (m_ball.getRect().x + m_ball.getRect().w / 2) - paddleHit->getRect().x :
 			(m_ball.getRect().y + m_ball.getRect().h / 2) - paddleHit->getRect().y;
 
-		double percent = static_cast<double>(dist / dimension);
+		double percent = (dist / dimension);
 
 		if (percent > 1)
 			percent = 1;
@@ -444,13 +445,19 @@ void GameplayState::checkCollision()
 			{
 				paddleHit->setRectH(paddleHit->getRect().h - (paddleHit->getRect().h / 16));
 				m_health -= 75;
+				m_HUD.HP_TEXT_NEEDS_UPDATED = true;
+
 				m_ball.addSpeed(0.02f);
+				m_HUD.BALL_SPEED_NEEDS_UPDATED = true;
 			}
 			else if (paddleHit->getRect().h >= m_ball.getRect().w)
 			{
 				paddleHit->setRectH(paddleHit->getRect().h - (paddleHit->getRect().h / 20));
 				m_health -= 10;
+				m_HUD.HP_TEXT_NEEDS_UPDATED = true;
+
 				m_ball.addSpeed(0.01f);
+				m_HUD.BALL_SPEED_NEEDS_UPDATED = true;
 			}
 		}
 		else
@@ -459,13 +466,19 @@ void GameplayState::checkCollision()
 			{
 				paddleHit->setRectW(paddleHit->getRect().w - (paddleHit->getRect().w / 16));
 				m_health -= 75;
+				m_HUD.HP_TEXT_NEEDS_UPDATED = true;
+
 				m_ball.addSpeed(0.02f);
+				m_HUD.BALL_SPEED_NEEDS_UPDATED = true;
 			}
 			else if (paddleHit->getRect().w >= m_ball.getRect().w)
 			{
 				paddleHit->setRectW(paddleHit->getRect().w - (paddleHit->getRect().w / 20));
 				m_health -= 10;
+				m_HUD.HP_TEXT_NEEDS_UPDATED = true;
+
 				m_ball.addSpeed(0.01f);
+				m_HUD.BALL_SPEED_NEEDS_UPDATED = true;
 			}
 		}
 
@@ -494,10 +507,12 @@ void GameplayState::checkforBonus()
 		if (m_health <= 484)
 		{
 			m_health += 66;
+			m_HUD.HP_TEXT_NEEDS_UPDATED = true;
 		}
 		else
 		{
 			m_health = 550;
+			m_HUD.HP_TEXT_NEEDS_UPDATED = true;
 		}
 
 		if (m_bonusProgress <= 500)
@@ -515,6 +530,7 @@ void GameplayState::checkforBonus()
 		}
 		m_HUD.m_ScoreBoard.increaseScore(5);
 		m_ball.removeSpeed(0.03f);
+		m_HUD.BALL_SPEED_NEEDS_UPDATED = true;
 
 		for (std::size_t i = 0; i < m_paddles.size(); ++i)
 		{
@@ -528,6 +544,7 @@ void GameplayState::checkforGameOver()
 	if (m_health <= 0 || m_ball.getRect().x <= 0 || m_ball.getRect().x > game->screenWidth - m_ball.getRect().w || m_ball.getRect().y < 0 || m_ball.getRect().y > game->screenHeight - m_ball.getRect().h)
 	{
 		m_health = 0;
+		m_HUD.HP_TEXT_NEEDS_UPDATED = true;
 		m_bonusProgress = 0;
 		if (Settings::Audio::SoundEffects == 1)
 		{
@@ -548,6 +565,7 @@ void GameplayState::checkforGameOver()
 		else
 		{
 			--m_lives;
+			m_HUD.LIVES_TEXT_NEEDS_UPDATED = true;
 			m_gameOver = true;
 		}
 	}
@@ -558,6 +576,7 @@ bool GameplayState::checkforWin()
 	if (m_HUD.m_ScoreBoard.getScore() >= m_HUD.m_ScoreBoard.getLevelScore())
 	{
 		m_dungeonLevels.nextLevel();
+		m_HUD.LEVEL_NUM_NEEDS_UPDATED = true;
 
 		return true;
 	}
@@ -568,6 +587,7 @@ bool GameplayState::checkforWin()
 void GameplayState::resetGame()
 {
 	m_health = 550;
+	m_HUD.HP_TEXT_NEEDS_UPDATED = true;
 	m_bonusProgress = 0;
 	m_ball.resetBall(Settings::GamePlay::Difficulty);
 
@@ -576,6 +596,7 @@ void GameplayState::resetGame()
 		if (m_lives > 0)
 		{
 			m_dungeonLevels.setLevel(m_dungeonLevels.getLevel());
+			m_HUD.LEVEL_NUM_NEEDS_UPDATED = true;
 		}
 		else
 		{
@@ -583,11 +604,13 @@ void GameplayState::resetGame()
 			{
 				m_dungeonLevels.Unload(m_dungeonLevels.getLevel());
 				m_dungeonLevels.setLevel(0);
+				m_HUD.LEVEL_NUM_NEEDS_UPDATED = true;
 				m_dungeonLevels.Load();
 			}
 			else
 			{
 				m_dungeonLevels.setLevel(0);
+				m_HUD.LEVEL_NUM_NEEDS_UPDATED = true;
 			}
 
 			m_lives = 3;

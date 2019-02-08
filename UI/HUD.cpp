@@ -146,17 +146,37 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 		}
 	}
 
-	m_ballSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));
-	m_ballSpeedText->Update(m_convertedBallSpeed);
+	if (BALL_SPEED_NEEDS_UPDATED)
+	{
+		m_ballSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));
+		m_ballSpeedText->Update(m_convertedBallSpeed);
+		BALL_SPEED_NEEDS_UPDATED = false;
+		GUNN_CORE_ERROR("UPDATING BALL SPEED!");
+	}
 
-	m_livesString = std::to_string(lives);
-	m_LivesText->Update(m_convertedLives);
+	if (LIVES_TEXT_NEEDS_UPDATED)
+	{
+		m_livesString = std::to_string(lives);
+		m_LivesText->Update(m_convertedLives);
+		LIVES_TEXT_NEEDS_UPDATED = false;
+		GUNN_CORE_ERROR("UPDATING LIVES!");
+	}
 
-	m_levelString = std::to_string(passedLevel.getLevelPlusOne());
-	m_levelText->Update(m_convertedLevel);
+	if (LEVEL_NUM_NEEDS_UPDATED)
+	{
+		m_levelString = std::to_string(passedLevel.getLevelPlusOne());
+		m_levelText->Update(m_convertedLevel);
+		LEVEL_NUM_NEEDS_UPDATED = false;
+		GUNN_CORE_ERROR("UPDATING LEVEL NUM!");
+	}
 
-	m_remaininghpString = std::to_string(static_cast<int>(hp / 550.0f * 100));
-	m_remainingHP->Update(m_convertedHP);
+	if (HP_TEXT_NEEDS_UPDATED)
+	{
+		m_remaininghpString = std::to_string(static_cast<int>(hp / 550.0f * 100));
+		m_remainingHP->Update(m_convertedHP);
+		HP_TEXT_NEEDS_UPDATED = false;
+		GUNN_CORE_ERROR("UPDATING HP!");
+	}
 }
 
 void HUD::setRect(SDL_Rect& r, const unsigned int w, const unsigned int h, const unsigned int x, const unsigned int y)

@@ -4,8 +4,8 @@
 Text::Text(unsigned int fontSize, const std::string_view text) :
 m_fontValue(text.data()), m_fontSize(fontSize)
 {
-	assert(typeid(fontSize) == typeid(unsigned int) && fontSize > 0 && "Text must have a font size");
-	assert(typeid(text) == typeid(std::string_view) && !text.empty() && "Text cannot have an empty value");
+	//assert(typeid(fontSize) == typeid(unsigned int) && fontSize > 0 && "Text must have a font size");
+	//assert(typeid(text) == typeid(std::string_view) && !text.empty() && "Text cannot have an empty value");
 
 	game = &Game::GetInstance();
 
@@ -48,6 +48,14 @@ void Text::Draw(unsigned int x, unsigned int y)
 	m_textRect.y = y;
 
 	SDL_RenderCopy(game->Renderer, m_textTexture, nullptr, &m_textRect);
+}
+
+void Text::Draw(unsigned int x, unsigned int y, double rotation)
+{
+	m_textRect.x = x;
+	m_textRect.y = y;
+
+	SDL_RenderCopyEx(game->Renderer, m_textTexture, nullptr, &m_textRect, rotation, nullptr, SDL_FLIP_NONE);
 }
 
 void Text::Update(const std::string_view newText)
