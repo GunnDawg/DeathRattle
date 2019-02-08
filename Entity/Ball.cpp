@@ -36,9 +36,6 @@ void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 	m_posX = (Settings::Display::WindowWidth / 2) - 40;
 	m_posY = (Settings::Display::WindowHeight / 2) - 25;
 
-	setAngle(randomizeAng());
-	m_isDead = false;
-
 	switch (speed)
 	{
 		case Settings::GamePlay::GameDifficulty::EASY:
@@ -59,6 +56,9 @@ void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 	default:
 		break;
 	}
+
+	setAngle(randomizeAng());
+	m_isDead = false;
 }
 
 void Ball::Load()
@@ -92,8 +92,8 @@ void Ball::Draw()
 
 void Ball::Update()
 {
-	m_posX += static_cast<int>(m_velocityX * game->avgDeltaTime);
-	m_posY += static_cast<int>(m_velocityY * game->avgDeltaTime);
+	m_posX += static_cast<unsigned int>(m_velocityX * game->avgDeltaTime);
+	m_posY += static_cast<unsigned int>(m_velocityY * game->avgDeltaTime);
 
 	if (m_velocityX > 0)
 	{
@@ -117,7 +117,7 @@ double Ball::randomizeAng()
 {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
-	static std::uniform_real_distribution<double> dis(-3.0f, 3.0f);
+	static std::uniform_real_distribution<double> dis(-3.0, 3.0);
 
 	double r = dis(gen);
 
