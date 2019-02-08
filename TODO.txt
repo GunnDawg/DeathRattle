@@ -23,6 +23,8 @@
 	 - (IN PROGRESS) HUD::Update() is causing higher than normal latency on the CPU due to Text::Update() reloading
 	   the .ttf every frame. We have flags for the SCORE and HIGH SCORE which seems to be working. We need flags for
 	   BALL SPEED, LIVES, and LEVEL SCORE, and LEVEL as well.
+	 - Precompiled Header File. Put together a PCH to include such things as SDL, memory, array, vector, etc, etc.
+	   This will drastically reduce the compile time, which is currently getting quite long.
 
 	* (CODE CLEAN UP)
 	 - Get rid of the excess UI RECTS (borders), and just call SDL_DrawRect on the original UI RECTS.
@@ -33,7 +35,7 @@
 
 	* (BUGS)
 	 - Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
-	   towards a NULL texture.
+	   towards a nullptr in the Texture class.
 
 -==(GAMEPLAY)==-
 
@@ -60,4 +62,5 @@
 	 - (DONE) Get rid of all static members inside the Game class.
 	 - (DONE) Level Score isn't populating until after the game has started. This isn't really a big issue though
 	   because we're going to start working on a new level/progression system anyways.
+	 - (DONE) Add a rotational speed and angle to the ball. Should rotate in the direction that it is traveling.
 
