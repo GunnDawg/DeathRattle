@@ -65,3 +65,7 @@
 	   BALL SPEED, LIVES, and LEVEL SCORE, and LEVEL as well.
 	 - (DONE) Ballspeed is not properly resetting on game over, or next level. Until it hits the first paddle of the next
 	   game, it retains the speed at which the last round/level ended in.
+	 - (DONE) Fixed bug where ball would not spawn in the center of the screen when a NEW GAME was started, but only when
+	   resetBall() was called.
+	 - (DONE) The resetBall() function has an identical switch statement to the one in the Ball() constructor.
+	   Move that statement to some sort of setSpeed()
