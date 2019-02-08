@@ -26,8 +26,6 @@ public:
 	inline unsigned int getX() const { return m_posX; }
 	inline unsigned int getY() const { return m_posY; }
 
-	inline void setSpeed(unsigned int speed) { m_speed = speed; }
-
 	inline void setDead(bool dead) { m_isDead = dead; }
 
 	inline void addSpeed(float speed) { m_speed += speed; }
@@ -43,6 +41,8 @@ public:
 
 private:
 	Game* game                         = nullptr;
+
+	void setSpeed(Settings::GamePlay::GameDifficulty speed);
 
 	Texture m_ballTexture;
 

@@ -5,29 +5,9 @@ Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 {
 	game = &Game::GetInstance();
 
-	switch (speed)
-	{
-		case Settings::GamePlay::GameDifficulty::EASY:
-		{
-			m_speed = 0.35;
-		} break;
-
-		case Settings::GamePlay::GameDifficulty::MEDIUM:
-		{
-			m_speed = 0.50;
-		} break;
-
-		case Settings::GamePlay::GameDifficulty::HARD:
-		{
-			m_speed = 0.70;
-		} break;
-
-	default:
-		break;
-	}
-
 	m_ballTexture = Texture("Assets/Graphics/gameplay_scene/ball.png");
 
+	setSpeed(speed);
 	setAngle(randomizeAng());
 }
 
@@ -37,7 +17,15 @@ void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 	m_posY = (Settings::Display::WindowHeight / 2) - 25;
 
 	m_rotation = 0.0;
+	
+	setSpeed(speed);
+	setAngle(randomizeAng());
 
+	m_isDead = false;
+}
+
+void Ball::setSpeed(Settings::GamePlay::GameDifficulty speed)
+{
 	switch (speed)
 	{
 		case Settings::GamePlay::GameDifficulty::EASY:
@@ -55,12 +43,9 @@ void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 			m_speed = 0.70;
 		} break;
 
-	default:
-		break;
+		default:
+			break;
 	}
-
-	setAngle(randomizeAng());
-	m_isDead = false;
 }
 
 void Ball::Load()
