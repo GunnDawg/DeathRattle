@@ -9,17 +9,17 @@ Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 	{
 		case Settings::GamePlay::GameDifficulty::EASY:
 		{
-			m_speed = 0.35f;
+			m_speed = 0.35;
 		} break;
 
 		case Settings::GamePlay::GameDifficulty::MEDIUM:
 		{
-			m_speed = 0.50f;
+			m_speed = 0.50;
 		} break;
 
 		case Settings::GamePlay::GameDifficulty::HARD:
 		{
-			m_speed = 0.70f;
+			m_speed = 0.70;
 		} break;
 
 	default:
@@ -33,24 +33,26 @@ Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 
 void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 {
-	m_posX = (Settings::Display::WindowWidth / 2) - 40;
+	m_posX = (Settings::Display::WindowWidth / 2) - 25;
 	m_posY = (Settings::Display::WindowHeight / 2) - 25;
+
+	m_rotation = 0.0;
 
 	switch (speed)
 	{
 		case Settings::GamePlay::GameDifficulty::EASY:
 		{
-			m_speed = 0.35f;
+			m_speed = 0.35;
 		} break;
 
 		case Settings::GamePlay::GameDifficulty::MEDIUM:
 		{
-			m_speed = 0.50f;
+			m_speed = 0.50;
 		} break;
 
 		case Settings::GamePlay::GameDifficulty::HARD:
 		{
-			m_speed = 0.70f;
+			m_speed = 0.70;
 		} break;
 
 	default:

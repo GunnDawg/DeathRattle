@@ -36,7 +36,7 @@ public:
 	void resetBall(Settings::GamePlay::GameDifficulty speed);
 	double randomizeAng();
 
-	unsigned int m_posX = (Settings::Display::WindowWidth / 2) - 40;
+	unsigned int m_posX = (Settings::Display::WindowWidth / 2) - 25;
 	unsigned int m_posY = (Settings::Display::WindowHeight / 2) - 25;
 
 	double m_angle = 0.0;
@@ -55,7 +55,7 @@ private:
 	double m_rotation                  = 0.0;
 	double m_rotationSpeed             = 0.5;
 
-	float m_speed                      = 0;
+	double m_speed                     = 0.0;
 
 	bool m_isDead                      = false;
 
