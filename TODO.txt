@@ -51,6 +51,11 @@
 	 - Item inventory UI will be where the BONUS meter currently is. BONUS meter will be removed, as we'll no
 	   longer be using it.
 
+    * (STATES)
+	 - Rather than making PAUSE a boolean value haulting the update of the GAMEPLAY SCENE, we need to make
+	   a separate PAUSE scene with all of it's own functionality, including access to the options menu.
+	 - GAME OVER should also be it's own scene, and again, with it's own functionality.
+
 
 
 -==(COMPLETED)==-
