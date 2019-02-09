@@ -52,8 +52,7 @@ private:
 
 	double m_velocityX                 = 0.0;
 	double m_velocityY                 = 0.0;
-	double m_rotation                  = 0.0;
-	double m_rotationSpeed             = 0.5;
+	double m_rotationAngle             = 0.0;
 
 	double m_speed                     = 0.0;
 

@@ -16,7 +16,7 @@ void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 	m_posX = (Settings::Display::WindowWidth / 2) - 25;
 	m_posY = (Settings::Display::WindowHeight / 2) - 25;
 
-	m_rotation = 0.0;
+	m_rotationAngle = 0.0;
 	
 	setSpeed(speed);
 	setAngle(randomizeAng());
@@ -74,7 +74,7 @@ void Ball::Draw()
 		SDL_SetTextureColorMod(m_ballTexture.getTexture(), 255, 255, 255);
 	}
 
-	SDL_RenderCopyEx(game->Renderer, m_ballTexture.m_Texture, nullptr, &m_ballRect, m_rotation, nullptr, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(game->Renderer, m_ballTexture.m_Texture, nullptr, &m_ballRect, m_rotationAngle, nullptr, SDL_FLIP_NONE);
 }
 
 void Ball::Update()
@@ -84,11 +84,11 @@ void Ball::Update()
 
 	if (m_velocityX > 0)
 	{
-		m_rotation += (m_rotationSpeed * game->avgDeltaTime);
+		m_rotationAngle += (m_speed * game->avgDeltaTime);
 	}
 	else
 	{
-		m_rotation -= (m_rotationSpeed * game->avgDeltaTime);
+		m_rotationAngle -= (m_speed * game->avgDeltaTime);
 	}
 }
 
