@@ -68,4 +68,4 @@
 	 - (DONE) Fixed bug where ball would not spawn in the center of the screen when a NEW GAME was started, but only when
 	   resetBall() was called.
 	 - (DONE) The resetBall() function has an identical switch statement to the one in the Ball() constructor.
-	   Move that statement to some sort of setSpeed()
+	   Move that statement to some sort of setSpeed() func.
