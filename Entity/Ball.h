@@ -50,11 +50,10 @@ private:
 	const unsigned int m_ballWidth     = 50;
 	const unsigned int m_ballHeight    = 50;
 
+	double m_speed                     = 0.0;
 	double m_velocityX                 = 0.0;
 	double m_velocityY                 = 0.0;
 	double m_rotationAngle             = 0.0;
-
-	double m_speed                     = 0.0;
 
 	bool m_isDead                      = false;
 
