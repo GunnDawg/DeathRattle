@@ -53,9 +53,10 @@
 
     * (STATES)
 	 - Rather than making PAUSE a boolean value haulting the update of the GAMEPLAY SCENE, we need to make
-	   a separate PAUSE scene with all of it's own functionality, including access to the options menu.
+	   a separate PAUSE scene with all of it's own functionality.
 	 - GAME OVER should also be it's own scene, and again, with it's own functionality.
-
+	 - All gameplay scenes should have a menu with selections for the options menu, restart, quit to menu,
+	   and exit game.
 
 
 -==(COMPLETED)==-
