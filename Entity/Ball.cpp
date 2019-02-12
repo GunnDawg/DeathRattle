@@ -67,11 +67,11 @@ void Ball::Draw()
 
 	if (m_isDead)
 	{
-		SDL_SetTextureColorMod(m_ballTexture.getTexture(), 255, 0, 0);
+		SDL_SetTextureColorMod(m_ballTexture.m_Texture, 255, 0, 0);
 	}
 	else
 	{
-		SDL_SetTextureColorMod(m_ballTexture.getTexture(), 255, 255, 255);
+		SDL_SetTextureColorMod(m_ballTexture.m_Texture, 255, 255, 255);
 	}
 
 	SDL_RenderCopyEx(game->Renderer, m_ballTexture.m_Texture, nullptr, &m_ballRect, m_rotationAngle, nullptr, SDL_FLIP_NONE);
