@@ -81,5 +81,3 @@
 	   resetBall() was called.
 	 - (DONE) The resetBall() function has an identical switch statement to the one in the Ball() constructor.
 	   Move that statement to some sort of setSpeed() func.
-
-	   test
