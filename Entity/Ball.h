@@ -20,7 +20,7 @@ public:
 	void Update();
 	void setAngle(double angle);
 
-	inline const SDL_Rect& getRect() { return m_ballRect; }
+	inline SDL_Rect getRect() const { return m_ballRect; }
 	inline double getSpeed() const { return m_speed; }
 	inline unsigned int getX() const { return m_posX; }
 	inline unsigned int getY() const { return m_posY; }
