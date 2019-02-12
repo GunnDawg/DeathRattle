@@ -10,16 +10,18 @@ public:
 	Animation(const char* filePath, unsigned int numFramesX, unsigned int numFramesY, double speed);
 
 	void Load(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
-	inline void Unload() { m_Texture.Unload(); }
 	void Play(double dt);
+	void Draw();
 	inline void Start() { m_isPlaying = true; }
 	inline void Stop() { m_isPlaying = false; }
-	void Draw();
+	inline void Unload() { m_Texture.Unload(); }
 
 private:
 	Game* game                           = nullptr;
 
 	Texture m_Texture;
+	SDL_Rect m_cropRect                  = { };
+	SDL_Rect m_posRect                   = { };
 
 	const unsigned int m_numFramesX      = 0;
 	const unsigned int m_numFramesY      = 0;

@@ -16,14 +16,10 @@ public:
 	void Unload();
 	void setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 	void setRect(unsigned int x, unsigned int y);
-	inline SDL_Rect getRect() const { return m_TextureRect; }
-	inline SDL_Texture* getTexture() const { return m_Texture; }
 
-	std::string m_filePath;
 	SDL_Texture* m_Texture               = nullptr;
+	std::string m_filePath               = { 0 };
 	SDL_Rect m_TextureRect               = { 0 };
-	SDL_Rect m_CropRect                  = { 0 };
-	SDL_Rect m_PosRect                   = { 0 };
 
 private:
 	Game* game                           = nullptr;
