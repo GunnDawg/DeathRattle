@@ -470,7 +470,7 @@ void OptionsMenuScene::handle_events()
 
 void OptionsMenuScene::draw()
 {
-	SDL_RenderCopy(game->Renderer, m_background.getTexture(), NULL, &m_background.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{

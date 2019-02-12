@@ -271,7 +271,7 @@ void GameplayState::drawText()
 	if (m_gameOver)
 	{
 		SDL_Rect rect = m_grimReaper.m_TextureRect;
-		SDL_RenderCopy(game->Renderer, m_grimReaper.getTexture(), nullptr, &rect);
+		SDL_RenderCopy(game->Renderer, m_grimReaper.m_Texture, nullptr, &rect);
 		m_gameOverText.Draw((game->screenWidth / 2) - (m_gameOverText.m_textRect.w / 2), (game->screenHeight / 2) - 150);
 		m_gameOverNewGameText.Draw((game->screenWidth / 2) - 225, (game->screenHeight / 2) - 90);
 	}
