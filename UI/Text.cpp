@@ -4,8 +4,8 @@
 Text::Text(unsigned int fontSize, const std::string_view text) :
 m_fontValue(text.data()), m_fontSize(fontSize)
 {
-	//assert(typeid(fontSize) == typeid(unsigned int) && fontSize > 0 && "Text must have a font size");
-	//assert(typeid(text) == typeid(std::string_view) && !text.empty() && "Text cannot have an empty value");
+	assert(typeid(fontSize) == typeid(unsigned int) && fontSize > 0 && "Text must have a font size");
+	assert(typeid(text) == typeid(std::string_view) && !text.empty() && "Text cannot have an empty value");
 
 	game = &Game::GetInstance();
 

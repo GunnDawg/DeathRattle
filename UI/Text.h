@@ -12,7 +12,6 @@ class Text
 public:
 	Text()=default;
 	Text(unsigned int fontSize, const std::string_view text);
-	~Text()=default;
 
 	void Draw(unsigned int x, unsigned int y);
 	void Draw(unsigned int x, unsigned int y, double rotation);
@@ -36,7 +35,4 @@ private:
 
 	SDL_Texture* m_textTexture          = nullptr;
 	SDL_Surface* m_textSurface          = nullptr;
-
-	Text(const Text& obj) = delete;
-	//Text& operator=(const Text&) = delete;
 };

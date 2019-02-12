@@ -8,7 +8,6 @@ class Animation
 public:
 	Animation()=default;
 	Animation(const char* filePath, unsigned int numFramesX, unsigned int numFramesY, double speed);
-	~Animation()=default;
 
 	void Load(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 	inline void Unload() { m_Texture.Unload(); }

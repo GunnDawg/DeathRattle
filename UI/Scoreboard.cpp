@@ -95,8 +95,8 @@ void Scoreboard::Update(const LevelSet& passedLevel)
 			m_levelScore = passedLevel.getScore(4);
 		} break;
 
-		default:
-			break;
+	default:
+		break;
 	}
 
 	m_fs = std::to_string(m_score);

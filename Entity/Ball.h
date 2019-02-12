@@ -13,7 +13,6 @@ class Ball
 public:
 	Ball()=default;
 	Ball(Settings::GamePlay::GameDifficulty speed);
-	~Ball()=default;
 
 	void Load();
 	void Unload();
@@ -22,7 +21,7 @@ public:
 	void setAngle(double angle);
 
 	inline const SDL_Rect& getRect() { return m_ballRect; }
-	inline float getSpeed() const { return m_speed; }
+	inline double getSpeed() const { return m_speed; }
 	inline unsigned int getX() const { return m_posX; }
 	inline unsigned int getY() const { return m_posY; }
 
@@ -56,7 +55,4 @@ private:
 	double m_rotationAngle             = 0.0;
 
 	bool m_isDead                      = false;
-
-	Ball(const Ball& obj) = delete;
-	Ball& operator=(const Ball&) = delete;
 };

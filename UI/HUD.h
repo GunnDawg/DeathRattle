@@ -17,7 +17,6 @@ class HUD
 {
 public:
 	HUD()=default;
-	~HUD()=default;
 
 	inline bool isShowing() const { return m_isShowing; }
 
@@ -67,7 +66,4 @@ private:
 	std::unique_ptr<Text> m_itemDropProgress                = nullptr;
 
 	bool m_isShowing                                        = true;
-
-	HUD(const HUD& obj) = default;
-	HUD& operator=(const HUD&) = default;
 };

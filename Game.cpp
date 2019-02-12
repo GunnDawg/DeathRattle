@@ -53,7 +53,7 @@ bool Game::Init()
 		return false;
 	}
 
-	if ((IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG))
+	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
 	{
 		GUNN_CORE_FATAL("IMG_Init: Failed to init required PNG support!");
 		GUNN_CORE_FATAL("IMG_Init: {0}", IMG_GetError());
@@ -86,8 +86,8 @@ bool Game::Init()
 			WindowFlags = SDL_WINDOW_FULLSCREEN_DESKTOP;
 		} break;
 
-		default:
-			break;
+	default:
+		break;
 	}
 
 	Window = SDL_CreateWindow
@@ -139,7 +139,6 @@ void Game::Update()
 
 void Game::Draw()
 {
-	SDL_RenderClear(Renderer);
 	gameStateMachine.draw();
 	SDL_RenderPresent(Renderer);
 }

@@ -11,7 +11,6 @@ class Texture
 public:
 	Texture()=default;
 	Texture(const std::string_view filePath);
-	~Texture()=default;
 
 	void Load();
 	void Unload();

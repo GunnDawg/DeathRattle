@@ -12,7 +12,6 @@ class Music
 public:
 	Music()=default;
 	Music(const char* filePath);
-	~Music()=default;
 
 	void Load();
 	void Unload();
@@ -23,9 +22,6 @@ public:
 	void SetVolume(int v);
 
 private:
-	Music(const Music& obj)=delete;
-	Music& operator=(const Music&)=delete;
-
 	Mix_Music* m_music             = nullptr;
 	const char* m_musicFilePath    = nullptr;
 };

@@ -15,7 +15,6 @@ class Scoreboard
 public:
 	Scoreboard()=default;
 	Scoreboard(unsigned int x, unsigned int y);
-	~Scoreboard()=default;
 
 	void Load();
 	void Unload();
@@ -66,7 +65,4 @@ private:
 	std::string m_hs;
 	std::string m_s;
 	std::string m_ls;
-
-	Scoreboard(const Scoreboard& obj) = delete;
-	Scoreboard& operator=(const Scoreboard&) = delete;
 };

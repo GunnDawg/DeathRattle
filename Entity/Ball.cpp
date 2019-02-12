@@ -43,8 +43,8 @@ void Ball::setSpeed(Settings::GamePlay::GameDifficulty speed)
 			m_speed = 0.70;
 		} break;
 
-		default:
-			break;
+	default:
+		break;
 	}
 }
 
