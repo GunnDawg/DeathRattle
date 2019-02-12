@@ -18,6 +18,7 @@
      - Detect user screen resolution and send it to the window at runtime. Might consider an external
 	   launcher later, where the user can set this themself, along with other options.
      - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
+	 - Setup a connection to an SQL server for stat tracking.
 
 	* (PERFORMANCE)
 	 - Precompiled Header File. Put together a PCH to include such things as SDL, memory, array, vector, etc, etc.
@@ -33,6 +34,11 @@
 	* (BUGS)
 	 - Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
 	   towards a nullptr in the Texture class.
+
+    * (FEATURES)
+	 - Stat tracking and things like high score is important for this game. We need some way to store and
+	   upload/download information from a central database. An SQL server might be an option here.
+
 
 -==(GAMEPLAY)==-
 
