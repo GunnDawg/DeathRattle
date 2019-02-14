@@ -277,6 +277,5 @@ void IntroSceneState::draw()
 	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
 
 	//Set fade value to the skull texture
-	//SDL_SetTextureAlphaMod(m_skull.m_Texture, mFadeValue);
 	SDL_SetTextureAlphaMod(m_skullWhite.m_Texture, static_cast<Uint8>(mFadeValue));
 }
