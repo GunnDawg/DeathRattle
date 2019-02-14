@@ -1,6 +1,10 @@
 #pragma once
-#include <SDL.h>
-#include <SDL_ttf.h>
+extern "C"
+{
+	#include <SDL.h>
+	#include <SDL_ttf.h>
+}
+
 #include <string>
 #include <cassert>
 #include "Log/Log.h"

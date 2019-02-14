@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <math.h>
 
 Game::~Game()
 {
