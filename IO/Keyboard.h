@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SDL.h>
 #include <cassert>
 #include "Entity/Paddle.h"
 
