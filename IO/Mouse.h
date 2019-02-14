@@ -1,7 +1,7 @@
 #pragma once
-
-#include <SDL.h>
 #include "Entity/Paddle.h"
+
+class Game;
 
 class Mouse
 {
@@ -15,6 +15,8 @@ public:
 	inline bool isEnabled() const { return m_Enabled; }
 
 private:
+	Game* game = nullptr;
+
 	bool m_Enabled;
 	int m_MouseX;
 	int m_MouseY;
