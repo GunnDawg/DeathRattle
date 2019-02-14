@@ -137,13 +137,17 @@ void IntroSceneState::update()
 
 	if (m_isClicked)
 	{
+		mFadeValue = 255;
+		mFadeIn = false;
+		mFadeOut = false;
+
 		m_isSkull = false;
 		m_scare.Play();
 
 		m_skull.m_TextureRect.w += (10.00 * game->avgDeltaTime);
 		m_skull.m_TextureRect.h += (10.00 * game->avgDeltaTime);
-		m_skull.m_TextureRect.x -= (5.00  * game->avgDeltaTime);
-		m_skull.m_TextureRect.y -= (5.00  * game->avgDeltaTime);
+		m_skull.m_TextureRect.x -= (5.00 * game->avgDeltaTime);
+		m_skull.m_TextureRect.y -= (5.00 * game->avgDeltaTime);
 
 		m_skullWhite.m_TextureRect.w = m_skull.m_TextureRect.w;
 		m_skullWhite.m_TextureRect.h = m_skull.m_TextureRect.h;
@@ -160,6 +164,29 @@ void IntroSceneState::update()
 
 			std::unique_ptr<GameState> mainMenuState = std::make_unique<MainMenuScene>();
 			game->gameStateMachine.push(std::move(mainMenuState));
+		}
+	}
+
+	if (!m_isClicked)
+	{
+		if (mFadeOut)
+		{
+			mFadeValue -= (0.2 * game->avgDeltaTime);
+			if (mFadeValue <= SDL_ALPHA_TRANSPARENT)
+			{
+				mFadeOut = false;
+				mFadeIn = true;
+			}
+		}
+
+		if (mFadeIn)
+		{
+			mFadeValue += (0.2 * game->avgDeltaTime);
+			if (mFadeValue >= SDL_ALPHA_OPAQUE)
+			{
+				mFadeOut = true;
+				mFadeIn = false;
+			}
 		}
 	}
 }
@@ -248,4 +275,8 @@ void IntroSceneState::draw()
 	SDL_RenderCopy(game->Renderer, m_plug.m_Texture, NULL, &m_plug.m_TextureRect);
 
 	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+
+	//Set fade value to the skull texture
+	//SDL_SetTextureAlphaMod(m_skull.m_Texture, mFadeValue);
+	SDL_SetTextureAlphaMod(m_skullWhite.m_Texture, static_cast<Uint8>(mFadeValue));
 }

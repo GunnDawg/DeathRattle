@@ -51,4 +51,7 @@ private:
 	bool m_isBlood                    = false;
 	bool m_isSkull                    = false;
 	bool m_isClicked                  = false;
+	bool mFadeIn                      = false;
+	bool mFadeOut                     = true;
+	double mFadeValue                 = 255.0;
 };
