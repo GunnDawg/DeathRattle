@@ -1,8 +1,8 @@
 /////////////////////////////////////////
-/// Author: Calvin Gunn               ///
-/// Document: TODO List               ///
-/// Project: Death Rattle Pong Game   ///
-/// Current Version: 0.0.1            ///
+///  Author: Calvin Gunn              ///
+///  Document: TODO List              ///
+///  Project: Death Rattle Pong Game  ///
+///  Current Version: 0.0.1           ///
 /////////////////////////////////////////
 
 -==(CORE)==-
@@ -19,6 +19,8 @@
 	   launcher later, where the user can set this themself, along with other options.
      - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
 	 - Setup a connection to an SQL server for stat tracking.
+	 - Create an external logging system that collects information during runtime. This will help
+	   with future end user debugging.
 
 	* (PERFORMANCE)
 	 - Precompiled Header File. Put together a PCH to include such things as SDL, memory, array, vector, etc, etc.
@@ -30,6 +32,7 @@
 	 - Figure out a better, cleaner way to initialize and load objects. Cluttering the on_enter() of every
 	   scene is just sloppy. There has to be a better way. Maybe the asset manager is the solution?
 	 - Continue to look for ways to shorten code, it's a mess.
+	 - Replace all m_ prefixes with just m. mDataMember looks better than m_dataMember.
 
 	* (BUGS)
 	 - Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
@@ -66,8 +69,8 @@
 
 
 -==(COMPLETED)==-
-	 - (DONE) Everywhere we pass things like ScreenWidth, ScreenHeight, and Renderer we need to be creating an instance
-	   of "Game" and use it's instance to access those data members.
+	 - (DONE) Everywhere we pass things like ScreenWidth, ScreenHeight, and Renderer we need to be creating a refernece
+	   to an instance of the  "Game" class, and use it's instance to access those data members.
 	 - (DONE) Get rid of all static members inside the Game class.
 	 - (DONE) Level Score isn't populating until after the game has started. This isn't really a big issue though
 	   because we're going to start working on a new level/progression system anyways.
