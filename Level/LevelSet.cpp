@@ -7,29 +7,29 @@ LevelSet::LevelSet(const char* filePath)
 
 	game = &Game::GetInstance();
 
-	for (std::size_t i = 0; i < m_levelTextures.size(); i++)
+	for (std::size_t i = 0; i < mLevelTextures.size(); i++)
 	{
 		std::ostringstream out;
 		out << filePath << "level" << i << ".png";
-		m_filename = out.str();
-		m_levelTextures[i] = Texture(m_filename);
+		mFilename = out.str();
+		mLevelTextures[i] = Texture(mFilename);
 	}
 }
 
 LevelSet::~LevelSet()
 {
-	Unload(m_levelNum);
+	Unload(mLevelNum);
 }
 
 void LevelSet::Load()
 {
-	m_levelTextures[m_levelNum].Load();
-	m_levelTextures[m_levelNum].setRect(0, 0, game->screenWidth, game->screenHeight);
+	mLevelTextures[mLevelNum].Load();
+	mLevelTextures[mLevelNum].setRect(0, 0, game->screenWidth, game->screenHeight);
 }
 
 void LevelSet::Unload(int x)
 {
-	m_levelTextures[x].Unload();
+	mLevelTextures[x].Unload();
 
 	//game = nullptr;
 }
@@ -38,43 +38,43 @@ void LevelSet::setScores(std::array<int, LEVEL_COUNT> s)
 {
 	for (std::size_t i = 0; i < s.size(); ++i)
 	{
-		m_levelScore[i] = s[i];
+		mLevelScore[i] = s[i];
 	}
 }
 
 void LevelSet::Draw()
 {
-	SDL_Rect rect = m_levelTextures[m_levelNum].m_TextureRect;
-	SDL_RenderCopy(game->Renderer, m_levelTextures[m_levelNum].m_Texture, nullptr, &rect);
+	SDL_Rect rect = mLevelTextures[mLevelNum].mTextureRect;
+	SDL_RenderCopy(game->Renderer, mLevelTextures[mLevelNum].mTexture, nullptr, &rect);
 }
 
 void LevelSet::setLevel(unsigned int x)
 {
-	m_levelNum = x;
+	mLevelNum = x;
 }
 
 void LevelSet::nextLevel()
 {
-	if (m_levelNum < (m_levelTextures.size() - 1))
+	if (mLevelNum < (mLevelTextures.size() - 1))
 	{
-		Unload(m_levelNum);
-		++m_levelNum;
+		Unload(mLevelNum);
+		++mLevelNum;
 		Load();
 	}
 	else
 	{
-		Unload(m_levelNum);
-		m_levelNum = 0;
+		Unload(mLevelNum);
+		mLevelNum = 0;
 		Load();
 	}
 }
 
 void LevelSet::prevLevel()
 {
-	if (m_levelNum >= 1)
+	if (mLevelNum >= 1)
 	{
-		Unload(m_levelNum);
-		--m_levelNum;
+		Unload(mLevelNum);
+		--mLevelNum;
 		Load();
 	}
 }

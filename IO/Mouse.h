@@ -10,14 +10,14 @@ public:
 	Mouse(bool defaultState);
 	void Update(Paddle* t, Paddle* r, Paddle* b, Paddle* l);
 
-	inline void On() { m_Enabled = true; }
-	inline void Off() { m_Enabled = false; }
-	inline bool isEnabled() const { return m_Enabled; }
+	inline void On() { mEnabled = true; }
+	inline void Off() { mEnabled = false; }
+	inline bool isEnabled() const { return mEnabled; }
 
 private:
 	Game* game = nullptr;
 
-	bool m_Enabled;
-	int m_MouseX;
-	int m_MouseY;
+	bool mEnabled;
+	int mMouseX;
+	int mMouseY;
 };

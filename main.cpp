@@ -26,5 +26,7 @@ int main(int argc, char* args[])
 	game->DestroyGame();
 	game = nullptr;
 
+	GUNN_LOG_FATAL("Exiting Game");
+
 	return EXIT_SUCCESS;
 }

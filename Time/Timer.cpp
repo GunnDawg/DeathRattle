@@ -3,13 +3,13 @@
 void Timer::Start()
 {
 	m_StartTime = std::chrono::system_clock::now();
-	m_bRunning = true;
+	mRunning = true;
 }
 
 void Timer::Stop()
 {
 	m_EndTime = std::chrono::system_clock::now();
-	m_bRunning = false;
+	mRunning = false;
 }
 
 //void Timer::reset()
@@ -22,7 +22,7 @@ double Timer::elapsedMilliseconds()
 {
 	std::chrono::time_point<std::chrono::system_clock> endTime;
 
-	if (m_bRunning)
+	if (mRunning)
 	{
 		endTime = std::chrono::system_clock::now();
 	}

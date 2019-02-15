@@ -5,7 +5,7 @@ Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 {
 	game = &Game::GetInstance();
 
-	m_ballTexture = Texture("Assets/Graphics/gameplay_scene/ball.png");
+	mBallTexture = Texture("Assets/Graphics/gameplay_scene/ball.png");
 
 	setSpeed(speed);
 	setAngle(randomizeAng());
@@ -13,15 +13,15 @@ Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 
 void Ball::resetBall(Settings::GamePlay::GameDifficulty speed)
 {
-	m_posX = (Settings::Display::WindowWidth / 2) - 25;
-	m_posY = (Settings::Display::WindowHeight / 2) - 25;
+	mPosX = (Settings::Display::WindowWidth / 2) - 25;
+	mPosY = (Settings::Display::WindowHeight / 2) - 25;
 
-	m_rotationAngle = 0.0;
+	mRotationAngle = 0.0;
 	
 	setSpeed(speed);
 	setAngle(randomizeAng());
 
-	m_isDead = false;
+	mIsDead = false;
 }
 
 void Ball::setSpeed(Settings::GamePlay::GameDifficulty speed)
@@ -30,17 +30,17 @@ void Ball::setSpeed(Settings::GamePlay::GameDifficulty speed)
 	{
 		case Settings::GamePlay::GameDifficulty::EASY:
 		{
-			m_speed = 0.35;
+			mSpeed = 0.35;
 		} break;
 
 		case Settings::GamePlay::GameDifficulty::MEDIUM:
 		{
-			m_speed = 0.50;
+			mSpeed = 0.50;
 		} break;
 
 		case Settings::GamePlay::GameDifficulty::HARD:
 		{
-			m_speed = 0.70;
+			mSpeed = 0.70;
 		} break;
 
 	default:
@@ -50,54 +50,54 @@ void Ball::setSpeed(Settings::GamePlay::GameDifficulty speed)
 
 void Ball::Load()
 {
-	m_ballTexture.Load();
+	mBallTexture.Load();
 }
 
 void Ball::Unload()
 {
-	m_ballTexture.Unload();
+	mBallTexture.Unload();
 }
 
 void Ball::Draw()
 {
-	m_ballRect.w = m_ballWidth;
-	m_ballRect.h = m_ballHeight;
-	m_ballRect.x = m_posX;
-	m_ballRect.y = m_posY;
+	mBallRect.w = mBallWidth;
+	mBallRect.h = mBallHeight;
+	mBallRect.x = mPosX;
+	mBallRect.y = mPosY;
 
-	if (m_isDead)
+	if (mIsDead)
 	{
-		SDL_SetTextureColorMod(m_ballTexture.m_Texture, 255, 0, 0);
+		SDL_SetTextureColorMod(mBallTexture.mTexture, 255, 0, 0);
 	}
 	else
 	{
-		SDL_SetTextureColorMod(m_ballTexture.m_Texture, 255, 255, 255);
+		SDL_SetTextureColorMod(mBallTexture.mTexture, 255, 255, 255);
 	}
 
-	SDL_RenderCopyEx(game->Renderer, m_ballTexture.m_Texture, nullptr, &m_ballRect, m_rotationAngle, nullptr, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(game->Renderer, mBallTexture.mTexture, nullptr, &mBallRect, mRotationAngle, nullptr, SDL_FLIP_NONE);
 }
 
 void Ball::Update()
 {
-	m_posX += static_cast<unsigned int>(m_velocityX * game->avgDeltaTime);
-	m_posY += static_cast<unsigned int>(m_velocityY * game->avgDeltaTime);
+	mPosX += static_cast<unsigned int>(mVelocityX * game->avgDeltaTime);
+	mPosY += static_cast<unsigned int>(mVelocityY * game->avgDeltaTime);
 
-	if (m_velocityX > 0)
+	if (mVelocityX > 0)
 	{
-		m_rotationAngle += (m_speed * game->avgDeltaTime);
+		mRotationAngle += (mSpeed * game->avgDeltaTime);
 	}
 	else
 	{
-		m_rotationAngle -= (m_speed * game->avgDeltaTime);
+		mRotationAngle -= (mSpeed * game->avgDeltaTime);
 	}
 }
 
 void Ball::setAngle(double angle)
 {
-	m_angle = angle;
+	mAngle = angle;
 
-	m_velocityX = ((cos(m_angle)) * m_speed);
-	m_velocityY = ((sin(m_angle)) * m_speed);
+	mVelocityX = ((cos(mAngle)) * mSpeed);
+	mVelocityY = ((sin(mAngle)) * mSpeed);
 }
 
 double Ball::randomizeAng()

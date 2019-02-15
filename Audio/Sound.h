@@ -11,10 +11,10 @@ public:
 
 	void Load();
 	void Unload();
-	inline void Play() const { Mix_PlayChannel(-1, m_chunk, 0); }
+	inline void Play() const { Mix_PlayChannel(-1, mChunk, 0); }
 	void setVolume(int v) const;
 
 private:
-	Mix_Chunk* m_chunk                = nullptr;
-	const char* m_soundFilePath       = nullptr;
+	Mix_Chunk* mChunk                = nullptr;
+	const char* mSoundFilePath       = nullptr;
 };

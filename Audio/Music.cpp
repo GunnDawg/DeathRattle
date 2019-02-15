@@ -1,17 +1,17 @@
 #include "Music.h"
 
 Music::Music(const char* filePath) :
-m_musicFilePath(filePath)
+mMusicFilePath(filePath)
 {
 
 }
 
 void Music::Load()
 {
-	if (m_music == nullptr)
+	if (mMusic == nullptr)
 	{
-		m_music = Mix_LoadMUS(m_musicFilePath);
-		if (m_music == nullptr)
+		mMusic = Mix_LoadMUS(mMusicFilePath);
+		if (mMusic == nullptr)
 		{
 			GUNN_CORE_ERROR("Error loading music file: {0}. Error: {1}",m_musicFilePath, Mix_GetError());
 		}
@@ -25,11 +25,11 @@ void Music::Load()
 
 void Music::Unload()
 {
-	if (m_music != nullptr)
+	if (mMusic != nullptr)
 	{
-		Mix_FreeMusic(m_music);
-		m_music = nullptr;
-		GUNN_CORE_INFO("MUSIC UNLOADED: {0}", m_musicFilePath);
+		Mix_FreeMusic(mMusic);
+		mMusic = nullptr;
+		GUNN_CORE_INFO("MUSIC UNLOADED: {0}", mMusicFilePath);
 	}
 }
 

@@ -121,6 +121,8 @@ bool Game::Init()
 	SDL_ShowCursor(0);
 	isRunning = true;
 
+	GUNN_LOG_FATAL("Testing file logger!!");
+
 	return true;
 }
 

@@ -30,11 +30,11 @@ public:
 	bool HIGHSCORE_NEEDS_UPDATED                  = true;
 	bool STAGE_SCORE_NEEDS_UPDATED                = false;
 
-	inline unsigned int getScore() const { return m_score; }
-	inline unsigned int getHighScore() const { return m_highScore; }
-	inline unsigned int getLevelScore() const { return m_levelScore; }
+	inline unsigned int getScore() const { return mScore; }
+	inline unsigned int getHighScore() const { return mHighScore; }
+	inline unsigned int getLevelScore() const { return mLevelScore; }
 
-	inline void setScore(unsigned int x) { m_score = x; }
+	inline void setScore(unsigned int x) { mScore = x; }
 
 	void increaseScore(unsigned int x);
 	void decreaseScore(unsigned int x);
@@ -45,28 +45,28 @@ public:
 private:
 	Game* game                                    = nullptr;
 
-	std::unique_ptr<FileIO> m_File;
+	std::unique_ptr<FileIO> mFile;
 
-	const char* m_convertedScore                  = nullptr;
-	const char* m_convertedHighScore              = nullptr;
-	const char* m_convertedLevelScore             = nullptr;
-	const char* m_convertedFinalScore             = nullptr;
+	const char* mConvertedScore                  = nullptr;
+	const char* mConvertedHighScore              = nullptr;
+	const char* mConvertedLevelScore             = nullptr;
+	const char* mConvertedFinalScore             = nullptr;
 
-	std::unique_ptr<Text> m_scoreLabel            = nullptr;
-	std::unique_ptr<Text> m_scoreText             = nullptr;
-	std::unique_ptr<Text> m_highScoreLabel        = nullptr;
-	std::unique_ptr<Text> m_highScoreText         = nullptr;
-	std::unique_ptr<Text> m_levelScoreLabel       = nullptr;
-	std::unique_ptr<Text> m_levelScoreText        = nullptr;
-	std::unique_ptr<Text> m_finalScoreLabel       = nullptr;
-	std::unique_ptr<Text> m_finalScoreText        = nullptr;
+	std::unique_ptr<Text> mScoreLabel            = nullptr;
+	std::unique_ptr<Text> mScoreText             = nullptr;
+	std::unique_ptr<Text> mHighScoreLabel        = nullptr;
+	std::unique_ptr<Text> mHighScoreText         = nullptr;
+	std::unique_ptr<Text> mLevelScoreLabel       = nullptr;
+	std::unique_ptr<Text> mLevelScoreText        = nullptr;
+	std::unique_ptr<Text> mFinalScoreLabel       = nullptr;
+	std::unique_ptr<Text> mFinalScoreText        = nullptr;
 
-	unsigned int m_score                          = 0;
-	unsigned int m_highScore                      = 0;
-	unsigned int m_levelScore                     = 0;
+	unsigned int mScore                          = 0;
+	unsigned int mHighScore                      = 0;
+	unsigned int mLevelScore                     = 0;
 
-	std::string m_fs;
-	std::string m_hs;
-	std::string m_s;
-	std::string m_ls;
+	std::string mFs;
+	std::string mHs;
+	std::string mS;
+	std::string mLs;
 };

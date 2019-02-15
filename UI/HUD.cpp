@@ -6,43 +6,43 @@ void HUD::Load(const LevelSet& passedLevel)
 	game = &Game::GetInstance();
 
 	//Top Left Display
-	setRect(m_textBoxes[0], 336, 100, 12, 12);
-	setRect(m_blackBoxes[0], 336, 100, m_textBoxes[0].x, m_textBoxes[0].y);
+	setRect(mTextBoxes[0], 336, 100, 12, 12);
+	setRect(mBlackBoxes[0], 336, 100, mTextBoxes[0].x, mTextBoxes[0].y);
 
 	//Top Right Display
-	setRect(m_textBoxes[1], 336, 100, game->screenWidth - 350, 12);
-	setRect(m_blackBoxes[1], 336, 100, m_textBoxes[1].x, m_textBoxes[1].y);
+	setRect(mTextBoxes[1], 336, 100, game->screenWidth - 350, 12);
+	setRect(mBlackBoxes[1], 336, 100, mTextBoxes[1].x, mTextBoxes[1].y);
 
 	//Health Bar
-	setRect(m_textBoxes[2], 558, 35, (game->screenWidth / 2) - 280, 12);// <--- Use textBoxes[2] if you need to move it around.
-	setRect(m_textBoxes[3], 550, 25, m_textBoxes[2].x + 4, m_textBoxes[2].y + 5); // <--- The red part of the bar :)
-	setRect(m_blackBoxes[2], 550, 25, m_textBoxes[3].x, m_textBoxes[3].y);
+	setRect(mTextBoxes[2], 558, 35, (game->screenWidth / 2) - 280, 12);// <--- Use textBoxes[2] if you need to move it around.
+	setRect(mTextBoxes[3], 550, 25, mTextBoxes[2].x + 4, mTextBoxes[2].y + 5); // <--- The red part of the bar :)
+	setRect(mBlackBoxes[2], 550, 25, mTextBoxes[3].x, mTextBoxes[3].y);
 
 	//Bonus Bar
-	setRect(m_textBoxes[4], 558, 35, m_textBoxes[2].x, m_textBoxes[2].y + 55);
-	setRect(m_textBoxes[5], 0, 25, m_textBoxes[4].x + 4, m_textBoxes[4].y + 5);
-	setRect(m_blackBoxes[3], 550, 25, m_textBoxes[5].x, m_textBoxes[5].y);
+	setRect(mTextBoxes[4], 558, 35, mTextBoxes[2].x, mTextBoxes[2].y + 55);
+	setRect(mTextBoxes[5], 0, 25, mTextBoxes[4].x + 4, mTextBoxes[4].y + 5);
+	setRect(mBlackBoxes[3], 550, 25, mTextBoxes[5].x, mTextBoxes[5].y);
 
-	m_ballSpeedString = std::to_string(NULL);
-	m_convertedBallSpeed = m_ballSpeedString.c_str();
+	mBallSpeedString = std::to_string(NULL);
+	mConvertedBallSpeed = mBallSpeedString.c_str();
 
-	m_livesString = std::to_string(NULL);
-	m_convertedLives = m_livesString.c_str();
+	mLivesString = std::to_string(NULL);
+	mConvertedLives = mLivesString.c_str();
 
-	m_levelString = std::to_string(NULL);
-	m_convertedLevel = m_levelString.c_str();
+	mLevelString = std::to_string(NULL);
+	mConvertedLevel = mLevelString.c_str();
 
-	m_remaininghpString = std::to_string(NULL);
-	m_convertedHP = m_remaininghpString.c_str();
+	mRemaininghpString = std::to_string(NULL);
+	mConvertedHP = mRemaininghpString.c_str();
 
-	m_ballSpeedLabel                              = std::make_unique<Text>(24, "SPEED LEVEL");
-	m_ballSpeedText                               = std::make_unique<Text>(24, m_convertedBallSpeed);
-	m_LivesLabel                                  = std::make_unique<Text>(24, "LIVES");
-	m_LivesText                                   = std::make_unique<Text>(24, m_convertedLives);
-	m_levelLabel                                  = std::make_unique<Text>(24, "STAGE");
-	m_levelText                                   = std::make_unique<Text>(24, m_convertedLevel);
-	m_remainingHP                                 = std::make_unique<Text>(22, m_convertedHP);
-	m_itemDropProgress                            = std::make_unique<Text>(22, "BONUS");
+	mBallSpeedLabel                              = std::make_unique<Text>(24, "SPEED LEVEL");
+	mBallSpeedText                               = std::make_unique<Text>(24, mConvertedBallSpeed);
+	mLivesLabel                                  = std::make_unique<Text>(24, "LIVES");
+	mLivesText                                   = std::make_unique<Text>(24, mConvertedLives);
+	mLevelLabel                                  = std::make_unique<Text>(24, "STAGE");
+	mLevelText                                   = std::make_unique<Text>(24, mConvertedLevel);
+	mRemainingHP                                 = std::make_unique<Text>(22, mConvertedHP);
+	mItemDropProgress                            = std::make_unique<Text>(22, "BONUS");
 
 	m_ScoreBoard.Load();
 	m_ScoreBoard.Update(passedLevel);
@@ -52,14 +52,14 @@ void HUD::Unload()
 {
 	m_ScoreBoard.Unload();
 
-	m_ballSpeedLabel->Unload();
-	m_ballSpeedText->Unload();
-	m_LivesLabel->Unload();
-	m_LivesText->Unload();
-	m_levelLabel->Unload();
-	m_levelText->Unload();
-	m_remainingHP->Unload();
-	m_itemDropProgress->Unload();
+	mBallSpeedLabel->Unload();
+	mBallSpeedText->Unload();
+	mLivesLabel->Unload();
+	mLivesText->Unload();
+	mLevelLabel->Unload();
+	mLevelText->Unload();
+	mRemainingHP->Unload();
+	mItemDropProgress->Unload();
 
 	game = nullptr;
 }
@@ -67,46 +67,46 @@ void HUD::Unload()
 void HUD::drawHealthBar()
 {
 	SDL_SetRenderDrawColor(game->Renderer, 255, 0, 0, 255);
-	SDL_RenderFillRect(game->Renderer, &m_textBoxes[3]);
+	SDL_RenderFillRect(game->Renderer, &mTextBoxes[3]);
 }
 
 void HUD::drawProgressBar()
 {
 	SDL_SetRenderDrawColor(game->Renderer, 76, 220, 61, 255);
-	SDL_RenderFillRect(game->Renderer, &m_textBoxes[5]);
+	SDL_RenderFillRect(game->Renderer, &mTextBoxes[5]);
 }
 
 void HUD::drawText()
 {
-	m_ballSpeedLabel->Draw(m_textBoxes[1].x + 12, 24);
-	m_ballSpeedText->Draw(game->screenWidth - 64, 24);
+	mBallSpeedLabel->Draw(mTextBoxes[1].x + 12, 24);
+	mBallSpeedText->Draw(game->screenWidth - 64, 24);
 
-	m_LivesLabel->Draw(m_ballSpeedLabel->m_textRect.x, m_ballSpeedLabel->m_textRect.y + 24);
-	m_LivesText->Draw(game->screenWidth - 64, m_LivesLabel->m_textRect.y);
+	mLivesLabel->Draw(mBallSpeedLabel->mTextRect.x, mBallSpeedLabel->mTextRect.y + 24);
+	mLivesText->Draw(game->screenWidth - 64, mLivesLabel->mTextRect.y);
 
-	m_levelLabel->Draw(m_ballSpeedLabel->m_textRect.x, m_ballSpeedLabel->m_textRect.y + 48);
-	m_levelText->Draw(game->screenWidth - 64, m_levelLabel->m_textRect.y);
+	mLevelLabel->Draw(mBallSpeedLabel->mTextRect.x, mBallSpeedLabel->mTextRect.y + 48);
+	mLevelText->Draw(game->screenWidth - 64, mLevelLabel->mTextRect.y);
 
-	m_remainingHP->Draw(m_textBoxes[3].x + 235, m_textBoxes[3].y - 1);
+	mRemainingHP->Draw(mTextBoxes[3].x + 235, mTextBoxes[3].y - 1);
 
-	m_itemDropProgress->Draw(m_textBoxes[5].x + 210, m_textBoxes[5].y - 1);
+	mItemDropProgress->Draw(mTextBoxes[5].x + 210, mTextBoxes[5].y - 1);
 }
 
 void HUD::drawBoxes()
 {
 	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(game->Renderer, 0, 0, 0, 100);
-	for (std::size_t i = 0; i < m_blackBoxes.size(); ++i)
+	for (std::size_t i = 0; i < mBlackBoxes.size(); ++i)
 	{
-		SDL_RenderFillRect(game->Renderer, &m_blackBoxes[i]);
+		SDL_RenderFillRect(game->Renderer, &mBlackBoxes[i]);
 	}
 	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_NONE);
 	SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
 
-	SDL_RenderDrawRect(game->Renderer, &m_textBoxes[0]);
-	SDL_RenderDrawRect(game->Renderer, &m_textBoxes[1]);
-	SDL_RenderDrawRect(game->Renderer, &m_textBoxes[2]);
-	SDL_RenderDrawRect(game->Renderer, &m_textBoxes[4]);
+	SDL_RenderDrawRect(game->Renderer, &mTextBoxes[0]);
+	SDL_RenderDrawRect(game->Renderer, &mTextBoxes[1]);
+	SDL_RenderDrawRect(game->Renderer, &mTextBoxes[2]);
+	SDL_RenderDrawRect(game->Renderer, &mTextBoxes[4]);
 }
 
 void HUD::Draw()
@@ -123,14 +123,14 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 {
 	if (HP_TEXT_NEEDS_UPDATED)
 	{
-		m_textBoxes[3].w = hp;
-		if (m_textBoxes[3].w < 0)
+		mTextBoxes[3].w = hp;
+		if (mTextBoxes[3].w < 0)
 		{
-			m_textBoxes[3].w = 0;
+			mTextBoxes[3].w = 0;
 		}
 	}
 
-	m_textBoxes[5].w = progress;
+	mTextBoxes[5].w = progress;
 
 	if (m_ScoreBoard.SCORE_NEEDS_UPDATED || m_ScoreBoard.HIGHSCORE_NEEDS_UPDATED)
 	{
@@ -149,29 +149,29 @@ void HUD::Update(const LevelSet& passedLevel, const Ball& passedBall, const unsi
 
 	if (BALL_SPEED_NEEDS_UPDATED)
 	{
-		m_ballSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));
-		m_ballSpeedText->Update(m_convertedBallSpeed);
+		mBallSpeedString = std::to_string(static_cast<int>(passedBall.getSpeed() * 10));
+		mBallSpeedText->Update(mConvertedBallSpeed);
 		BALL_SPEED_NEEDS_UPDATED = false;
 	}
 
 	if (LIVES_TEXT_NEEDS_UPDATED)
 	{
-		m_livesString = std::to_string(lives);
-		m_LivesText->Update(m_convertedLives);
+		mLivesString = std::to_string(lives);
+		mLivesText->Update(mConvertedLives);
 		LIVES_TEXT_NEEDS_UPDATED = false;
 	}
 
 	if (LEVEL_NUM_NEEDS_UPDATED)
 	{
-		m_levelString = std::to_string(passedLevel.getLevelPlusOne());
-		m_levelText->Update(m_convertedLevel);
+		mLevelString = std::to_string(passedLevel.getLevelPlusOne());
+		mLevelText->Update(mConvertedLevel);
 		LEVEL_NUM_NEEDS_UPDATED = false;
 	}
 
 	if (HP_TEXT_NEEDS_UPDATED)
 	{
-		m_remaininghpString = std::to_string(static_cast<int>(hp / 550.0f * 100));
-		m_remainingHP->Update(m_convertedHP);
+		mRemaininghpString = std::to_string(static_cast<int>(hp / 550.0f * 100));
+		mRemainingHP->Update(mConvertedHP);
 		HP_TEXT_NEEDS_UPDATED = false;
 	}
 }

@@ -18,13 +18,13 @@ class HUD
 public:
 	HUD()=default;
 
-	inline bool isShowing() const { return m_isShowing; }
+	inline bool isShowing() const { return mShowing; }
 
 	void Load(const LevelSet& passedLevel);
 	void Unload();
 	void Draw();
 	void Update(const LevelSet& passedLevel, const Ball& passedBall, const unsigned int lives, const unsigned int hp, const unsigned int progress);
-	inline void setShowing(bool showing) { m_isShowing = showing; }
+	inline void setShowing(bool showing) { mShowing = showing; }
 
 	Scoreboard m_ScoreBoard = Scoreboard(24, 24);
 
@@ -43,27 +43,27 @@ private:
 
 	void setRect(SDL_Rect& r, const unsigned int w, const unsigned int h, const unsigned int x, const unsigned int y);
 
-	std::string m_ballSpeedString;
-	std::string m_livesString;
-	std::string m_levelString;
-	std::string m_remaininghpString;
+	std::string mBallSpeedString;
+	std::string mLivesString;
+	std::string mLevelString;
+	std::string mRemaininghpString;
 
-	const char* m_convertedBallSpeed                        = nullptr;
-	const char* m_convertedLives                            = nullptr;
-	const char* m_convertedHP                               = nullptr;
-	const char* m_convertedLevel                            = nullptr;
+	const char* mConvertedBallSpeed                        = nullptr;
+	const char* mConvertedLives                            = nullptr;
+	const char* mConvertedHP                               = nullptr;
+	const char* mConvertedLevel                            = nullptr;
 
-	std::array<SDL_Rect, NUM_BOXES> m_textBoxes             = { 0 };
-	std::array<SDL_Rect, NUM_SHADED_BOXES> m_blackBoxes     = { 0 };
+	std::array<SDL_Rect, NUM_BOXES> mTextBoxes             = { 0 };
+	std::array<SDL_Rect, NUM_SHADED_BOXES> mBlackBoxes     = { 0 };
 
-	std::unique_ptr<Text> m_ballSpeedLabel                  = nullptr;
-	std::unique_ptr<Text> m_ballSpeedText                   = nullptr;
-	std::unique_ptr<Text> m_LivesLabel                      = nullptr;
-	std::unique_ptr<Text> m_LivesText                       = nullptr;
-	std::unique_ptr<Text> m_levelLabel                      = nullptr;
-	std::unique_ptr<Text> m_levelText                       = nullptr;
-	std::unique_ptr<Text> m_remainingHP                     = nullptr;
-	std::unique_ptr<Text> m_itemDropProgress                = nullptr;
+	std::unique_ptr<Text> mBallSpeedLabel                  = nullptr;
+	std::unique_ptr<Text> mBallSpeedText                   = nullptr;
+	std::unique_ptr<Text> mLivesLabel                      = nullptr;
+	std::unique_ptr<Text> mLivesText                       = nullptr;
+	std::unique_ptr<Text> mLevelLabel                      = nullptr;
+	std::unique_ptr<Text> mLevelText                       = nullptr;
+	std::unique_ptr<Text> mRemainingHP                     = nullptr;
+	std::unique_ptr<Text> mItemDropProgress                = nullptr;
 
-	bool m_isShowing                                        = true;
+	bool mShowing                                        = true;
 };

@@ -16,15 +16,15 @@ public:
 	Paddle()=default;
 	Paddle(int x, int y, int w, int h);
 
-	bool isMarked() const { return m_paddleMarked; }
+	bool isMarked() const { return mPaddleMarked; }
 
 	void Draw();
 	void resetPaddles(int x, int y, int w, int h);
-	inline void setRectX(int x) { m_paddleRect.x = x; }
-	inline void setRectY(int y) { m_paddleRect.y = y; }
-	inline void setRectW(int w) { m_paddleRect.w = w; }
-	inline void setRectH(int h) { m_paddleRect.h = h; }
-	inline SDL_Rect getRect()	{ return m_paddleRect; }
+	inline void setRectX(int x) { mPaddleRect.x = x; }
+	inline void setRectY(int y) { mPaddleRect.y = y; }
+	inline void setRectW(int w) { mPaddleRect.w = w; }
+	inline void setRectH(int h) { mPaddleRect.h = h; }
+	inline SDL_Rect getRect()	{ return mPaddleRect; }
 
 	void Heal();
 	void setHit(bool hit);
@@ -32,7 +32,7 @@ public:
 private:
 	Game* game                        = nullptr;
 
-	SDL_Rect m_paddleRect             = { 0 };
-	double m_moveSpeed                = 0.0;
-	bool m_paddleMarked               = false;
+	SDL_Rect mPaddleRect             = { 0 };
+	double mMoveSpeed                = 0.0;
+	bool mPaddleMarked               = false;
 };

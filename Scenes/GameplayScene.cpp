@@ -45,10 +45,10 @@ void GameplayState::on_enter()
 	m_cursor.Load();
 
 	m_grimReaper.Load();
-	m_grimReaper.setRect((game->screenWidth / 2) - (m_grimReaper.m_TextureRect.w / 2),
-		                  game->screenHeight - m_grimReaper.m_TextureRect.h,
-		                  m_grimReaper.m_TextureRect.w,
-		                  m_grimReaper.m_TextureRect.h);
+	m_grimReaper.setRect((game->screenWidth / 2) - (m_grimReaper.mTextureRect.w / 2),
+		                  game->screenHeight - m_grimReaper.mTextureRect.h,
+		                  m_grimReaper.mTextureRect.w,
+		                  m_grimReaper.mTextureRect.h);
 
 	m_Flames[0].Load(12, -200, 320, 512);
 	m_Flames[1].Load(942, -200, 320, 512);
@@ -240,7 +240,7 @@ void GameplayState::update()
 
 void GameplayState::drawCursor()
 {
-	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_cursor.mTexture, NULL, &m_cursor.mTextureRect);
 }
 
 void GameplayState::drawLevel()
@@ -270,27 +270,27 @@ void GameplayState::drawText()
 
 	if (m_gameOver)
 	{
-		SDL_Rect rect = m_grimReaper.m_TextureRect;
-		SDL_RenderCopy(game->Renderer, m_grimReaper.m_Texture, nullptr, &rect);
-		m_gameOverText.Draw((game->screenWidth / 2) - (m_gameOverText.m_textRect.w / 2), (game->screenHeight / 2) - 150);
+		SDL_Rect rect = m_grimReaper.mTextureRect;
+		SDL_RenderCopy(game->Renderer, m_grimReaper.mTexture, nullptr, &rect);
+		m_gameOverText.Draw((game->screenWidth / 2) - (m_gameOverText.mTextRect.w / 2), (game->screenHeight / 2) - 150);
 		m_gameOverNewGameText.Draw((game->screenWidth / 2) - 225, (game->screenHeight / 2) - 90);
 	}
 
 	else if (m_levelWon)
 	{
-		m_levelPassed.Draw((game->screenWidth / 2) - (m_levelPassed.m_textRect.w / 2), (game->screenHeight / 2) - 150);
-		m_levelPassedContinue.Draw((game->screenWidth / 2) - (m_levelPassedContinue.m_textRect.w / 2), (game->screenHeight / 2) - 90);
+		m_levelPassed.Draw((game->screenWidth / 2) - (m_levelPassed.mTextRect.w / 2), (game->screenHeight / 2) - 150);
+		m_levelPassedContinue.Draw((game->screenWidth / 2) - (m_levelPassedContinue.mTextRect.w / 2), (game->screenHeight / 2) - 90);
 	}
 
 	else if (m_paused && !m_newGame)
 	{
-		m_pausedText.Draw((game->screenWidth / 2) - (m_pausedText.m_textRect.w / 2), (game->screenHeight / 2) - 150);
-		m_pressSpaceText.Draw((game->screenWidth / 2) - (m_pressSpaceText.m_textRect.w / 2), (game->screenHeight / 2) - 90);
+		m_pausedText.Draw((game->screenWidth / 2) - (m_pausedText.mTextRect.w / 2), (game->screenHeight / 2) - 150);
+		m_pressSpaceText.Draw((game->screenWidth / 2) - (m_pressSpaceText.mTextRect.w / 2), (game->screenHeight / 2) - 90);
 	}
 
 	else if (m_paused && m_newGame)
 	{
-		m_gameTitle.Draw((game->screenWidth / 2) - (m_gameTitle.m_textRect.w / 2), (game->screenHeight / 2) - 150);
+		m_gameTitle.Draw((game->screenWidth / 2) - (m_gameTitle.mTextRect.w / 2), (game->screenHeight / 2) - 150);
 		m_gameTitleStart.Draw((game->screenWidth / 2) - 185, (game->screenHeight / 2) - 90);
 	}
 }
@@ -419,22 +419,22 @@ void GameplayState::checkCollision()
 		if (paddleHit == &m_paddles[0])
 		{
 			angle = percent * -1 * M_PI + M_PI;
-			m_ball.m_posY = paddleHit->getRect().y + paddleHit->getRect().h + 1;
+			m_ball.mPosY = paddleHit->getRect().y + paddleHit->getRect().h + 1;
 		}
 		else if (paddleHit == &m_paddles[1])
 		{
 			angle = percent * -1 * M_PI - M_PI / 2;
-			m_ball.m_posX = paddleHit->getRect().x - m_ball.getRect().w - 1;
+			m_ball.mPosX = paddleHit->getRect().x - m_ball.getRect().w - 1;
 		}
 		else if (paddleHit == &m_paddles[2])
 		{
 			angle = percent * M_PI - M_PI;
-			m_ball.m_posY = paddleHit->getRect().y - m_ball.getRect().h - 1;
+			m_ball.mPosY = paddleHit->getRect().y - m_ball.getRect().h - 1;
 		}
 		else if (paddleHit == &m_paddles[3])
 		{
 			angle = percent * M_PI - M_PI / 2;
-			m_ball.m_posX = paddleHit->getRect().x + paddleHit->getRect().w + 1;
+			m_ball.mPosX = paddleHit->getRect().x + paddleHit->getRect().w + 1;
 		}
 
 		m_ball.setAngle(angle);

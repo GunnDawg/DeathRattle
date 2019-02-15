@@ -25,19 +25,19 @@ public:
 	void setLevel(unsigned int x);
 	void nextLevel();
 	void prevLevel();
-	inline unsigned int getLevel() const { return m_levelNum; }
-	inline unsigned int getLevelPlusOne() const { return m_levelNum + 1; }
+	inline unsigned int getLevel() const { return mLevelNum; }
+	inline unsigned int getLevelPlusOne() const { return mLevelNum + 1; }
 	void setScores(std::array<int, LEVEL_COUNT> s);
-	inline unsigned int getScore(unsigned int s) const { return m_levelScore[s]; }
+	inline unsigned int getScore(unsigned int s) const { return mLevelScore[s]; }
 
 private:
 	Game* game = nullptr;
 
-	std::string m_filename;
-	std::array<Texture, LEVEL_COUNT> m_levelTextures = { };
-	std::array<unsigned int, LEVEL_COUNT> m_levelScore = { 0 };
+	std::string mFilename;
+	std::array<Texture, LEVEL_COUNT> mLevelTextures = { };
+	std::array<unsigned int, LEVEL_COUNT> mLevelScore = { 0 };
 
-	unsigned int m_levelNum = 0;
+	unsigned int mLevelNum = 0;
 
 	LevelSet(const LevelSet& obj) = delete;
 	LevelSet& operator=(const LevelSet&) = delete;

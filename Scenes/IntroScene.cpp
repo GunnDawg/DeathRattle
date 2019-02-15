@@ -7,33 +7,33 @@ void IntroSceneState::on_enter()
 	game = &Game::GetInstance();
 
 	m_cursor.Load();
-	m_cursor.m_TextureRect.w = 48;
-	m_cursor.m_TextureRect.h = 48;
+	m_cursor.mTextureRect.w = 48;
+	m_cursor.mTextureRect.h = 48;
 
 	m_background.Load();
-	m_background.m_TextureRect.x = 0;
-	m_background.m_TextureRect.y = 0;
-	m_background.m_TextureRect.w = game->screenWidth;
-	m_background.m_TextureRect.h = game->screenHeight;
+	m_background.mTextureRect.x = 0;
+	m_background.mTextureRect.y = 0;
+	m_background.mTextureRect.w = game->screenWidth;
+	m_background.mTextureRect.h = game->screenHeight;
 
 	m_title.Load();
-	m_title.m_TextureRect.x = (game->screenWidth / 2) - (m_title.m_TextureRect.w / 2);
-	m_title.m_TextureRect.y = (game->screenHeight / 2) - (m_title.m_TextureRect.h / 2) - 60;
+	m_title.mTextureRect.x = (game->screenWidth / 2) - (m_title.mTextureRect.w / 2);
+	m_title.mTextureRect.y = (game->screenHeight / 2) - (m_title.mTextureRect.h / 2) - 60;
 
 	m_howLong.Load();
-	m_howLong.m_TextureRect.x = (game->screenWidth / 2) - (m_howLong.m_TextureRect.w / 2);
-	m_howLong.m_TextureRect.y = m_title.m_TextureRect.y + 85;
+	m_howLong.mTextureRect.x = (game->screenWidth / 2) - (m_howLong.mTextureRect.w / 2);
+	m_howLong.mTextureRect.y = m_title.mTextureRect.y + 85;
 
 	m_Flames[0].Load(12, -200, 320, 512);
 	m_Flames[1].Load(942, -200, 320, 512);
 
 	m_plug.Load();
-	m_plug.m_TextureRect.x = (game->screenWidth / 2) - (m_plug.m_TextureRect.w / 2);
-	m_plug.m_TextureRect.y = 0;
+	m_plug.mTextureRect.x = (game->screenWidth / 2) - (m_plug.mTextureRect.w / 2);
+	m_plug.mTextureRect.y = 0;
 
 	m_blood.Load();
-	m_blood.m_TextureRect.x = (game->screenWidth / 2) - (m_blood.m_TextureRect.w / 2);
-	m_blood.m_TextureRect.y = (game->screenHeight / 2) - (m_blood.m_TextureRect.h / 2);
+	m_blood.mTextureRect.x = (game->screenWidth / 2) - (m_blood.mTextureRect.w / 2);
+	m_blood.mTextureRect.y = (game->screenHeight / 2) - (m_blood.mTextureRect.h / 2);
 
 	m_skullBox.w = game->screenWidth;
 	m_skullBox.h = 100;
@@ -41,38 +41,38 @@ void IntroSceneState::on_enter()
 	m_skullBox.y = 550;
 
 	m_skullWhite.Load();
-	m_skullWhite.m_TextureRect.w = 125;
-	m_skullWhite.m_TextureRect.h = 125;
-	m_skullWhite.m_TextureRect.x = (game->screenWidth / 2) - m_skullWhite.m_TextureRect.w / 2;
-	m_skullWhite.m_TextureRect.y = m_skullBox.y - 10;
+	m_skullWhite.mTextureRect.w = 125;
+	m_skullWhite.mTextureRect.h = 125;
+	m_skullWhite.mTextureRect.x = (game->screenWidth / 2) - m_skullWhite.mTextureRect.w / 2;
+	m_skullWhite.mTextureRect.y = m_skullBox.y - 10;
 
-	m_skullCollider.w = m_skullWhite.m_TextureRect.w / 2;
-	m_skullCollider.h = m_skullWhite.m_TextureRect.h / 2;
-	m_skullCollider.x = m_skullWhite.m_TextureRect.x + m_skullCollider.w / 2;
-	m_skullCollider.y = m_skullWhite.m_TextureRect.y + m_skullCollider.h / 2;
+	m_skullCollider.w = m_skullWhite.mTextureRect.w / 2;
+	m_skullCollider.h = m_skullWhite.mTextureRect.h / 2;
+	m_skullCollider.x = m_skullWhite.mTextureRect.x + m_skullCollider.w / 2;
+	m_skullCollider.y = m_skullWhite.mTextureRect.y + m_skullCollider.h / 2;
 
 	m_skull.Load();
-	m_skull.m_TextureRect.w = 125;
-	m_skull.m_TextureRect.h = 125;
-	m_skull.m_TextureRect.x = m_skullWhite.m_TextureRect.x;
-	m_skull.m_TextureRect.y = m_skullWhite.m_TextureRect.y;
+	m_skull.mTextureRect.w = 125;
+	m_skull.mTextureRect.h = 125;
+	m_skull.mTextureRect.x = m_skullWhite.mTextureRect.x;
+	m_skull.mTextureRect.y = m_skullWhite.mTextureRect.y;
 
 	m_press.Load();
-	m_press.m_TextureRect.x = (m_skullWhite.m_TextureRect.x) - (m_press.m_TextureRect.w) - 10;
-	m_press.m_TextureRect.y = (m_skullBox.y + m_press.m_TextureRect.h / 2);
+	m_press.mTextureRect.x = (m_skullWhite.mTextureRect.x) - (m_press.mTextureRect.w) - 10;
+	m_press.mTextureRect.y = (m_skullBox.y + m_press.mTextureRect.h / 2);
 
 	m_enter.Load();
-	m_enter.m_TextureRect.x = (m_skullWhite.m_TextureRect.x) + (m_enter.m_TextureRect.w) - 10;
-	m_enter.m_TextureRect.y = (m_skullBox.y + m_enter.m_TextureRect.h / 2);
+	m_enter.mTextureRect.x = (m_skullWhite.mTextureRect.x) + (m_enter.mTextureRect.w) - 10;
+	m_enter.mTextureRect.y = (m_skullBox.y + m_enter.mTextureRect.h / 2);
 
 	m_plugBox.x = 0;
-	m_plugBox.y = m_plug.m_TextureRect.y;
+	m_plugBox.y = m_plug.mTextureRect.y;
 	m_plugBox.w = game->screenWidth;
-	m_plugBox.h = m_plug.m_TextureRect.h;
+	m_plugBox.h = m_plug.mTextureRect.h;
 
 	m_version.Load();
-	m_version.m_TextureRect.x = ((game->screenWidth - m_version.m_TextureRect.w) - 20);
-	m_version.m_TextureRect.y = (game->screenHeight - m_version.m_TextureRect.h);
+	m_version.mTextureRect.x = ((game->screenWidth - m_version.mTextureRect.w) - 20);
+	m_version.mTextureRect.y = (game->screenHeight - m_version.mTextureRect.h);
 
 	m_timer.Start();
 
@@ -144,19 +144,19 @@ void IntroSceneState::update()
 		m_isSkull = false;
 		m_scare.Play();
 
-		m_skull.m_TextureRect.w += (10.00 * game->avgDeltaTime);
-		m_skull.m_TextureRect.h += (10.00 * game->avgDeltaTime);
-		m_skull.m_TextureRect.x -= (5.00 * game->avgDeltaTime);
-		m_skull.m_TextureRect.y -= (5.00 * game->avgDeltaTime);
+		m_skull.mTextureRect.w += (10.00 * game->avgDeltaTime);
+		m_skull.mTextureRect.h += (10.00 * game->avgDeltaTime);
+		m_skull.mTextureRect.x -= (5.00 * game->avgDeltaTime);
+		m_skull.mTextureRect.y -= (5.00 * game->avgDeltaTime);
 
-		m_skullWhite.m_TextureRect.w = m_skull.m_TextureRect.w;
-		m_skullWhite.m_TextureRect.h = m_skull.m_TextureRect.h;
-		m_skullWhite.m_TextureRect.x = m_skull.m_TextureRect.x;
-		m_skullWhite.m_TextureRect.y = m_skull.m_TextureRect.y;
+		m_skullWhite.mTextureRect.w = m_skull.mTextureRect.w;
+		m_skullWhite.mTextureRect.h = m_skull.mTextureRect.h;
+		m_skullWhite.mTextureRect.x = m_skull.mTextureRect.x;
+		m_skullWhite.mTextureRect.y = m_skull.mTextureRect.y;
 
 		m_skullBox.y += 50;
-		m_press.m_TextureRect.x -= 100;
-		m_enter.m_TextureRect.x += 100;
+		m_press.mTextureRect.x -= 100;
+		m_enter.mTextureRect.x += 100;
 
 		if (m_timer.elapsedMilliseconds() > 250)
 		{
@@ -241,7 +241,7 @@ void IntroSceneState::handle_events()
 
 void IntroSceneState::draw()
 {
-	SDL_RenderCopy(game->Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_background.mTexture, NULL, &m_background.mTextureRect);
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
@@ -250,9 +250,9 @@ void IntroSceneState::draw()
 
 	if (m_isBlood)
 	{
-		SDL_RenderCopy(game->Renderer, m_blood.m_Texture, NULL, &m_blood.m_TextureRect);
-		SDL_RenderCopy(game->Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
-		SDL_RenderCopy(game->Renderer, m_howLong.m_Texture, NULL, &m_howLong.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_blood.mTexture, NULL, &m_blood.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_title.mTexture, NULL, &m_title.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_howLong.mTexture, NULL, &m_howLong.mTextureRect);
 	}
 
 	SDL_SetRenderDrawBlendMode(game->Renderer, SDL_BLENDMODE_BLEND);
@@ -264,18 +264,18 @@ void IntroSceneState::draw()
 
 	if (m_isSkull)
 	{
-		SDL_RenderCopy(game->Renderer, m_skull.m_Texture, NULL, &m_skull.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_skull.mTexture, NULL, &m_skull.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_skullWhite.m_Texture, NULL, &m_skullWhite.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_skullWhite.mTexture, NULL, &m_skullWhite.mTextureRect);
 	}
-	SDL_RenderCopy(game->Renderer, m_press.m_Texture, NULL, &m_press.m_TextureRect);
-	SDL_RenderCopy(game->Renderer, m_enter.m_Texture, NULL, &m_enter.m_TextureRect);
-	SDL_RenderCopy(game->Renderer, m_plug.m_Texture, NULL, &m_plug.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_press.mTexture, NULL, &m_press.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_enter.mTexture, NULL, &m_enter.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_plug.mTexture, NULL, &m_plug.mTextureRect);
 
-	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_cursor.mTexture, NULL, &m_cursor.mTextureRect);
 
 	//Set fade value to the skull texture
-	SDL_SetTextureAlphaMod(m_skullWhite.m_Texture, static_cast<Uint8>(mFadeValue));
+	SDL_SetTextureAlphaMod(m_skullWhite.mTexture, static_cast<Uint8>(mFadeValue));
 }

@@ -1,7 +1,7 @@
 #include "Keyboard.h"
 
 Keyboard::Keyboard(bool defaultState) :
-m_Enabled(defaultState)
+mEnabled(defaultState)
 {
 	assert(typeid(defaultState) == typeid(bool));
 }

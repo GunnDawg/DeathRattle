@@ -15,5 +15,5 @@ public:
 	void Write(unsigned int highScore);
 
 private:
-	std::string m_file;
+	std::string mFile;
 };

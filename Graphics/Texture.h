@@ -21,9 +21,9 @@ public:
 	void setRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 	void setRect(unsigned int x, unsigned int y);
 
-	SDL_Texture* m_Texture               = nullptr;
-	std::string m_filePath               = { 0 };
-	SDL_Rect m_TextureRect               = { 0 };
+	SDL_Texture* mTexture               = nullptr;
+	std::string mFilePath               = { 0 };
+	SDL_Rect mTextureRect               = { 0 };
 
 private:
 	Game* game                           = nullptr;

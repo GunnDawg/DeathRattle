@@ -6,18 +6,18 @@ void SplashScene::on_enter()
 	game = &Game::GetInstance();
 
 	m_background.Load();
-	m_background.m_TextureRect.x = 0;
-	m_background.m_TextureRect.y = 0;
-	m_background.m_TextureRect.w = 1280;
-	m_background.m_TextureRect.h = 720;
+	m_background.mTextureRect.x = 0;
+	m_background.mTextureRect.y = 0;
+	m_background.mTextureRect.w = 1280;
+	m_background.mTextureRect.h = 720;
 
 	m_logo.Load();
-	m_logo.m_TextureRect.x = (game->screenWidth / 2) - (m_logo.m_TextureRect.w / 2);
-	m_logo.m_TextureRect.y = -450;
+	m_logo.mTextureRect.x = (game->screenWidth / 2) - (m_logo.mTextureRect.w / 2);
+	m_logo.mTextureRect.y = -450;
 
 	m_production.Load();
-	m_production.m_TextureRect.x = (game->screenWidth / 2) - (m_production.m_TextureRect.w / 2);
-	m_production.m_TextureRect.y = game->screenHeight;
+	m_production.mTextureRect.x = (game->screenWidth / 2) - (m_production.mTextureRect.w / 2);
+	m_production.mTextureRect.y = game->screenHeight;
 
 	m_introSound.Load();
 	m_introSound.Play();
@@ -38,14 +38,14 @@ void SplashScene::on_exit()
 
 void SplashScene::update()
 {
-	if (m_logo.m_TextureRect.y <= 10)
+	if (m_logo.mTextureRect.y <= 10)
 	{
-		m_logo.m_TextureRect.y += 0.35 * game->avgDeltaTime;
+		m_logo.mTextureRect.y += 0.35 * game->avgDeltaTime;
 	}
 
-	if (m_production.m_TextureRect.y >= 540)
+	if (m_production.mTextureRect.y >= 540)
 	{
-		m_production.m_TextureRect.y -= 0.123 * game->avgDeltaTime;
+		m_production.mTextureRect.y -= 0.123 * game->avgDeltaTime;
 	}
 
 	if (m_timer.elapsedSeconds() > 7.0)
@@ -78,7 +78,7 @@ void SplashScene::handle_events()
 
 void SplashScene::draw()
 {
-	SDL_RenderCopy(game->Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
-	SDL_RenderCopy(game->Renderer, m_production.m_Texture, NULL, &m_production.m_TextureRect);
-	SDL_RenderCopy(game->Renderer, m_logo.m_Texture, NULL, &m_logo.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_background.mTexture, NULL, &m_background.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_production.mTexture, NULL, &m_production.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_logo.mTexture, NULL, &m_logo.mTextureRect);
 }

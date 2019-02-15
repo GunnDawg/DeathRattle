@@ -12,24 +12,24 @@ public:
 	void Load(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 	void Play(double dt);
 	void Draw();
-	inline void Start() { m_isPlaying = true; }
-	inline void Stop() { m_isPlaying = false; }
-	inline void Unload() { m_Texture.Unload(); }
+	inline void Start() { mIsPlaying = true; }
+	inline void Stop() { mIsPlaying = false; }
+	inline void Unload() { mTexture.Unload(); }
 
 private:
 	Game* game                           = nullptr;
 
-	Texture m_Texture;
-	SDL_Rect m_cropRect                  = { };
-	SDL_Rect m_posRect                   = { };
+	Texture mTexture;
+	SDL_Rect mCropRect                  = { };
+	SDL_Rect mPosRect                   = { };
 
-	const unsigned int m_numFramesX      = 0;
-	const unsigned int m_numFramesY      = 0;
-	unsigned int m_frameWidth            = 0;
-	unsigned int m_frameHeight           = 0;
-	unsigned int m_currentFrame          = 0;
-	const double m_animSpeed             = 0;
-	double m_frameTime                   = 0.0;
+	const unsigned int mNumFramesX      = 0;
+	const unsigned int mNumFramesY      = 0;
+	unsigned int mFrameWidth            = 0;
+	unsigned int mFrameHeight           = 0;
+	unsigned int mCurrentFrame          = 0;
+	const double mAnimSpeed             = 0;
+	double mFrameTime                   = 0.0;
 
-	bool m_isPlaying                     = true;
+	bool mIsPlaying                     = true;
 };

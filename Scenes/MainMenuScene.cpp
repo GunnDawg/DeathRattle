@@ -13,45 +13,45 @@ void MainMenuScene::on_enter()
 	for (std::size_t i = 0; i < m_skulls.size(); ++i)
 	{
 		m_skulls[i].Load();
-		m_skulls[i].m_TextureRect.w = 100;
-		m_skulls[i].m_TextureRect.h = 100;
-		m_skulls[i].m_TextureRect.y = 0;
+		m_skulls[i].mTextureRect.w = 100;
+		m_skulls[i].mTextureRect.h = 100;
+		m_skulls[i].mTextureRect.y = 0;
 	}
 
-	m_skulls[0].m_TextureRect.x = 125;
-	m_skulls[1].m_TextureRect.x = (game->screenWidth - m_skulls[1].m_TextureRect.w) - 125;
+	m_skulls[0].mTextureRect.x = 125;
+	m_skulls[1].mTextureRect.x = (game->screenWidth - m_skulls[1].mTextureRect.w) - 125;
 
 	m_cursor.Load();
-	m_cursor.m_TextureRect.w = 48;
-	m_cursor.m_TextureRect.h = 48;
+	m_cursor.mTextureRect.w = 48;
+	m_cursor.mTextureRect.h = 48;
 
 	m_title.Load();
-	m_title.m_TextureRect.x = (game->screenWidth / 2) - (m_title.m_TextureRect.w / 2);
-	m_title.m_TextureRect.y = 0;
+	m_title.mTextureRect.x = (game->screenWidth / 2) - (m_title.mTextureRect.w / 2);
+	m_title.mTextureRect.y = 0;
 
 	m_titleBox.x = 0;
-	m_titleBox.y = m_title.m_TextureRect.y;
+	m_titleBox.y = m_title.mTextureRect.y;
 	m_titleBox.w = game->screenWidth;
-	m_titleBox.h = m_title.m_TextureRect.h;
+	m_titleBox.h = m_title.mTextureRect.h;
 
 	m_devName.Load();
-	m_devName.m_TextureRect.x = (game->screenWidth / 2) - (m_devName.m_TextureRect.w / 2);
-	m_devName.m_TextureRect.y = (game->screenHeight - m_devName.m_TextureRect.h);
+	m_devName.mTextureRect.x = (game->screenWidth / 2) - (m_devName.mTextureRect.w / 2);
+	m_devName.mTextureRect.y = (game->screenHeight - m_devName.mTextureRect.h);
 
-	m_devNameBox.h = m_devName.m_TextureRect.h;
+	m_devNameBox.h = m_devName.mTextureRect.h;
 	m_devNameBox.w = game->screenWidth;
 	m_devNameBox.x = 0;
-	m_devNameBox.y = m_devName.m_TextureRect.y;
+	m_devNameBox.y = m_devName.mTextureRect.y;
 
 	m_version.Load();
-	m_version.m_TextureRect.x = ((game->screenWidth - m_version.m_TextureRect.w));
-	m_version.m_TextureRect.y = (game->screenHeight - m_version.m_TextureRect.h);
+	m_version.mTextureRect.x = ((game->screenWidth - m_version.mTextureRect.w));
+	m_version.mTextureRect.y = (game->screenHeight - m_version.mTextureRect.h);
 
 	m_background.Load();
-	m_background.m_TextureRect.x = 0;
-	m_background.m_TextureRect.y = 0;
-	m_background.m_TextureRect.w = game->screenWidth;
-	m_background.m_TextureRect.h = game->screenHeight;
+	m_background.mTextureRect.x = 0;
+	m_background.mTextureRect.y = 0;
+	m_background.mTextureRect.w = game->screenWidth;
+	m_background.mTextureRect.h = game->screenHeight;
 
 	m_Flames[0].Load(12, -200, 320, 512);
 	m_Flames[1].Load(942, -200, 320, 512);
@@ -81,35 +81,35 @@ void MainMenuScene::on_enter()
 	m_exit.Load();
 	m_exitWhite.Load();
 
-	m_newGame.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_newGame.m_TextureRect.w / 2);
-	m_newGame.m_TextureRect.y = m_menuBox.y + 25;
+	m_newGame.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_newGame.mTextureRect.w / 2);
+	m_newGame.mTextureRect.y = m_menuBox.y + 25;
 
-	m_newGameWhite.m_TextureRect.x = m_newGame.m_TextureRect.x;
-	m_newGameWhite.m_TextureRect.y = m_newGame.m_TextureRect.y;
+	m_newGameWhite.mTextureRect.x = m_newGame.mTextureRect.x;
+	m_newGameWhite.mTextureRect.y = m_newGame.mTextureRect.y;
 
-	m_options.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_options.m_TextureRect.w / 2);
-	m_options.m_TextureRect.y = m_newGame.m_TextureRect.y + 75;
+	m_options.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_options.mTextureRect.w / 2);
+	m_options.mTextureRect.y = m_newGame.mTextureRect.y + 75;
 
-	m_optionsWhite.m_TextureRect.x = m_options.m_TextureRect.x;
-	m_optionsWhite.m_TextureRect.y = m_options.m_TextureRect.y;
+	m_optionsWhite.mTextureRect.x = m_options.mTextureRect.x;
+	m_optionsWhite.mTextureRect.y = m_options.mTextureRect.y;
 
-	m_leaderBoard.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_leaderBoard.m_TextureRect.w / 2);
-	m_leaderBoard.m_TextureRect.y = m_options.m_TextureRect.y + 65;
+	m_leaderBoard.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_leaderBoard.mTextureRect.w / 2);
+	m_leaderBoard.mTextureRect.y = m_options.mTextureRect.y + 65;
 
-	m_leaderBoardWhite.m_TextureRect.x = m_leaderBoard.m_TextureRect.x;
-	m_leaderBoardWhite.m_TextureRect.y = m_leaderBoard.m_TextureRect.y;
+	m_leaderBoardWhite.mTextureRect.x = m_leaderBoard.mTextureRect.x;
+	m_leaderBoardWhite.mTextureRect.y = m_leaderBoard.mTextureRect.y;
 
-	m_credits.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_credits.m_TextureRect.w / 2);
-	m_credits.m_TextureRect.y = m_leaderBoard.m_TextureRect.y + 65;
+	m_credits.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_credits.mTextureRect.w / 2);
+	m_credits.mTextureRect.y = m_leaderBoard.mTextureRect.y + 65;
 
-	m_creditsWhite.m_TextureRect.x = m_credits.m_TextureRect.x;
-	m_creditsWhite.m_TextureRect.y = m_credits.m_TextureRect.y;
+	m_creditsWhite.mTextureRect.x = m_credits.mTextureRect.x;
+	m_creditsWhite.mTextureRect.y = m_credits.mTextureRect.y;
 
-	m_exit.m_TextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exit.m_TextureRect.w / 2);
-	m_exit.m_TextureRect.y = m_credits.m_TextureRect.y + 75;
+	m_exit.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exit.mTextureRect.w / 2);
+	m_exit.mTextureRect.y = m_credits.mTextureRect.y + 75;
 
-	m_exitWhite.m_TextureRect.x = m_exit.m_TextureRect.x;
-	m_exitWhite.m_TextureRect.y = m_exit.m_TextureRect.y;
+	m_exitWhite.mTextureRect.x = m_exit.mTextureRect.x;
+	m_exitWhite.mTextureRect.y = m_exit.mTextureRect.y;
 
 	if (Settings::Audio::MenuMusic == 1)
 	{
@@ -158,38 +158,38 @@ void MainMenuScene::on_exit()
 
 void MainMenuScene::update()
 {
-	if(game->mouseX >= m_newGame.m_TextureRect.x &&
-		game->mouseX <= m_newGame.m_TextureRect.x + m_newGame.m_TextureRect.w &&
-		game->mouseY >= m_newGame.m_TextureRect.y &&
-		game->mouseY <= m_newGame.m_TextureRect.y + m_newGame.m_TextureRect.h)
+	if(game->mouseX >= m_newGame.mTextureRect.x &&
+		game->mouseX <= m_newGame.mTextureRect.x + m_newGame.mTextureRect.w &&
+		game->mouseY >= m_newGame.mTextureRect.y &&
+		game->mouseY <= m_newGame.mTextureRect.y + m_newGame.mTextureRect.h)
 	{
 		m_isNewGame = true;
 	}
-	else if (game->mouseX >= m_options.m_TextureRect.x &&
-		game->mouseX <= m_options.m_TextureRect.x + m_options.m_TextureRect.w &&
-		game->mouseY >= m_options.m_TextureRect.y &&
-		game->mouseY <= m_options.m_TextureRect.y + m_options.m_TextureRect.h)
+	else if (game->mouseX >= m_options.mTextureRect.x &&
+		game->mouseX <= m_options.mTextureRect.x + m_options.mTextureRect.w &&
+		game->mouseY >= m_options.mTextureRect.y &&
+		game->mouseY <= m_options.mTextureRect.y + m_options.mTextureRect.h)
 	{
 		m_isOptions = true;
 	}
-	else if (game->mouseX >= m_exit.m_TextureRect.x &&
-		game->mouseX <= m_exit.m_TextureRect.x + m_exit.m_TextureRect.w &&
-		game->mouseY >= m_exit.m_TextureRect.y &&
-		game->mouseY <= m_exit.m_TextureRect.y + m_exit.m_TextureRect.h)
+	else if (game->mouseX >= m_exit.mTextureRect.x &&
+		game->mouseX <= m_exit.mTextureRect.x + m_exit.mTextureRect.w &&
+		game->mouseY >= m_exit.mTextureRect.y &&
+		game->mouseY <= m_exit.mTextureRect.y + m_exit.mTextureRect.h)
 	{
 		m_isExit = true;
 	}
-	else if (game->mouseX >= m_leaderBoard.m_TextureRect.x &&
-		game->mouseX <= m_leaderBoard.m_TextureRect.x + m_leaderBoard.m_TextureRect.w &&
-		game->mouseY >= m_leaderBoard.m_TextureRect.y &&
-		game->mouseY <= m_leaderBoard.m_TextureRect.y + m_leaderBoard.m_TextureRect.h)
+	else if (game->mouseX >= m_leaderBoard.mTextureRect.x &&
+		game->mouseX <= m_leaderBoard.mTextureRect.x + m_leaderBoard.mTextureRect.w &&
+		game->mouseY >= m_leaderBoard.mTextureRect.y &&
+		game->mouseY <= m_leaderBoard.mTextureRect.y + m_leaderBoard.mTextureRect.h)
 	{
 		m_isLeaderBoard = true;
 	}
-	else if (game->mouseX >= m_credits.m_TextureRect.x &&
-		game->mouseX <= m_credits.m_TextureRect.x + m_credits.m_TextureRect.w &&
-		game->mouseY >= m_credits.m_TextureRect.y &&
-		game->mouseY <= m_credits.m_TextureRect.y + m_credits.m_TextureRect.h)
+	else if (game->mouseX >= m_credits.mTextureRect.x &&
+		game->mouseX <= m_credits.mTextureRect.x + m_credits.mTextureRect.w &&
+		game->mouseY >= m_credits.mTextureRect.y &&
+		game->mouseY <= m_credits.mTextureRect.y + m_credits.mTextureRect.h)
 	{
 		m_isCredits = true;
 	}
@@ -291,7 +291,7 @@ void MainMenuScene::handle_events()
 
 void MainMenuScene::draw()
 {
-	SDL_RenderCopy(game->Renderer, m_background.m_Texture, NULL, &m_background.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_background.mTexture, NULL, &m_background.mTextureRect);
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
@@ -310,59 +310,59 @@ void MainMenuScene::draw()
 
 	if (m_isNewGame)
 	{
-		SDL_RenderCopy(game->Renderer, m_newGameWhite.m_Texture, NULL, &m_newGameWhite.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_newGameWhite.mTexture, NULL, &m_newGameWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_newGame.m_Texture, NULL, &m_newGame.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_newGame.mTexture, NULL, &m_newGame.mTextureRect);
 	}
 
 	if (m_isOptions)
 	{
-		SDL_RenderCopy(game->Renderer, m_optionsWhite.m_Texture, NULL, &m_optionsWhite.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_optionsWhite.mTexture, NULL, &m_optionsWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_options.m_Texture, NULL, &m_options.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_options.mTexture, NULL, &m_options.mTextureRect);
 	}
 
 	if (m_isLeaderBoard)
 	{
-		SDL_RenderCopy(game->Renderer, m_leaderBoardWhite.m_Texture, NULL, &m_leaderBoardWhite.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_leaderBoardWhite.mTexture, NULL, &m_leaderBoardWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_leaderBoard.m_Texture, NULL, &m_leaderBoard.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_leaderBoard.mTexture, NULL, &m_leaderBoard.mTextureRect);
 
 	}
 
 	if (m_isCredits)
 	{
-		SDL_RenderCopy(game->Renderer, m_creditsWhite.m_Texture, NULL, &m_creditsWhite.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_creditsWhite.mTexture, NULL, &m_creditsWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_credits.m_Texture, NULL, &m_credits.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_credits.mTexture, NULL, &m_credits.mTextureRect);
 	}
 
 	if (m_isExit)
 	{
-		SDL_RenderCopy(game->Renderer, m_exitWhite.m_Texture, NULL, &m_exitWhite.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_exitWhite.mTexture, NULL, &m_exitWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_exit.m_Texture, NULL, &m_exit.m_TextureRect);
+		SDL_RenderCopy(game->Renderer, m_exit.mTexture, NULL, &m_exit.mTextureRect);
 	}
 	
-	SDL_RenderCopy(game->Renderer, m_devName.m_Texture, NULL, &m_devName.m_TextureRect);
-	SDL_RenderCopy(game->Renderer, m_version.m_Texture, NULL, &m_version.m_TextureRect);
-	SDL_RenderCopy(game->Renderer, m_title.m_Texture, NULL, &m_title.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_devName.mTexture, NULL, &m_devName.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_version.mTexture, NULL, &m_version.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_title.mTexture, NULL, &m_title.mTextureRect);
 
 	SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
 	SDL_RenderDrawRect(game->Renderer, &m_menuBoxOutline);
 
-	SDL_RenderCopyEx(game->Renderer, m_skulls[0].m_Texture, NULL, &m_skulls[0].m_TextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
-	SDL_RenderCopy(game->Renderer, m_skulls[1].m_Texture, NULL, &m_skulls[1].m_TextureRect);
+	SDL_RenderCopyEx(game->Renderer, m_skulls[0].mTexture, NULL, &m_skulls[0].mTextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
+	SDL_RenderCopy(game->Renderer, m_skulls[1].mTexture, NULL, &m_skulls[1].mTextureRect);
 
-	SDL_RenderCopy(game->Renderer, m_cursor.m_Texture, NULL, &m_cursor.m_TextureRect);
+	SDL_RenderCopy(game->Renderer, m_cursor.mTexture, NULL, &m_cursor.mTextureRect);
 }

@@ -8,60 +8,60 @@ Scoreboard::Scoreboard(unsigned int x, unsigned int y)
 
 	game                           = &Game::GetInstance();
 
-	m_File                         = std::make_unique<FileIO>("ProfileData/highscore.txt");
+	mFile                         = std::make_unique<FileIO>("ProfileData/highscore.txt");
 
 	Load();
 
-	m_scoreLabel                   = std::make_unique<Text>(24, "SCORE");
-	m_scoreText                    = std::make_unique<Text>(24, m_convertedScore);
-	m_highScoreLabel               = std::make_unique<Text>(24, "HIGH SCORE");
-	m_highScoreText                = std::make_unique<Text>(24, m_convertedHighScore);
-	m_levelScoreLabel              = std::make_unique<Text>(24, "LEVEL GOAL");
-	m_levelScoreText               = std::make_unique<Text>(24, m_convertedLevelScore);
+	mScoreLabel                   = std::make_unique<Text>(24, "SCORE");
+	mScoreText                    = std::make_unique<Text>(24, mConvertedScore);
+	mHighScoreLabel               = std::make_unique<Text>(24, "HIGH SCORE");
+	mHighScoreText                = std::make_unique<Text>(24, mConvertedHighScore);
+	mLevelScoreLabel              = std::make_unique<Text>(24, "LEVEL GOAL");
+	mLevelScoreText               = std::make_unique<Text>(24, mConvertedLevelScore);
 
-	m_finalScoreLabel              = std::make_unique<Text>(32, "FINAL SCORE");
-	m_finalScoreText               = std::make_unique<Text>(48, m_convertedScore);
+	mFinalScoreLabel              = std::make_unique<Text>(32, "FINAL SCORE");
+	mFinalScoreText               = std::make_unique<Text>(48, mConvertedScore);
 
-	m_scoreLabel->m_textRect.x     = x;
-	m_scoreLabel->m_textRect.y     = y;
+	mScoreLabel->mTextRect.x     = x;
+	mScoreLabel->mTextRect.y     = y;
 
-	m_scoreText->m_textRect.x      = x;
-	m_scoreText->m_textRect.y      = y;
+	mScoreText->mTextRect.x      = x;
+	mScoreText->mTextRect.y      = y;
 }
 
 void Scoreboard::Load()
 {
 	//Load in our high score from file
-	m_highScore = m_File->Read();
-	if (m_highScore > 1000)
+	mHighScore = mFile->Read();
+	if (mHighScore > 1000)
 	{
-		m_convertedHighScore = "ERROR";
+		mConvertedHighScore = "ERROR";
 	}
 	else
 	{
-		m_hs = std::to_string(m_highScore);
-		m_convertedHighScore = m_hs.data();
+		mHs = std::to_string(mHighScore);
+		mConvertedHighScore = mHs.data();
 	}
 
 	//Convert score to a char*
-	m_s = std::to_string(m_score);
-	m_convertedScore = m_s.data();
+	mS = std::to_string(mScore);
+	mConvertedScore = mS.data();
 
 	//Convert level score to a char*
-	m_ls = std::to_string(m_levelScore);
-	m_convertedLevelScore = m_ls.data();
+	mLs = std::to_string(mLevelScore);
+	mConvertedLevelScore = mLs.data();
 }
 
 void Scoreboard::Unload()
 {
-	m_scoreLabel->Unload();
-	m_scoreText->Unload();
-	m_highScoreLabel->Unload();
-	m_highScoreText->Unload();
-	m_levelScoreLabel->Unload();
-	m_levelScoreText->Unload();
-	m_finalScoreLabel->Unload();
-	m_finalScoreText->Unload();
+	mScoreLabel->Unload();
+	mScoreText->Unload();
+	mHighScoreLabel->Unload();
+	mHighScoreText->Unload();
+	mLevelScoreLabel->Unload();
+	mLevelScoreText->Unload();
+	mFinalScoreLabel->Unload();
+	mFinalScoreText->Unload();
 
 	game = nullptr;
 }
@@ -72,111 +72,111 @@ void Scoreboard::Update(const LevelSet& passedLevel)
 	{
 		case 0:
 		{
-			m_levelScore = passedLevel.getScore(0);
+			mLevelScore = passedLevel.getScore(0);
 		} break;
 
 		case 1:
 		{
-			m_levelScore = passedLevel.getScore(1);
+			mLevelScore = passedLevel.getScore(1);
 		} break;
 
 		case 2:
 		{
-			m_levelScore = passedLevel.getScore(2);
+			mLevelScore = passedLevel.getScore(2);
 		} break;
 
 		case 3:
 		{
-			m_levelScore = passedLevel.getScore(3);
+			mLevelScore = passedLevel.getScore(3);
 		} break;
 
 		case 4:
 		{
-			m_levelScore = passedLevel.getScore(4);
+			mLevelScore = passedLevel.getScore(4);
 		} break;
 
 	default:
 		break;
 	}
 
-	m_fs = std::to_string(m_score);
-	m_convertedFinalScore = m_fs.data();
+	mFs = std::to_string(mScore);
+	mConvertedFinalScore = mFs.data();
 
-	m_ls = std::to_string(m_levelScore);
+	mLs = std::to_string(mLevelScore);
 
-	if (m_score >= m_highScore)
+	if (mScore >= mHighScore)
 	{
-		m_hs = std::to_string(m_score);
-		m_convertedHighScore = m_hs.data();
+		mHs = std::to_string(mScore);
+		mConvertedHighScore = mHs.data();
 	}
 	else
 	{
-		m_highScore = m_File->Read();
-		m_hs = std::to_string(m_highScore);
-		m_convertedHighScore = m_hs.data();
+		mHighScore = mFile->Read();
+		mHs = std::to_string(mHighScore);
+		mConvertedHighScore = mHs.data();
 	}
 
 	if (SCORE_NEEDS_UPDATED)
 	{
-		m_s = std::to_string(m_score);
-		m_convertedScore = m_s.data();
-		m_scoreText->Update(m_convertedScore);
+		mS = std::to_string(mScore);
+		mConvertedScore = mS.data();
+		mScoreText->Update(mConvertedScore);
 	}
 	if (HIGHSCORE_NEEDS_UPDATED)
 	{
-		m_highScoreText->Update(m_convertedHighScore);
+		mHighScoreText->Update(mConvertedHighScore);
 	}
 
-	m_levelScoreText->Update(m_convertedLevelScore);
-	m_finalScoreText->Update(m_convertedFinalScore);
+	mLevelScoreText->Update(mConvertedLevelScore);
+	mFinalScoreText->Update(mConvertedFinalScore);
 
-	if (m_score >= m_levelScore)
+	if (mScore >= mLevelScore)
 	{
-		m_scoreText->Update({ 0, 255, 0, 255 });
+		mScoreText->Update({ 0, 255, 0, 255 });
 	}
 	else
 	{
-		m_scoreText->Update({ 255, 255, 255, 255 });
+		mScoreText->Update({ 255, 255, 255, 255 });
 	}
 }
 
 void Scoreboard::Draw()
 {
-	m_scoreLabel->Draw(m_scoreLabel->m_textRect.x, m_scoreText->m_textRect.y);
-	m_scoreText->Draw((m_scoreLabel->m_textRect.x) + 240, m_scoreLabel->m_textRect.y);
+	mScoreLabel->Draw(mScoreLabel->mTextRect.x, mScoreText->mTextRect.y);
+	mScoreText->Draw((mScoreLabel->mTextRect.x) + 240, mScoreLabel->mTextRect.y);
 
-	m_levelScoreLabel->Draw(m_scoreLabel->m_textRect.x, (m_scoreText->m_textRect.y) + 24);
-	m_levelScoreText->Draw((m_scoreLabel->m_textRect.x) + 240, (m_highScoreLabel->m_textRect.y) - 24);
+	mLevelScoreLabel->Draw(mScoreLabel->mTextRect.x, (mScoreText->mTextRect.y) + 24);
+	mLevelScoreText->Draw((mScoreLabel->mTextRect.x) + 240, (mHighScoreLabel->mTextRect.y) - 24);
 
-	m_highScoreLabel->Draw(m_scoreLabel->m_textRect.x, (m_scoreText->m_textRect.y) + 48);
-	m_highScoreText->Draw((m_scoreLabel->m_textRect.x) + 240, (m_highScoreLabel->m_textRect.y));
+	mHighScoreLabel->Draw(mScoreLabel->mTextRect.x, (mScoreText->mTextRect.y) + 48);
+	mHighScoreText->Draw((mScoreLabel->mTextRect.x) + 240, (mHighScoreLabel->mTextRect.y));
 }
 
 void Scoreboard::recordHighScore()
 {
-	m_File->Write(m_score);
+	mFile->Write(mScore);
 	HIGHSCORE_NEEDS_UPDATED = true;
 }
 
 void Scoreboard::showFinal()
 {
-	m_finalScoreLabel->Draw((game->screenWidth / 2) - (m_finalScoreLabel->m_textRect.w / 2), (game->screenHeight / 2) - 70);
-	m_finalScoreText->Draw((game->screenWidth / 2) - (m_finalScoreText->m_textRect.w / 2), m_finalScoreLabel->m_textRect.y + 50);
+	mFinalScoreLabel->Draw((game->screenWidth / 2) - (mFinalScoreLabel->mTextRect.w / 2), (game->screenHeight / 2) - 70);
+	mFinalScoreText->Draw((game->screenWidth / 2) - (mFinalScoreText->mTextRect.w / 2), mFinalScoreLabel->mTextRect.y + 50);
 }
 
 void Scoreboard::increaseScore(unsigned int x)
 { 
-	m_score += x;
+	mScore += x;
 	SCORE_NEEDS_UPDATED = true;
 }
 void Scoreboard::decreaseScore(unsigned int x)
 {
-	m_score -= x;
+	mScore -= x;
 	SCORE_NEEDS_UPDATED = true;
 }
 
 void Scoreboard::resetScore()
 {
-	m_score = 0;
+	mScore = 0;
 	SCORE_NEEDS_UPDATED = true;
 }

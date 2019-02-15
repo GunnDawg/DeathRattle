@@ -24,39 +24,39 @@ public:
 	void Update();
 	void setAngle(double angle);
 
-	inline SDL_Rect getRect() const { return m_ballRect; }
-	inline double getSpeed() const { return m_speed; }
-	inline unsigned int getX() const { return m_posX; }
-	inline unsigned int getY() const { return m_posY; }
+	inline SDL_Rect getRect() const { return mBallRect; }
+	inline double getSpeed() const { return mSpeed; }
+	inline unsigned int getX() const { return mPosX; }
+	inline unsigned int getY() const { return mPosY; }
 
-	inline void setDead(bool dead) { m_isDead = dead; }
+	inline void setDead(bool dead) { mIsDead = dead; }
 
-	inline void addSpeed(float speed) { m_speed += speed; }
-	inline void removeSpeed(float speed) { m_speed -= speed; }
+	inline void addSpeed(float speed) { mSpeed += speed; }
+	inline void removeSpeed(float speed) { mSpeed -= speed; }
 
 	void resetBall(Settings::GamePlay::GameDifficulty speed);
 	double randomizeAng();
 
-	unsigned int m_posX = (Settings::Display::WindowWidth / 2) - 25;
-	unsigned int m_posY = (Settings::Display::WindowHeight / 2) - 25;
+	unsigned int mPosX = (Settings::Display::WindowWidth / 2) - 25;
+	unsigned int mPosY = (Settings::Display::WindowHeight / 2) - 25;
 
-	double m_angle = 0.0;
+	double mAngle = 0.0;
 
 private:
 	Game* game                         = nullptr;
 
 	void setSpeed(Settings::GamePlay::GameDifficulty speed);
 
-	Texture m_ballTexture;
+	Texture mBallTexture;
 
-	SDL_Rect m_ballRect                = { 0 };
-	const unsigned int m_ballWidth     = 50;
-	const unsigned int m_ballHeight    = 50;
+	SDL_Rect mBallRect                = { 0 };
+	const unsigned int mBallWidth     = 50;
+	const unsigned int mBallHeight    = 50;
 
-	double m_speed                     = 0.0;
-	double m_velocityX                 = 0.0;
-	double m_velocityY                 = 0.0;
-	double m_rotationAngle             = 0.0;
+	double mSpeed                     = 0.0;
+	double mVelocityX                 = 0.0;
+	double mVelocityY                 = 0.0;
+	double mRotationAngle             = 0.0;
 
-	bool m_isDead                      = false;
+	bool mIsDead                      = false;
 };
