@@ -14,7 +14,7 @@
 	 - Start using assertions at the public call sites of all objects/classes. This means asserting all
 	   paramatized constructors either for NULL checks, range checks, or type checks.
 	 - Implement a controller type in the options menu. The implementation for keyboard or mouse
-       is already there, just needs to be implemented. Also look into gamepad implementation.
+	   is already there, just needs to be implemented. Also look into gamepad implementation.
      - Detect user screen resolution and send it to the window at runtime. Might consider an external
 	   launcher later, where the user can set this themself, along with other options.
      - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
