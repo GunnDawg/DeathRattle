@@ -15,9 +15,9 @@
 	   paramatized constructors either for NULL checks, range checks, or type checks.
 	 - Implement a controller type in the options menu. The implementation for keyboard or mouse
 	   is already there, just needs to be implemented. Also look into gamepad implementation.
-     - Detect user screen resolution and send it to the window at runtime. Might consider an external
+	 - Detect user screen resolution and send it to the window at runtime. Might consider an external
 	   launcher later, where the user can set this themself, along with other options.
-     - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
+	 - Get the Fullscreen / Windowed options working correctly. Currently only Windowed mode works.
 	 - Setup a connection to an SQL server for stat tracking.
 	 - Create an external logging system that collects information during runtime. This will help
 	   with future end user debugging.
