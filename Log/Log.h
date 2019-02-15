@@ -2,6 +2,7 @@
 #include <memory>
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/sinks/basic_file_sink.h>
 
 namespace Gunn
 {
@@ -12,12 +13,20 @@ namespace Gunn
 
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
+		inline static std::shared_ptr<spdlog::logger>& GetFileLogger() { return sFileLogger; }
 
 	private:
 		inline static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		inline static std::shared_ptr<spdlog::logger> s_ClientLogger;
+		inline static std::shared_ptr<spdlog::logger> sFileLogger;
 	};
 }
+
+#ifdef GUNN_RELEASE
+#define GUNN_LOG_FATAL(...)    Gunn::Log::GetFileLogger()->critical(__VA_ARGS__)
+#else
+#define GUNN_LOG_FATAL(...)
+#endif
 
 #ifdef GUNN_DEBUG
 #define GUNN_CORE_TRACE(...)   Gunn::Log::GetCoreLogger()->trace(__VA_ARGS__)
