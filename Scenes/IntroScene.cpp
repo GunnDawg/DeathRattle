@@ -4,6 +4,8 @@
 
 void IntroSceneState::on_enter()
 {
+	GUNN_CORE_INFO("----------ENTERING INTRO SCENE----------");
+
 	game = &Game::GetInstance();
 
 	m_cursor.Load();
@@ -117,7 +119,7 @@ void IntroSceneState::update()
 		m_Flames[i].Play(game->avgDeltaTime);
 	}
 
-	if (m_timer.elapsedMilliseconds() > 200)
+	if (m_timer.ElapsedMilliseconds() > 200)
 	{
 		m_isBlood = true;
 		m_timer.Stop();
@@ -158,8 +160,10 @@ void IntroSceneState::update()
 		m_press.mTextureRect.x -= 100;
 		m_enter.mTextureRect.x += 100;
 
-		if (m_timer.elapsedMilliseconds() > 250)
+		if (m_timer.ElapsedMilliseconds() > 250)
 		{
+			m_timer.Stop();
+
 			game->gameStateMachine.pop();
 
 			std::unique_ptr<GameState> mainMenuState = std::make_unique<MainMenuScene>();
@@ -171,7 +175,7 @@ void IntroSceneState::update()
 	{
 		if (mFadeOut)
 		{
-			mFadeValue -= (0.2 * game->avgDeltaTime);
+			mFadeValue -= (0.2f * game->avgDeltaTime);
 			if (mFadeValue <= SDL_ALPHA_TRANSPARENT)
 			{
 				mFadeOut = false;
@@ -181,7 +185,7 @@ void IntroSceneState::update()
 
 		if (mFadeIn)
 		{
-			mFadeValue += (0.2 * game->avgDeltaTime);
+			mFadeValue += (0.2f * game->avgDeltaTime);
 			if (mFadeValue >= SDL_ALPHA_OPAQUE)
 			{
 				mFadeOut = true;

@@ -3,6 +3,8 @@
 
 void LeaderBoardScene::on_enter()
 {
+	GUNN_CORE_INFO("----------ENTERING LEADERBOARD SCENE----------");
+
 	game = &Game::GetInstance();
 
 	m_cursor.Load();

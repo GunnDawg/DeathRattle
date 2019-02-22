@@ -26,5 +26,5 @@ public:
 	SDL_Rect mTextureRect               = { 0 };
 
 private:
-	Game* game                           = nullptr;
+	Game* game                          = nullptr;
 };

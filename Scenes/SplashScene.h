@@ -18,15 +18,15 @@ public:
 	void draw() override;
 
 private:
-	Game* game                      = nullptr;
-
-	Texture m_background            = Texture("Assets/Graphics/splash_scene/background.png");
-	Texture m_production            = Texture("Assets/Graphics/splash_scene/production.png");
-	Texture m_logo                  = Texture("Assets/Graphics/common/GGlogo.png");
-
-	Sound m_introSound              = Sound("Assets/Audio/intro.wav");
-
-	SDL_Rect m_comingSoonBox        = { 0 };
+	Game* game                                = nullptr;
+									          
+	Texture m_background                      = Texture("Assets/Graphics/splash_scene/background.png");
+	Texture m_production                      = Texture("Assets/Graphics/splash_scene/production.png");
+	Texture m_logo                            = Texture("Assets/Graphics/common/GGlogo.png");
+									          
+	Sound m_introSound                        = Sound("Assets/Audio/intro.wav");
+									          
+	SDL_Rect m_comingSoonBox                  = { 0 };
 
 	Timer m_timer;
 };

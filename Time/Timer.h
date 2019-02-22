@@ -8,8 +8,8 @@ public:
 	void Stop();
 	//void reset();
 
-	double elapsedMilliseconds();
-	double elapsedSeconds();
+	double ElapsedMilliseconds();
+	double ElapsedSeconds();
 
 private:
 	std::chrono::time_point<std::chrono::system_clock> m_StartTime;

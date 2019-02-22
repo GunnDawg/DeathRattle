@@ -4,6 +4,8 @@
 
 void OptionsMenuScene::on_enter()
 {
+	GUNN_CORE_INFO("----------ENTERING OPTIONS MENU SCENE----------");
+
 	game = &Game::GetInstance();
 
 	m_optionsBox.w = 800;

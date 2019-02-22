@@ -13,11 +13,11 @@ void Music::Load()
 		mMusic = Mix_LoadMUS(mMusicFilePath);
 		if (mMusic == nullptr)
 		{
-			GUNN_CORE_ERROR("Error loading music file: {0}. Error: {1}",m_musicFilePath, Mix_GetError());
+			GUNN_CORE_ERROR("Error loading music file: {0}. Error: {1}",mMusicFilePath, Mix_GetError());
 		}
 		else
 		{
-			GUNN_CORE_INFO("MUSIC LOADED: {0}", m_musicFilePath);
+			GUNN_CORE_INFO("MUSIC LOADED: {0}", mMusicFilePath);
 			Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 		}
 	}

@@ -4,7 +4,7 @@
 
 void GameplayState::on_enter()
 {
-	GUNN_CORE_INFO("<-----LOADING GAME--------->");
+	GUNN_CORE_INFO("----------ENTERING GAMEPLAY SCENE----------");
 
 	game = &Game::GetInstance();
 

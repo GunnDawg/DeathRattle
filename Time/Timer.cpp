@@ -18,7 +18,7 @@ void Timer::Stop()
 //	m_EndTime = m_StartTime;
 //}
 
-double Timer::elapsedMilliseconds()
+double Timer::ElapsedMilliseconds()
 {
 	std::chrono::time_point<std::chrono::system_clock> endTime;
 
@@ -34,7 +34,7 @@ double Timer::elapsedMilliseconds()
 	return std::chrono::duration_cast<std::chrono::milliseconds>(endTime - m_StartTime).count();
 }
 
-double Timer::elapsedSeconds()
+double Timer::ElapsedSeconds()
 {
-	return elapsedMilliseconds() / 1000.0;
+	return ElapsedMilliseconds() / 1000.0;
 }

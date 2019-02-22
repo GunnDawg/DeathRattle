@@ -11,11 +11,11 @@ void Sound::Load()
 	mChunk = Mix_LoadWAV(mSoundFilePath);
 	if (mChunk == nullptr)
 	{
-		GUNN_CORE_ERROR("Error loading audio file: {0}. Error: {1}",m_soundFilePath, Mix_GetError());
+		GUNN_CORE_ERROR("Error loading audio file: {0}. Error: {1}", mSoundFilePath, Mix_GetError());
 	}
 	else
 	{
-		GUNN_CORE_INFO("SOUND LOADED: {0}", m_soundFilePath);
+		GUNN_CORE_INFO("SOUND LOADED: {0}", mSoundFilePath);
 	}
 }
 
@@ -25,7 +25,7 @@ void Sound::Unload()
 	{
 		Mix_FreeChunk(mChunk);
 		mChunk = nullptr;
-		GUNN_CORE_INFO("SOUND UNLOADED: {0}", m_soundFilePath);
+		GUNN_CORE_INFO("SOUND UNLOADED: {0}", mSoundFilePath);
 	}
 }
 

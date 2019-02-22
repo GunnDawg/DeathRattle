@@ -20,13 +20,13 @@ void Text::loadFont()
 	mFont = TTF_OpenFont(mFontPath.data(), mFontSize);
 	if (!mFont)
 	{
-		GUNN_CORE_ERROR("Error loading font: {0}. Error: {1}", m_fontPath, TTF_GetError());
+		GUNN_CORE_ERROR("Error loading font: {0}. Error: {1}", mFontPath, TTF_GetError());
 	}
 
 	mTextSurface = TTF_RenderText_Solid(mFont, mFontValue.data(), mFontColor);
 	if (!mTextSurface)
 	{
-		GUNN_CORE_ERROR("Error creating text surface: {0}. Error: {1}", m_fontPath.data(), TTF_GetError());
+		GUNN_CORE_ERROR("Error creating text surface: {0}. Error: {1}", mFontPath.data(), TTF_GetError());
 	}
 
 	mTextTexture = SDL_CreateTextureFromSurface(game->Renderer, mTextSurface);
@@ -89,5 +89,5 @@ void Text::Unload()
 	TTF_CloseFont(mFont);
 	mFont = nullptr;
 
-	GUNN_CORE_INFO("TEXT UNLOADED: {0}", m_fontValue.c_str());
+	GUNN_CORE_INFO("TEXT UNLOADED: {0}", mFontValue.c_str());
 }

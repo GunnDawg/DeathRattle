@@ -3,6 +3,8 @@
 
 void SplashScene::on_enter()
 {
+	GUNN_CORE_INFO("----------ENTERING SPLASH SCENE----------");
+
 	game = &Game::GetInstance();
 
 	m_background.Load();
@@ -48,8 +50,10 @@ void SplashScene::update()
 		m_production.mTextureRect.y -= 0.123 * game->avgDeltaTime;
 	}
 
-	if (m_timer.elapsedSeconds() > 7.0)
+	if (m_timer.ElapsedSeconds() > 7.0)
 	{
+		m_timer.Stop();
+
 		game->gameStateMachine.pop();
 
 		std::unique_ptr<GameState> introSceneState = std::make_unique<IntroSceneState>();

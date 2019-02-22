@@ -3,6 +3,8 @@
 
 void CreditsScene::on_enter()
 {
+	GUNN_CORE_INFO("----------ENTERING CREDITS SCENE----------");
+
 	game = &Game::GetInstance();
 
 	for (std::size_t i = 0; i < m_skulls.size(); ++i)

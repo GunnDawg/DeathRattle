@@ -30,7 +30,7 @@ void FileIO::Write(unsigned int highScore)
 	outFile.open(mFile);
 	if (outFile.fail())
 	{
-		GUNN_CORE_ERROR("Error writing to file: {0}", m_file.c_str());
+		GUNN_CORE_ERROR("Error writing to file: {0}", mFile.c_str());
 	}
 
 	outFile << highScore;

@@ -8,6 +8,8 @@
 
 void MainMenuScene::on_enter()
 {
+	GUNN_CORE_INFO("----------ENTERING MAIN MENU SCENE----------");
+
 	game = &Game::GetInstance();
 
 	for (std::size_t i = 0; i < m_skulls.size(); ++i)
