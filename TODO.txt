@@ -35,7 +35,7 @@
 	 - Replace all m_ prefixes with just m. mDataMember looks better than m_dataMember IMO.
 
 	* (BUGS)
-	 - Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
+	 - (FIXED MAYBE?) Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
 	   towards a nullptr in the Texture class.
 
 	* (FEATURES)
