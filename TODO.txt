@@ -32,7 +32,7 @@
 	 - Figure out a better, cleaner way to initialize and load objects. Cluttering the on_enter() of every
 	   scene is just sloppy. There has to be a better way. Maybe the asset manager is the solution?
 	 - Continue to look for ways to shorten code, it's a mess.
-	 - Replace all m_ prefixes with just m. mDataMember looks better than m_dataMember.
+	 - Replace all m_ prefixes with just m. mDataMember looks better than m_dataMember IMO.
 
 	* (BUGS)
 	 - Game will sometimes crash while entering MAIN MENU, or NEW GAME. The call stack is pointing
