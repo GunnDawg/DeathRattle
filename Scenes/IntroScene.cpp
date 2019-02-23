@@ -1,6 +1,7 @@
 #include "IntroScene.h"
 #include "MainMenuScene.h"
 #include "Game.h"
+#include "Graphics/FadeEffect.h"
 
 void IntroSceneState::on_enter()
 {
@@ -192,7 +193,10 @@ void IntroSceneState::update()
 				mFadeIn = false;
 			}
 		}
+
 	}
+
+	SDL_SetTextureAlphaMod(m_skullWhite.mTexture, static_cast<Uint8>(mFadeValue));
 }
 
 void IntroSceneState::handle_events()
@@ -279,7 +283,4 @@ void IntroSceneState::draw()
 	SDL_RenderCopy(game->Renderer, m_plug.mTexture, NULL, &m_plug.mTextureRect);
 
 	SDL_RenderCopy(game->Renderer, m_cursor.mTexture, NULL, &m_cursor.mTextureRect);
-
-	//Set fade value to the skull texture
-	SDL_SetTextureAlphaMod(m_skullWhite.mTexture, static_cast<Uint8>(mFadeValue));
 }
