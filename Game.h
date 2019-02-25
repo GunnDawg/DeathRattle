@@ -63,7 +63,7 @@ public:
 
 	Uint64 currentTime                                          = 0ULL;
 	Uint64 lastTime                                             = 0ULL;
-	unsigned long long totalUpdates                             = 0;
+	unsigned long long totalUpdates                             = 0ULL;
 	double deltaTime                                            = 0.0;
 	double totalDeltaTime                                       = 0.0;
 	double avgDeltaTime                                         = 0.0;
