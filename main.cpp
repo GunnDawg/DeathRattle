@@ -23,7 +23,7 @@ int main(int argc, char* args[])
 		game->Draw();
 	}
 
-	game->DestroyGame();
+	Game::DestroyGame();
 	game = nullptr;
 
 	return EXIT_SUCCESS;
