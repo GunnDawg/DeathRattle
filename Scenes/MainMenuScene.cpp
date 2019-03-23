@@ -156,6 +156,7 @@ void MainMenuScene::on_exit()
 	}
 
 	game = nullptr;
+	JukeBox = nullptr;
 }
 
 void MainMenuScene::update()

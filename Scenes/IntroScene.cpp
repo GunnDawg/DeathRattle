@@ -171,13 +171,12 @@ void IntroSceneState::update()
 			game->gameStateMachine.push(std::move(mainMenuState));
 		}
 	}
-
-	if (!m_isClicked)
+	else
 	{
 		if (mFadeOut)
 		{
 			mFadeValue -= (0.2f * game->avgDeltaTime);
-			if (mFadeValue <= SDL_ALPHA_TRANSPARENT)
+			if (mFadeValue <= SDL_ALPHA_TRANSPARENT + 25)
 			{
 				mFadeOut = false;
 				mFadeIn = true;
@@ -187,16 +186,13 @@ void IntroSceneState::update()
 		if (mFadeIn)
 		{
 			mFadeValue += (0.2f * game->avgDeltaTime);
-			if (mFadeValue >= SDL_ALPHA_OPAQUE)
+			if (mFadeValue >= SDL_ALPHA_OPAQUE - 25)
 			{
 				mFadeOut = true;
 				mFadeIn = false;
 			}
 		}
-
 	}
-
-	SDL_SetTextureAlphaMod(m_skullWhite.mTexture, static_cast<Uint8>(mFadeValue));
 }
 
 void IntroSceneState::handle_events()
@@ -276,6 +272,7 @@ void IntroSceneState::draw()
 	}
 	else
 	{
+		SDL_SetTextureAlphaMod(m_skullWhite.mTexture, static_cast<Uint8>(mFadeValue));
 		SDL_RenderCopy(game->Renderer, m_skullWhite.mTexture, NULL, &m_skullWhite.mTextureRect);
 	}
 	SDL_RenderCopy(game->Renderer, m_press.mTexture, NULL, &m_press.mTextureRect);

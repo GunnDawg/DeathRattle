@@ -112,6 +112,7 @@ void GameplayState::on_exit()
 	}
 
 	game = nullptr;
+	JukeBox = nullptr;
 }
 
 void GameplayState::handle_events()

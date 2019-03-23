@@ -260,6 +260,7 @@ void OptionsMenuScene::on_exit()
 	m_thud.Unload();
 
 	game = nullptr;
+	JukeBox = nullptr;
 }
 
 void OptionsMenuScene::update()
