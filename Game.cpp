@@ -112,9 +112,6 @@ bool Game::Init()
 		return false;
 	}
 
-	//std::unique_ptr<GameState> loadingSceneState = std::make_unique<LoadingScene>();
-	//gameStateMachine.push(std::move(loadingSceneState));
-
 	std::unique_ptr<GameState> splashSceneState = std::make_unique<SplashScene>();
 	gameStateMachine.push(std::move(splashSceneState));
 

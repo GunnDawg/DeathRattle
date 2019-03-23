@@ -12,7 +12,6 @@ extern "C"
 #include "Log/Log.h"
 #include "GameSettings.h"
 #include "StateMachine/GameStateMachine.h"
-#include "Scenes/LoadingScene.h"
 #include "Scenes/SplashScene.h"
 
 class Game
@@ -63,7 +62,7 @@ public:
 
 	Uint64 currentTime                                          = 0ULL;
 	Uint64 lastTime                                             = 0ULL;
-	unsigned long long totalUpdates                             = 0ULL;
+	Uint64 totalUpdates                                         = 0ULL;
 	double deltaTime                                            = 0.0;
 	double totalDeltaTime                                       = 0.0;
 	double avgDeltaTime                                         = 0.0;
