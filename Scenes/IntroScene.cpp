@@ -157,9 +157,18 @@ void IntroSceneState::update()
 		m_skullWhite.mTextureRect.x = m_skull.mTextureRect.x;
 		m_skullWhite.mTextureRect.y = m_skull.mTextureRect.y;
 
-		m_skullBox.y += 50;
-		m_press.mTextureRect.x -= 100;
-		m_enter.mTextureRect.x += 100;
+		//Top Box
+		m_plugBox.y -= (0.5 * game->avgDeltaTime);
+		m_plug.mTextureRect.y -= (0.5 * game->avgDeltaTime);
+
+		//Title Area
+		m_title.mTextureRect.x += (4 * game->avgDeltaTime);
+		m_howLong.mTextureRect.x -= (4 * game->avgDeltaTime);
+
+		//Bottom Box
+		m_skullBox.y += (3 * game->avgDeltaTime);
+		m_press.mTextureRect.y += (3 * game->avgDeltaTime);
+		m_enter.mTextureRect.y += (3 * game->avgDeltaTime);
 
 		if (m_timer.ElapsedMilliseconds() > 250)
 		{
