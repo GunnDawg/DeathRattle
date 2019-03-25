@@ -42,6 +42,9 @@
 	 - Stat tracking and things like high score is important for this game. We need some way to store and
 	   upload/download information from a central database. An SQL server might be an option here.
 
+	* (MENUS)
+	 - Create an easier system for creating and using menus.
+	 - Create an animation for the Main Menu box on_enter and on_exit.
 
 -==(GAMEPLAY)==-
 
