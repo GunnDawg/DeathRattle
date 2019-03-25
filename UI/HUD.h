@@ -8,8 +8,8 @@
 #include "Level/LevelSet.h"
 #include "Entity/Ball.h"
 
-constexpr unsigned int NUM_BOXES = 6;
-constexpr unsigned int NUM_SHADED_BOXES = 4;
+constexpr Uint8 NUM_BOXES = 6;
+constexpr Uint8 NUM_SHADED_BOXES = 4;
 
 class Game;
 
@@ -28,13 +28,13 @@ public:
 
 	Scoreboard m_ScoreBoard = Scoreboard(24, 24);
 
-	bool BALL_SPEED_NEEDS_UPDATED                           = true;
-	bool LIVES_TEXT_NEEDS_UPDATED                           = true;
-	bool HP_TEXT_NEEDS_UPDATED                              = true;
-	bool LEVEL_NUM_NEEDS_UPDATED                            = true;
+	bool BALL_SPEED_NEEDS_UPDATED                          = true;
+	bool LIVES_TEXT_NEEDS_UPDATED                          = true;
+	bool HP_TEXT_NEEDS_UPDATED                             = true;
+	bool LEVEL_NUM_NEEDS_UPDATED                           = true;
 
 private:
-	Game* game                                              = nullptr;
+	Game* game                                             = nullptr;
 
 	void drawHealthBar();
 	void drawProgressBar();
@@ -65,5 +65,5 @@ private:
 	std::unique_ptr<Text> mRemainingHP                     = nullptr;
 	std::unique_ptr<Text> mItemDropProgress                = nullptr;
 
-	bool mShowing                                        = true;
+	bool mShowing                                          = true;
 };

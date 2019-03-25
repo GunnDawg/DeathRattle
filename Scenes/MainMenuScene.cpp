@@ -108,7 +108,7 @@ void MainMenuScene::on_enter()
 	m_creditsWhite.mTextureRect.y = m_credits.mTextureRect.y;
 
 	m_exit.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exit.mTextureRect.w / 2);
-	m_exit.mTextureRect.y = m_credits.mTextureRect.y + 75;
+	m_exit.mTextureRect.y = m_credits.mTextureRect.y + 95;
 
 	m_exitWhite.mTextureRect.x = m_exit.mTextureRect.x;
 	m_exitWhite.mTextureRect.y = m_exit.mTextureRect.y;
@@ -240,11 +240,11 @@ void MainMenuScene::handle_events()
 							JukeBox->Stop(JukeBox->MenuMusic);
 						}
 
+						m_isNewGame = false;
 						game->gameStateMachine.unloadAll();
 						std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
 						game->gameStateMachine.push(std::move(gamePlayState));
 
-						//m_isNewGame = false;
 						//std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
 						//Game::gameStateMachine.push(std::move(preGamePlayState));
 					}
