@@ -96,19 +96,20 @@ void MainMenuScene::on_enter()
 	m_optionsWhite.mTextureRect.y = m_options.mTextureRect.y;
 
 	m_leaderBoard.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_leaderBoard.mTextureRect.w / 2);
-	m_leaderBoard.mTextureRect.y = m_options.mTextureRect.y + 65;
+	m_leaderBoard.mTextureRect.y = m_options.mTextureRect.y + 75;
 
 	m_leaderBoardWhite.mTextureRect.x = m_leaderBoard.mTextureRect.x;
 	m_leaderBoardWhite.mTextureRect.y = m_leaderBoard.mTextureRect.y;
 
 	m_credits.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_credits.mTextureRect.w / 2);
-	m_credits.mTextureRect.y = m_leaderBoard.mTextureRect.y + 65;
+	m_credits.mTextureRect.y = m_leaderBoard.mTextureRect.y + 75;
 
 	m_creditsWhite.mTextureRect.x = m_credits.mTextureRect.x;
 	m_creditsWhite.mTextureRect.y = m_credits.mTextureRect.y;
 
 	m_exit.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exit.mTextureRect.w / 2);
-	m_exit.mTextureRect.y = m_credits.mTextureRect.y + 95;
+	//m_exit.mTextureRect.y = m_credits.mTextureRect.y + 95;
+	m_exit.mTextureRect.y = (m_menuBox.y + m_menuBox.h - 25 ) - m_exit.mTextureRect.h;
 
 	m_exitWhite.mTextureRect.x = m_exit.mTextureRect.x;
 	m_exitWhite.mTextureRect.y = m_exit.mTextureRect.y;
@@ -215,79 +216,77 @@ void MainMenuScene::update()
 void MainMenuScene::handle_events()
 {
 	SDL_Event evnt;
+	while (SDL_PollEvent(&evnt))
 	{
-		while (SDL_PollEvent(&evnt))
+		switch (evnt.type)
 		{
-			switch (evnt.type)
+			case SDL_QUIT:
 			{
-				case SDL_QUIT:
+				game->isRunning = false;
+			} break;
+
+			case SDL_MOUSEBUTTONDOWN:
+			{
+				if (m_isExit)
 				{
 					game->isRunning = false;
-				} break;
+					game->gameStateMachine.unloadAll();
+				}
 
-				case SDL_MOUSEBUTTONDOWN:
+				else if (m_isNewGame)
 				{
-					if (m_isExit)
+					if (Settings::Audio::MenuMusic == 1)
+					{
+						JukeBox->Stop(JukeBox->MenuMusic);
+					}
+
+					m_isNewGame = false;
+					game->gameStateMachine.unloadAll();
+					std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
+					game->gameStateMachine.push(std::move(gamePlayState));
+
+					//std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
+					//Game::gameStateMachine.push(std::move(preGamePlayState));
+				}
+
+				else if (m_isLeaderBoard)
+				{
+					m_isLeaderBoard = false;
+					std::unique_ptr<GameState> leaderBoardScene = std::make_unique<LeaderBoardScene>();
+					game->gameStateMachine.push(std::move(leaderBoardScene));
+				}
+
+				else if (m_isOptions)
+				{
+					m_isOptions = false;
+					std::unique_ptr<GameState> optionsMenuScene = std::make_unique<OptionsMenuScene>();
+					game->gameStateMachine.push(std::move(optionsMenuScene));
+				}
+
+				else if (m_isCredits)
+				{
+					m_isCredits = false;
+					std::unique_ptr<GameState> creditsScene = std::make_unique<CreditsScene>();
+					game->gameStateMachine.push(std::move(creditsScene));
+				}
+			} break;
+
+			case SDL_KEYDOWN:
+			{
+				switch (evnt.key.keysym.sym)
+				{
+					case SDLK_ESCAPE:
 					{
 						game->isRunning = false;
-						game->gameStateMachine.unloadAll();
-					}
+					} break;
 
-					else if (m_isNewGame)
-					{
-						if (Settings::Audio::MenuMusic == 1)
-						{
-							JukeBox->Stop(JukeBox->MenuMusic);
-						}
+				default:
+					break;
+				}
+			} break;
 
-						m_isNewGame = false;
-						game->gameStateMachine.unloadAll();
-						std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
-						game->gameStateMachine.push(std::move(gamePlayState));
-
-						//std::unique_ptr<GameState> preGamePlayState = std::make_unique<PreGameplayScene>();
-						//Game::gameStateMachine.push(std::move(preGamePlayState));
-					}
-
-					else if (m_isLeaderBoard)
-					{
-						m_isLeaderBoard = false;
-						std::unique_ptr<GameState> leaderBoardScene = std::make_unique<LeaderBoardScene>();
-						game->gameStateMachine.push(std::move(leaderBoardScene));
-					}
-
-					else if (m_isOptions)
-					{
-						m_isOptions = false;
-						std::unique_ptr<GameState> optionsMenuScene = std::make_unique<OptionsMenuScene>();
-						game->gameStateMachine.push(std::move(optionsMenuScene));
-					}
-
-					else if (m_isCredits)
-					{
-						m_isCredits = false;
-						std::unique_ptr<GameState> creditsScene = std::make_unique<CreditsScene>();
-						game->gameStateMachine.push(std::move(creditsScene));
-					}
-				} break;
-
-				case SDL_KEYDOWN:
-				{
-					switch (evnt.key.keysym.sym)
-					{
-						case SDLK_ESCAPE:
-						{
-							game->isRunning = false;
-						} break;
-
-					default:
-						break;
-					}
-				} break;
-
-			default:
-				break;
-			}
+		default:
+			break;
 		}
 	}
 }
