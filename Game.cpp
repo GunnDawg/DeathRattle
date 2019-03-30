@@ -72,7 +72,6 @@ bool Game::Init()
 	}
 
 	Uint32 WindowFlags = 0;
-
 	switch (Settings::Display::WindowMode)
 	{
 		case 0:
@@ -83,6 +82,11 @@ bool Game::Init()
 		case 1:
 		{
 			WindowFlags = SDL_WINDOW_FULLSCREEN_DESKTOP;
+		} break;
+
+		case 2:
+		{
+			WindowFlags = SDL_WINDOW_BORDERLESS;
 		} break;
 
 	default:
