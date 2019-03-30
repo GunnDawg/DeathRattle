@@ -147,6 +147,7 @@ void IntroSceneState::update()
 		m_isSkull = false;
 		m_scare.Play();
 
+		//Press Enter Skull
 		m_skull.mTextureRect.w += (10.00 * game->avgDeltaTime);
 		m_skull.mTextureRect.h += (10.00 * game->avgDeltaTime);
 		m_skull.mTextureRect.x -= (5.00 * game->avgDeltaTime);
