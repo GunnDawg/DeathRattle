@@ -1,4 +1,13 @@
 #include "Game.h"
+#include "Log/Log.h"
+#include "Scenes/SplashScene.h"
+
+#include <SDL_image.h>
+#include <SDL_mixer.h>
+#include <SDL_ttf.h>
+
+#include <memory>
+
 
 Game::~Game()
 {
@@ -125,7 +134,7 @@ bool Game::Init()
 	return true;
 }
 
-void Game::ProcessInput()
+void Game::ProcessInput() const
 {
 	gameStateMachine.handleEvents();
 }
@@ -137,7 +146,7 @@ void Game::Update()
 	gameStateMachine.update();
 }
 
-void Game::Draw()
+void Game::Draw() const
 {
 	gameStateMachine.draw();
 	SDL_RenderPresent(Renderer);

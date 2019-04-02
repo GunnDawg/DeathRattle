@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 #include <array>
 #include "StateMachine/GameState.h"
 #include "Graphics/Texture.h"

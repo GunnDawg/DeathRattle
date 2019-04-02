@@ -4,9 +4,6 @@ extern "C"
 	#include <SDL.h>
 }
 
-#include <cassert>
-#include <random>
-
 #include "GameSettings.h"
 #include "Graphics/Texture.h"
 

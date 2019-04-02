@@ -1,5 +1,8 @@
 #include "FileIO.h"
 
+#include <cassert>
+#include <fstream>
+
 FileIO::FileIO(const std::string_view filePath) :
 mFile(filePath.data())
 {

@@ -1,6 +1,8 @@
 #include "Ball.h"
 #include "Game.h"
 
+#include <random>
+
 Ball::Ball(Settings::GamePlay::GameDifficulty speed)
 {
 	game = &Game::GetInstance();
@@ -102,9 +104,9 @@ void Ball::setAngle(double angle)
 
 double Ball::randomizeAng()
 {
-	static std::random_device rd;
-	static std::mt19937 gen(rd());
-	static std::uniform_real_distribution<double> dis(-3.0, 3.0);
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<double> dis(-3.0, 3.0);
 
 	double r = dis(gen);
 

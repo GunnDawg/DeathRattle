@@ -1,6 +1,10 @@
 #include "LevelSet.h"
 #include "Game.h"
 
+#include <cassert>
+#include <sstream>
+#include "Entity/Paddle.h"
+
 LevelSet::LevelSet(const char* filePath)
 {
 	assert(typeid(filePath) == typeid(const char*) && filePath > 0);

@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "LeaderboardScene.h"
 #include "Game.h"
 

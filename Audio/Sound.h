@@ -1,7 +1,5 @@
 #pragma once
 #include <SDL_mixer.h>
-#include <cassert>
-#include "Log/Log.h"
 
 class Sound
 {

@@ -1,11 +1,5 @@
 #pragma once
-extern "C"
-{
-	#include <SDL.h>
-}
 
-#include <cassert>
-#include <array>
 #include <string>
 #include <memory>
 #include "Text.h"

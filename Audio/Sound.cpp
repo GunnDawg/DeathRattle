@@ -1,4 +1,5 @@
 #include "Sound.h"
+#include "Log/Log.h"
 
 Sound::Sound(const char* filePath) : 
 mSoundFilePath(filePath)

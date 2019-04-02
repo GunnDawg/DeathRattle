@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "MainMenuScene.h"
 #include "PreGameplayScene.h"
 #include "LeaderboardScene.h"
@@ -293,7 +295,7 @@ void MainMenuScene::handle_events()
 
 void MainMenuScene::draw()
 {
-	SDL_RenderCopy(game->Renderer, m_background.mTexture, NULL, &m_background.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_background.mTexture, nullptr, &m_background.mTextureRect);
 
 	for (std::size_t i = 0; i < m_Flames.size(); ++i)
 	{
@@ -312,59 +314,59 @@ void MainMenuScene::draw()
 
 	if (m_isNewGame)
 	{
-		SDL_RenderCopy(game->Renderer, m_newGameWhite.mTexture, NULL, &m_newGameWhite.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_newGameWhite.mTexture, nullptr, &m_newGameWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_newGame.mTexture, NULL, &m_newGame.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_newGame.mTexture, nullptr, &m_newGame.mTextureRect);
 	}
 
 	if (m_isOptions)
 	{
-		SDL_RenderCopy(game->Renderer, m_optionsWhite.mTexture, NULL, &m_optionsWhite.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_optionsWhite.mTexture, nullptr, &m_optionsWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_options.mTexture, NULL, &m_options.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_options.mTexture, nullptr, &m_options.mTextureRect);
 	}
 
 	if (m_isLeaderBoard)
 	{
-		SDL_RenderCopy(game->Renderer, m_leaderBoardWhite.mTexture, NULL, &m_leaderBoardWhite.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_leaderBoardWhite.mTexture, nullptr, &m_leaderBoardWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_leaderBoard.mTexture, NULL, &m_leaderBoard.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_leaderBoard.mTexture, nullptr, &m_leaderBoard.mTextureRect);
 
 	}
 
 	if (m_isCredits)
 	{
-		SDL_RenderCopy(game->Renderer, m_creditsWhite.mTexture, NULL, &m_creditsWhite.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_creditsWhite.mTexture, nullptr, &m_creditsWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_credits.mTexture, NULL, &m_credits.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_credits.mTexture, nullptr, &m_credits.mTextureRect);
 	}
 
 	if (m_isExit)
 	{
-		SDL_RenderCopy(game->Renderer, m_exitWhite.mTexture, NULL, &m_exitWhite.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_exitWhite.mTexture, nullptr, &m_exitWhite.mTextureRect);
 	}
 	else
 	{
-		SDL_RenderCopy(game->Renderer, m_exit.mTexture, NULL, &m_exit.mTextureRect);
+		SDL_RenderCopy(game->Renderer, m_exit.mTexture, nullptr, &m_exit.mTextureRect);
 	}
 	
-	SDL_RenderCopy(game->Renderer, m_devName.mTexture, NULL, &m_devName.mTextureRect);
-	SDL_RenderCopy(game->Renderer, m_version.mTexture, NULL, &m_version.mTextureRect);
-	SDL_RenderCopy(game->Renderer, m_title.mTexture, NULL, &m_title.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_devName.mTexture, nullptr, &m_devName.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_version.mTexture, nullptr, &m_version.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_title.mTexture, nullptr, &m_title.mTextureRect);
 
 	SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
 	SDL_RenderDrawRect(game->Renderer, &m_menuBoxOutline);
 
-	SDL_RenderCopyEx(game->Renderer, m_skulls[0].mTexture, NULL, &m_skulls[0].mTextureRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
-	SDL_RenderCopy(game->Renderer, m_skulls[1].mTexture, NULL, &m_skulls[1].mTextureRect);
+	SDL_RenderCopyEx(game->Renderer, m_skulls[0].mTexture, nullptr, &m_skulls[0].mTextureRect, NULL, nullptr, SDL_FLIP_HORIZONTAL);
+	SDL_RenderCopy(game->Renderer, m_skulls[1].mTexture, nullptr, &m_skulls[1].mTextureRect);
 
-	SDL_RenderCopy(game->Renderer, m_cursor.mTexture, NULL, &m_cursor.mTextureRect);
+	SDL_RenderCopy(game->Renderer, m_cursor.mTexture, nullptr, &m_cursor.mTextureRect);
 }

@@ -1,9 +1,5 @@
 #pragma once
-
 #include <SDL_mixer.h>
-#include <cassert>
-#include <string>
-#include "Log/Log.h"
 
 //TODO: Add .MP3 support for a custom music library the engine will poll before game starts (Calvin)
 

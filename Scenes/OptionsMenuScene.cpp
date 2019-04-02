@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "OptionsMenuScene.h"
 #include "GameSettings.h"
 #include "Game.h"

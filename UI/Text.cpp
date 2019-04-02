@@ -1,3 +1,5 @@
+#include <cassert>
+
 #include "Text.h"
 #include "Game.h"
 

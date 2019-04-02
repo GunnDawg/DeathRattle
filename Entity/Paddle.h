@@ -4,8 +4,6 @@ extern "C"
 	#include <SDL.h>
 }
 
-#include <cassert>
-#include <typeinfo>
 #include "Graphics/Texture.h"
 
 class Game;

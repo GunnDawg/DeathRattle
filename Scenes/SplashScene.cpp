@@ -1,5 +1,8 @@
+#include <memory>
+
 #include "SplashScene.h"
 #include "Game.h"
+#include <Scenes/IntroScene.h>
 
 void SplashScene::on_enter()
 {

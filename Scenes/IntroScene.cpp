@@ -1,7 +1,8 @@
+#include <memory>
+
 #include "IntroScene.h"
 #include "MainMenuScene.h"
 #include "Game.h"
-#include "Graphics/FadeEffect.h"
 
 void IntroSceneState::on_enter()
 {
@@ -185,7 +186,7 @@ void IntroSceneState::update()
 	{
 		if (mFadeOut)
 		{
-			mFadeValue -= (0.2f * game->avgDeltaTime);
+			mFadeValue -= (0.3f * game->avgDeltaTime);
 			if (mFadeValue <= SDL_ALPHA_TRANSPARENT + 25)
 			{
 				mFadeOut = false;
@@ -195,7 +196,7 @@ void IntroSceneState::update()
 
 		if (mFadeIn)
 		{
-			mFadeValue += (0.2f * game->avgDeltaTime);
+			mFadeValue += (0.3f * game->avgDeltaTime);
 			if (mFadeValue >= SDL_ALPHA_OPAQUE - 25)
 			{
 				mFadeOut = true;

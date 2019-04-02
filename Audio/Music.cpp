@@ -1,4 +1,7 @@
 #include "Music.h"
+#include <cassert>
+#include <string>
+#include "Log/Log.h"
 
 Music::Music(const char* filePath) :
 mMusicFilePath(filePath)

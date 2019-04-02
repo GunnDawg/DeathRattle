@@ -1,11 +1,6 @@
 #pragma once
-#include <cassert>
-#include <memory>
 #include <array>
-#include <vector>
-#include <sstream>
 #include "Graphics/Texture.h"
-#include "Entity/Paddle.h"
 
 constexpr unsigned int LEVEL_COUNT = 5;
 

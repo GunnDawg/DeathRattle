@@ -1,5 +1,7 @@
 #include "Keyboard.h"
 
+#include <cassert>
+
 Keyboard::Keyboard(bool defaultState) :
 mEnabled(defaultState)
 {

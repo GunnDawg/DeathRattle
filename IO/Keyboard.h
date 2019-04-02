@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cassert>
 #include "Entity/Paddle.h"
 
 class Keyboard

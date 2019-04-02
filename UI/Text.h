@@ -6,7 +6,6 @@ extern "C"
 }
 
 #include <string>
-#include <cassert>
 #include "Log/Log.h"
 
 class Game;

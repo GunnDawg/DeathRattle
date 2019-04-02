@@ -2,17 +2,11 @@
 extern "C"
 {
 	#include <SDL.h>
-	#include <SDL_image.h>
-	#include <SDL_mixer.h>
-	#include <SDL_ttf.h>
 }
 
-#include <array>
-#include <memory>
-#include "Log/Log.h"
+
 #include "GameSettings.h"
 #include "StateMachine/GameStateMachine.h"
-#include "Scenes/SplashScene.h"
 
 class Game
 {
@@ -48,9 +42,9 @@ public:
 
 	void updateDelta();
 	bool Init();
-	void ProcessInput();
+	void ProcessInput() const;
 	void Update();
-	void Draw();
+	void Draw() const;
 
 	inline static GameStateMachine gameStateMachine             = GameStateMachine();
 	SDL_Window* Window                                          = nullptr;

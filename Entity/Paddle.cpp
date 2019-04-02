@@ -1,6 +1,9 @@
 #include "Paddle.h"
 #include "Game.h"
 
+#include <cassert>
+#include <typeinfo>
+
 Paddle::Paddle(int x, int y, int w, int h) :
 mPaddleRect({ w, h, x, y })
 {
@@ -26,7 +29,6 @@ void Paddle::Draw()
 
 	if (mPaddleMarked)
 	{
-		//SDL_SetRenderDrawColor(passedRender, 136, 4, 7, 255);
 		SDL_SetRenderDrawColor(game->Renderer, 255, 0, 0, 255);
 		SDL_RenderFillRect(game->Renderer, &mPaddleRect);
 	}
@@ -35,8 +37,6 @@ void Paddle::Draw()
 		SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
 		SDL_RenderFillRect(game->Renderer, &mPaddleRect);
 	}
-
-	SDL_SetRenderDrawColor(game->Renderer, 255, 255, 255, 255);
 }
 
 void Paddle::resetPaddles(int x, int y, int w, int h)

@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "PreGameplayScene.h"
 #include "Game.h"
 
