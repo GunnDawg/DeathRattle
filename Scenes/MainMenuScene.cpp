@@ -110,7 +110,6 @@ void MainMenuScene::on_enter()
 	m_creditsWhite.mTextureRect.y = m_credits.mTextureRect.y;
 
 	m_exit.mTextureRect.x = m_menuBox.x + ((m_menuBox.w / 2) - m_exit.mTextureRect.w / 2);
-	//m_exit.mTextureRect.y = m_credits.mTextureRect.y + 95;
 	m_exit.mTextureRect.y = (m_menuBox.y + m_menuBox.h - 25 ) - m_exit.mTextureRect.h;
 
 	m_exitWhite.mTextureRect.x = m_exit.mTextureRect.x;
@@ -243,6 +242,7 @@ void MainMenuScene::handle_events()
 					}
 
 					m_isNewGame = false;
+
 					game->gameStateMachine.unloadAll();
 					std::unique_ptr<GameState> gamePlayState = std::make_unique<GameplayState>();
 					game->gameStateMachine.push(std::move(gamePlayState));
