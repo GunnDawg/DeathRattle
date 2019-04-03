@@ -12,12 +12,6 @@ void Timer::Stop()
 	mRunning = false;
 }
 
-//void Timer::reset()
-//{
-//	m_StartTime = std::chrono::system_clock::now();
-//	m_EndTime = m_StartTime;
-//}
-
 double Timer::ElapsedMilliseconds()
 {
 	std::chrono::time_point<std::chrono::system_clock> endTime;
