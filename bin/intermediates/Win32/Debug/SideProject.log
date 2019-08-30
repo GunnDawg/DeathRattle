@@ -1,0 +1,91 @@
+﻿  MusicManager.cpp
+  Music.cpp
+  Sound.cpp
+  Ball.cpp
+c:\dev\sideproject\entity\ball.h(31): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  Item.cpp
+  Paddle.cpp
+  Animation.cpp
+  Texture.cpp
+c:\dev\sideproject\graphics\texture.cpp(25): warning C4840: non-portable use of class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' as an argument to a variadic function
+  c:\dev\sideproject\graphics\texture.cpp(25): note: 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string' is non-trivial
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xstring(2128): note: see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string'
+  c:\dev\sideproject\graphics\texture.cpp(25): note: the constructor and destructor will not be called; a bitwise copy of the class will be passed as the argument
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xstring(4373): note: see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+c:\dev\sideproject\graphics\texture.cpp(25): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+c:\dev\sideproject\graphics\texture.cpp(36): warning C4840: non-portable use of class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' as an argument to a variadic function
+  c:\dev\sideproject\graphics\texture.cpp(36): note: 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string' is non-trivial
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xstring(2128): note: see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string'
+  c:\dev\sideproject\graphics\texture.cpp(36): note: the constructor and destructor will not be called; a bitwise copy of the class will be passed as the argument
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xstring(4373): note: see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+c:\dev\sideproject\graphics\texture.cpp(36): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+  Game.cpp
+  FileIO.cpp
+  Keyboard.cpp
+  Mouse.cpp
+  LevelSet.cpp
+  Log.cpp
+  main.cpp
+c:\dev\sideproject\main.cpp(11): warning C4100: 'args': unreferenced formal parameter
+c:\dev\sideproject\main.cpp(11): warning C4100: 'argc': unreferenced formal parameter
+  AABBCollision.cpp
+  CreditsScene.cpp
+c:\dev\sideproject\scenes\creditsscene.cpp(36): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\creditsscene.cpp(37): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+  IntroScene.cpp
+c:\dev\sideproject\scenes\introscene.cpp(25): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\introscene.cpp(26): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\introscene.cpp(132): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\introscene.cpp(133): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\introscene.cpp(134): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\introscene.cpp(135): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+  LeaderboardScene.cpp
+c:\dev\sideproject\scenes\leaderboardscene.cpp(16): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\leaderboardscene.cpp(17): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+  LoadingScene.cpp
+  Generating Code...
+  Compiling...
+  MainMenuScene.cpp
+c:\dev\sideproject\entity\ball.h(31): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.h(47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.h(49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\mainmenuscene.cpp(54): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\mainmenuscene.cpp(55): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\mainmenuscene.cpp(118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  OptionsMenuScene.cpp
+c:\dev\sideproject\scenes\optionsmenuscene.cpp(162): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\optionsmenuscene.cpp(163): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\optionsmenuscene.cpp(428): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  PauseScene.cpp
+c:\dev\sideproject\entity\ball.h(31): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.h(47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.h(49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  PreGameplayScene.cpp
+c:\dev\sideproject\scenes\pregameplayscene.cpp(46): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\pregameplayscene.cpp(47): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+  SplashScene.cpp
+c:\dev\sideproject\scenes\splashscene.cpp(39): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\splashscene.cpp(44): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+  GameStateMachine.cpp
+  GameplayScene.cpp
+c:\dev\sideproject\entity\ball.h(31): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.h(47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.h(49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.cpp(45): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\gameplayscene.cpp(46): warning C4245: 'argument': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+c:\dev\sideproject\scenes\gameplayscene.cpp(219): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.cpp(518): warning C4018: '>': signed/unsigned mismatch
+c:\dev\sideproject\scenes\gameplayscene.cpp(587): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\dev\sideproject\scenes\gameplayscene.cpp(589): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Timer.cpp
+c:\dev\sideproject\time\timer.cpp(34): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+  HUD.cpp
+c:\dev\sideproject\entity\ball.h(31): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  Scoreboard.cpp
+  Text.cpp
+  Generating Code...
+  SideProject.vcxproj -> C:\Dev\SideProject\bin\Win32\Debug\SideProject.exe

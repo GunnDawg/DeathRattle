@@ -1,0 +1,64 @@
+﻿  Music.cpp
+  MusicManager.cpp
+  Sound.cpp
+  Ball.cpp
+  Paddle.cpp
+  Game.cpp
+  Animation.cpp
+  Texture.cpp
+  FileIO.cpp
+  Keyboard.cpp
+  Mouse.cpp
+  LevelSet.cpp
+  Log.cpp
+  AABBCollision.cpp
+  BackgroundScene.cpp
+  CreditsScene.cpp
+  GameplayScene.cpp
+C:\Dev\SideProject\Scenes\GameplayScene.cpp(39,29): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\GameplayScene.cpp(41,29): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\GameplayScene.cpp(231,42): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\GameplayScene.cpp(545,69): warning C4018:  '>': signed/unsigned mismatch
+C:\Dev\SideProject\Scenes\GameplayScene.cpp(545,158): warning C4018:  '>': signed/unsigned mismatch
+C:\Dev\SideProject\Scenes\GameplayScene.cpp(621,88): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+  IntroScene.cpp
+C:\Dev\SideProject\Scenes\GameplayScene.cpp(623,109): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(152,57): warning C4244:  '+=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(153,57): warning C4244:  '+=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(154,56): warning C4244:  '-=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(155,56): warning C4244:  '-=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(163,44): warning C4244:  '-=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(164,54): warning C4244:  '-=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(167,53): warning C4244:  '+=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(168,55): warning C4244:  '-=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(171,43): warning C4244:  '+=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(172,53): warning C4244:  '+=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(173,53): warning C4244:  '+=': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\IntroScene.cpp(189,45): warning C4244:  '-=': conversion from 'double' to 'float', possible loss of data
+  LeaderboardScene.cpp
+  MainMenuScene.cpp
+C:\Dev\SideProject\Scenes\IntroScene.cpp(199,45): warning C4244:  '+=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  OptionsMenuScene.cpp
+C:\Dev\SideProject\Scenes\MainMenuScene.cpp(121,42): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+  PreGameplayScene.cpp
+  SplashScene.cpp
+C:\Dev\SideProject\Scenes\OptionsMenuScene.cpp(437,46): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+C:\Dev\SideProject\Scenes\SplashScene.cpp(48,53): warning C4244:  '+=': conversion from 'double' to 'int', possible loss of data
+  GameStateMachine.cpp
+  Timer.cpp
+C:\Dev\SideProject\Scenes\SplashScene.cpp(53,60): warning C4244:  '-=': conversion from 'double' to 'int', possible loss of data
+  HUD.cpp
+  Popup.cpp
+C:\Dev\SideProject\Time\Timer.cpp(28,91): warning C4244:  'return': conversion from '_Rep' to 'double', possible loss of data
+C:\Dev\SideProject\Time\Timer.cpp(28,91): warning C4244:         with
+C:\Dev\SideProject\Time\Timer.cpp(28,91): warning C4244:         [
+C:\Dev\SideProject\Time\Timer.cpp(28,91): warning C4244:             _Rep=__int64
+C:\Dev\SideProject\Time\Timer.cpp(28,91): warning C4244:         ]
+  Scoreboard.cpp
+  Text.cpp
+  main.cpp
+  Generating Code...
+C:\Dev\SideProject\UI\Popup.cpp(23,64): warning C4244:  '+=': conversion from 'double' to 'int', possible loss of data
+  SideProject.vcxproj -> C:\Dev\SideProject\bin\x64\Debug\SideProject.exe
