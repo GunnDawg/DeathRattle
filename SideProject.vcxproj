@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{0A287C91-5C40-43F1-8157-D6C2EE1F2ED4}</ProjectGuid>
+    <RootNamespace>SideProject</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\;$(SolutionDir)\Dependencies\SDL2_ttf-2.0.15\include;$(SolutionDir)\Dependencies\SDL2_mixer-2.0.4\include;$(SolutionDir)\Dependencies\SDL2_image-2.0.4\include;$(SolutionDir)\Dependencies\SDL2-2.0.9\include;$(SolutionDir)\Dependencies\spdlog\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Dependencies\SDL2_ttf-2.0.15\lib\x86;$(SolutionDir)\Dependencies\SDL2_mixer-2.0.4\lib\x86;$(SolutionDir)\Dependencies\SDL2_image-2.0.4\lib\x86;$(SolutionDir)\Dependencies\SDL2-2.0.9\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\;$(SolutionDir)\Dependencies\SDL2_ttf-2.0.15\include;$(SolutionDir)\Dependencies\SDL2_mixer-2.0.4\include;$(SolutionDir)\Dependencies\SDL2_image-2.0.4\include;$(SolutionDir)\Dependencies\SDL2-2.0.9\include;$(SolutionDir)\Dependencies\spdlog\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Dependencies\SDL2_ttf-2.0.15\lib\x86;$(SolutionDir)\Dependencies\SDL2_mixer-2.0.4\lib\x86;$(SolutionDir)\Dependencies\SDL2_image-2.0.4\lib\x86;$(SolutionDir)\Dependencies\SDL2-2.0.9\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir);$(SolutionDir)\Dependencies\SDL2-2.0.9\include;$(SolutionDir)\Dependencies\SDL2_ttf-2.0.15\include;$(SolutionDir)\Dependencies\SDL2_mixer-2.0.4\include;$(SolutionDir)\Dependencies\SDL2_image-2.0.4\include;$(SolutionDir)\Dependencies\spdlog-1.x\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Dependencies\SDL2-2.0.9\lib\x64;$(SolutionDir)\Dependencies\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\Dependencies\SDL2_mixer-2.0.4\lib\x64;$(SolutionDir)\Dependencies\SDL2_image-2.0.4\lib\x64;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir);$(SolutionDir)\Dependencies\SDL2-2.0.9\include;$(SolutionDir)\Dependencies\SDL2_ttf-2.0.15\include;$(SolutionDir)\Dependencies\SDL2_mixer-2.0.4\include;$(SolutionDir)\Dependencies\SDL2_image-2.0.4\include;$(SolutionDir)\Dependencies\spdlog-1.x\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Dependencies\SDL2-2.0.9\lib\x64;$(SolutionDir)\Dependencies\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\Dependencies\SDL2_mixer-2.0.4\lib\x64;$(SolutionDir)\Dependencies\SDL2_image-2.0.4\lib\x64;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/w35038 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>GUNN_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>GUNN_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>GUNN_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>GUNN_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Audio\MusicManager.cpp" />
+    <ClCompile Include="Audio\Music.cpp" />
+    <ClCompile Include="Audio\Sound.cpp" />
+    <ClCompile Include="Entity\Ball.cpp" />
+    <ClCompile Include="Entity\Item.cpp" />
+    <ClCompile Include="Entity\Paddle.cpp" />
+    <ClCompile Include="Graphics\Animation.cpp" />
+    <ClCompile Include="Graphics\Texture.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="IO\FileIO.cpp" />
+    <ClCompile Include="IO\Keyboard.cpp" />
+    <ClCompile Include="IO\Mouse.cpp" />
+    <ClCompile Include="Level\LevelSet.cpp" />
+    <ClCompile Include="Level\Stage.cpp" />
+    <ClCompile Include="Log\Log.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Physics\AABBCollision.cpp" />
+    <ClCompile Include="Scenes\BackgroundScene.cpp" />
+    <ClCompile Include="Scenes\CreditsScene.cpp" />
+    <ClCompile Include="Scenes\IntroScene.cpp" />
+    <ClCompile Include="Scenes\LeaderboardScene.cpp" />
+    <ClCompile Include="Scenes\MainMenuScene.cpp" />
+    <ClCompile Include="Scenes\OptionsMenuScene.cpp" />
+    <ClCompile Include="Scenes\PauseScene.cpp" />
+    <ClCompile Include="Scenes\PreGameplayScene.cpp" />
+    <ClCompile Include="Scenes\SplashScene.cpp" />
+    <ClCompile Include="StateMachine\GameStateMachine.cpp" />
+    <ClCompile Include="Scenes\GameplayScene.cpp" />
+    <ClCompile Include="Time\Timer.cpp" />
+    <ClCompile Include="UI\HUD.cpp" />
+    <ClCompile Include="UI\Popup.cpp" />
+    <ClCompile Include="UI\Scoreboard.cpp" />
+    <ClCompile Include="UI\Text.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Audio\MusicManager.h" />
+    <ClInclude Include="Audio\Music.h" />
+    <ClInclude Include="Audio\Sound.h" />
+    <ClInclude Include="Entity\Ball.h" />
+    <ClInclude Include="Entity\Item.h" />
+    <ClInclude Include="Entity\Paddle.h" />
+    <ClInclude Include="GameSettings.h" />
+    <ClInclude Include="Graphics\Animation.h" />
+    <ClInclude Include="Graphics\FadeEffect.h" />
+    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="IO\FileIO.h" />
+    <ClInclude Include="IO\Keyboard.h" />
+    <ClInclude Include="IO\Mouse.h" />
+    <ClInclude Include="Level\LevelSet.h" />
+    <ClInclude Include="Level\Stage.h" />
+    <ClInclude Include="Log\Log.h" />
+    <ClInclude Include="Physics\AABBCollision.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Scenes\BackgroundScene.h" />
+    <ClInclude Include="Scenes\CreditsScene.h" />
+    <ClInclude Include="Scenes\PauseScene.h" />
+    <ClInclude Include="Scenes\IntroScene.h" />
+    <ClInclude Include="Scenes\LeaderboardScene.h" />
+    <ClInclude Include="Scenes\MainMenuScene.h" />
+    <ClInclude Include="Scenes\OptionsMenuScene.h" />
+    <ClInclude Include="Scenes\PreGameplayScene.h" />
+    <ClInclude Include="Scenes\SplashScene.h" />
+    <ClInclude Include="StateMachine\GameState.h" />
+    <ClInclude Include="StateMachine\GameStateMachine.h" />
+    <ClInclude Include="Scenes\GameplayScene.h" />
+    <ClInclude Include="Time\Timer.h" />
+    <ClInclude Include="UI\HUD.h" />
+    <ClInclude Include="UI\Popup.h" />
+    <ClInclude Include="UI\Scoreboard.h" />
+    <ClInclude Include="UI\Text.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Graphics\gameplay_scene\gameover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SideProject.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
