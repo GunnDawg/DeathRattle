@@ -8,7 +8,6 @@
 
 #include <memory>
 
-
 Game::~Game()
 {
 	if (!gameStateMachine.m_gameStates.empty())

@@ -4,7 +4,6 @@ extern "C"
 	#include <SDL.h>
 }
 
-
 #include "GameSettings.h"
 #include "StateMachine/GameStateMachine.h"
 

@@ -6,7 +6,7 @@ Scoreboard::Scoreboard(unsigned int x, unsigned int y)
 	assert(typeid(x) == typeid(unsigned int) && x > 0 && "Scoreboard must have an X value");
 	assert(typeid(y) == typeid(unsigned int) && y > 0 && "Scoreboard must have an Y value");
 
-	game                           = &Game::GetInstance();
+	game                          = &Game::GetInstance();
 
 	mFile                         = std::make_unique<FileIO>("ProfileData/highscore.txt");
 
@@ -22,11 +22,11 @@ Scoreboard::Scoreboard(unsigned int x, unsigned int y)
 	mFinalScoreLabel              = std::make_unique<Text>(32, "FINAL SCORE");
 	mFinalScoreText               = std::make_unique<Text>(48, mConvertedScore);
 
-	mScoreLabel->mTextRect.x     = x;
-	mScoreLabel->mTextRect.y     = y;
-
-	mScoreText->mTextRect.x      = x;
-	mScoreText->mTextRect.y      = y;
+	mScoreLabel->mTextRect.x      = x;
+	mScoreLabel->mTextRect.y      = y;
+								  
+	mScoreText->mTextRect.x       = x;
+	mScoreText->mTextRect.y       = y;
 }
 
 void Scoreboard::Load()
